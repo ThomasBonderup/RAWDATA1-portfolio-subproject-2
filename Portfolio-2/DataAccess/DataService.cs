@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+
 namespace DataAccess
 {
     public class DataService : IDataService
@@ -7,6 +10,11 @@ namespace DataAccess
         public DataService()
         {
             ctx = new DBContext();
+        }
+
+        public IList<Title> GetTitles()
+        {
+            return ctx.Titles.ToList();
         }
     }
 }
