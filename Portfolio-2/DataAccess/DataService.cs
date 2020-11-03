@@ -16,5 +16,10 @@ namespace DataAccess
         {
             return ctx.Titles.ToList();
         }
+
+        public IList<Name> GetNames()
+        {
+            return ctx.Names.ToList();
+        }
     }
 }
