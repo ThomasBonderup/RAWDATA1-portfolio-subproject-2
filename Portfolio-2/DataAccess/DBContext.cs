@@ -22,9 +22,9 @@ namespace DataAccess
             modelBuilder.Entity<Title>().Property(x => x.StartYear).HasColumnName("startyear");
             modelBuilder.Entity<Title>().Property(x => x.EndYear).HasColumnName("endyear");
             modelBuilder.Entity<Title>().Property(x => x.RunTimeMinutes).HasColumnName("runtimeminutes");
-            modelBuilder.Entity<Title>().Property(x => x.poster).HasColumnName("poster");
-            modelBuilder.Entity<Title>().Property(x => x.awards).HasColumnName("awards");
-            modelBuilder.Entity<Title>().Property(x => x.plot).HasColumnName("plot");
+            modelBuilder.Entity<Title>().Property(x => x.Poster).HasColumnName("poster");
+            modelBuilder.Entity<Title>().Property(x => x.Awards).HasColumnName("awards");
+            modelBuilder.Entity<Title>().Property(x => x.Plot).HasColumnName("plot");
         }
     }
 }
