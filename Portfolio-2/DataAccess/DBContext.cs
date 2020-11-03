@@ -1,3 +1,4 @@
+using System.Globalization;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess
@@ -27,23 +28,27 @@ namespace DataAccess
             modelBuilder.Entity<Title>().Property(x => x.Poster).HasColumnName("poster");
             modelBuilder.Entity<Title>().Property(x => x.Awards).HasColumnName("awards");
             modelBuilder.Entity<Title>().Property(x => x.Plot).HasColumnName("plot");
+            modelBuilder.Entity<Title>().HasKey(x => new {x.Tconst}); //manuelt defineret
 
             modelBuilder.Entity<Name>().ToTable("name");
             modelBuilder.Entity<Name>().Property(x => x.Nconst).HasColumnName("nconst");
             modelBuilder.Entity<Name>().Property(x => x.PrimaryName).HasColumnName("primaryname");
             modelBuilder.Entity<Name>().Property(x => x.BirthYear).HasColumnName("birthyear");
             modelBuilder.Entity<Name>().Property(x => x.DeathYear).HasColumnName("deathyear");
+            modelBuilder.Entity<Name>().HasKey(x => new {x.Nconst}); //den her burde kun have en primary key så hvorfor skal den have den defineret?
 
             modelBuilder.Entity<TitleRatings>().ToTable("title_ratings");
             modelBuilder.Entity<TitleRatings>().Property(x => x.Tconst).HasColumnName("tconst");
             modelBuilder.Entity<TitleRatings>().Property(x => x.AverageRating).HasColumnName("averagerating");
             modelBuilder.Entity<TitleRatings>().Property(x => x.NumVotes).HasColumnName("numvotes");
+            modelBuilder.Entity<TitleRatings>().HasKey(x => new {x.Tconst}); //manually defined
 
             modelBuilder.Entity<TitleEpisode>().ToTable("title_episode");
             modelBuilder.Entity<TitleEpisode>().Property(x => x.Tconst).HasColumnName("tconst");
             modelBuilder.Entity<TitleEpisode>().Property(x => x.ParentTconst).HasColumnName("parenttconst");
             modelBuilder.Entity<TitleEpisode>().Property(x => x.EpisodeNumber).HasColumnName("episodenumber");
             modelBuilder.Entity<TitleEpisode>().Property(x => x.SeasonNumber).HasColumnName("seasonnumber");
+            modelBuilder.Entity<TitleEpisode>().HasKey(x => new {x.Tconst, x.ParentTconst}); 
 
             modelBuilder.Entity<LocalTitles>().ToTable("local_titles");
             modelBuilder.Entity<LocalTitles>().Property(x => x.TitleId).HasColumnName("titleid");
@@ -54,6 +59,7 @@ namespace DataAccess
             modelBuilder.Entity<LocalTitles>().Property(x => x.Types).HasColumnName("types");
             modelBuilder.Entity<LocalTitles>().Property(x => x.Attributes).HasColumnName("attributes");
             modelBuilder.Entity<LocalTitles>().Property(x => x.IsOriginalTitle).HasColumnName("isoriginaltitle");
+            modelBuilder.Entity<LocalTitles>().HasKey(x => new {x.TitleId, x.Ordering, x.Region});
         }
         
         
