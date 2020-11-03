@@ -6,6 +6,7 @@ namespace DataAccess
 
         public DataService()
         {
+            ctx = new DBContext();
         }
     }
 }
