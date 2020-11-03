@@ -5,22 +5,30 @@ namespace DataAccess
 {
     public class Title
     {
-        public string tconst { get; set; }
+        public string Tconst { get; set; }
 
-        public string titletype { get; set; }
+        public string Titletype { get; set; }
 
-        public string primaryTitle { get; set; }
+        public string PrimaryTitle { get; set; }
 
-        public string originalTitle { get; set; }
+        public string OriginalTitle { get; set; }
         
-        public bool isAdult { get; set; } 
+        public bool IsAdult { get; set; } 
         
-        public int startYear { get; set; }
+        public int StartYear { get; set; }
 
-        public int endYear { get; set; }
+        public int EndYear { get; set; }
 
-        public int runTimeMinutes { get; set; }
+        public int RunTimeMinutes { get; set; }
 
-        public string genre { get; set;}
+        public string Genre { get; set;}
+
+        public string poster { get; set; }
+
+        public string awards { get; set; }
+
+        public string plot { get; set; }
+
+        public TitleRatings TitleRatings { get; set; }
     }
 }
