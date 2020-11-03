@@ -30,5 +30,7 @@ namespace DataAccess
         public string plot { get; set; }
 
         public TitleRatings TitleRatings { get; set; }
+
+        public LocalTitles LocalTitles { get; set; }
     }
 }
