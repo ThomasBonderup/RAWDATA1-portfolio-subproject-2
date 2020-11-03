@@ -15,13 +15,13 @@ namespace DataAccess
         
         public bool IsAdult { get; set; } 
         
-        public int StartYear { get; set; }
+        public string StartYear { get; set; }
 
-        public int EndYear { get; set; }
+        public string EndYear { get; set; }
 
-        public int RunTimeMinutes { get; set; }
+        //public int RunTimeMinutes { get; set; }
 
-        public string Genre { get; set;}
+        //public string Genre { get; set;}
 
         public string Poster { get; set; }
 
@@ -29,15 +29,16 @@ namespace DataAccess
 
         public string Plot { get; set; }
 
-        public TitleRatings TitleRatings { get; set; }
+        //public TitleRatings TitleRatings { get; set; }
 
-        public LocalTitles LocalTitles { get; set; }
+        //public LocalTitles LocalTitles { get; set; }
 
         public override string ToString()
         {
             return $"Tconst={Tconst}, PrimaryTitle{PrimaryTitle}, OriginalTitle {OriginalTitle}, IsAdult {IsAdult}, StartYear{StartYear}" +
-                   $"EndYear {EndYear}, RunTimeMinutes{RunTimeMinutes}, Genre{Genre}, Poster {Poster}, Awards {Awards}, Plot{Plot}"+ 
-                   $"TitleRatings{TitleRatings}, LocalTitles{LocalTitles}";
+                   $"EndYear {EndYear}, Poster {Poster}, Awards {Awards}, Plot{Plot}" 
+                   //$"TitleRatings{TitleRatings}, LocalTitles{LocalTitles}"
+                   ;
         }
     }
 }
