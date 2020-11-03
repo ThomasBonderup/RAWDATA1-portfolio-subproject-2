@@ -23,14 +23,21 @@ namespace DataAccess
 
         public string Genre { get; set;}
 
-        public string poster { get; set; }
+        public string Poster { get; set; }
 
-        public string awards { get; set; }
+        public string Awards { get; set; }
 
-        public string plot { get; set; }
+        public string Plot { get; set; }
 
         public TitleRatings TitleRatings { get; set; }
 
         public LocalTitles LocalTitles { get; set; }
+
+        public override string ToString()
+        {
+            return $"Tconst={Tconst}, PrimaryTitle{PrimaryTitle}, OriginalTitle {OriginalTitle}, IsAdult {IsAdult}, StartYear{StartYear}" +
+                   $"EndYear {EndYear}, RunTimeMinutes{RunTimeMinutes}, Genre{Genre}, Poster {Poster}, Awards {Awards}, Plot{Plot}"+ 
+                   $"TitleRatings{TitleRatings}, LocalTitles{LocalTitles}";
+        }
     }
 }
