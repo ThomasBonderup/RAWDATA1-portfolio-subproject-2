@@ -6,7 +6,6 @@
 
     <ItemGroup>
       <PackageReference Include="AutoMapper" Version="8.1.0" />
-      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.0-rc2" />
     </ItemGroup>
 
     <ItemGroup>
