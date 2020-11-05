@@ -60,11 +60,11 @@ namespace WebService.Controllers
             return dto;
         }
 
-        /*private object CreateResult(int page, int pageSize, IList<Name> names)
+        private object CreateResult(int page, int pageSize, IList<Name> names)
          {
              var items = names.Select(CreateNameListDto);
-                  
-                  var count =_dataService.
+
+             var count = _dataService.NumberOfNames();
                       
                       var navigationUrls = CreatePagingNavigation(page, pageSize, count);
   
@@ -79,7 +79,7 @@ namespace WebService.Controllers
                   
               return result;
           }
-  */
+  
 
       /*  public NamesController(IDataService dataService)
         {
