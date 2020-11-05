@@ -52,7 +52,6 @@ namespace DataAccess
 
         public int NumberOfNames()
         {
-           // return names.Count;
             return ctx.Names.Count();
 
         }
