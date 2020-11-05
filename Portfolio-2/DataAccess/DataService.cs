@@ -6,6 +6,8 @@ namespace DataAccess
     public class DataService : IDataService
     {
         public DBContext ctx { get; set; }
+        
+        private IList<Name> names = new List<Name>();
 
         public DataService()
         {
@@ -17,8 +19,9 @@ namespace DataAccess
             return ctx.Titles.ToList();
         }
 
-        public IList<Name> GetNames()
+        public IList<Name> GetNames(int page, int pageSize)
         {
+            //return names;
             return ctx.Names.ToList();
         }
     }

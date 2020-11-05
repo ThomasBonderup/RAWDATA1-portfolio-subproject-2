@@ -6,6 +6,6 @@ namespace DataAccess
     {
         IList<Title> GetTitles();
 
-        IList<Name> GetNames();
+        IList<Name> GetNames(int page, int pageSize);
     }
 }
