@@ -1,5 +1,7 @@
+using System;
 using System.Globalization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace DataAccess
 {
@@ -12,12 +14,17 @@ namespace DataAccess
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
            // optionsBuilder.UseNpgsql();
-           optionsBuilder.UseNpgsql("host=localhost;db=raw1;uid=postgres;pwd=postgres");
-           
+           IConfigurationRoot configuration = new ConfigurationBuilder()
+               .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+               .AddJsonFile("config.json")
+               .Build();
+           //optionsBuilder.UseNpgsql("host=localhost;db=raw1;uid=postgres;pwd=postgres");
+           optionsBuilder.UseNpgsql(configuration.GetConnectionString("RAW1DbContext"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.HasDefaultSchema("movie_data_model");
             modelBuilder.Entity<Title>().ToTable("title");
             modelBuilder.Entity<Title>().Property(x => x.Tconst).HasColumnName("tconst");
             modelBuilder.Entity<Title>().Property(x => x.Titletype).HasColumnName("titletype");
