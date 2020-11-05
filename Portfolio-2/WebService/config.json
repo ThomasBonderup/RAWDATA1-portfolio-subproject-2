@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "RAW1DbContext": "host=localhost;db=raw1;uid=postgres;pwd=postgres"
+  }
+}
