@@ -54,15 +54,14 @@ namespace DataAccess
             return null;
         }
 
-        public User GetUser(string Uconst)
+        public User GetUser(string uconst)
         {
-            var user = ctx.Users.Find(Uconst);
+            var user = ctx.Users.Find(uconst);
 
             if (user != null)
             {
                 return user;
             }
-
             return null;
         }
 

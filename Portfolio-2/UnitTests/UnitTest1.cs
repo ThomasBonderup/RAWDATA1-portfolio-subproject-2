@@ -42,6 +42,16 @@ namespace UnitTests
             Assert.Equal(55076, titles.Count);
             Assert.Equal("Çocuk", titles.First().PrimaryTitle);
         }
+        
+        
+        //api/users
+        [Fact]
+        public void GetUserByUconst_ValidUconst()
+        {
+            var service = new DataService();
+            var users = service.GetUser("ui000001");
+            Assert.Equal("Alex",users.FirstName);
+        }
 
 
         // Helpers 
