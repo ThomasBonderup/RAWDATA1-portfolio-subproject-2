@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using AutoMapper;
 using DataAccess;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -16,6 +17,14 @@ namespace WebService.Controllers
     public class NamesController : ControllerBase
     {
         private IDataService _dataService;
+        private IMapper _mapper;
+
+        public NamesController(IDataService dataService, IMapper mapper)
+        {
+            _dataService = dataService;
+            _mapper = mapper;
+        }
+        
         private int MaxPageSize = 25;
 
         
@@ -42,26 +51,34 @@ namespace WebService.Controllers
             return (prev, cur, next);
         }
 
-      /* private object CreateResult(int page, int pageSize, IList<Name> names)
+        private NameListDto CreateNameListeDto(Name name)
         {
-            var items 
-                
-                var count =_dataService.
-                    
-                    var navigationUrls = CreatePagingNavigation(page, pageSize, count);
-
-                var result = new
-                {
-                    navigationUrls.prev,
-                    navigationUrls.cur,
-                    navigationUrls.next,
-                    count,
-                    items
-                };
-                
-            return result;
+            var dto = _mapper.Map<NameListDto>(name);
+            dto.Url = Url.Link(nameof(GetNames), new {name.Nconst});
+            
+            return dto;
         }
-*/
+
+        /* private object CreateResult(int page, int pageSize, IList<Name> names)
+          {
+              var items 
+                  
+                  var count =_dataService.
+                      
+                      var navigationUrls = CreatePagingNavigation(page, pageSize, count);
+  
+                  var result = new
+                  {
+                      navigationUrls.prev,
+                      navigationUrls.cur,
+                      navigationUrls.next,
+                      count,
+                      items
+                  };
+                  
+              return result;
+          }
+  */
 
         public NamesController(IDataService dataService)
         {
