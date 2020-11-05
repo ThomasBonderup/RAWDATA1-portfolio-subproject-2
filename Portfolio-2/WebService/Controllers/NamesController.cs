@@ -13,8 +13,6 @@ namespace WebService.Controllers
     [ApiController]
     [Route("api/names")]
     
-   
-
     public class NamesController : ControllerBase
     {
         private IDataService _dataService;
@@ -42,6 +40,7 @@ namespace WebService.Controllers
             }
 
             string next = null;
+            
             if (page < (int) Math.Ceiling((double)count / pageSize) - 1)
                 next = Url.Link(nameof(GetNames), new {page = page + 1, pageSize});
 
@@ -84,14 +83,14 @@ namespace WebService.Controllers
             _dataService = dataService;
         }*/
 
-        [HttpGet]
+        [HttpGet(Name = nameof(GetNames))]
         public IActionResult GetNames(int page = 0, int pageSize = 10)
         {
             pageSize = CheckPageSize(pageSize);
             var names = _dataService.GetNames(page, pageSize);
 
-           //var result = CreateResult(page, pageSize, names);
-            return Ok(names);
+           var result = CreateResult(page, pageSize, names);
+            return Ok(result);
 
         }
 }
