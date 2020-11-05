@@ -60,6 +60,15 @@ namespace DataAccess
             modelBuilder.Entity<LocalTitles>().Property(x => x.Attributes).HasColumnName("attributes");
             modelBuilder.Entity<LocalTitles>().Property(x => x.IsOriginalTitle).HasColumnName("isoriginaltitle");
             modelBuilder.Entity<LocalTitles>().HasKey(x => new {x.TitleId, x.Ordering, x.Region});
+
+            modelBuilder.Entity<User>().ToTable("user");
+            modelBuilder.Entity<User>().Property(x => x.Uconst).HasColumnName("uconst");
+            modelBuilder.Entity<User>().Property(x => x.FirstName).HasColumnName("firstname");
+            modelBuilder.Entity<User>().Property(x => x.LastName).HasColumnName("lastname");
+            modelBuilder.Entity<User>().Property(x => x.Email).HasColumnName("email");
+            modelBuilder.Entity<User>().Property(x => x.Password).HasColumnName("password");
+            modelBuilder.Entity<User>().Property(x => x.UserName).HasColumnName("username");
+            modelBuilder.Entity<User>().HasKey(x => new {x.Uconst});
         }
         
         
