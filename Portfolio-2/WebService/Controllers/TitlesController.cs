@@ -24,5 +24,30 @@ namespace WebService.Controllers
 
             return Ok(titles);
         }
+
+        [HttpGet("{tconst}")]
+
+        public IActionResult GetTitle(string tconst)
+        {
+            var title = _dataService.GetTitle(tconst);
+            if (title == null)
+            {
+                return NotFound();
+            }
+            return Ok(title);
+        }
+
+        [HttpGet("{nconst}")]
+
+        public IActionResult GetName(string nconst)
+        {
+            var name = _dataService.GetName(nconst);
+            if (name == null)
+            {
+                return NotFound();
+            }
+            return Ok(name);
+        }
+
     }
 }
