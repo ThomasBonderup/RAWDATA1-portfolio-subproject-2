@@ -76,12 +76,6 @@ namespace WebService.Controllers
                   
               return result;
           }
-  
-
-      /*  public NamesController(IDataService dataService)
-        {
-            _dataService = dataService;
-        }*/
 
         [HttpGet(Name = nameof(GetNames))]
         public IActionResult GetNames(int page = 0, int pageSize = 10)
