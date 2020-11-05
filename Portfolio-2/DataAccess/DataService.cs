@@ -21,5 +21,28 @@ namespace DataAccess
         {
             return ctx.Names.ToList();
         }
+
+        public Title GetTitle(string tconst)
+        {
+            var title = ctx.Titles.Find(tconst);
+
+            if (title != null)
+            {
+                return title;
+            }
+            return null;
+        }
+
+        public Name GetName(string nconst)
+        {
+            var name = ctx.Names.Find(nconst);
+
+            if (name != null)
+            {
+                return name;
+            }
+            return null;
+        }
+        
     }
 }

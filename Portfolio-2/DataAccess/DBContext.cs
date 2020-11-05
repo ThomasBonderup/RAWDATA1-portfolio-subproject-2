@@ -11,7 +11,9 @@ namespace DataAccess
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql();
+           // optionsBuilder.UseNpgsql();
+           optionsBuilder.UseNpgsql("host=localhost;db=raw1;uid=postgres;pwd=postgres");
+           
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

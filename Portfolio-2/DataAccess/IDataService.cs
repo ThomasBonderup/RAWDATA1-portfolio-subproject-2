@@ -7,5 +7,9 @@ namespace DataAccess
         IList<Title> GetTitles();
 
         IList<Name> GetNames();
+
+        Title GetTitle(string tconst);
+
+        Name GetName(string nconst);
     }
 }
