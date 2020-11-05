@@ -46,6 +46,10 @@ namespace DataAccess
             }
             return null;
         }
-        
+
+        public int NumberOfNames()
+        {
+            return names.Count;
+        }
     }
 }
