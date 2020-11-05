@@ -19,16 +19,14 @@ namespace WebService.Controllers
     {
         private IDataService _dataService;
         private IMapper _mapper;
-
+        private int MaxPageSize = 25;
+        
         public NamesController(IDataService dataService, IMapper mapper)
         {
             _dataService = dataService;
             _mapper = mapper;
         }
-        
-        private int MaxPageSize = 25;
 
-        
         private int CheckPageSize (int pageSize)
         {
             return pageSize > MaxPageSize ? MaxPageSize : pageSize;
