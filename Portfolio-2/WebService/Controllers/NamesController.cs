@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using DataAccess;
 using Microsoft.AspNetCore.Mvc;
@@ -51,7 +52,7 @@ namespace WebService.Controllers
             return (prev, cur, next);
         }
 
-        private NameListDto CreateNameListeDto(Name name)
+        private NameListDto CreateNameListDto(Name name)
         {
             var dto = _mapper.Map<NameListDto>(name);
             dto.Url = Url.Link(nameof(GetNames), new {name.Nconst});
@@ -59,9 +60,9 @@ namespace WebService.Controllers
             return dto;
         }
 
-        /* private object CreateResult(int page, int pageSize, IList<Name> names)
-          {
-              var items 
+        /*private object CreateResult(int page, int pageSize, IList<Name> names)
+         {
+             var items = names.Select(CreateNameListDto);
                   
                   var count =_dataService.
                       
@@ -80,10 +81,10 @@ namespace WebService.Controllers
           }
   */
 
-        public NamesController(IDataService dataService)
+      /*  public NamesController(IDataService dataService)
         {
             _dataService = dataService;
-        }
+        }*/
 
         [HttpGet]
         public IActionResult GetNames(int page = 0, int pageSize = 10)

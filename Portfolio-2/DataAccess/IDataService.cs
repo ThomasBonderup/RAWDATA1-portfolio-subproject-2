@@ -11,5 +11,7 @@ namespace DataAccess
         Name GetName(string nconst);
 
         IList<Name> GetNames(int page, int pageSize);
+
+        int NumberOfNames();
     }
 }
