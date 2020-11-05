@@ -14,7 +14,7 @@ namespace UnitTests
     {
         // TITLES
         private const string TitlesApi = "http://localhost:5001/api/titles";
-        private const string TitlesPrincipalsApi = "http://localhost:5001/api/titles/titleprincipals";
+        private const string TitlePrincipalsApi = "http://localhost:5001/api/titles/titleprincipals";
         private const string TitleGenresApi = "http://localhost:5001/api/titles/titlegenres";
         private const string LocalTitlesApi = "http://localhost:5001/api/titles/localtitle";
         private const string TitleRatingsApi = "http://localhost:5001/api/titles/titleratings";
@@ -31,8 +31,8 @@ namespace UnitTests
         private const string NamesApi = "http://localhost:5001/api/names";
         private const string KnownForTitles = "http://localhost:5001/api/names/knownfortitles";
         private const string NameRatingApi = "http://localhost:5001/api/names/namerating";
-        private const string PrimaryProfessionApi = "http://localhost:5001/api/name/primaryprofession";
-        private const string TitlePrincipalsApi = "http://localhost:5001/api/names/titleprincipals";
+        private const string PrimaryProfessionApi = "http://localhost:5001/api/names/primaryprofession";
+       // private const string TitlePrincipalsApi = "http://localhost:5001/api/names/titleprincipals";
         
         
        // /api/titles

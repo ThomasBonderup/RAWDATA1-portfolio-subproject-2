@@ -16,6 +16,8 @@ namespace WebService.Controllers
             _dataService = dataService;
             //_mapper = mapper;
         }
+        
+        // GET
 
         [HttpGet]
         public IActionResult GetTitles()
@@ -48,6 +50,14 @@ namespace WebService.Controllers
             }
             return Ok(name);
         }
+        
+        
+        
+        // PUT
+        
+        // POST
+        
+        // DELETE
 
     }
 }
