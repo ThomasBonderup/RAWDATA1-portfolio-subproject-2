@@ -21,8 +21,8 @@ namespace DataAccess
 
         public IList<Name> GetNames(int page, int pageSize)
         {
-            return ctx.Names.ToList()
-            //return names
+            //return ctx.Names.ToList()
+            return names
                 .Skip(page * pageSize)
                 .Take(pageSize)
                 .ToList();
