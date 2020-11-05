@@ -14,6 +14,11 @@ namespace DataAccess
             ctx = new DBContext();
         }
 
+        public IList<User> GetUsers()
+        {
+            return ctx.Users.ToList();
+        }
+
         public IList<Title> GetTitles()
         {
             return ctx.Titles.ToList();
@@ -46,6 +51,18 @@ namespace DataAccess
             {
                 return name;
             }
+            return null;
+        }
+
+        public User GetUser(string Uconst)
+        {
+            var user = ctx.Users.Find(Uconst);
+
+            if (user != null)
+            {
+                return user;
+            }
+
             return null;
         }
 

@@ -8,6 +8,8 @@ namespace DataAccess
 
         Title GetTitle(string tconst);
 
+        User GetUser(string Uconst);
+
         Name GetName(string nconst);
 
         IList<Name> GetNames(int page, int pageSize);

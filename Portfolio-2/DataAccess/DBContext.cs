@@ -8,6 +8,8 @@ namespace DataAccess
     public class DBContext : DbContext
     {
         public DbSet<Title> Titles { get; set; }
+        
+        public DbSet<User> Users { get; set; }
 
         public DbSet<Name> Names { get; set; }
 
