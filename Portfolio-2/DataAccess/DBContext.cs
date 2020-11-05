@@ -33,12 +33,17 @@ namespace DataAccess
             modelBuilder.Entity<Title>().Property(x => x.IsAdult).HasColumnName("isadult");
             modelBuilder.Entity<Title>().Property(x => x.StartYear).HasColumnName("startyear");
             modelBuilder.Entity<Title>().Property(x => x.EndYear).HasColumnName("endyear");
-            //modelBuilder.Entity<Title>().Property(x => x.RunTimeMinutes).HasColumnName("runtimeminutes");
+            modelBuilder.Entity<Title>().Property(x => x.RunTimeMinutes).HasColumnName("runtimeminutes");
             modelBuilder.Entity<Title>().Property(x => x.Poster).HasColumnName("poster");
             modelBuilder.Entity<Title>().Property(x => x.Awards).HasColumnName("awards");
             modelBuilder.Entity<Title>().Property(x => x.Plot).HasColumnName("plot");
             modelBuilder.Entity<Title>().HasKey(x => new {x.Tconst}); //manuelt defineret
 
+            modelBuilder.Entity<TitleGenres>().ToTable("title_genres");
+            modelBuilder.Entity<TitleGenres>().Property(x => x.Tconst).HasColumnName("tconst");
+            modelBuilder.Entity<TitleGenres>().Property(x => x.Genre).HasColumnName("genre");
+            modelBuilder.Entity<TitleGenres>().HasKey(x => new {x.Tconst});
+            
             modelBuilder.Entity<Name>().ToTable("name");
             modelBuilder.Entity<Name>().Property(x => x.Nconst).HasColumnName("nconst");
             modelBuilder.Entity<Name>().Property(x => x.PrimaryName).HasColumnName("primaryname");
