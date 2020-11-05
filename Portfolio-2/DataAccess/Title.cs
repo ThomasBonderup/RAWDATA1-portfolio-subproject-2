@@ -19,9 +19,9 @@ namespace DataAccess
 
         public string EndYear { get; set; }
 
-        //public int RunTimeMinutes { get; set; }
+        public int RunTimeMinutes { get; set; }
 
-        //public string Genre { get; set;}
+        public string Genre { get; set;}
 
         public string Poster { get; set; }
 

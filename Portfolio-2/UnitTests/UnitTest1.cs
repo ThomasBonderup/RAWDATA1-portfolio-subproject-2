@@ -62,9 +62,8 @@ namespace UnitTests
             var service = new DataService();
             var titles = service.GetTitles();
             _testOutputHelper.WriteLine(titles.Count.ToString());
-            Assert.Equal(8, titles.Count);
-            Assert.Equal("Test primarytitle", titles.First().PrimaryTitle);
-
+            Assert.Equal(55076, titles.Count);
+            Assert.Equal("Çocuk", titles.First().PrimaryTitle);
         }
 
 

@@ -9,16 +9,15 @@ namespace WebService.Controllers
     public class TitlesController : ControllerBase
     {
         IDataService _dataService;
-        //private readonly IMapper _mapper;
+        private readonly IMapper _mapper;
 
-        public TitlesController(IDataService dataService)
+        public TitlesController(IDataService dataService, IMapper mapper)
         {
             _dataService = dataService;
-            //_mapper = mapper;
+            _mapper = mapper;
         }
         
         // GET
-
         [HttpGet]
         public IActionResult GetTitles()
         {
