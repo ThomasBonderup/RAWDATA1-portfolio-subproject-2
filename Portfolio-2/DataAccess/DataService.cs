@@ -7,7 +7,7 @@ namespace DataAccess
     {
         public DBContext ctx { get; set; }
         
-        private IList<Name> names = new List<Name>();
+       // private IList<Name> names = new List<Name>(); ?? 
 
         public DataService()
         {
@@ -49,7 +49,9 @@ namespace DataAccess
 
         public int NumberOfNames()
         {
-            return names.Count;
+           // return names.Count;
+            return ctx.Names.Count();
+
         }
     }
 }

@@ -5,13 +5,24 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using DataAccess;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Xunit.Abstractions;
 
 namespace UnitTests
 {
     public class UnitTest1
     {
+        private readonly ITestOutputHelper _testOutputHelper;
+
+        public UnitTest1(ITestOutputHelper testOutputHelper)
+        {
+            _testOutputHelper = testOutputHelper;
+        }
+
+        // USE THESE IN WEB SERVICE TEST
+        /*
         // TITLES
         private const string TitlesApi = "http://localhost:5001/api/titles";
         private const string TitlePrincipalsApi = "http://localhost:5001/api/titles/titleprincipals";
@@ -33,28 +44,27 @@ namespace UnitTests
         private const string NameRatingApi = "http://localhost:5001/api/names/namerating";
         private const string PrimaryProfessionApi = "http://localhost:5001/api/names/primaryprofession";
        // private const string TitlePrincipalsApi = "http://localhost:5001/api/names/titleprincipals";
-        
-        
-       // /api/titles
-        
-        [Fact]
-        public void ApiTitles_GetWithNoArgument_OkAndAllTitles()
-        {
-            var (data, statusCode) = GetArray(TitlesApi);
+        */
 
-            Assert.Equal(HttpStatusCode.OK, statusCode);
-            Assert.Equal(28417, data.Count);
-            Assert.Equal("Çocuk", data.First()["primaryname"]);
+        // /api/titles
+
+        [Fact]
+        public void Title_Object_HasTconstAndPrimaryTitle()
+        {
+            var title = new Title();
+            Assert.Null(title.Tconst);
+            Assert.Null(title.PrimaryTitle);
         }
 
         [Fact]
-
-        public void ApiTitles_GetWithValidTitleId_OkAndTitle()
+        public void GetAllTitles_NoArgument_ReturnsAllTitles()
         {
-            var (title, statusCode) = GetObject($"{TitlesApi}/tt10850402");
-            
-            Assert.Equal(HttpStatusCode.OK, statusCode);
-            Assert.Equal("Çocuk", title["primarytitle"]);
+            var service = new DataService();
+            var titles = service.GetTitles();
+            _testOutputHelper.WriteLine(titles.Count.ToString());
+            Assert.Equal(8, titles.Count);
+            Assert.Equal("Test primarytitle", titles.First().PrimaryTitle);
+
         }
 
 
