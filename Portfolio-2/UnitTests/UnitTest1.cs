@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using DataAccess;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit.Abstractions;
@@ -54,6 +55,33 @@ namespace UnitTests
             Assert.Equal("Tao",users.LastName);
         }
 
+        [Fact]
+        public void CreateNewUser()
+        {
+            var service = new DataService();
+            var users = service.CreateUser("John","Doe","jodo@dummy.data","jodo01pw","JoDo");
+            Assert.True(users.Uconst != null);
+            Assert.Equal("John", users.FirstName);
+            Assert.Equal("Doe", users.LastName);
+            Assert.Equal("jodo@dummy.data", users.Email);
+            Assert.Equal("jodo01pw", users.Password);
+            Assert.Equal("JoDo", users.UserName);
+            
+            //clean up
+            service.DeleteUser(users.Uconst);
+        }
+
+        [Fact]
+        public void DeleteUser()
+        {
+            var service = new DataService();
+            var users = service.CreateUser("John","Doe","jodo@dummy.data","jodo01pw","JoDo");
+            var result = service.DeleteUser(users.Uconst); // result should be a boolean?
+            //Assert.True(result); 
+            users = service.GetUser(users.Uconst);
+            Assert.Null(users);
+
+        }
 
         // Helpers 
         
@@ -103,8 +131,5 @@ namespace UnitTests
             var response = client.DeleteAsync(url).Result;
             return response.StatusCode;
         }
-        
-        
-        
     }
 }

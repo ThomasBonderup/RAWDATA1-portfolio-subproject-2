@@ -53,7 +53,15 @@ namespace DataAccess
             }
             return null;
         }
+        
+ // Is used for pagination
+        public int NumberOfNames()
+        {
+            return ctx.Names.Count();
 
+        }
+        
+        //User
         public User GetUser(string uconst)
         {
             var user = ctx.Users.Find(uconst);
@@ -65,10 +73,18 @@ namespace DataAccess
             return null;
         }
 
-        public int NumberOfNames()
+        public User CreateUser(string firstName, string lastName, string email, string password, string userName)
         {
-            return ctx.Names.Count();
-
+            var newUconst = ctx.Users.Max(x => x.Uconst);
+            var newUser = new User{Uconst = newUconst +1, FirstName = firstName, LastName = lastName, Email = email,Password = password, UserName = userName};
+            return newUser;
         }
+
+        public User DeleteUser(string Uconst)
+        {
+            var user = ctx.Users.Find(Uconst);
+            return user;
+        }
+
     }
 }
