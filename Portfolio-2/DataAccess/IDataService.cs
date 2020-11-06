@@ -4,7 +4,7 @@ namespace DataAccess
 {
     public interface IDataService
     {
-        IList<Title> GetTitles();
+        IList<Title> GetTitles(int page, int pageSize);
 
         Title GetTitle(string tconst);
 

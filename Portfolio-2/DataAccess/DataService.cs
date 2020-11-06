@@ -14,9 +14,12 @@ namespace DataAccess
             ctx = new DBContext();
         }
 
-        public IList<User> GetUsers()
+        public IList<User> GetUsers(int page, int pageSize)
         {
-            return ctx.Users.ToList();
+            return ctx.Users.ToList()
+                .Skip(page * pageSize)
+                .Take(pageSize)
+                .ToList();
         }
 
         public IList<Title> GetTitles()

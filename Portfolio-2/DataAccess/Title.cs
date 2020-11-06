@@ -21,14 +21,14 @@ namespace DataAccess
 
         public int? RunTimeMinutes { get; set; }
 
-        //public string Genre { get; set;}
-
         public string Poster { get; set; }
 
         public string Awards { get; set; }
 
         public string Plot { get; set; }
 
+        //public string Genre { get; set;}
+        
         //public TitleRatings TitleRatings { get; set; }
 
         //public LocalTitles LocalTitles { get; set; }
