@@ -51,6 +51,7 @@ namespace UnitTests
             var service = new DataService();
             var users = service.GetUser("ui000001");
             Assert.Equal("Alex",users.FirstName);
+            Assert.Equal("Tao",users.LastName);
         }
 
 
