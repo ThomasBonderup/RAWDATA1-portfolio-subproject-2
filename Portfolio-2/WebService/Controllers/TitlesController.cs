@@ -104,11 +104,28 @@ namespace WebService.Controllers
             return Ok(name);
         }
         
-        
-        
+        // POST
+        [HttpPost("{tconst}")]
+        public IActionResult CreateTitle(string primaryTitle)
+        {
+
+            var title = _dataService.CreateTitle(primaryTitle);
+            return Ok(title);
+
+            /*
+            if (_dataService.GetTitle(tconst) != null)
+            {
+                return BadRequest("Title already exists");
+            }
+            var title = _dataService.CreateTitle(tconst);
+            return Ok(title);
+            */
+
+        }
+
         // PUT
         
-        // POST
+       
         
         // DELETE
 

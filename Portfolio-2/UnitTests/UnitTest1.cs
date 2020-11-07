@@ -38,8 +38,7 @@ namespace UnitTests
         public void GetAllTitles_NoArgument_ReturnsAllTitles()
         {
             var service = new DataService();
-            var titles = service.GetTitles();
-            _testOutputHelper.WriteLine(titles.Count.ToString());
+            var titles = service.GetTitles(55076, 55076);
             Assert.Equal(55076, titles.Count);
             Assert.Equal("Çocuk", titles.First().PrimaryTitle);
         }
@@ -75,11 +74,11 @@ namespace UnitTests
         public void DeleteUser()
         {
             var service = new DataService();
-            var users = service.CreateUser("John","Doe","jodo@dummy.data","jodo01pw","JoDo");
-            var result = service.DeleteUser(users.Uconst); // result should be a boolean?
-            //Assert.True(result); 
-            users = service.GetUser(users.Uconst);
-            Assert.Null(users);
+            var user = service.CreateUser("John","Doe","jodo@dummy.data","jodo01pw","JoDo");
+            var result = service.DeleteUser(user.Uconst); // result should be a boolean?
+            user = service.GetUser(user.Uconst);
+            Assert.True(result); 
+            Assert.Null(user);
 
         }
 

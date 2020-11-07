@@ -14,6 +14,14 @@ namespace DataAccess
             ctx = new DBContext();
         }
 
+        public IList<Name> GetNames(int page, int pageSize)
+        {
+            return ctx.Names.ToList()
+                .Skip(page * pageSize)
+                .Take(pageSize)
+                .ToList();
+        }
+
         public IList<User> GetUsers(int page, int pageSize)
         {
             return ctx.Users.ToList()
@@ -22,18 +30,25 @@ namespace DataAccess
                 .ToList();
         }
 
-        public IList<Title> GetTitles()
+        public User CreateUser(string firstName, string lastName, string Emial, string password, string userName)
         {
-            return ctx.Titles.ToList();
+            throw new System.NotImplementedException();
         }
 
-        public IList<Name> GetNames(int page, int pageSize)
+        public bool DeleteUser(string uconst)
         {
-            return ctx.Names.ToList()
+            throw new System.NotImplementedException();
+        }
+
+        public IList<Title> GetTitles(int page, int pageSize)
+        {
+            return ctx.Titles.ToList()
                 .Skip(page * pageSize)
                 .Take(pageSize)
                 .ToList();
         }
+        
+        
 
         public Title GetTitle(string tconst)
         {
@@ -46,6 +61,11 @@ namespace DataAccess
             return null;
         }
 
+        public User GetUser(string Uconst)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public Name GetName(string nconst)
         {
             var name = ctx.Names.Find(nconst);
@@ -56,38 +76,16 @@ namespace DataAccess
             }
             return null;
         }
-        
- // Is used for pagination
+
         public int NumberOfNames()
         {
             return ctx.Names.Count();
 
         }
-        
-        //User
-        public User GetUser(string uconst)
+
+        public Title CreateTitle(string primaryTitle)
         {
-            var user = ctx.Users.Find(uconst);
-
-            if (user != null)
-            {
-                return user;
-            }
-            return null;
+            throw new System.NotImplementedException();
         }
-
-        public User CreateUser(string firstName, string lastName, string email, string password, string userName)
-        {
-            var newUconst = ctx.Users.Max(x => x.Uconst);
-            var newUser = new User{Uconst = newUconst +1, FirstName = firstName, LastName = lastName, Email = email,Password = password, UserName = userName};
-            return newUser;
-        }
-
-        public User DeleteUser(string Uconst)
-        {
-            var user = ctx.Users.Find(Uconst);
-            return user;
-        }
-
     }
 }
