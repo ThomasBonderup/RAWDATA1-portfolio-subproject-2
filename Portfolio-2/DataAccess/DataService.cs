@@ -78,7 +78,18 @@ namespace DataAccess
 
         public bool DeleteUser(string uconst)
         {
-            throw new System.NotImplementedException();
+
+            var user = ctx.Users.Find(uconst);
+
+            if (user != null)
+            {
+                ctx.Users.Remove(user);
+                return true;
+            }
+
+            return false;
+
+
         }
 
         public IList<Title> GetTitles(int page, int pageSize)
