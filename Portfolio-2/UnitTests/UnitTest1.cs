@@ -94,7 +94,42 @@ namespace UnitTests
             Assert.Equal("Fred Astaire", name.PrimaryName);
         }
 
+        [Fact]
 
+        public void CreateNewTitle()
+        {
+            var service = new DataService();
+            var title = service.CreateTitle("Movie", "Ultra Testing 3", "UT3", 
+                true, "2020", "2020", 120, null, null,
+                null);
+            Assert.True(title.Tconst != null);
+            Assert.Equal("Movie", title.Titletype);
+            Assert.Equal("Ultra Testing 3", title.PrimaryTitle);
+            Assert.Equal("UT3", title.OriginalTitle);
+            Assert.True(title.IsAdult);
+            Assert.Equal("2020", title.StartYear);
+            Assert.Equal("2020", title.EndYear);
+            Assert.Equal(120, title.RunTimeMinutes);
+
+            service.DeleteTitle(title.Tconst);
+        }
+
+        [Fact]
+
+        public void DeleteTitle()
+        {
+            
+            var service = new DataService();
+            var title = service.CreateTitle("Movie", "Ultra Testing 3", "UT3", 
+                true, "2020", "2020", 120, null, null,
+                null);
+            var result = service.DeleteTitle(title.Tconst);
+            title = service.GetTitle(title.Tconst);
+            Assert.True(result);
+            Assert.Null(title);
+            
+
+        }
 
         [Fact]
         public void CreateNewUser()

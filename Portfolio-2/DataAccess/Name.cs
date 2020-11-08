@@ -1,6 +1,6 @@
 namespace DataAccess
 {
-    public class Name
+    public class Name 
     {
         public string Nconst { get; set; }
         
@@ -9,5 +9,6 @@ namespace DataAccess
         public string BirthYear { get; set; }
 
         public string DeathYear { get; set; }
+        
     }
 }

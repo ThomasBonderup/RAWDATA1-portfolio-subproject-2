@@ -35,8 +35,6 @@ namespace DataAccess
         
         public User CreateUser(string firstName, string lastName, string emial, string password, string userName)
         {
-            
-            
             var user = new User
             {
             FirstName = firstName,
@@ -49,6 +47,40 @@ namespace DataAccess
 
             ctx.Users.Add(user);
             return user;
+        }
+
+        public Title CreateTitle(string titleType, string primaryTitle, string originalTitle, bool isAdult, string startYear, string endYear, int runtimeMinutes, string? poster, string? awards, string? plot)
+        {
+            var title = new Title
+            {
+                Tconst = AssignMaxTconst(),
+                Titletype = titleType,
+                PrimaryTitle = primaryTitle,
+                OriginalTitle = originalTitle,
+                IsAdult = isAdult,
+                StartYear = startYear,
+                EndYear = endYear,
+                RunTimeMinutes = runtimeMinutes,
+                Poster = poster,
+                Awards = awards,
+                Plot = plot
+            };
+
+            return title;
+
+        }
+
+        public bool DeleteTitle(string tconst)
+        {
+            var title = ctx.Titles.Find(tconst);
+
+            if (title != null)
+            {
+                ctx.Titles.Remove(title);
+                return true;
+            }
+
+            return false;
         }
 
         public bool DeleteUser(string uconst)
@@ -108,6 +140,11 @@ namespace DataAccess
                 return name;
             }
             return null;
+        }
+
+        public int NumberOfTitles()
+        {
+            return ctx.Titles.Count();
         }
 
         public int NumberOfNames()

@@ -1,6 +1,6 @@
 namespace DataAccess
 {
-    public class User
+    public class User 
     {
         public string Uconst { get; set; }
         public string FirstName { get; set; }
@@ -18,5 +18,6 @@ namespace DataAccess
             return $"Uconst = {Uconst}, FirstName = {FirstName}, LastName = {LastName}, Email = {Email}," +
                    $"Password = {Password}, UserName ={UserName}";
         }
+        
     }
 }

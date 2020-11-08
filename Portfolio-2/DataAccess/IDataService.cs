@@ -22,6 +22,8 @@ namespace DataAccess
 
         int NumberOfNames();
 
+        int NumberOfTitles();
+
         Title CreateTitle(string primaryTitle);
     }
 }
