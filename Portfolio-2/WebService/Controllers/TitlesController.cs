@@ -80,10 +80,6 @@ namespace WebService.Controllers
             return Ok(result);
         }
         
-        
-        
-
-
         [HttpGet("{tconst}")]
 
         public IActionResult GetTitle(string tconst)
@@ -96,18 +92,7 @@ namespace WebService.Controllers
             return Ok(title);
         }
 
-        [HttpGet("{nconst}")]
-
-        public IActionResult GetName(string nconst)
-        {
-            var name = _dataService.GetName(nconst);
-            if (name == null)
-            {
-                return NotFound();
-            }
-            return Ok(name);
-        }
-
+        // For user controller 
         [HttpGet("{uconst}")]
         public IActionResult GetUser(string uconst)
         {
@@ -126,15 +111,7 @@ namespace WebService.Controllers
 
             var title = _dataService.CreateTitle(primaryTitle);
             return Ok(title);
-
-            /*
-            if (_dataService.GetTitle(tconst) != null)
-            {
-                return BadRequest("Title already exists");
-            }
-            var title = _dataService.CreateTitle(tconst);
-            return Ok(title);
-            */
+            
 
         }
 

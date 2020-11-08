@@ -87,6 +87,17 @@ namespace WebService.Controllers
             return Ok(result);
 
         }
+        [HttpGet("{nconst}")]
+
+        public IActionResult GetName(string nconst)
+        {
+            var name = _dataService.GetName(nconst);
+            if (name == null)
+            {
+                return NotFound();
+            }
+            return Ok(name);
+        }
 }
 
 }

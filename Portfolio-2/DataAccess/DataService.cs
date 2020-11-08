@@ -51,6 +51,8 @@ namespace DataAccess
 
         public Title CreateTitle(string titleType, string primaryTitle, string originalTitle, bool isAdult, string startYear, string endYear, int runtimeMinutes, string? poster, string? awards, string? plot)
         {
+            
+            
             var title = new Title
             {
                 Tconst = AssignMaxTconst(),
@@ -95,8 +97,6 @@ namespace DataAccess
             }
 
             return false;
-
-
         }
 
         public IList<Title> GetTitles(int page, int pageSize)
@@ -107,8 +107,6 @@ namespace DataAccess
                 .ToList();
         }
         
-        
-
         public Title GetTitle(string tconst)
         {
             var title = ctx.Titles.Find(tconst);
@@ -191,7 +189,6 @@ namespace DataAccess
             
             foreach (var title in ctx.Titles)
             {
-
                 var tconst = title.Tconst;
                 var trimmedUconst = tconst.Remove(0, 2);
                 int intUconst = Int32.Parse(trimmedUconst);
@@ -202,7 +199,7 @@ namespace DataAccess
                 }
             }
             maxTconstInt++;
-            var stringUconst = "tt" + maxTconstInt.ToString();
+            var stringUconst = "tt" + maxTconstInt;
 
             return stringUconst;
         }
