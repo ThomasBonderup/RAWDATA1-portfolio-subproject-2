@@ -8,7 +8,7 @@ namespace DataAccess
 
         Title GetTitle(string tconst);
 
-        User GetUser(string Uconst);
+        User GetUser(string uconst);
 
         Name GetName(string nconst);
 

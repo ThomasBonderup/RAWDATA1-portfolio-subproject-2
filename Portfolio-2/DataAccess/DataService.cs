@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -30,9 +31,49 @@ namespace DataAccess
                 .ToList();
         }
 
-        public User CreateUser(string firstName, string lastName, string Emial, string password, string userName)
+        public string AssignMaxUconst()
         {
-            throw new System.NotImplementedException();
+
+            var maxUconstInt = 0;
+            
+            foreach (var user in ctx.Users)
+            {
+
+                var uconst = user.Uconst;
+                var trimmedUconst = uconst.Remove(0, 2);
+                int intUconst = Int32.Parse(trimmedUconst);
+
+                if (intUconst > maxUconstInt)
+                {
+                    maxUconstInt = intUconst;
+
+                }
+            }
+
+            maxUconstInt++;
+            var stringUconst = "tt" + maxUconstInt.ToString();
+
+            return stringUconst;
+
+
+        }
+
+        public User CreateUser(string firstName, string lastName, string emial, string password, string userName)
+        {
+            
+            
+            var user = new User
+            {
+            FirstName = firstName,
+            LastName = lastName,
+            Uconst = AssignMaxUconst(),
+            Email = emial,
+            Password = password,
+            UserName = userName
+            };
+
+            ctx.Users.Add(user);
+            return user;
         }
 
         public bool DeleteUser(string uconst)
@@ -61,9 +102,15 @@ namespace DataAccess
             return null;
         }
 
-        public User GetUser(string Uconst)
+        public User GetUser(string uconst)
         {
-            throw new System.NotImplementedException();
+            var user = ctx.Users.Find(uconst);
+            
+            if (user != null)
+            {
+                return user;
+            }
+            return null;
         }
 
         public Name GetName(string nconst)
