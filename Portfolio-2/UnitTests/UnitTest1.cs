@@ -24,7 +24,6 @@ namespace UnitTests
           
         }
         
-        ///api/titles
 
         [Fact]
         public void Title_Object_HasTconstAndPrimaryTitle()
@@ -33,6 +32,8 @@ namespace UnitTests
             Assert.Null(title.Tconst);
             Assert.Null(title.PrimaryTitle);
         }
+        
+        // Get ALL titles, names, and users
 
         [Fact]
         public void GetAllTitles_NoArgument_ReturnsAllTitles()
@@ -64,9 +65,18 @@ namespace UnitTests
             Assert.Equal("Fred Astaire", names.First().PrimaryName);
 
         }
+        
+        // Get a title, name or user BY t-, n-, u-const
 
+        [Fact]
+        public void GetTitleByTconst_validTconst()
+        {
+            var service = new DataService();
+            var title = service.GetTitle("tt10850402");
+            Assert.Equal("Çocuk", title.PrimaryTitle);
+        }
 
-        //api/users
+        
         [Fact]
         public void GetUserByUconst_ValidUconst()
         {
@@ -75,6 +85,16 @@ namespace UnitTests
             Assert.Equal("Alex",users.FirstName);
             Assert.Equal("Tao",users.LastName);
         }
+
+        [Fact]
+        public void GetNameByNconst_ValidNconst()
+        {
+            var service = new DataService();
+            var name = service.GetName("nm0000001");
+            Assert.Equal("Fred Astaire", name.PrimaryName);
+        }
+
+
 
         [Fact]
         public void CreateNewUser()
