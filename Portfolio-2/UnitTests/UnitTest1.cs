@@ -15,15 +15,15 @@ namespace UnitTests
 {
     public class UnitTest1
     {
+        
         private readonly ITestOutputHelper _testOutputHelper;
 
         public UnitTest1(ITestOutputHelper testOutputHelper)
         {
             _testOutputHelper = testOutputHelper;
+          
         }
-
         
-
         ///api/titles
 
         [Fact]
@@ -42,8 +42,30 @@ namespace UnitTests
             Assert.Equal(55076, titles.Count);
             Assert.Equal("Çocuk", titles.First().PrimaryTitle);
         }
-        
-        
+
+        [Fact]
+        public void GetAllUsers_NoArgument_ReturnsAllUsers()
+        {
+            
+            var service = new DataService();
+            var users = service.GetUsers(6, 6);
+            Assert.Equal(6, users.Count);
+            Assert.Equal("Alex", users.First().FirstName);
+
+        }
+
+        [Fact]
+        public void GetAllNames_NoAargument_ReturnsAllNames()
+        {
+            
+            var service = new DataService();
+            var names = service.GetNames(234484, 234484);
+            Assert.Equal(234484, names.Count);
+            Assert.Equal("Fred Astaire", names.First().PrimaryName);
+
+        }
+
+
         //api/users
         [Fact]
         public void GetUserByUconst_ValidUconst()
