@@ -30,34 +30,9 @@ namespace DataAccess
                 .Take(pageSize)
                 .ToList();
         }
-
-        public string AssignMaxUconst()
-        {
-
-            var maxUconstInt = 0;
-            
-            foreach (var user in ctx.Users)
-            {
-
-                var uconst = user.Uconst;
-                var trimmedUconst = uconst.Remove(0, 2);
-                int intUconst = Int32.Parse(trimmedUconst);
-
-                if (intUconst > maxUconstInt)
-                {
-                    maxUconstInt = intUconst;
-
-                }
-            }
-
-            maxUconstInt++;
-            var stringUconst = "tt" + maxUconstInt.ToString();
-
-            return stringUconst;
-
-
-        }
-
+        
+        
+        
         public User CreateUser(string firstName, string lastName, string emial, string password, string userName)
         {
             
@@ -145,5 +120,79 @@ namespace DataAccess
         {
             throw new System.NotImplementedException();
         }
+        
+        // Utils 
+        
+        public string AssignMaxUconst()
+        {
+
+            var maxUconstInt = 0;
+            
+            foreach (var user in ctx.Users)
+            {
+
+                var uconst = user.Uconst;
+                var trimmedUconst = uconst.Remove(0, 2);
+                int intUconst = Int32.Parse(trimmedUconst);
+
+                if (intUconst > maxUconstInt)
+                {
+                    maxUconstInt = intUconst;
+
+                }
+            }
+            maxUconstInt++;
+            var stringUconst = "tt" + maxUconstInt.ToString();
+
+            return stringUconst;
+        }
+
+        public string AssignMaxTconst()
+        {
+
+            var maxTconstInt = 0;
+            
+            foreach (var title in ctx.Titles)
+            {
+
+                var tconst = title.Tconst;
+                var trimmedUconst = tconst.Remove(0, 2);
+                int intUconst = Int32.Parse(trimmedUconst);
+
+                if (intUconst > maxTconstInt)
+                {
+                    maxTconstInt = intUconst;
+                }
+            }
+            maxTconstInt++;
+            var stringUconst = "tt" + maxTconstInt.ToString();
+
+            return stringUconst;
+        }
+        
+        public string AssignMaxNconst()
+        {
+
+            var maxNconstInt = 0;
+            
+            foreach (var name in ctx.Names)
+            {
+
+                var tconst = name.Nconst;
+                var trimmedUconst = tconst.Remove(0, 2);
+                int intUconst = Int32.Parse(trimmedUconst);
+
+                if (intUconst > maxNconstInt)
+                {
+                    maxNconstInt = intUconst;
+                }
+            }
+            maxNconstInt++;
+            var stringUconst = "tt" + maxNconstInt.ToString();
+
+            return stringUconst;
+        }
+        
+        
     }
 }
