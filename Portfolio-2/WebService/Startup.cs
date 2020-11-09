@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WebService.Middleware;
 
 namespace WebService
 {
@@ -34,6 +35,8 @@ namespace WebService
             }
 
             app.UseRouting();
+
+            app.UseAuth();
 
             app.UseEndpoints(endpoints =>
             {
