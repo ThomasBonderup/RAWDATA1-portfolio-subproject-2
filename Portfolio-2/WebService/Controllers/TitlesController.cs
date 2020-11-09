@@ -81,9 +81,13 @@ namespace WebService.Controllers
         }
         
         [HttpGet("{tconst}")]
-
         public IActionResult GetTitle(string tconst)
         {
+            if (Program.CurrentUser == null)
+            {
+                return Unauthorized();
+            }
+            
             var title = _dataService.GetTitle(tconst);
             if (title == null)
             {
@@ -93,16 +97,16 @@ namespace WebService.Controllers
         }
 
         // For user controller 
-        [HttpGet("{uconst}")]
-        public IActionResult GetUser(string uconst)
-        {
-            var user = _dataService.GetUser(uconst);
-            if (user == null)
-            {
-                return NotFound();
-            }
-            return Ok(user);
-        }
+        // [HttpGet("{uconst}")]
+        // public IActionResult GetUser(string uconst)
+        // {
+        //     var user = _dataService.GetUser(uconst);
+        //     if (user == null)
+        //     {
+        //         return NotFound();
+        //     }
+        //     return Ok(user);
+        // }
 
         // POST
         [HttpPost("{tconst}")]
