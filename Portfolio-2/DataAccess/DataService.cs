@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.SymbolStore;
 using System.Linq;
 
 namespace DataAccess
@@ -49,10 +50,9 @@ namespace DataAccess
             return user;
         }
 
-        public Title CreateTitle(string titleType, string primaryTitle, string originalTitle, bool isAdult, string startYear, string endYear, int runtimeMinutes, string? poster, string? awards, string? plot)
+        public Title CreateTitle(string titleType, string primaryTitle, string originalTitle, bool isAdult, string startYear, string endYear, 
+            int runtimeMinutes, string poster, string awards, string plot)
         {
-            
-            
             var title = new Title
             {
                 Tconst = AssignMaxTconst(),
@@ -67,9 +67,33 @@ namespace DataAccess
                 Awards = awards,
                 Plot = plot
             };
-
+            ctx.Titles.Add(title);
             return title;
+        }
 
+        public bool UpdateTitle(string tconst, string titleType, string primaryTitle, string originalTitle, bool isAdult, string startYear, string endYear,
+            int? runtimeMinutes, string poster, string awards, string plot)
+        {
+
+            var title = ctx.Titles.Find(tconst);
+
+            if (title == null || tconst.Length != 10)
+            {
+                return false;
+            }
+
+            title.Titletype = titleType;
+            title.PrimaryTitle = primaryTitle;
+            title.OriginalTitle = originalTitle;
+            title.IsAdult = isAdult;
+            title.StartYear = startYear;
+            title.EndYear = endYear;
+            title.RunTimeMinutes = runtimeMinutes;
+            title.Poster = poster;
+            title.Awards = awards;
+            title.Plot = plot;
+            
+            return true;
         }
 
         public bool DeleteTitle(string tconst)
@@ -151,10 +175,12 @@ namespace DataAccess
 
         }
 
+        
         public Title CreateTitle(string primaryTitle)
         {
             throw new System.NotImplementedException();
         }
+        
         
         // Utils 
         
@@ -185,7 +211,7 @@ namespace DataAccess
         public string AssignMaxTconst()
         {
 
-            var maxTconstInt = 0;
+            int maxTconstInt = 0;
             
             foreach (var title in ctx.Titles)
             {
@@ -193,12 +219,13 @@ namespace DataAccess
                 var trimmedUconst = tconst.Remove(0, 2);
                 int intUconst = Int32.Parse(trimmedUconst);
 
-                if (intUconst > maxTconstInt)
+                if (intUconst >= maxTconstInt)
                 {
                     maxTconstInt = intUconst;
                 }
             }
-            maxTconstInt++;
+
+            maxTconstInt += 1;
             var stringUconst = "tt" + maxTconstInt;
 
             return stringUconst;

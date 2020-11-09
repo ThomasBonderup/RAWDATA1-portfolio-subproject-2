@@ -114,6 +114,36 @@ namespace UnitTests
             service.DeleteTitle(title.Tconst);
         }
 
+
+
+        [Fact]
+
+        public void UpdateTitle_InvalidID_ReturnsFalse()
+        {
+            var service = new DataService();
+            var result = service.UpdateTitle("tt001", "test", "Test", "Testy", true, "2015", "2015", 20, null, null, null);
+            Assert.False(result);
+            
+        }
+
+        [Fact]
+
+        public void UpdateTitle_ValidID_ReturnsTrue()
+        {
+            var service = new DataService();
+            var title = service.GetTitle("tt10850402");
+            var result = service.UpdateTitle(title.Tconst, title.Titletype, "Testing", title.OriginalTitle,
+                title.IsAdult, title.StartYear, title.EndYear, title.RunTimeMinutes, title.Poster, title.Awards, title.Plot);
+            Assert.Equal("tt10850402", title.Tconst);
+            Assert.Equal("Testing", title.PrimaryTitle);
+            Assert.True(result);
+            
+            service.UpdateTitle(title.Tconst, title.Titletype, "Çocuk", title.OriginalTitle,
+                title.IsAdult, title.StartYear, title.EndYear, title.RunTimeMinutes, title.Poster, title.Awards, title.Plot);
+            
+            
+        }
+
         [Fact]
 
         public void DeleteTitle()

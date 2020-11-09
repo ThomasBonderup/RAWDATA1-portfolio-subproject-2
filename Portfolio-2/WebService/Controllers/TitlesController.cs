@@ -100,34 +100,41 @@ namespace WebService.Controllers
             }
             return Ok(title);
         }
-
-        // For user controller 
-        // [HttpGet("{uconst}")]
-        // public IActionResult GetUser(string uconst)
-        // {
-        //     var user = _dataService.GetUser(uconst);
-        //     if (user == null)
-        //     {
-        //         return NotFound();
-        //     }
-        //     return Ok(user);
-        // }
-
+        
         // POST
+        
         [HttpPost("{tconst}")]
-        public IActionResult CreateTitle(string primaryTitle)
+        public IActionResult CreateTitle(string titleType, string primaryTitle, string originalTitle, bool isAdult, 
+            string startYear, string endYear, int runtimeMinutes, string poster, string awards, string plot)
         {
-
-            var title = _dataService.CreateTitle(primaryTitle);
+           // var title = _dataService.CreateTitle(primaryTitle);
+           var title = _dataService.CreateTitle(titleType, primaryTitle, originalTitle, isAdult, startYear, endYear,
+               runtimeMinutes, poster,
+               awards, plot);
             return Ok(title);
-            
-
         }
 
         // PUT
-        
-       
-        
+
+        [HttpPut("{tconst}")]
+
+        public IActionResult UpdateTitle(string tconst, string titleType, string primaryTitle, string originalTitle, bool isAdult, 
+            string startYear, string endYear, int runtimeMinutes, string poster, string awards, string plot)
+        {
+
+            var title = _dataService.GetTitle(tconst);
+
+            if (title != null)
+            {
+                _dataService.UpdateTitle(tconst, titleType, primaryTitle, originalTitle, isAdult, startYear, endYear,
+                    runtimeMinutes, poster, awards, plot);
+                return Ok(title);
+            }
+
+            return NotFound();
+        }
+
+
         // DELETE
 
     }
