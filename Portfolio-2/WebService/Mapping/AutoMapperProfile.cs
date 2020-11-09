@@ -8,6 +8,7 @@ namespace WebService.Mapping
         public AutoMapperProfile ()
         {
             CreateMap<Name, NameListDto>().ReverseMap();
+            CreateMap<Title, TitleListDto>().ReverseMap();
         }
     }
 }
