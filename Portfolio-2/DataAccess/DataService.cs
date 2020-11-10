@@ -130,7 +130,14 @@ namespace DataAccess
                 .Take(pageSize)
                 .ToList();
         }
-        
+
+        public IList<TitlePrincipals> GetTitlePrincipals(string tconst, string nconst)
+        {
+
+            return null;
+
+        }
+
         public Title GetTitle(string tconst)
         {
             var title = ctx.Titles.Find(tconst);
