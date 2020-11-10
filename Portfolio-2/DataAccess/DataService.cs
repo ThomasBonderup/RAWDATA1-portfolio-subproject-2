@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.SymbolStore;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess
 {
@@ -283,9 +284,14 @@ namespace DataAccess
             return stringUconst;
         }
 
-        public IList<SearchResult> SearchTitles(string searchString, int page, int pageSize)
+        public IList<SearchResult> SearchTitles(string searchString, string uConst, int page, int pageSize)
         {
-            throw new NotImplementedException();
+            var result = ctx.SearchResults
+                .FromSqlInterpolated($"select * from string_search({searchString}, {uConst})")
+                .Skip(page * pageSize)
+                .Take(pageSize)
+                .ToList();
+            return result;
         }
     }
 }
