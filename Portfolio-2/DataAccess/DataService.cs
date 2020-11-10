@@ -223,7 +223,7 @@ namespace DataAccess
             return null;
         }
 
-        public IList<Name> GetNames(int page, int pageSize)
+        public IList<Name> GetNames(int page, int pageSize) //se om denne kan bruges til primary profession?
         {
             return ctx.Names
                 .Include(x => x.PrimaryProfession)
