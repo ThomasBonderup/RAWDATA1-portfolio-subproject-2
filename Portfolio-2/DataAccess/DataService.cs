@@ -280,7 +280,7 @@ namespace DataAccess
             return ctx.Professions.ToList();
         }
 
-        public IList<PrimaryProfession> GetPrimaryProfession(string nconst)
+       /* public IList<PrimaryProfession> GetPrimaryProfession(string nconst)
         {
             List<PrimaryProfession> professions = new List<PrimaryProfession>();
             foreach (var p in GetProfessions())
@@ -291,7 +291,7 @@ namespace DataAccess
                 }
             }
             return professions;
-        }
+        }*/
 
 //pagination use
         public int NumberOfTitles()
