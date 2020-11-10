@@ -1,7 +1,10 @@
+
+
 namespace DataAccess
 {
     public class TitlePrincipals
     {
+
         public string Tconst { get; set;}
         public string Nconst { get; set;}
         public int Ordering { get; set; }

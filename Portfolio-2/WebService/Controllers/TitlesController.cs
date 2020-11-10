@@ -49,9 +49,9 @@ namespace WebService.Controllers
             return dto;
         }
         
+
         private object CreateResultTitles(int page, int pageSize, IList<Title> titles)
         {
-
             var items = titles.Select(CreateTitleListDto);
             var count = _dataService.NumberOfTitles();
             var navigationUrls = CreatePagingNavigation(page, pageSize, count);
@@ -91,9 +91,7 @@ namespace WebService.Controllers
             
             return Ok(result);
         }
-
-     
-
+        
         [HttpGet("{tconst}")]
         public IActionResult GetTitle(string tconst)
         {
@@ -107,7 +105,22 @@ namespace WebService.Controllers
             }
             return Ok(title);
         }
-        
+
+        [HttpGet("{tconst}, {nconst}")]
+
+        public IActionResult GetTitlePrincipals(string tconst, string nconst)
+        {
+            CheckCurrentUser();
+
+            var titlePrincipals = _dataService.GetTitlePrincipals(tconst, nconst);
+            if (titlePrincipals == null)
+            {
+                return NotFound();
+            }
+            return Ok(titlePrincipals);
+        }
+
+
         // POST
         
         [HttpPost("{tconst}")]

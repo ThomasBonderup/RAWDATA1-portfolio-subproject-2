@@ -68,6 +68,8 @@ namespace DataAccess
             return true;
         }
 
+    
+
         public bool DeleteTitle(string tconst)
         {
             var title = ctx.Titles.Find(tconst);
@@ -90,15 +92,7 @@ namespace DataAccess
                 .Take(pageSize)
                 .ToList();
         }
-
-        public IList<TitlePrincipals> GetTitlePrincipals(string tconst, string nconst)
-        {
-            
-
-            return null;
-
-        }
-
+        
         public Title GetTitle(string tconst)
         {
             var title = ctx.Titles.Find(tconst);
@@ -109,7 +103,19 @@ namespace DataAccess
             }
             return null;
         }
-        
+
+        public TitlePrincipals GetTitlePrincipals(string tconst, string nconst)
+        {
+            var titleProncipals = ctx.TitlePrincipals.Find(tconst, nconst);
+
+            if (titleProncipals != null)
+            {
+                return titleProncipals;
+            }
+            return null;
+        }
+
+
         /**
          *  USER
          */

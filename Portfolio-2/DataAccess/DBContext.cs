@@ -8,7 +8,9 @@ namespace DataAccess
     public class DBContext : DbContext
     {
         public DbSet<Title> Titles { get; set; }
-        
+
+        public DbSet<TitlePrincipals> TitlePrincipals { get; set; }
+
         public DbSet<User> Users { get; set; }
 
         public DbSet<Name> Names { get; set; }
@@ -55,8 +57,9 @@ namespace DataAccess
             modelBuilder.Entity<TitlePrincipals>().Property(x => x.Category).HasColumnName("category");
             modelBuilder.Entity<TitlePrincipals>().Property(x => x.Job).HasColumnName("job");
             modelBuilder.Entity<TitlePrincipals>().Property(x => x.Characters).HasColumnName("characters");
-            modelBuilder.Entity<TitlePrincipals>().HasKey(x => new {x.Tconst});
-            
+            modelBuilder.Entity<TitlePrincipals>().HasKey(x => new {x.Tconst, x.Nconst});
+     
+          
             
             modelBuilder.Entity<Name>().ToTable("name");
             modelBuilder.Entity<Name>().Property(x => x.Nconst).HasColumnName("nconst");

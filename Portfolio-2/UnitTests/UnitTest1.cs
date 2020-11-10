@@ -98,6 +98,18 @@ namespace UnitTests
         //Title
         [Fact]
 
+        public void GetTitlePrincipalsByTconstAndNconst_ValidTconstNconst()
+        {
+            
+            var service = new DataService();
+            var titlePrincipals = service.GetTitlePrincipals("tt0052520", "nm0580565");
+            Assert.Equal(8, titlePrincipals.Ordering);
+            Assert.Equal("actor", titlePrincipals.Category);
+            
+        }
+
+        [Fact]
+
         public void CreateNewTitle()
         {
             var service = new DataService();
