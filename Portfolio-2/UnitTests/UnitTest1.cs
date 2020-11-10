@@ -70,7 +70,17 @@ namespace UnitTests
         // Get a title, name or user BY t-, n-, u-const
 
         [Fact]
-        public void GetTitleByTconst_validTconst()
+        public void GetTitleByTconst_InvalidTconst()
+        {
+            var service = new DataService();
+            var title = service.GetTitle("tt10850");
+            var title2 = service.GetTitle("nt10850402");
+            Assert.Null(title);
+            Assert.Null(title2);
+        }
+        
+        [Fact]
+        public void GetTitleByTconst_ValidTconst()
         {
             var service = new DataService();
             var title = service.GetTitle("tt10850402");

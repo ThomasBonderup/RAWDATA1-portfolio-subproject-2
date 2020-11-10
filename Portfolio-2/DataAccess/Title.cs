@@ -40,27 +40,5 @@ namespace DataAccess
                    //$"TitleRatings{TitleRatings}, LocalTitles{LocalTitles}"
                    ;
         }
-
-        public bool IsTitle()
-        {
-            return true;
-        }
-
-        public bool IsName()
-        {
-            return false;
-        }
-
-        public bool IsUser()
-        {
-            return false;
-        }
-
-        public string GetIConst()
-        {
-            return Tconst;
-        }
-        
-
     }
 }

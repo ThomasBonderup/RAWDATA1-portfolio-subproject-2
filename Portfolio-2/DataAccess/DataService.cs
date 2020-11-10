@@ -49,7 +49,7 @@ namespace DataAccess
 
             var title = ctx.Titles.Find(tconst);
 
-            if (title == null || tconst.Length != 10)
+            if (title == null || tconst.Length != 10 || !tconst.StartsWith("t"))
             {
                 return false;
             }
@@ -113,6 +113,20 @@ namespace DataAccess
                 return titleProncipals;
             }
             return null;
+        }
+
+        public IList<TitlePrincipals> GetTitlePrincipalsByTitle(string tconst)
+        {
+            IList<TitlePrincipals> result = new List<TitlePrincipals>();
+            foreach (var titlePrincipal in ctx.TitlePrincipals)
+            {
+                if (titlePrincipal.Tconst == tconst)
+                {
+                    result.Add(titlePrincipal);
+                    
+                }
+            }
+            return result;
         }
 
 
