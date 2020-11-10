@@ -266,8 +266,6 @@ namespace DataAccess
             return true;
         }
 
-
-
         public int NumberOfTitles()
         {
             return ctx.Titles.Count();
