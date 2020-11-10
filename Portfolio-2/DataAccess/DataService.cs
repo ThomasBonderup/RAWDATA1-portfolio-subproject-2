@@ -286,7 +286,7 @@ namespace DataAccess
 
         public IList<SearchResult> SearchTitles(string searchString, string uConst, int page, int pageSize)
         {
-            var result = ctx.SearchResults.FromSqlInterpolated($"select * from string_search({searchString})").ToList();
+            var result = ctx.SearchResults.FromSqlInterpolated($"select * from string_search({searchString}, {uConst})").ToList();
             return result;
         }
     }
