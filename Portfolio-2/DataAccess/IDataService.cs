@@ -26,7 +26,7 @@ namespace DataAccess
         bool UpdateUser(string uconst, string FirstName, string LastName, string Email, string Password, string UserName);
 
         bool DeleteUser(string uconst);
-
+        
         int NumberOfNames();
 
         int NumberOfTitles();
@@ -36,9 +36,6 @@ namespace DataAccess
         
         bool UpdateTitle(string tconst, string titleType, string primaryTitle, string originalTitle, bool isAdult, string startYear, string endYear, int? runtimeMinutes,
             string poster, string awards, string plot);
-
-        
-      
         
         IList<SearchResult> SearchTitles(string searchString, string uconst, int page, int pageSize);
     }

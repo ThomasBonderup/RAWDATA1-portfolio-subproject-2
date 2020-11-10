@@ -250,7 +250,30 @@ namespace UnitTests
         public void DeleteName()
         {
             var service = new DataService();
-            //var name = service.DeleteNa
+            var name = service.CreateName("Mickey Mouse", "1926", null); //hvis vi både laver et navn
+            var result = service.DeleteName(name.Nconst);
+            name = service.GetName(name.Nconst); // og henter et navn?? burde vi ikke kun gøre en af delene???
+            Assert.True(result);
+            Assert.Null(name);
+        }
+
+        [Fact]
+
+        public void UpdateName()
+        {
+            var service = new DataService();
+            var name = service.CreateName("Mickey Mouse", "1926", null);
+            var result = service.UpdateName(name.Nconst, "UpdatedName", "UpdatedBirthyear", "UpdatedDeathyear");
+            Assert.True(result);
+
+            name = service.GetName(name.Nconst);
+            
+            Assert.Equal("UpdatedName", name.PrimaryName);
+            Assert.Equal("UpdatedBirthyear", name.BirthYear);
+            Assert.Equal("UpdatedDeathyear", name.DeathYear);
+            
+            //cleanup
+            service.DeleteUser(name.Nconst);
         }
 
         // Helpers 

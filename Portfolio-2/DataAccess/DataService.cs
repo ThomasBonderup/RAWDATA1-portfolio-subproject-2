@@ -238,11 +238,32 @@ namespace DataAccess
             return name;
         }
 
-        public Name DeleteName(string nconst, string primaryName, string birthYear, string deathYear)
+        public bool DeleteName(string nconst)
         {
-            var name = new Name();
+            var name = ctx.Names.Find(nconst);
 
-            return name;
+            if (name != null)
+            {
+                ctx.Names.Remove(name);
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool UpdateName(string nconst, string primaryName, string birthYear, string deathYear)
+        {
+            var name = GetName(nconst);
+            if (name == null)
+            {
+                return false;
+            }
+
+            name.PrimaryName = primaryName;
+            name.BirthYear = birthYear;
+            name.DeathYear = deathYear;
+
+            return true;
         }
 
 
