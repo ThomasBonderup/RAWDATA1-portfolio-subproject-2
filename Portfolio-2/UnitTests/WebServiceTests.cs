@@ -30,7 +30,9 @@ namespace UnitTests
         private const string UsersApi = "http://localhost:5001/api/users"; 
         private const string NamesApi = "http://localhost:5001/api/names";
         
-        // -------------------------------- user --------------------------------------
+        // ------ authentication...
+        // TODO fix authentication error
+        // ui000001  
         
 
         // -------------------------------- api/titles -------------------------------- 
@@ -76,8 +78,10 @@ namespace UnitTests
                 Awards = "null",
                 Plot = ""
             };
+            _testOutputHelper.WriteLine(newTitle.ToString());
+
             var (title, statusCode) = PostData(TitlesApi, newTitle);
-            
+
 
             Assert.Equal(HttpStatusCode.Created, statusCode);
 
@@ -204,8 +208,6 @@ namespace UnitTests
        public void ApiUsers_GetWithValidUserId_OkAndUser()
        {
            var (user, statusCode) = GetObject($"{UsersApi}/ui000002");
-           _testOutputHelper.WriteLine(user.ToString());
-
            Assert.Equal(HttpStatusCode.OK, statusCode);
            Assert.Equal("Nils", user["firstName"]);
        }
@@ -280,6 +282,7 @@ namespace UnitTests
        (JObject, HttpStatusCode) PostData(string url, object content)
        {
            var client = new HttpClient();
+           //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", "ui000001");
            var requestContent = new StringContent(
                JsonConvert.SerializeObject(content),
                Encoding.UTF8,
