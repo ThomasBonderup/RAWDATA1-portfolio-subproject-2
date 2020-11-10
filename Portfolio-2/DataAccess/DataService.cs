@@ -165,8 +165,19 @@ namespace DataAccess
 
         public bool UpdateUser(string uconst, string FirstName, string LastName, string Email, string Password, string UserName)
         {
+            var user = GetUser(uconst);
+            if (user == null)
+            {
+                return false;
+            }
+
+            user.FirstName = FirstName;
+            user.LastName = LastName;
+            user.Email = Email;
+            user.Password = Password;
+            user.UserName = UserName;
             
-            return false;
+            return true;
         }
 
         /**
