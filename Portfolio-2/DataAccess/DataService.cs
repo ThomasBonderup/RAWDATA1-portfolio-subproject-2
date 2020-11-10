@@ -9,7 +9,7 @@ namespace DataAccess
     public class DataService : IDataService
     {
         public DBContext ctx { get; set; }
-        
+
 
 
         public DataService()
@@ -17,12 +17,13 @@ namespace DataAccess
             ctx = new DBContext();
         }
 
-        
+
         /**
          *  TITLES
          */
-        
-        public Title CreateTitle(string titleType, string primaryTitle, string originalTitle, bool isAdult, string startYear, string endYear, 
+
+        public Title CreateTitle(string titleType, string primaryTitle, string originalTitle, bool isAdult,
+            string startYear, string endYear,
             int runtimeMinutes, string poster, string awards, string plot)
         {
             var title = new Title
@@ -43,7 +44,8 @@ namespace DataAccess
             return title;
         }
 
-        public bool UpdateTitle(string tconst, string titleType, string primaryTitle, string originalTitle, bool isAdult, string startYear, string endYear,
+        public bool UpdateTitle(string tconst, string titleType, string primaryTitle, string originalTitle,
+            bool isAdult, string startYear, string endYear,
             int? runtimeMinutes, string poster, string awards, string plot)
         {
 
@@ -64,11 +66,11 @@ namespace DataAccess
             title.Poster = poster;
             title.Awards = awards;
             title.Plot = plot;
-            
+
             return true;
         }
 
-    
+
 
         public bool DeleteTitle(string tconst)
         {
@@ -82,9 +84,9 @@ namespace DataAccess
 
             return false;
         }
-        
-      
-        
+
+
+
         public IList<Title> GetTitles(int page, int pageSize)
         {
             return ctx.Titles.ToList()
@@ -92,7 +94,7 @@ namespace DataAccess
                 .Take(pageSize)
                 .ToList();
         }
-        
+
         public Title GetTitle(string tconst)
         {
             var title = ctx.Titles.Find(tconst);
@@ -101,6 +103,7 @@ namespace DataAccess
             {
                 return title;
             }
+
             return null;
         }
 
@@ -112,6 +115,7 @@ namespace DataAccess
             {
                 return titleProncipals;
             }
+
             return null;
         }
 
@@ -123,9 +127,10 @@ namespace DataAccess
                 if (titlePrincipal.Tconst == tconst)
                 {
                     result.Add(titlePrincipal);
-                    
+
                 }
             }
+
             return result;
         }
 
@@ -133,7 +138,7 @@ namespace DataAccess
         /**
          *  USER
          */
-        
+
         public User CreateUser(string firstName, string lastName, string email, string password, string userName)
         {
             var user = new User
@@ -163,18 +168,19 @@ namespace DataAccess
 
             return false;
         }
-        
+
         public User GetUser(string uconst)
         {
             var user = ctx.Users.Find(uconst);
-            
+
             if (user != null)
             {
                 return user;
             }
+
             return null;
         }
-        
+
         public IList<User> GetUsers(int page, int pageSize)
         {
             return ctx.Users.ToList()
@@ -183,7 +189,8 @@ namespace DataAccess
                 .ToList();
         }
 
-        public bool UpdateUser(string uconst, string FirstName, string LastName, string Email, string Password, string UserName)
+        public bool UpdateUser(string uconst, string FirstName, string LastName, string Email, string Password,
+            string UserName)
         {
             var user = GetUser(uconst);
             if (user == null)
@@ -196,14 +203,14 @@ namespace DataAccess
             user.Email = Email;
             user.Password = Password;
             user.UserName = UserName;
-            
+
             return true;
         }
 
         /**
          * NAME 
          */
-        
+
         public Name GetName(string nconst)
         {
             var name = ctx.Names.Find(nconst);
@@ -212,12 +219,14 @@ namespace DataAccess
             {
                 return name;
             }
+
             return null;
         }
-        
+
         public IList<Name> GetNames(int page, int pageSize)
         {
-            return ctx.Names.ToList()
+            return ctx.Names
+                .Include(x => x.PrimaryProfession)
                 .Skip(page * pageSize)
                 .Take(pageSize)
                 .ToList();
@@ -234,7 +243,7 @@ namespace DataAccess
             };
 
             ctx.Names.Add(name);
-            
+
             return name;
         }
 
@@ -266,6 +275,25 @@ namespace DataAccess
             return true;
         }
 
+        public IList<PrimaryProfession> GetProfessions()
+        {
+            return ctx.Professions.ToList();
+        }
+
+        public IList<PrimaryProfession> GetPrimaryProfession(string nconst)
+        {
+            List<PrimaryProfession> professions = new List<PrimaryProfession>();
+            foreach (var p in GetProfessions())
+            {
+                if (p.Nconst == nconst)
+                {
+                    professions.Add(p);
+                }
+            }
+            return professions;
+        }
+
+//pagination use
         public int NumberOfTitles()
         {
             return ctx.Titles.Count();
@@ -276,7 +304,6 @@ namespace DataAccess
             return ctx.Names.Count();
 
         }
-
         
         public Title CreateTitle(string primaryTitle)
         {
