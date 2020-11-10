@@ -107,7 +107,7 @@ namespace WebService.Controllers
             return Ok(title);
         }
 
-        [HttpGet("{tconst}, {nconst}")]
+        [HttpGet("{tconst}/titleprincipals/{nconst}")]
 
         public IActionResult GetTitlePrincipals(string tconst, string nconst, int page, int pageSize)
         {
@@ -123,8 +123,7 @@ namespace WebService.Controllers
             return Ok(titlePrincipals);
         }
 
-        [HttpGet("{tconst}")]
-
+        [HttpGet("{tconst}/titleprincipals")]
         public IActionResult GetTitlePrincipalsByTitle(string tconst, int page = 0, int pageSize = 10)
         {
             CheckCurrentUser();
