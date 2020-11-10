@@ -120,7 +120,7 @@ namespace DataAccess
                 FirstName = firstName,
                 LastName = lastName,
                 Uconst = AssignMaxUconst(),
-                Email = emial,
+                Email = email,
                 Password = password,
                 UserName = userName
             };
