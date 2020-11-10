@@ -22,18 +22,17 @@ namespace UnitTests
             _testOutputHelper = testOutputHelper;
         }
 
-        // api paths 
+        // -------------------------------- api paths  -------------------------------- 
         private const string TitlesApi = "http://localhost:5001/api/titles";
         private const string UsersApi = "http://localhost:5001/api/users"; 
         private const string NamesApi = "http://localhost:5001/api/names";
 
 
-        // api/titles
+        // -------------------------------- api/titles -------------------------------- 
        [Fact]
        public void ApiTitles_GetWithNoArguments_OkAndAllTitles()
        {
            var (data, statusCode) = GetResponseWithPaging(TitlesApi);
-           //_testOutputHelper.WriteLine(data.ToString());
            Assert.Equal(HttpStatusCode.OK, statusCode);
            Assert.Equal(10, data.Count());
            Assert.Equal("tt10850402", data.First()["tconst"]);
@@ -44,9 +43,8 @@ namespace UnitTests
        public void ApiTitles_GetWithValidTitleId_OkAndTitle()
        {
            var (title, statusCode) = GetObject($"{TitlesApi}/tt9999998");
-           
            Assert.Equal(HttpStatusCode.OK, statusCode);
-           Assert.Equal("Test 1 primarytitle", title["primaryname"]);
+           Assert.Equal("Test 1 primarytitle", title["primaryTitle"]);
        }
        
        [Fact]
@@ -58,25 +56,25 @@ namespace UnitTests
        }
 
 
-       // api/users
+       // -------------------------------- api/users  -------------------------------- 
        [Fact]
        public void ApiUsers_GetWithNoArguments_OkAndAllUsers()
        {
            var (data, statusCode) = GetResponseWithPaging(UsersApi);
-
            Assert.Equal(HttpStatusCode.OK, statusCode);
            Assert.Equal(6, data.Count());
-           Assert.Equal("ui000001  ", data.First()["tconst"]);
-           Assert.Equal("ui000006  ", data.Last()["tconst"]);
+           Assert.Equal("ui000001  ", data.First()["uconst"]);
+           Assert.Equal("ui000006  ", data.Last()["uconst"]);
        }
        
        [Fact]
        public void ApiUsers_GetWithValidUserId_OkAndUser()
        {
            var (user, statusCode) = GetObject($"{UsersApi}/ui000002");
-           
+           _testOutputHelper.WriteLine(user.ToString());
+
            Assert.Equal(HttpStatusCode.OK, statusCode);
-           Assert.Equal("Nils", user["firstmame"]);
+           Assert.Equal("Nils", user["firstName"]);
        }
        
        [Fact]
@@ -87,7 +85,7 @@ namespace UnitTests
            Assert.Equal(HttpStatusCode.NotFound, statusCode);
        }
        
-       // api/names
+       // -------------------------------- api/names -------------------------------- 
        [Fact]
        public void ApiNames_GetWithNoArguments_OkAndAllNames()
        {
@@ -98,9 +96,26 @@ namespace UnitTests
            Assert.Equal("nm0000001 ", data.First()["nconst"]);
            Assert.Equal("nm0000025 ", data.Last()["nconst"]);
        }
+       
+       [Fact]
+       public void ApiUsers_GetWithValidNameId_OkAndName()
+       {
+           var (user, statusCode) = GetObject($"{NamesApi}/nm0000001");
+           
+           Assert.Equal(HttpStatusCode.OK, statusCode);
+           Assert.Equal("Fred Astaire", user["primaryName"]);
+       }
+       
+       [Fact]
+       public void ApiUsers_GetWithInvalidNameId_NotFound()
+       {
+           var (_, statusCode) = GetObject($"{NamesApi}/nm000000");
+           
+           Assert.Equal(HttpStatusCode.NotFound, statusCode);
+       }
 
 
-       // Helper methods for tests
+       // --------------------------------  Helper methods for tests
        (JArray, HttpStatusCode) GetArray(string url)
        {
            var client = new HttpClient();
