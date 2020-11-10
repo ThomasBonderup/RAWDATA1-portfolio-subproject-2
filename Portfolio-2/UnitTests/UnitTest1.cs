@@ -50,18 +50,18 @@ namespace UnitTests
         {
             
             var service = new DataService();
-            var users = service.GetUsers(6, 6);
+            var users = service.GetUsers(0, 6);
             Assert.Equal(6, users.Count);
             Assert.Equal("Alex", users.First().FirstName);
 
         }
 
         [Fact]
-        public void GetAllNames_NoAargument_ReturnsAllNames()
+        public void GetAllNames_NoArgument_ReturnsAllNames()
         {
             
             var service = new DataService();
-            var names = service.GetNames(234484, 234484);
+            var names = service.GetNames(0, 234484);
             Assert.Equal(234484, names.Count);
             Assert.Equal("Fred Astaire", names.First().PrimaryName);
 

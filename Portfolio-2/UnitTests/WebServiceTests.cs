@@ -33,7 +33,7 @@ namespace UnitTests
        public void ApiTitles_GetWithNoArguments_OkAndAllTitles()
        {
            var (data, statusCode) = GetResponseWithPaging(TitlesApi);
-
+           //_testOutputHelper.WriteLine(data.ToString());
            Assert.Equal(HttpStatusCode.OK, statusCode);
            Assert.Equal(10, data.Count());
            Assert.Equal("tt10850402", data.First()["tconst"]);
@@ -65,7 +65,7 @@ namespace UnitTests
            var (data, statusCode) = GetResponseWithPaging(UsersApi);
 
            Assert.Equal(HttpStatusCode.OK, statusCode);
-           Assert.Equal(06, data.Count());
+           Assert.Equal(6, data.Count());
            Assert.Equal("ui000001  ", data.First()["tconst"]);
            Assert.Equal("ui000006  ", data.Last()["tconst"]);
        }
