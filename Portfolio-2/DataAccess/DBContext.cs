@@ -12,6 +12,8 @@ namespace DataAccess
         public DbSet<User> Users { get; set; }
 
         public DbSet<Name> Names { get; set; }
+        
+        public DbSet<SearchResult> SearchResults { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -85,6 +87,10 @@ namespace DataAccess
             modelBuilder.Entity<User>().Property(x => x.Password).HasColumnName("password");
             modelBuilder.Entity<User>().Property(x => x.UserName).HasColumnName("username");
             modelBuilder.Entity<User>().HasKey(x => new {x.Uconst});
+
+            modelBuilder.Entity<SearchResult>().HasNoKey();
+            modelBuilder.Entity<SearchResult>().Property(x => x.Tconst).HasColumnName("tconst");
+            modelBuilder.Entity<SearchResult>().Property(x => x.PrimaryTitle).HasColumnName("primarytitle");
         }
         
         

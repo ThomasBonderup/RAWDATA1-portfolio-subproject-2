@@ -51,7 +51,7 @@ namespace WebService.Controllers
         
         private object CreateResultTitles(int page, int pageSize, IList<Title> titles)
         {
-            
+
             var items = titles.Select(CreateTitleListDto);
             var count = _dataService.NumberOfTitles();
             var navigationUrls = CreatePagingNavigation(page, pageSize, count);
@@ -68,14 +68,21 @@ namespace WebService.Controllers
             return result;
         }
         
-        // GET
-        [HttpGet(Name = nameof(GetTitles))]
-        public IActionResult GetTitles(int page = 0, int pageSize = 10)
+        public UnauthorizedResult CheckCurrentUser()
         {
             if (Program.CurrentUser == null)
             {
                 return Unauthorized();
             }
+            return null;
+        }
+        
+        
+        // GET
+        [HttpGet(Name = nameof(GetTitles))]
+        public IActionResult GetTitles(int page = 0, int pageSize = 10)
+        {
+            CheckCurrentUser();
             
             pageSize = PaginationHelper.CheckPageSize(pageSize);
             var titles = _dataService.GetTitles(page, pageSize);
@@ -84,14 +91,14 @@ namespace WebService.Controllers
             
             return Ok(result);
         }
-        
+
+     
+
         [HttpGet("{tconst}")]
         public IActionResult GetTitle(string tconst)
         {
-            if (Program.CurrentUser == null)
-            {
-                return Unauthorized();
-            }
+            
+            CheckCurrentUser();
             
             var title = _dataService.GetTitle(tconst);
             if (title == null)
@@ -107,6 +114,7 @@ namespace WebService.Controllers
         public IActionResult CreateTitle(string titleType, string primaryTitle, string originalTitle, bool isAdult, 
             string startYear, string endYear, int runtimeMinutes, string poster, string awards, string plot)
         {
+            CheckCurrentUser();
            // var title = _dataService.CreateTitle(primaryTitle);
            var title = _dataService.CreateTitle(titleType, primaryTitle, originalTitle, isAdult, startYear, endYear,
                runtimeMinutes, poster,
@@ -122,6 +130,8 @@ namespace WebService.Controllers
             string startYear, string endYear, int runtimeMinutes, string poster, string awards, string plot)
         {
 
+            CheckCurrentUser();
+            
             var title = _dataService.GetTitle(tconst);
 
             if (title != null)
@@ -136,6 +146,9 @@ namespace WebService.Controllers
 
 
         // DELETE
+        
+        
+    
 
     }
 }
