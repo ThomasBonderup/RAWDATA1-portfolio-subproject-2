@@ -225,7 +225,8 @@ namespace DataAccess
 
         public IList<Name> GetNames(int page, int pageSize)
         {
-            return ctx.Names.ToList()
+            return ctx.Names
+                .Include(x => x.PrimaryProfession)
                 .Skip(page * pageSize)
                 .Take(pageSize)
                 .ToList();
