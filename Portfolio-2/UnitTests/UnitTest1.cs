@@ -195,8 +195,8 @@ namespace UnitTests
         public void UpdateUser()
         { var service = new DataService();
             var user = service.CreateUser("John", "Doe", "jodo@dummy.dk", "jodo01pw", "JoDo");
-            var result = service.UpdateUser(user.Uconst, "UpdatedFirstName", "UpdatedLastName", "UpdatedEmail",
-                "UpdatedPassword", "UpdatedUserName");
+           // var result = service.UpdateUser(user.Uconst, "UpdatedFirstName", "UpdatedLastName", "UpdatedEmail",
+             //   "UpdatedPassword", "UpdatedUserName");
 
         }
 
