@@ -32,17 +32,15 @@ namespace UnitTests
        [Fact]
        public void ApiTitles_GetWithNoArguments_OkAndAllTitles()
        {
-           var (data, statusCode) = GetObject(TitlesApi);
-           var list = data["items"];
-           //_testOutputHelper.WriteLine(list.ToString());
-           
+           var (data, statusCode) = GetResponseWithPaging(TitlesApi);
+
            Assert.Equal(HttpStatusCode.OK, statusCode);
-           Assert.Equal(10, list.Count());
-           Assert.Equal("tt10850402", list.First()["tconst"]);
-           Assert.Equal("tt2583620 ", list.Last()["tconst"]);
+           Assert.Equal(10, data.Count());
+           Assert.Equal("tt10850402", data.First()["tconst"]);
+           Assert.Equal("tt2583620 ", data.Last()["tconst"]);
        }
 
-       /*[Fact]
+       [Fact]
        public void ApiTitles_GetWithValidTitleId_OkAndTitle()
        {
            var (title, statusCode) = GetObject($"{TitlesApi}/tt9999998");
@@ -64,12 +62,12 @@ namespace UnitTests
        [Fact]
        public void ApiUsers_GetWithNoArguments_OkAndAllUsers()
        {
-           var (data, statusCode) = GetArray(UsersApi);
-           
+           var (data, statusCode) = GetResponseWithPaging(UsersApi);
+
            Assert.Equal(HttpStatusCode.OK, statusCode);
-           Assert.Equal(6, data.Count);
-           Assert.Equal("ui000001", data.First()["uconst"]);
-           Assert.Equal("ui000006", data.Last()["uconst"]);
+           Assert.Equal(06, data.Count());
+           Assert.Equal("ui000001  ", data.First()["tconst"]);
+           Assert.Equal("ui000006  ", data.Last()["tconst"]);
        }
        
        [Fact]
@@ -89,30 +87,35 @@ namespace UnitTests
            Assert.Equal(HttpStatusCode.NotFound, statusCode);
        }
        
-       
-       [Fact]
        // api/names
+       [Fact]
        public void ApiNames_GetWithNoArguments_OkAndAllNames()
        {
-           var (data, statusCode) = GetArray(NamesApi);
-           
-           Assert.Equal(HttpStatusCode.OK, statusCode);
-           Assert.Equal(234485, data.Count);
-           Assert.Equal("nm0000001", data.First()["nconst"]);
-           Assert.Equal("nm99999999", data.Last()["nconst"]);
-       }*/
-       
-       
-       
-       
-       // Helper methods for tests
+           var (data, statusCode) = GetResponseWithPaging(NamesApi);
 
+           Assert.Equal(HttpStatusCode.OK, statusCode);
+           Assert.Equal(10, data.Count());
+           Assert.Equal("nm0000001 ", data.First()["nconst"]);
+           Assert.Equal("nm0000025 ", data.Last()["nconst"]);
+       }
+
+
+       // Helper methods for tests
        (JArray, HttpStatusCode) GetArray(string url)
        {
            var client = new HttpClient();
            var response = client.GetAsync(url).Result;
            var data = response.Content.ReadAsStringAsync().Result;
            return ((JArray)JsonConvert.DeserializeObject(data), response.StatusCode);
+       }
+       
+       (JToken, HttpStatusCode) GetResponseWithPaging(string url)
+       {
+           var client = new HttpClient();
+           var response = client.GetAsync(url).Result;
+           var result = (JObject) JsonConvert.DeserializeObject(response.Content.ReadAsStringAsync().Result);
+           var data= result["items"];
+           return (data, response.StatusCode);
        }
 
        (JObject, HttpStatusCode) GetObject(string url)
