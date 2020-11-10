@@ -37,6 +37,6 @@ namespace DataAccess
         bool UpdateTitle(string tconst, string titleType, string primaryTitle, string originalTitle, bool isAdult, string startYear, string endYear, int? runtimeMinutes,
             string poster, string awards, string plot);
         
-        IList<SearchResult> SearchTitles(string searchString, string uconst, int page, int pageSize);
+        IList<Title> SearchTitles(string searchString, string uconst, int page, int pageSize);
     }
 }

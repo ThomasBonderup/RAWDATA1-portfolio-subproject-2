@@ -383,10 +383,10 @@ namespace DataAccess
             return stringUconst;
         }
 
-        public IList<SearchResult> SearchTitles(string searchString, string uConst, int page, int pageSize)
+        public IList<Title> SearchTitles(string searchString, string uConst, int page, int pageSize)
         {
-            var result = ctx.SearchResults
-                .FromSqlInterpolated($"select * from string_search({searchString}, {uConst})")
+            var result = ctx.Titles
+                .FromSqlInterpolated($"SELECT * FROM movie_data_model.string_search({searchString}, {uConst})")
                 .Skip(page * pageSize)
                 .Take(pageSize)
                 .ToList();
