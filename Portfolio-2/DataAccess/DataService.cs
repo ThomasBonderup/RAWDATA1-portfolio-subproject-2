@@ -226,7 +226,7 @@ namespace DataAccess
         public IList<Name> GetNames(int page, int pageSize) //se om denne kan bruges til primary profession?
         {
             return ctx.Names
-                .Include(x => x.PrimaryProfession)
+                //.Include(x => x.PrimaryProfession)
                 .Skip(page * pageSize)
                 .Take(pageSize)
                 .ToList();
