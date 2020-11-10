@@ -160,8 +160,23 @@ namespace WebService.Controllers
 
         // DELETE
         
-        
-    
+        [HttpGet("search/{searchString}")]
+        public IActionResult SearchTitle(string searchString, string uConst, int page = 0, int pageSize = 10)
+        {
+            CheckCurrentUser();
+
+            pageSize = PaginationHelper.CheckPageSize(pageSize);
+            var titles = _dataService.SearchTitles(searchString, Program.CurrentUser.Uconst, page, pageSize);
+
+            if (titles == null)
+            {
+                return NotFound();
+            }
+
+            var result = CreateResultTitles(page, pageSize, titles);
+            
+            return Ok(result);
+        }
 
     }
 }
