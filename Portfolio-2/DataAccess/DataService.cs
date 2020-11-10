@@ -9,47 +9,18 @@ namespace DataAccess
     {
         public DBContext ctx { get; set; }
         
-      //  private IList<Name> names = new List<Name>(); 
+
 
         public DataService()
         {
             ctx = new DBContext();
         }
 
-        public IList<Name> GetNames(int page, int pageSize)
-        {
-            return ctx.Names.ToList()
-                .Skip(page * pageSize)
-                .Take(pageSize)
-                .ToList();
-        }
-
-        public IList<User> GetUsers(int page, int pageSize)
-        {
-            return ctx.Users.ToList()
-                .Skip(page * pageSize)
-                .Take(pageSize)
-                .ToList();
-        }
         
+        /**
+         *  TITLES
+         */
         
-        
-        public User CreateUser(string firstName, string lastName, string emial, string password, string userName)
-        {
-            var user = new User
-            {
-            FirstName = firstName,
-            LastName = lastName,
-            Uconst = AssignMaxUconst(),
-            Email = emial,
-            Password = password,
-            UserName = userName
-            };
-
-            ctx.Users.Add(user);
-            return user;
-        }
-
         public Title CreateTitle(string titleType, string primaryTitle, string originalTitle, bool isAdult, string startYear, string endYear, 
             int runtimeMinutes, string poster, string awards, string plot)
         {
@@ -108,21 +79,9 @@ namespace DataAccess
 
             return false;
         }
-
-        public bool DeleteUser(string uconst)
-        {
-
-            var user = ctx.Users.Find(uconst);
-
-            if (user != null)
-            {
-                ctx.Users.Remove(user);
-                return true;
-            }
-
-            return false;
-        }
-
+        
+      
+        
         public IList<Title> GetTitles(int page, int pageSize)
         {
             return ctx.Titles.ToList()
@@ -133,7 +92,6 @@ namespace DataAccess
 
         public IList<TitlePrincipals> GetTitlePrincipals(string tconst, string nconst)
         {
-            
             
 
             return null;
@@ -150,7 +108,41 @@ namespace DataAccess
             }
             return null;
         }
+        
+        /**
+         *  USER
+         */
+        
+        public User CreateUser(string firstName, string lastName, string emial, string password, string userName)
+        {
+            var user = new User
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                Uconst = AssignMaxUconst(),
+                Email = emial,
+                Password = password,
+                UserName = userName
+            };
 
+            ctx.Users.Add(user);
+            return user;
+        }
+
+        public bool DeleteUser(string uconst)
+        {
+
+            var user = ctx.Users.Find(uconst);
+
+            if (user != null)
+            {
+                ctx.Users.Remove(user);
+                return true;
+            }
+
+            return false;
+        }
+        
         public User GetUser(string uconst)
         {
             var user = ctx.Users.Find(uconst);
@@ -161,6 +153,14 @@ namespace DataAccess
             }
             return null;
         }
+        
+        public IList<User> GetUsers(int page, int pageSize)
+        {
+            return ctx.Users.ToList()
+                .Skip(page * pageSize)
+                .Take(pageSize)
+                .ToList();
+        }
 
         public User UpdateUser(string uconst)
         {
@@ -168,6 +168,10 @@ namespace DataAccess
             return null;
         }
 
+        /**
+         * NAME 
+         */
+        
         public Name GetName(string nconst)
         {
             var name = ctx.Names.Find(nconst);
@@ -178,6 +182,16 @@ namespace DataAccess
             }
             return null;
         }
+        
+        public IList<Name> GetNames(int page, int pageSize)
+        {
+            return ctx.Names.ToList()
+                .Skip(page * pageSize)
+                .Take(pageSize)
+                .ToList();
+        }
+        
+        
 
         public int NumberOfTitles()
         {

@@ -47,6 +47,16 @@ namespace DataAccess
             modelBuilder.Entity<TitleGenres>().Property(x => x.Tconst).HasColumnName("tconst");
             modelBuilder.Entity<TitleGenres>().Property(x => x.Genre).HasColumnName("genre");
             modelBuilder.Entity<TitleGenres>().HasKey(x => new {x.Tconst});
+
+            modelBuilder.Entity<TitlePrincipals>().ToTable("title_principals");
+            modelBuilder.Entity<TitlePrincipals>().Property(x => x.Tconst).HasColumnName("tconst");
+            modelBuilder.Entity<TitlePrincipals>().Property(x => x.Nconst).HasColumnName("nconst");
+            modelBuilder.Entity<TitlePrincipals>().Property(x => x.Ordering).HasColumnName("ordering");
+            modelBuilder.Entity<TitlePrincipals>().Property(x => x.Category).HasColumnName("category");
+            modelBuilder.Entity<TitlePrincipals>().Property(x => x.Job).HasColumnName("job");
+            modelBuilder.Entity<TitlePrincipals>().Property(x => x.Characters).HasColumnName("characters");
+            modelBuilder.Entity<TitlePrincipals>().HasKey(x => new {x.Tconst});
+            
             
             modelBuilder.Entity<Name>().ToTable("name");
             modelBuilder.Entity<Name>().Property(x => x.Nconst).HasColumnName("nconst");
