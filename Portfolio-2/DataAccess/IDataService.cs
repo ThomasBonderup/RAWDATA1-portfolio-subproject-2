@@ -18,7 +18,7 @@ namespace DataAccess
 
         User CreateUser(string firstName, string lastName, string Email, string password, string userName);
 
-        User UpdateUser(string uconst);
+        bool UpdateUser(string uconst);
 
         bool DeleteUser(string uconst);
 

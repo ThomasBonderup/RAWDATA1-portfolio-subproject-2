@@ -113,7 +113,7 @@ namespace DataAccess
          *  USER
          */
         
-        public User CreateUser(string firstName, string lastName, string emial, string password, string userName)
+        public User CreateUser(string firstName, string lastName, string email, string password, string userName)
         {
             var user = new User
             {
@@ -162,10 +162,10 @@ namespace DataAccess
                 .ToList();
         }
 
-        public User UpdateUser(string uconst)
+        public bool UpdateUser(string uconst)
         {
             
-            return null;
+            return false;
         }
 
         /**
