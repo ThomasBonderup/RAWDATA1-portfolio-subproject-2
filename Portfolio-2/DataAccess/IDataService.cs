@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace DataAccess
 {
@@ -18,7 +19,7 @@ namespace DataAccess
 
         User CreateUser(string firstName, string lastName, string Email, string password, string userName);
 
-        bool UpdateUser(string uconst);
+        bool UpdateUser(string uconst, string FirstName, string LastName, string Email, string Password, string UserName);
 
         bool DeleteUser(string uconst);
 

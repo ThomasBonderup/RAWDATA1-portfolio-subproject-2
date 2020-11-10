@@ -163,7 +163,7 @@ namespace DataAccess
                 .ToList();
         }
 
-        public bool UpdateUser(string uconst)
+        public bool UpdateUser(string uconst, string FirstName, string LastName, string Email, string Password, string UserName)
         {
             
             return false;

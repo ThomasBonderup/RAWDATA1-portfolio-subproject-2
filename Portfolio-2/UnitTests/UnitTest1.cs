@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using AutoMapper;
 using DataAccess;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Newtonsoft.Json;
@@ -195,8 +196,20 @@ namespace UnitTests
         public void UpdateUser()
         { var service = new DataService();
             var user = service.CreateUser("John", "Doe", "jodo@dummy.dk", "jodo01pw", "JoDo");
-           // var result = service.UpdateUser(user.Uconst, "UpdatedFirstName", "UpdatedLastName", "UpdatedEmail",
-             //   "UpdatedPassword", "UpdatedUserName");
+            var result = service.UpdateUser(user.Uconst, "UpdatedFirstName", "UpdatedLastName", "UpdatedEmail",
+                "UpdatedPassword", "UpdatedUserName");
+            Assert.True(result);
+
+            user = service.GetUser(user.Uconst);
+            
+            Assert.Equal("UpdatedFirstName", user.FirstName);
+            Assert.Equal("UpdatedLastName", user.LastName);
+            Assert.Equal("UpdatedEmail", user.Email);
+            Assert.Equal("UpdatedPassword", user.Password);
+            Assert.Equal("UpdatedUserName", user.UserName);
+            
+            //cleanup
+            service.DeleteUser(user.Uconst);
 
         }
 
