@@ -224,6 +224,13 @@ namespace UnitTests
             Assert.Equal("1926", name.BirthYear);
         }
 
+        [Fact]
+        public void DeleteName()
+        {
+            var service = new DataService();
+            //var name = service.DeleteNa
+        }
+
         // Helpers 
         
         (JArray, HttpStatusCode) GetArray(string url)

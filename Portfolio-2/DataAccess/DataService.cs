@@ -218,6 +218,13 @@ namespace DataAccess
             return name;
         }
 
+        public Name DeleteName(string nconst, string primaryName, string birthYear, string deathYear)
+        {
+            var name = new Name();
+
+            return name;
+        }
+
 
 
         public int NumberOfTitles()
