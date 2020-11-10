@@ -28,6 +28,8 @@ namespace DataAccess
         bool DeleteUser(string uconst);
         
         int NumberOfNames();
+        
+        int NumberOfUsers();
 
         int NumberOfTitles();
 

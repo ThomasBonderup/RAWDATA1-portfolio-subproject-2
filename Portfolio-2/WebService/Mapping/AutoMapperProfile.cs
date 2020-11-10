@@ -9,6 +9,7 @@ namespace WebService.Mapping
         {
             CreateMap<Name, NameListDto>().ReverseMap();
             CreateMap<Title, TitleListDto>().ReverseMap();
+            CreateMap<User, UserListDto>().ReverseMap();
         }
     }
 }
