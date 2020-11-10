@@ -95,6 +95,7 @@ namespace UnitTests
             Assert.Equal("Fred Astaire", name.PrimaryName);
         }
 
+        //Title
         [Fact]
 
         public void CreateNewTitle()
@@ -211,6 +212,16 @@ namespace UnitTests
             //cleanup
             service.DeleteUser(user.Uconst);
 
+        }
+        //Name tests
+        [Fact]
+        public void CreateNewName()
+        {
+            var service = new DataService();
+            var name = service.CreateName("Mickey Mouse", "1926", null);
+            Assert.True(name.Nconst != null);
+            Assert.Equal("Mickey Mouse", name.PrimaryName );
+            Assert.Equal("1926", name.BirthYear);
         }
 
         // Helpers 

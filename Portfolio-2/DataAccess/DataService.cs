@@ -202,8 +202,23 @@ namespace DataAccess
                 .Take(pageSize)
                 .ToList();
         }
-        
-        
+
+        public Name CreateName(string PrimaryName, string Birthyear, string DeathYear)
+        {
+            var name = new Name()
+            {
+                Nconst = AssignMaxNconst(),
+                PrimaryName = PrimaryName,
+                BirthYear = Birthyear,
+                DeathYear = DeathYear
+            };
+
+            ctx.Names.Add(name);
+            
+            return name;
+        }
+
+
 
         public int NumberOfTitles()
         {
