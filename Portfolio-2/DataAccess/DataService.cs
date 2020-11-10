@@ -253,7 +253,10 @@ namespace DataAccess
 
             return stringUconst;
         }
-        
-        
+
+        public IList<SearchResult> SearchTitles(string searchString, int page, int pageSize)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
