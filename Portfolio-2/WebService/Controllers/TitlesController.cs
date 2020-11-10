@@ -108,9 +108,11 @@ namespace WebService.Controllers
 
         [HttpGet("{tconst}, {nconst}")]
 
-        public IActionResult GetTitlePrincipals(string tconst, string nconst)
+        public IActionResult GetTitlePrincipals(string tconst, string nconst, int page, int pageSize)
         {
             CheckCurrentUser();
+            
+            pageSize = PaginationHelper.CheckPageSize(pageSize);
 
             var titlePrincipals = _dataService.GetTitlePrincipals(tconst, nconst);
             if (titlePrincipals == null)
@@ -120,6 +122,18 @@ namespace WebService.Controllers
             return Ok(titlePrincipals);
         }
 
+        [HttpGet("{tconst}")]
+
+        public IActionResult GetTitlePrincipalsByTitle(string tconst, int page = 0, int pageSize = 10)
+        {
+            CheckCurrentUser();
+            var titlePrincipalsList = _dataService.GetTitlePrincipalsByTitle(tconst, page, pageSize);
+            if (titlePrincipalsList == null)
+            {
+                return NotFound();
+            }
+            return Ok(titlePrincipalsList);
+        }
 
         // POST
         

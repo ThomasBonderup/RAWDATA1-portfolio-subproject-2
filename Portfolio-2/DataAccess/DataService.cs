@@ -119,9 +119,17 @@ namespace DataAccess
             return null;
         }
 
-        public IList<TitlePrincipals> GetTitlePrincipalsByTitle(string tconst)
+        public IList<TitlePrincipals> GetTitlePrincipalsByTitle(string tconst, int page, int pageSize)
         {
-            IList<TitlePrincipals> result = new List<TitlePrincipals>();
+
+            var result = ctx.TitlePrincipals
+                .FromSqlInterpolated($"SELECT * FROM movie_data_model.title_principals WHERE tconst = {tconst}")
+                .Skip(page * pageSize)
+                .Take(pageSize)
+                .ToList();
+            return result;
+            /*
+              IList<TitlePrincipals> result = new List<TitlePrincipals>();
             foreach (var titlePrincipal in ctx.TitlePrincipals)
             {
                 if (titlePrincipal.Tconst == tconst)
@@ -132,6 +140,8 @@ namespace DataAccess
             }
 
             return result;
+            
+            */
         }
 
 

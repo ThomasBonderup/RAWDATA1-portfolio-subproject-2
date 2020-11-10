@@ -105,7 +105,7 @@ namespace UnitTests
             Assert.Equal("Fred Astaire", name.PrimaryName);
         }
 
-        //Title
+        // Title principals
         [Fact]
 
         public void GetTitlePrincipalsByTconstAndNconst_ValidTconstNconst()
@@ -118,6 +118,20 @@ namespace UnitTests
             
         }
 
+        [Fact]
+
+        public void GetTitlePrincipalsByTitle_ValidTconst()
+        {
+            var service = new DataService();
+            var titlePrincipalsList = service.GetTitlePrincipalsByTitle("tt0052520", 0, 10);
+            Assert.True(titlePrincipalsList.Count ==  10);
+            Assert.Equal("nm0641729", titlePrincipalsList[0].Nconst.Trim());
+            Assert.Equal("nm0785245", titlePrincipalsList[1].Nconst.Trim());
+            Assert.Equal("nm0566389", titlePrincipalsList[2].Nconst.Trim());
+           
+        }
+
+        // Title
         [Fact]
 
         public void CreateNewTitle()
