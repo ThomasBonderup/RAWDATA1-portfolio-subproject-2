@@ -24,7 +24,7 @@ namespace DataAccess
 
         public Title CreateTitle(string titleType, string primaryTitle, string originalTitle, bool isAdult,
             string startYear, string endYear,
-            int runtimeMinutes, string poster, string awards, string plot)
+            int? runtimeMinutes, string poster, string awards, string plot)
         {
             var title = new Title
             {
@@ -317,7 +317,6 @@ namespace DataAccess
         public int NumberOfNames()
         {
             return ctx.Names.Count();
-
         }
         
         public Title CreateTitle(string primaryTitle)

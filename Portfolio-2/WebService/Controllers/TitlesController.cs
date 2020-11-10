@@ -12,7 +12,7 @@ namespace WebService.Controllers
     [Route("api/titles")]
     public class TitlesController : ControllerBase
     {
-        IDataService _dataService;
+        private readonly IDataService _dataService;
         private readonly IMapper _mapper;
 
         public TitlesController(IDataService dataService, IMapper mapper)
@@ -82,6 +82,7 @@ namespace WebService.Controllers
         [HttpGet(Name = nameof(GetTitles))]
         public IActionResult GetTitles(int page = 0, int pageSize = 10)
         {
+
             CheckCurrentUser();
             
             pageSize = PaginationHelper.CheckPageSize(pageSize);
@@ -138,33 +139,32 @@ namespace WebService.Controllers
         // POST
         
         [HttpPost("{tconst}")]
-        public IActionResult CreateTitle(string titleType, string primaryTitle, string originalTitle, bool isAdult, 
-            string startYear, string endYear, int runtimeMinutes, string poster, string awards, string plot)
+        public IActionResult CreateTitle(Title title)
         {
             CheckCurrentUser();
            // var title = _dataService.CreateTitle(primaryTitle);
-           var title = _dataService.CreateTitle(titleType, primaryTitle, originalTitle, isAdult, startYear, endYear,
-               runtimeMinutes, poster,
-               awards, plot);
-            return Ok(title);
+           var result = _dataService.CreateTitle(title.Titletype, title.PrimaryTitle, 
+               title.OriginalTitle, title.IsAdult, title.StartYear, title.EndYear,
+               title.RunTimeMinutes, title.Poster, title.Awards, title.Plot);
+            return Ok(result);
         }
 
         // PUT
 
         [HttpPut("{tconst}")]
 
-        public IActionResult UpdateTitle(string tconst, string titleType, string primaryTitle, string originalTitle, bool isAdult, 
-            string startYear, string endYear, int runtimeMinutes, string poster, string awards, string plot)
+        public IActionResult UpdateTitle(Title title)
         {
 
             CheckCurrentUser();
             
-            var title = _dataService.GetTitle(tconst);
+            var result = _dataService.GetTitle(title.Tconst);
 
-            if (title != null)
+            if (result != null)
             {
-                _dataService.UpdateTitle(tconst, titleType, primaryTitle, originalTitle, isAdult, startYear, endYear,
-                    runtimeMinutes, poster, awards, plot);
+                _dataService.UpdateTitle(title.Tconst, title.Titletype, title.PrimaryTitle, 
+                    title.OriginalTitle, title.IsAdult, title.StartYear, title.EndYear,
+                    title.RunTimeMinutes, title.Poster, title.Awards, title.Plot);
                 return Ok(title);
             }
 
@@ -173,6 +173,19 @@ namespace WebService.Controllers
 
 
         // DELETE
+        [HttpDelete("{tconst}")]
+        public IActionResult DeleteTitle(string tconst)
+        {
+            CheckCurrentUser();
+
+            if (!_dataService.DeleteTitle(tconst))
+            {
+                return NotFound();
+            }
+            return Ok();
+        }
+        
+        
         
         [HttpGet("search/{searchString}")]
         public IActionResult SearchTitle(string searchString, string uConst, int page = 0, int pageSize = 10)

@@ -4,8 +4,11 @@ using Xunit;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using DataAccess;
+using Microsoft.VisualStudio.TestPlatform.Common;
+using Microsoft.VisualStudio.TestPlatform.TestHost;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit.Abstractions;
@@ -26,7 +29,9 @@ namespace UnitTests
         private const string TitlesApi = "http://localhost:5001/api/titles";
         private const string UsersApi = "http://localhost:5001/api/users"; 
         private const string NamesApi = "http://localhost:5001/api/names";
-
+        
+        // -------------------------------- user --------------------------------------
+        
 
         // -------------------------------- api/titles -------------------------------- 
        [Fact]
@@ -54,6 +59,134 @@ namespace UnitTests
            
            Assert.Equal(HttpStatusCode.NotFound, statusCode);
        }
+       
+       [Fact]
+        public void ApiTitles_PostWithTitle_Created()
+        {
+            var newTitle = new
+            {
+                Titletype = "titleTypeTest",
+                PrimaryTitle = "primaryTitle Test",
+                OriginalTitle = "originalTitle Test",
+                IsAdult = false,
+                StartYear = 2020,
+                EndYear = 2020,
+                RunTimeMinutes = 160,
+                Poster = "poster N/A",
+                Awards = "null",
+                Plot = ""
+            };
+            var (title, statusCode) = PostData(TitlesApi, newTitle);
+            
+
+            Assert.Equal(HttpStatusCode.Created, statusCode);
+
+            DeleteData($"{TitlesApi}/{title["tconst"]}");
+        }
+
+        [Fact]
+        public void ApiTitles_PutWithValidTitle_Ok()
+        {
+
+            var data = new
+            {
+                Titletype = "titleTypeTestt",
+                PrimaryTitle = "primaryTitle Test 2",
+                OriginalTitle = "originalTitle Test 2",
+                IsAdult = false,
+                StartYear = 2021,
+                EndYear = 2023,
+                RunTimeMinutes = 161,
+                Poster = "poster N/A",
+                Awards = "null",
+                Plot = "gg"
+            };
+            
+            var (title, _) = PostData($"{TitlesApi}", data);
+
+            var update = new
+            {
+                Tconst = title["tconst"],
+                Titletype = title["titleType"] + "Updated",
+                PrimaryTitle = title["primaryTitle"] + "Updated",
+                OriginalTitle = title["originalTitle"] + "Updated",
+                IsAdult = title["isAdult"],
+                StartYear = title["startYear"] + "2020",
+                EndYear = title["endYear"] + "2020",
+                RunTimeMinutes = title["runTimeMinutes"] + "1",
+                Poster = title["poster"] + "Updated",
+                Awards = title["awards"] + "Updated",
+                Plot = title["plot"] + "Updated",
+            };
+
+            var statusCode = PutData($"{TitlesApi}/{title["tconst"]}", update);
+
+            Assert.Equal(HttpStatusCode.OK, statusCode);
+
+            var (titleCheck, _) = GetObject($"{TitlesApi}/{title["tconst"]}");
+
+            Assert.Equal(title["name"] + "Updated", titleCheck["name"]);
+            Assert.Equal(title["titleType"] + "Updated", titleCheck["titleType"]);
+
+            DeleteData($"{TitlesApi}/{title["tconst"]}");
+        }
+
+        [Fact]
+        public void ApiTitles_PutWithInvalidTitle_NotFound()
+        {
+            var update = new
+            {
+                Tconst = -1,
+                Titletype = "Updated",
+                PrimaryTitle = "Updated",
+                OriginalTitle = "Updated",
+                IsAdult = true,
+                StartYear = 2020,
+                EndYear = 2021,
+                RunTimeMinutes = 10,
+                Poster = "Updated",
+                Awards = "Updated",
+                Plot = "Updated",
+            };
+
+            var statusCode = PutData($"{TitlesApi}", update);
+
+            Assert.Equal(HttpStatusCode.NotFound, statusCode);
+        }
+
+        [Fact]
+        public void ApiTitles_DeleteWithValidId_Ok()
+        {
+
+            var data = new
+            {
+                Titletype = "titleTypeTestt",
+                PrimaryTitle = "primaryTitle Test 2",
+                OriginalTitle = "originalTitle Test 2",
+                IsAdult = false,
+                StartYear = "2021",
+                EndYear = "2023",
+                RunTimeMinutes = "161",
+                Poster = "poster N/A",
+                Awards = "null",
+                Plot = "gg"
+            };
+            
+            var (title, _) = PostData($"{TitlesApi}", data);
+
+            var statusCode = DeleteData($"{TitlesApi}/{title["tconst"]}");
+
+            Assert.Equal(HttpStatusCode.OK, statusCode);
+        }
+
+        [Fact]
+        public void ApiTitles_DeleteWithInvalidId_NotFound()
+        {
+
+            var statusCode = DeleteData($"{TitlesApi}/-1");
+
+            Assert.Equal(HttpStatusCode.NotFound, statusCode);
+        }
 
 
        // -------------------------------- api/users  -------------------------------- 
@@ -84,6 +217,9 @@ namespace UnitTests
            
            Assert.Equal(HttpStatusCode.NotFound, statusCode);
        }
+       
+       
+       
        
        // -------------------------------- api/names -------------------------------- 
        [Fact]

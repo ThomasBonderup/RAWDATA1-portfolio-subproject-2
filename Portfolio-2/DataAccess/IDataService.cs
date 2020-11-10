@@ -13,6 +13,8 @@ namespace DataAccess
 
         Title GetTitle(string tconst);
 
+        bool DeleteTitle(string tconst);
+
         User GetUser(string uconst);
 
         Name GetName(string nconst);
@@ -33,7 +35,8 @@ namespace DataAccess
 
         int NumberOfTitles();
 
-        Title CreateTitle(string titleType, string primaryTitle, string originalTitle, bool isAdult, string startYear, string endYear, int runtimeMinutes,
+        Title CreateTitle(string titleType, string primaryTitle, string originalTitle, bool isAdult, string startYear,
+            string endYear, int? runtimeMinutes,
             string poster, string awards, string plot);
         
         bool UpdateTitle(string tconst, string titleType, string primaryTitle, string originalTitle, bool isAdult, string startYear, string endYear, int? runtimeMinutes,
