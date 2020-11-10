@@ -162,6 +162,12 @@ namespace DataAccess
             return null;
         }
 
+        public User UpdateUser(string uconst)
+        {
+            
+            return null;
+        }
+
         public Name GetName(string nconst)
         {
             var name = ctx.Names.Find(nconst);

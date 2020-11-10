@@ -161,6 +161,8 @@ namespace UnitTests
 
         }
 
+        //User tests
+        
         [Fact]
         public void CreateNewUser()
         {
@@ -186,6 +188,13 @@ namespace UnitTests
             user = service.GetUser(user.Uconst);
             Assert.True(result); 
             Assert.Null(user);
+
+        }
+        
+        [Fact]
+        public void UpdateUser()
+        { var service = new DataService();
+            var user = service.CreateUser("John", "Doe", "jodo@dummy.dk", "jodo01pw", "JoDo");
 
         }
 
