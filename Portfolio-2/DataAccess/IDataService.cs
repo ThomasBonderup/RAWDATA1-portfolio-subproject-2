@@ -43,5 +43,7 @@ namespace DataAccess
             string poster, string awards, string plot);
         
         IList<Title> SearchTitles(string searchString, string uconst, int page, int pageSize);
+
+        public IList<string> GetGenres(string tconst);
     }
 }

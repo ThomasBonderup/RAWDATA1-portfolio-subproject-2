@@ -136,6 +136,21 @@ namespace WebService.Controllers
             return Ok(titlePrincipalsList);
         }
 
+        [HttpGet("{tconst}")]
+
+        public IActionResult GetGenres(string tconst)
+        {
+            CheckCurrentUser();
+
+            var genres = _dataService.GetGenres(tconst);
+
+            if (genres == null)
+            {
+                return NotFound();
+            }
+            return Ok(genres);
+        }
+
         // POST
         
         [HttpPost("{tconst}")]

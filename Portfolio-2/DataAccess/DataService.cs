@@ -393,5 +393,22 @@ namespace DataAccess
                 .ToList();
             return result;
         }
+
+        public IList<string> GetGenres(string tconst)
+        {
+
+            IList<string> result = new List<string>();
+
+
+            foreach (var tg in ctx.TitleGenres)
+            {
+                if (tg.Tconst.Trim() == tconst)
+                {
+                    result.Add(tg.Genre);
+                }
+            }
+            return result;
+        }
+
     }
 }

@@ -128,7 +128,18 @@ namespace UnitTests
             Assert.Equal("nm0026930", titlePrincipalsList[0].Nconst.Trim());
             Assert.Equal("nm0580565", titlePrincipalsList[1].Nconst.Trim());
             Assert.Equal("nm0001430", titlePrincipalsList[2].Nconst.Trim());
-           
+        }
+
+
+        [Fact]
+
+        public void GetGenresByTconst_ValidTconst_GetTitleGenresList()
+        {
+            var service = new DataService();
+            var titleGenres = service.GetGenres("tt9055052");
+            Assert.True(titleGenres.Count == 3);
+            Assert.Equal("Comedy", titleGenres[0]);
+
         }
 
         // Title

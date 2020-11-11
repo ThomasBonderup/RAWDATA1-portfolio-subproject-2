@@ -19,6 +19,8 @@ namespace DataAccess
         
         public DbSet<SearchResult> SearchResults { get; set; }
 
+        public DbSet<TitleGenres> TitleGenres { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
            // optionsBuilder.UseNpgsql();
