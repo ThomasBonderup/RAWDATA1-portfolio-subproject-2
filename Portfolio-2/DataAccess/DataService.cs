@@ -128,20 +128,7 @@ namespace DataAccess
                 .Take(pageSize)
                 .ToList();
             return result;
-            /*
-              IList<TitlePrincipals> result = new List<TitlePrincipals>();
-            foreach (var titlePrincipal in ctx.TitlePrincipals)
-            {
-                if (titlePrincipal.Tconst == tconst)
-                {
-                    result.Add(titlePrincipal);
-
-                }
-            }
-
-            return result;
-            
-            */
+       
         }
 
 
@@ -359,19 +346,19 @@ namespace DataAccess
             foreach (var title in ctx.Titles)
             {
                 var tconst = title.Tconst;
-                var trimmedUconst = tconst.Remove(0, 2);
-                int intUconst = Int32.Parse(trimmedUconst);
+                var trimmedTconst = tconst.Remove(0, 2);
+                int intTconst = Int32.Parse(trimmedTconst);
 
-                if (intUconst >= maxTconstInt)
+                if (intTconst >= maxTconstInt)
                 {
-                    maxTconstInt = intUconst;
+                    maxTconstInt = intTconst;
                 }
             }
 
             maxTconstInt += 1;
-            var stringUconst = "tt" + maxTconstInt;
+            var stringTconst = "tt" + maxTconstInt;
 
-            return stringUconst;
+            return stringTconst;
         }
         
         public string AssignMaxNconst()
@@ -382,19 +369,19 @@ namespace DataAccess
             foreach (var name in ctx.Names)
             {
 
-                var tconst = name.Nconst;
-                var trimmedUconst = tconst.Remove(0, 2);
-                int intUconst = Int32.Parse(trimmedUconst);
+                var nconst = name.Nconst;
+                var trimmedNconst = nconst.Remove(0, 2);
+                int intNconst = Int32.Parse(trimmedNconst);
 
-                if (intUconst > maxNconstInt)
+                if (intNconst > maxNconstInt)
                 {
-                    maxNconstInt = intUconst;
+                    maxNconstInt = intNconst;
                 }
             }
             maxNconstInt++;
-            var stringUconst = "tt" + maxNconstInt.ToString();
+            var stringNconst = "tt" + maxNconstInt.ToString();
 
-            return stringUconst;
+            return stringNconst;
         }
 
         public IList<Title> SearchTitles(string searchString, string uConst, int page, int pageSize)

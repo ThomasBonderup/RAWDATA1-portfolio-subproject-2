@@ -49,7 +49,6 @@ namespace WebService.Controllers
             return dto;
         }
         
-
         private object CreateResultTitles(int page, int pageSize, IList<Title> titles)
         {
             var items = titles.Select(CreateTitleListDto);
@@ -109,11 +108,10 @@ namespace WebService.Controllers
 
         [HttpGet("{tconst}/titleprincipals/{nconst}")]
 
-        public IActionResult GetTitlePrincipals(string tconst, string nconst, int page, int pageSize)
+        public IActionResult GetTitlePrincipals(string tconst, string nconst)
         {
             CheckCurrentUser();
             
-            pageSize = PaginationHelper.CheckPageSize(pageSize);
 
             var titlePrincipals = _dataService.GetTitlePrincipals(tconst, nconst);
             if (titlePrincipals == null)
@@ -127,6 +125,9 @@ namespace WebService.Controllers
         public IActionResult GetTitlePrincipalsByTitle(string tconst, int page = 0, int pageSize = 10)
         {
             CheckCurrentUser();
+            
+            pageSize = PaginationHelper.CheckPageSize(pageSize);
+            
             var titlePrincipalsList = _dataService.GetTitlePrincipalsByTitle(tconst, page, pageSize);
             if (titlePrincipalsList == null)
             {
