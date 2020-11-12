@@ -259,7 +259,7 @@ namespace WebService.Controllers
                 return NotFound();
             }
 
-            var result = CreateResultTitles(page, pageSize, titles);
+            var result = CreateResultTitlePrincipals(page, pageSize, titles);
             
             return Ok(result);
         }
