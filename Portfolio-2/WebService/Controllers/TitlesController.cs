@@ -177,6 +177,7 @@ namespace WebService.Controllers
             return Ok(genres);
         }
 
+        [HttpGet("{tconst}")]
         public IActionResult GetTitleRating(string tconst)
         {
             CheckCurrentUser();
@@ -191,6 +192,7 @@ namespace WebService.Controllers
 
         }
 
+        [HttpGet("{uconst},{tconst}")]
         public IActionResult GetTitleBookmark(string uconst, string tconst)
         {
             CheckCurrentUser();
@@ -203,6 +205,7 @@ namespace WebService.Controllers
             return Ok(titleBookmark);
         }
 
+        [HttpGet("{uconst},{tconst}")]
         public IActionResult DeleteTitleBookmark(string uconst, string tconst)
         {
             CheckCurrentUser();
@@ -215,6 +218,7 @@ namespace WebService.Controllers
             return NotFound();
         }
 
+        [HttpGet("{uconst},{tconst}")]
         public IActionResult CreateTitleBookmark(string uconst, string tconst)
         {
             CheckCurrentUser();
@@ -223,7 +227,8 @@ namespace WebService.Controllers
 
         }
 
-
+        
+        [HttpGet("{uconst}")]
         public IActionResult GetRatings(string uconst)
         {
             CheckCurrentUser();
@@ -235,6 +240,7 @@ namespace WebService.Controllers
             return Ok(ratings);
         }
 
+        [HttpGet("{uconst},{tconst}")]
         public IActionResult GetRating(string uconst, string tconst)
         {
             CheckCurrentUser();
@@ -247,6 +253,7 @@ namespace WebService.Controllers
             return Ok(ratingByUser);
         }
 
+        [HttpGet("{uconst}")]
         public IActionResult GetTitleBookmarks(string uconst)
         {
             CheckCurrentUser();
@@ -258,6 +265,7 @@ namespace WebService.Controllers
             return Ok(titleBookmarks);
         }
 
+        [HttpGet]
         public IActionResult GetTitleRatings()
         {
             CheckCurrentUser();
@@ -271,6 +279,21 @@ namespace WebService.Controllers
 
         }
 
+        [HttpGet("{uconst}")]
+
+        public IActionResult GetRatingHistory(string uconst)
+        {
+            CheckCurrentUser();
+            var result = _dataService.GetRatingHistory(uconst);
+            if (result == null)
+            {
+                return NoContent();
+            }
+            return Ok(result);
+        }
+
+
+        [HttpGet("{tconst}")]
         public IActionResult GetLocaltitle(string tconst)
         {
             CheckCurrentUser();

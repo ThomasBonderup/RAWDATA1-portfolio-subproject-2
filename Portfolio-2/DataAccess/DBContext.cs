@@ -29,6 +29,8 @@ namespace DataAccess
 
         public DbSet<RatingByUser> RatingsByUser { get; set; }
 
+        public DbSet<RatingHistory> RatingHistories { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
            // optionsBuilder.UseNpgsql();
@@ -56,6 +58,14 @@ namespace DataAccess
             modelBuilder.Entity<Title>().Property(x => x.Awards).HasColumnName("awards");
             modelBuilder.Entity<Title>().Property(x => x.Plot).HasColumnName("plot");
             modelBuilder.Entity<Title>().HasKey(x => new {x.Tconst}); //manuelt defineret
+            
+            modelBuilder.Entity<RatingHistory>().ToTable("rating_history");
+            modelBuilder.Entity<RatingHistory>().Property(x => x.Uconst).HasColumnName("uconst");
+            modelBuilder.Entity<RatingHistory>().Property(x => x.Tconst).HasColumnName("tconst");
+            modelBuilder.Entity<RatingHistory>().Property(x => x.Timestamp).HasColumnName("tstamp");
+            modelBuilder.Entity<RatingHistory>().Property(x => x.Rating).HasColumnName("rating");
+            modelBuilder.Entity<RatingHistory>().Property(x => x.Review).HasColumnName("review");
+            modelBuilder.Entity<RatingHistory>().HasKey(x => new {x.Uconst, x.Tconst});
             
             modelBuilder.Entity<RatingByUser>().ToTable("rating");
             modelBuilder.Entity<RatingByUser>().Property(x => x.Uconst).HasColumnName("uconst");

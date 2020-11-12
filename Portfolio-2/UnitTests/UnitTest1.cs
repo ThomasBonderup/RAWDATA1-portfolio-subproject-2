@@ -161,6 +161,16 @@ namespace UnitTests
 
         [Fact]
 
+        public void GetRatingHistory_ValidUconst()
+        {
+            var service = new DataService();
+            var ratingHistory = service.GetRatingHistory("ui000002");
+            Assert.Equal(5, ratingHistory.Count);
+
+        }
+
+        [Fact]
+
         public void CreateTitleBookmark_ValidUconstAndTconst()
         {
             var service = new DataService();
