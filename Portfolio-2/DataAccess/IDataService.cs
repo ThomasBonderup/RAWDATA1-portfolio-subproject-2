@@ -67,5 +67,7 @@ namespace DataAccess
 
         public IList<RatingByUser> GetRatings(string uconst);
         public IList<RatingHistory> GetRatingHistory(string uconst);
+
+        public IList<RatingHistory> GetAllRatingHistory(string uconst, string tconst);
     }
 }

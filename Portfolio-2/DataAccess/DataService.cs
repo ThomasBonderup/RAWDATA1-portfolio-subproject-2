@@ -409,6 +409,21 @@ namespace DataAccess
             return result;
         }
 
+        public IList<RatingHistory> GetAllRatingHistory(string uconst, string tconst)
+        {
+            IList<RatingHistory> result = new List<RatingHistory>();
+            
+            foreach (var rh in ctx.RatingHistories)
+            {
+                if (rh.Uconst.Trim() == uconst && rh.Tconst.Trim() == tconst)
+                {
+                 result.Add(rh);   
+                }
+            }
+
+            return result;
+        }
+
         public IList<RatingHistory> GetRatingHistory(string uconst)
         {
             var result = new List<RatingHistory>();

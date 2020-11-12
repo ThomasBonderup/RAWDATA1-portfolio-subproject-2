@@ -66,7 +66,7 @@ namespace DataAccess
             modelBuilder.Entity<RatingHistory>().Property(x => x.Timestamp).HasColumnName("tstamp");
             modelBuilder.Entity<RatingHistory>().Property(x => x.Rating).HasColumnName("rating");
             modelBuilder.Entity<RatingHistory>().Property(x => x.Review).HasColumnName("review");
-            modelBuilder.Entity<RatingHistory>().HasKey(x => new {x.Uconst, x.Tconst});
+            modelBuilder.Entity<RatingHistory>().HasKey(x => new {x.Uconst, x.Tconst, x.Timestamp});
             
             modelBuilder.Entity<RatingByUser>().ToTable("rating");
             modelBuilder.Entity<RatingByUser>().Property(x => x.Uconst).HasColumnName("uconst");

@@ -279,8 +279,21 @@ namespace WebService.Controllers
 
         }
 
-        [HttpGet("{uconst}")]
+        [HttpGet("{uconst}, {tconst}")]
 
+        public IActionResult GetAllRatingHistory(string uconst, string tconst)
+        {
+            CheckCurrentUser();
+
+            var result = _dataService.GetAllRatingHistory(uconst, tconst);
+            if (result == null)
+            {
+                return NoContent();
+            }
+            return Ok(result);
+        }
+
+        [HttpGet("{uconst}")]
         public IActionResult GetRatingHistory(string uconst)
         {
             CheckCurrentUser();

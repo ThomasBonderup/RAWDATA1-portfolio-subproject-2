@@ -131,13 +131,26 @@ namespace UnitTests
             Assert.Equal(7, rating.Rating);
 
         }
-        
+
+        [Fact]
+
+        public void GetAllRatingHistory_ValidUconstAndTconst()
+        {
+            var service = new DataService();
+            var ratingHistory = service.GetAllRatingHistory("ui000002", "tt0206878");
+            Assert.Equal(3, ratingHistory.Count);
+            Assert.Equal(4, ratingHistory.First().Rating);
+            Assert.Equal(8, ratingHistory.Last().Rating);
+
+        }
+
+
         [Fact]
         public void GetRatingHistory_ValidUconst()
         {
             var service = new DataService();
             var ratingHistory = service.GetRatingHistory("ui000002");
-            Assert.Equal(6, ratingHistory.Count);
+            Assert.Equal(5, ratingHistory.Count);
 
         }
         
