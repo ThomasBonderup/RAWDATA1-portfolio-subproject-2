@@ -108,9 +108,9 @@ namespace UnitTests
             var service = new DataService();
             var titlePrincipalsList = service.GetTitlePrincipalsByTitle("tt0052520", 0, 10);
             Assert.True(titlePrincipalsList.Count ==  10);
-            Assert.Equal("nm0026930", titlePrincipalsList[0].Nconst.Trim());
-            Assert.Equal("nm0580565", titlePrincipalsList[1].Nconst.Trim());
-            Assert.Equal("nm0001430", titlePrincipalsList[2].Nconst.Trim());
+            Assert.Equal("nm0026930", titlePrincipalsList[9].Nconst.Trim());
+            Assert.Equal("nm0580565", titlePrincipalsList[8].Nconst.Trim());
+            Assert.Equal("nm0001430", titlePrincipalsList[7].Nconst.Trim());
         }
         // ----------------------- rating and rating history -------------------------
         [Fact]
@@ -126,13 +126,14 @@ namespace UnitTests
         public void GetRatingByUser_ValidUconstAndTconst()
         {
             var service = new DataService();
-            var rating = service.GetRating("ui000001", "tt9999997");
+            var rating = service.GetRating("ui000001", "tt0312284");
             _testOutputHelper.WriteLine(rating.ToString());
             Assert.Equal(7, rating.Rating);
 
         }
 
         [Fact]
+
         public void GetNameRating_ValidNconst()
         {
             var service = new DataService();
@@ -142,22 +143,24 @@ namespace UnitTests
         }
 
         [Fact]
+
         public void GetAllRatingHistory_ValidUconstAndTconst()
         {
             var service = new DataService();
-            var ratingHistory = service.GetAllRatingHistory("ui000002", "tt9999995");
+            var ratingHistory = service.GetAllRatingHistory("ui000002", "tt0206878");
             Assert.Equal(3, ratingHistory.Count);
-            Assert.Equal(4, ratingHistory.First().Rating);
-            Assert.Equal(6, ratingHistory[1].Rating);
-            Assert.Equal(8, ratingHistory.Last().Rating);
+            Assert.Equal(6, ratingHistory.First().Rating);
+            Assert.Equal(4, ratingHistory.Last().Rating);
+
         }
+
 
         [Fact]
         public void GetRatingHistory_ValidUconst()
         {
             var service = new DataService();
             var ratingHistory = service.GetRatingHistory("ui000002");
-            Assert.Equal(6, ratingHistory.Count);
+            Assert.Equal(5, ratingHistory.Count);
 
         }
         
@@ -356,7 +359,7 @@ namespace UnitTests
             var service = new DataService();
             var name = service.CreateName("Mickey Mouse", "1926", null); //hvis vi både laver et navn
             var result = service.DeleteName(name.Nconst);
-            name = service.GetName(name.Nconst); // og henter et navn?? burde vi ikke kun gøre en af delene??? nej vi tester bare om delete virkede
+            name = service.GetName(name.Nconst); // og henter et navn?? burde vi ikke kun gøre en af delene???
             Assert.True(result);
             Assert.Null(name);
         }
@@ -366,14 +369,14 @@ namespace UnitTests
         {
             var service = new DataService();
             var name = service.CreateName("Mickey Mouse", "1926", null);
-            var result = service.UpdateName(name.Nconst, "UpdatedName", "1931", "1999");
+            var result = service.UpdateName(name.Nconst, "UpdatedName", "UpdatedBirthyear", "UpdatedDeathyear");
             Assert.True(result);
             name = service.GetName(name.Nconst);
             Assert.Equal("UpdatedName", name.PrimaryName);
-            Assert.Equal("1931", name.BirthYear);
-            Assert.Equal("1999", name.DeathYear);
+            Assert.Equal("UpdatedBirthyear", name.BirthYear);
+            Assert.Equal("UpdatedDeathyear", name.DeathYear);
             //cleanup
-            service.DeleteName(name.Nconst);
+            service.DeleteUser(name.Nconst);
         }
 
         [Fact]
@@ -383,29 +386,6 @@ namespace UnitTests
             var profession = service.GetProfessions("nm0000001");
             Assert.Equal("actor",profession.First().Profession);
             Assert.Equal("soundtrack", profession.Last().Profession);
-        }
-        
-        //----------------------------  notes --------------------
-        [Fact]
-        public void GetNameNotes_ValidUconst()
-        {
-            var service = new DataService();
-            var notes = service.GetNameNotes("ui000001");
-            Assert.Equal(3, notes.Count);
-        }
-        
-        
-        [Fact]
-        public void UpdateNameNote()
-        {
-            var service = new DataService();
-            var newNote = service.CreateNameNote("Mickey Mouse", "1926", "test");
-            var result = service.UpdateNameNote(newNote.Uconst, newNote.Nconst, "updated");
-            Assert.True(result);
-            newNote = service.GetNameNote(newNote.Uconst, newNote.Nconst);
-            Assert.Equal("updated", newNote.Notes);
-            //cleanup
-            service.DeleteNameNote(newNote.Uconst, newNote.Nconst);
         }
     }
 }
