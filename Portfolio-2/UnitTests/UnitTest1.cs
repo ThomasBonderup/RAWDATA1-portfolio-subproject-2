@@ -387,5 +387,51 @@ namespace UnitTests
             Assert.Equal("actor",profession.First().Profession);
             Assert.Equal("soundtrack", profession.Last().Profession);
         }
+
+        
+        //----------------------------  notes --------------------
+        [Fact]
+        public void GetNameNotes_ValidUconst()
+        {
+            var service = new DataService();
+            var notes = service.GetNameNotes("ui000001");
+            Assert.Equal(3, notes.Count);
+        }
+        
+        
+        [Fact]
+        public void UpdateNameNote()
+        {
+            var service = new DataService();
+            var newNote = service.CreateNameNote("ui...", "nm...", "test");
+            var result = service.UpdateNameNote(newNote.Uconst, newNote.Nconst, "updated");
+            Assert.True(result);
+            newNote = service.GetNameNote(newNote.Uconst, newNote.Nconst);
+            Assert.Equal("updated", newNote.Notes);
+            //cleanup
+            service.DeleteNameNote(newNote.Uconst, newNote.Nconst);
+        }
+        
+        [Fact]
+        public void GetTitleNotes_ValidUconst()
+        {
+            var service = new DataService();
+            var notes = service.GetTitleNotes("ui000001");
+            Assert.Equal(4, notes.Count);
+        }
+        
+        
+        [Fact]
+        public void UpdateTitleNote()
+        {
+            var service = new DataService();
+            var newNote = service.CreateTitleNote("ui...", "tt...", "test");
+            var result = service.UpdateTitleNote(newNote.Uconst, newNote.Tconst, "updated");
+            Assert.True(result);
+            newNote = service.GetTitleNote(newNote.Uconst, newNote.Tconst);
+            Assert.Equal("updated", newNote.Notes);
+            //cleanup
+            service.DeleteTitleNote(newNote.Uconst, newNote.Tconst);
+        }
     }
 }

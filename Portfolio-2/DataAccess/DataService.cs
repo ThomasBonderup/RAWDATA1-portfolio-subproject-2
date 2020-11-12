@@ -646,6 +646,59 @@ namespace DataAccess
             return true;
         }
         
+        // ---------------------- title notes -----------------------
+        public IList<TitleNotes> GetTitleNotes(string uconst)
+        {
+            IList<TitleNotes> result = new List<TitleNotes>();
+            foreach (var nm in ctx.TitleNotes)
+            {
+                if (nm.Uconst.Trim() == uconst)
+                {
+                    result.Add(nm);
+                }
+            }
+            return result;
+        }
+        
+        public TitleNotes GetTitleNote(string uconst, string tconst)
+        {
+            return ctx.TitleNotes.Find(uconst, tconst);
+        }
+        
+        public bool DeleteTitleNote(string uconst, string tconst)
+        {
+            var note = ctx.TitleNotes.Find(uconst, tconst);
+            if (note == null)
+            {
+                return false;
+            }
+            ctx.TitleNotes.Remove(note);
+            return true;
+        }
+        
+        public TitleNotes CreateTitleNote(string uconst, string tconst, string notes)
+        {
+            var response = new TitleNotes()
+            {
+                Uconst = uconst,
+                Tconst = tconst,
+                Notes = notes
+            };
+            ctx.TitleNotes.Add(response);
+            return response;
+        }
+
+        public bool UpdateTitleNote(string uconst, string tconst, string notes)
+        {
+            var note = GetTitleNote(uconst, tconst);
+            if (note == null)
+            {
+                return false;
+            }
+            note.Notes = notes;
+            return true;
+        }
+        
 
     }
 }

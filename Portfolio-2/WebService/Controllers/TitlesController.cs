@@ -279,7 +279,7 @@ namespace WebService.Controllers
 
         }
 
-        [HttpGet("{uconst}, {tconst}")]
+        [HttpGet("{uconst}/RatingHistory/{tconst}")]
 
         public IActionResult GetAllRatingHistory(string uconst, string tconst)
         {
