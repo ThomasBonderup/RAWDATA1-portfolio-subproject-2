@@ -108,9 +108,9 @@ namespace UnitTests
             var service = new DataService();
             var titlePrincipalsList = service.GetTitlePrincipalsByTitle("tt0052520", 0, 10);
             Assert.True(titlePrincipalsList.Count ==  10);
-            Assert.Equal("nm0026930", titlePrincipalsList[9].Nconst.Trim());
-            Assert.Equal("nm0580565", titlePrincipalsList[8].Nconst.Trim());
-            Assert.Equal("nm0001430", titlePrincipalsList[7].Nconst.Trim());
+            Assert.Equal("nm0026930", titlePrincipalsList[0].Nconst.Trim());
+            Assert.Equal("nm0580565", titlePrincipalsList[1].Nconst.Trim());
+            Assert.Equal("nm0001430", titlePrincipalsList[2].Nconst.Trim());
         }
         // ----------------------- rating and rating history -------------------------
         [Fact]
@@ -126,7 +126,7 @@ namespace UnitTests
         public void GetRatingByUser_ValidUconstAndTconst()
         {
             var service = new DataService();
-            var rating = service.GetRating("ui000001", "tt0312284");
+            var rating = service.GetRating("ui000001", "tt9999997");
             _testOutputHelper.WriteLine(rating.ToString());
             Assert.Equal(7, rating.Rating);
 
@@ -147,10 +147,11 @@ namespace UnitTests
         public void GetAllRatingHistory_ValidUconstAndTconst()
         {
             var service = new DataService();
-            var ratingHistory = service.GetAllRatingHistory("ui000002", "tt0206878");
+            var ratingHistory = service.GetAllRatingHistory("ui000002", "tt9999995");
             Assert.Equal(3, ratingHistory.Count);
-            Assert.Equal(6, ratingHistory.First().Rating);
-            Assert.Equal(4, ratingHistory.Last().Rating);
+            Assert.Equal(4, ratingHistory.First().Rating);
+            Assert.Equal(6, ratingHistory[1].Rating);
+            Assert.Equal(8, ratingHistory.Last().Rating);
 
         }
 
@@ -160,7 +161,7 @@ namespace UnitTests
         {
             var service = new DataService();
             var ratingHistory = service.GetRatingHistory("ui000002");
-            Assert.Equal(5, ratingHistory.Count);
+            Assert.Equal(6, ratingHistory.Count);
 
         }
         
@@ -369,14 +370,14 @@ namespace UnitTests
         {
             var service = new DataService();
             var name = service.CreateName("Mickey Mouse", "1926", null);
-            var result = service.UpdateName(name.Nconst, "UpdatedName", "UpdatedBirthyear", "UpdatedDeathyear");
+            var result = service.UpdateName(name.Nconst, "UpdatedName", "1927", "2000");
             Assert.True(result);
             name = service.GetName(name.Nconst);
             Assert.Equal("UpdatedName", name.PrimaryName);
-            Assert.Equal("UpdatedBirthyear", name.BirthYear);
-            Assert.Equal("UpdatedDeathyear", name.DeathYear);
+            Assert.Equal("1927", name.BirthYear);
+            Assert.Equal("2000", name.DeathYear);
             //cleanup
-            service.DeleteUser(name.Nconst);
+            service.DeleteName(name.Nconst);
         }
 
         [Fact]
