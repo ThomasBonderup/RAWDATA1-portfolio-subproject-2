@@ -133,7 +133,6 @@ namespace UnitTests
         }
 
         [Fact]
-
         public void GetNameRating_ValidNconst()
         {
             var service = new DataService();
@@ -143,24 +142,22 @@ namespace UnitTests
         }
 
         [Fact]
-
         public void GetAllRatingHistory_ValidUconstAndTconst()
         {
             var service = new DataService();
-            var ratingHistory = service.GetAllRatingHistory("ui000002", "tt0206878");
+            var ratingHistory = service.GetAllRatingHistory("ui000002", "tt9999995");
             Assert.Equal(3, ratingHistory.Count);
             Assert.Equal(4, ratingHistory.First().Rating);
+            Assert.Equal(6, ratingHistory[1].Rating);
             Assert.Equal(8, ratingHistory.Last().Rating);
-
         }
-
 
         [Fact]
         public void GetRatingHistory_ValidUconst()
         {
             var service = new DataService();
             var ratingHistory = service.GetRatingHistory("ui000002");
-            Assert.Equal(5, ratingHistory.Count);
+            Assert.Equal(6, ratingHistory.Count);
 
         }
         
@@ -359,7 +356,7 @@ namespace UnitTests
             var service = new DataService();
             var name = service.CreateName("Mickey Mouse", "1926", null); //hvis vi både laver et navn
             var result = service.DeleteName(name.Nconst);
-            name = service.GetName(name.Nconst); // og henter et navn?? burde vi ikke kun gøre en af delene???
+            name = service.GetName(name.Nconst); // og henter et navn?? burde vi ikke kun gøre en af delene??? nej vi tester bare om delete virkede
             Assert.True(result);
             Assert.Null(name);
         }
@@ -369,14 +366,14 @@ namespace UnitTests
         {
             var service = new DataService();
             var name = service.CreateName("Mickey Mouse", "1926", null);
-            var result = service.UpdateName(name.Nconst, "UpdatedName", "UpdatedBirthyear", "UpdatedDeathyear");
+            var result = service.UpdateName(name.Nconst, "UpdatedName", "1931", "1999");
             Assert.True(result);
             name = service.GetName(name.Nconst);
             Assert.Equal("UpdatedName", name.PrimaryName);
-            Assert.Equal("UpdatedBirthyear", name.BirthYear);
-            Assert.Equal("UpdatedDeathyear", name.DeathYear);
+            Assert.Equal("1931", name.BirthYear);
+            Assert.Equal("1999", name.DeathYear);
             //cleanup
-            service.DeleteUser(name.Nconst);
+            service.DeleteName(name.Nconst);
         }
 
         [Fact]
@@ -386,6 +383,29 @@ namespace UnitTests
             var profession = service.GetProfessions("nm0000001");
             Assert.Equal("actor",profession.First().Profession);
             Assert.Equal("soundtrack", profession.Last().Profession);
+        }
+        
+        //----------------------------  notes --------------------
+        [Fact]
+        public void GetNameNotes_ValidUconst()
+        {
+            var service = new DataService();
+            var notes = service.GetNameNotes("ui000001");
+            Assert.Equal(3, notes.Count);
+        }
+        
+        
+        [Fact]
+        public void UpdateNameNote()
+        {
+            var service = new DataService();
+            var newNote = service.CreateNameNote("Mickey Mouse", "1926", "test");
+            var result = service.UpdateNameNote(newNote.Uconst, newNote.Nconst, "updated");
+            Assert.True(result);
+            newNote = service.GetNameNote(newNote.Uconst, newNote.Nconst);
+            Assert.Equal("updated", newNote.Notes);
+            //cleanup
+            service.DeleteNameNote(newNote.Uconst, newNote.Nconst);
         }
     }
 }

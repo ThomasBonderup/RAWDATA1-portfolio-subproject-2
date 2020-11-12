@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.SymbolStore;
 using System.IO.Enumeration;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Security;
 using Microsoft.EntityFrameworkCore;
 
@@ -591,6 +592,60 @@ namespace DataAccess
             }
             return result;
         }
+        
+        // ---------------------- name notes -----------------------
+        public IList<NameNotes> GetNameNotes(string uconst)
+        {
+            IList<NameNotes> result = new List<NameNotes>();
+            foreach (var nm in ctx.NameNotes)
+            {
+                if (nm.Uconst.Trim() == uconst)
+                {
+                    result.Add(nm);
+                }
+            }
+            return result;
+        }
+        
+        public NameNotes GetNameNote(string uconst, string nconst)
+        {
+            return ctx.NameNotes.Find(uconst, nconst);
+        }
+        
+        public bool DeleteNameNote(string uconst, string nconst)
+        {
+            var note = ctx.NameNotes.Find(uconst, nconst);
+            if (note == null)
+            {
+                return false;
+            }
+            ctx.NameNotes.Remove(note);
+            return true;
+        }
+        
+        public NameNotes CreateNameNote(string uconst, string nconst, string notes)
+        {
+            var response = new NameNotes()
+            {
+                Uconst = uconst,
+                Nconst = nconst,
+                Notes = notes
+            };
+            ctx.NameNotes.Add(response);
+            return response;
+        }
+
+        public bool UpdateNameNote(string uconst, string nconst, string notes)
+        {
+            var note = GetNameNote(uconst, nconst);
+            if (note == null)
+            {
+                return false;
+            }
+            note.Notes = notes;
+            return true;
+        }
+        
 
     }
 }

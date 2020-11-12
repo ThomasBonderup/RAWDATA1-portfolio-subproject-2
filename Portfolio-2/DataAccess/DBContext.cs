@@ -31,6 +31,10 @@ namespace DataAccess
         public DbSet<RatingByUser> RatingsByUser { get; set; }
 
         public DbSet<RatingHistory> RatingHistories { get; set; }
+        
+        public DbSet<TitleNotes> TitleNotes { get; set; }
+        
+        public DbSet<NameNotes> NameNotes { get; set; }
 
         public DbSet<NameRating> NameRatings { get; set; }
 
@@ -100,6 +104,18 @@ namespace DataAccess
             modelBuilder.Entity<NameBookmark>().Property(x => x.Timestamp).HasColumnName("tstamp");
             modelBuilder.Entity<NameBookmark>().HasKey(x => new {x.Uconst, x.Nconst});
             
+            modelBuilder.Entity<TitleNotes>().ToTable("title_notes");
+            modelBuilder.Entity<TitleNotes>().Property(x => x.Uconst).HasColumnName("uconst");
+            modelBuilder.Entity<TitleNotes>().Property(x => x.Tconst).HasColumnName("tconst");
+            modelBuilder.Entity<TitleNotes>().Property(x => x.Notes).HasColumnName("notes");
+            modelBuilder.Entity<TitleNotes>().HasKey(x => new {x.Uconst, x.Tconst});
+            
+            modelBuilder.Entity<NameNotes>().ToTable("name_notes");
+            modelBuilder.Entity<NameNotes>().Property(x => x.Uconst).HasColumnName("uconst");
+            modelBuilder.Entity<NameNotes>().Property(x => x.Nconst).HasColumnName("nconst");
+            modelBuilder.Entity<NameNotes>().Property(x => x.Notes).HasColumnName("notes");
+            modelBuilder.Entity<NameNotes>().HasKey(x => new {x.Uconst, x.Nconst});
+
             modelBuilder.Entity<TitlePrincipals>().ToTable("title_principals");
             modelBuilder.Entity<TitlePrincipals>().Property(x => x.Tconst).HasColumnName("tconst");
             modelBuilder.Entity<TitlePrincipals>().Property(x => x.Nconst).HasColumnName("nconst");
