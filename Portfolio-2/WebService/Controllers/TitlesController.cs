@@ -284,7 +284,7 @@ namespace WebService.Controllers
             return Ok(result);
         }
         
-        [HttpGet("search-titleprincipals/{searchString}")]
+        [HttpGet("titleprincipals/{searchString}")]
         public IActionResult SearchTitlePrincipals(string searchString, string uConst, int page = 0, int pageSize = 10)
         {
             CheckCurrentUser();
