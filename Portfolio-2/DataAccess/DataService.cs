@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.SymbolStore;
 using System.Linq;
+using System.Security;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess
@@ -409,6 +410,38 @@ namespace DataAccess
             return result;
         }
 
+        public TitleBookmark GetTitleBookmark(string uconst, string tconst)
+        {
+            return ctx.TitleBookmarks.Find(uconst, tconst);
+        }
+
+        public bool DeleteTitleBookmark(string uconst, string tconst)
+        {
+            var titleBookmark = ctx.TitleBookmarks.Find(uconst, tconst);
+            if (titleBookmark == null)
+            {
+                return false;
+            }
+
+            ctx.TitleBookmarks.Remove(titleBookmark);
+            return true;
+        }
+        
+        public TitleBookmark CreateTitleBookmark(string uconst, string tconst)
+        {
+
+           var result = new TitleBookmark
+            {
+                Uconst = uconst,
+                Tconst = tconst,
+                Timestamp = DateTime.Now
+
+            };
+           
+           ctx.TitleBookmarks.Add(result);
+            return result;
+        }
+
         public TitleRatings GetTitleRating(string tconst)
         {
             var result = ctx.TitleRatings.Find(tconst);
@@ -427,7 +460,7 @@ namespace DataAccess
         {
             
             IList<string> result = new List<string>();
-            foreach (var lt in ctx.LocalTitle)
+            foreach (var lt in ctx.LocalTitles)
             {
                 if (lt.TitleId.Trim() == tconst)
                 {

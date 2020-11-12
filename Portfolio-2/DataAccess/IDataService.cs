@@ -53,5 +53,10 @@ namespace DataAccess
         public IList<TitleRatings> GetTitleRatings();
 
         public TitleRatings GetTitleRating(string tconst);
+        public TitleBookmark CreateTitleBookmark(string uconst, string tconst);
+
+        public bool DeleteTitleBookmark(string uconst, string tconst);
+
+        public TitleBookmark GetTitleBookmark(string uconst, string tconst);
     }
 }

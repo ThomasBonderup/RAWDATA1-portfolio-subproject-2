@@ -21,9 +21,11 @@ namespace DataAccess
 
         public DbSet<TitleGenres> TitleGenres { get; set; }
 
-        public DbSet<LocalTitles> LocalTitle { get; set; }
+        public DbSet<LocalTitles> LocalTitles { get; set; }
 
         public DbSet<TitleRatings> TitleRatings { get; set; }
+
+        public DbSet<TitleBookmark> TitleBookmarks { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -57,6 +59,13 @@ namespace DataAccess
             modelBuilder.Entity<TitleGenres>().Property(x => x.Tconst).HasColumnName("tconst");
             modelBuilder.Entity<TitleGenres>().Property(x => x.Genre).HasColumnName("genre");
             modelBuilder.Entity<TitleGenres>().HasKey(x => new {x.Tconst});
+
+            modelBuilder.Entity<TitleBookmark>().ToTable("title_bookmark");
+            modelBuilder.Entity<TitleBookmark>().Property(x => x.Uconst).HasColumnName("uconst");
+            modelBuilder.Entity<TitleBookmark>().Property(x => x.Tconst).HasColumnName("tconst");
+            modelBuilder.Entity<TitleBookmark>().Property(x => x.Timestamp).HasColumnName("tstamp");
+            modelBuilder.Entity<TitleBookmark>().HasKey(x => new {x.Uconst, x.Tconst});
+            
 
             modelBuilder.Entity<TitlePrincipals>().ToTable("title_principals");
             modelBuilder.Entity<TitlePrincipals>().Property(x => x.Tconst).HasColumnName("tconst");

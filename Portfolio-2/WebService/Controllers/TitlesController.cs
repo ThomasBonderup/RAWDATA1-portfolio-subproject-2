@@ -191,6 +191,38 @@ namespace WebService.Controllers
 
         }
 
+        public IActionResult GetTitleBookmark(string uconst, string tconst)
+        {
+            CheckCurrentUser();
+
+            var titleBookmark = _dataService.GetTitleBookmark(uconst, tconst);
+            if (titleBookmark == null)
+            {
+                return NotFound();
+            }
+            return Ok(titleBookmark);
+        }
+
+        public IActionResult DeleteTitleBookmark(string uconst, string tconst)
+        {
+            CheckCurrentUser();
+            var titleBookmark = _dataService.DeleteTitleBookmark(uconst, tconst);
+            if (titleBookmark)
+            {
+                return Ok();
+            }
+
+            return NotFound();
+        }
+
+        public IActionResult CreateTitleBookmark(string uconst, string tconst)
+        {
+            CheckCurrentUser();
+            var titleBookmark = _dataService.CreateTitleBookmark(uconst, tconst);
+            return Ok(titleBookmark);
+
+        }
+
         public IActionResult GetTitleRatings()
         {
             CheckCurrentUser();

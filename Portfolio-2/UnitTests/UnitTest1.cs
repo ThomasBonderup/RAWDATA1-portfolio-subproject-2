@@ -130,6 +130,18 @@ namespace UnitTests
             Assert.Equal("nm0001430", titlePrincipalsList[2].Nconst.Trim());
         }
 
+        [Fact]
+
+        public void CreateTitleBookmark_ValidUconstAndTconst()
+        {
+            var service = new DataService();
+            var newBookmark = service.CreateTitleBookmark("ui000001", "tt6850980");
+            Assert.NotNull(newBookmark);
+            service.DeleteTitleBookmark("ui000001", "tt6850980");
+            Assert.Null(service.GetTitleBookmark("ui000001", "tt6850980"));
+
+        }
+
 
         [Fact]
 
