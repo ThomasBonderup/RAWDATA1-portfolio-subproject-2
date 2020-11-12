@@ -11,9 +11,7 @@ namespace DataAccess
     public class DataService : IDataService
     {
         public DBContext ctx { get; set; }
-
-
-
+        
         public DataService()
         {
             ctx = new DBContext();
@@ -446,20 +444,17 @@ namespace DataAccess
             return result;
 
         }
-
+        // ------------------------------- title bookmark -----------------------------
         public IList<TitleBookmark> GetTitleBookmarks(string uconst)
         {
-
             IList<TitleBookmark> result = new List<TitleBookmark>();
             foreach (var tb in ctx.TitleBookmarks)
             {
-
                 if (tb.Uconst.Trim() == uconst)
                 {
                     result.Add(tb);
                 }
             }
-
             return result;
         }
 
@@ -470,30 +465,66 @@ namespace DataAccess
 
         public bool DeleteTitleBookmark(string uconst, string tconst)
         {
-            
             var titleBookmark = ctx.TitleBookmarks.Find(uconst, tconst);
             if (titleBookmark == null)
             {
                 return false;
             }
-
             ctx.TitleBookmarks.Remove(titleBookmark);
             return true;
-            
         }
         
         public TitleBookmark CreateTitleBookmark(string uconst, string tconst)
         {
-
-           var result = new TitleBookmark
+            var result = new TitleBookmark
             {
                 Uconst = uconst,
                 Tconst = tconst,
                 Timestamp = DateTime.Now
-
             };
-           
-           ctx.TitleBookmarks.Add(result);
+            ctx.TitleBookmarks.Add(result);
+            return result;
+        }
+        
+        // ------------------------------------- name bookmark -----------------------------------
+        public IList<NameBookmark> GetNameBookmarks(string uconst)
+        {
+            IList<NameBookmark> result = new List<NameBookmark>();
+            foreach (var tb in ctx.NameBookmarks)
+            {
+                if (tb.Uconst.Trim() == uconst)
+                {
+                    result.Add(tb);
+                }
+            }
+            return result;
+        }
+
+        public NameBookmark GetNameBookmark(string uconst, string nconst)
+        {
+            return ctx.NameBookmarks.Find(uconst, nconst);
+        }
+
+        public bool DeleteNameBookmark(string uconst, string nconst)
+        {
+            var nameBookmark = ctx.NameBookmarks.Find(uconst, nconst);
+            if (nameBookmark == null)
+            {
+                return false;
+            }
+            ctx.NameBookmarks.Remove(nameBookmark);
+            return true;
+        }
+        
+        public NameBookmark CreateNameBookmark(string uconst, string nconst)
+        {
+            var result = new NameBookmark
+            {
+                Uconst = uconst,
+                Nconst = nconst,
+                Timestamp = DateTime.Now
+            };
+            ctx.NameBookmarks.Add(result);
             return result;
         }
 

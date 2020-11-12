@@ -26,7 +26,8 @@ namespace DataAccess
         public DbSet<TitleRatings> TitleRatings { get; set; }
 
         public DbSet<TitleBookmark> TitleBookmarks { get; set; }
-
+        
+        public DbSet<NameBookmark> NameBookmarks { get; set; }
         public DbSet<RatingByUser> RatingsByUser { get; set; }
 
         public DbSet<RatingHistory> RatingHistories { get; set; }
@@ -85,7 +86,12 @@ namespace DataAccess
             modelBuilder.Entity<TitleBookmark>().Property(x => x.Timestamp).HasColumnName("tstamp");
             modelBuilder.Entity<TitleBookmark>().HasKey(x => new {x.Uconst, x.Tconst});
             
-
+            modelBuilder.Entity<NameBookmark>().ToTable("name_bookmark");
+            modelBuilder.Entity<NameBookmark>().Property(x => x.Uconst).HasColumnName("uconst");
+            modelBuilder.Entity<NameBookmark>().Property(x => x.Nconst).HasColumnName("nconst");
+            modelBuilder.Entity<NameBookmark>().Property(x => x.Timestamp).HasColumnName("tstamp");
+            modelBuilder.Entity<NameBookmark>().HasKey(x => new {x.Uconst, x.Nconst});
+            
             modelBuilder.Entity<TitlePrincipals>().ToTable("title_principals");
             modelBuilder.Entity<TitlePrincipals>().Property(x => x.Tconst).HasColumnName("tconst");
             modelBuilder.Entity<TitlePrincipals>().Property(x => x.Nconst).HasColumnName("nconst");
@@ -94,9 +100,7 @@ namespace DataAccess
             modelBuilder.Entity<TitlePrincipals>().Property(x => x.Job).HasColumnName("job");
             modelBuilder.Entity<TitlePrincipals>().Property(x => x.Characters).HasColumnName("characters");
             modelBuilder.Entity<TitlePrincipals>().HasKey(x => new {x.Tconst, x.Nconst});
-     
-          
-            
+
             modelBuilder.Entity<Name>().ToTable("name");
             modelBuilder.Entity<Name>().Property(x => x.Nconst).HasColumnName("nconst");
             modelBuilder.Entity<Name>().Property(x => x.PrimaryName).HasColumnName("primaryname");

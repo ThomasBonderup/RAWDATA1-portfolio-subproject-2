@@ -1,15 +1,7 @@
 using System;
-using System.Data;
 using Xunit;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using AutoMapper;
 using DataAccess;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Xunit.Abstractions;
 
 namespace UnitTests
@@ -168,6 +160,27 @@ namespace UnitTests
             Assert.Equal(newBookmark, service.GetTitleBookmark("ui000001", "tt6850980"));
             service.DeleteTitleBookmark("ui000001", "tt6850980");
             Assert.Null(service.GetTitleBookmark("ui000001", "tt6850980"));
+        }
+
+        // ------------------------------- name bookmarks ---------------------------
+        [Fact]
+        public void GetNameBookmarks_ValidUconst()
+        {
+            var service = new DataService();
+            var bookmarks = service.GetNameBookmarks("ui000001");
+            Assert.Equal(3, bookmarks.Count);
+        }
+
+
+        [Fact]
+        public void CreateNameBookmark_ValidUconstAndNconst()
+        {
+            var service = new DataService();
+            var newBookmark = service.CreateNameBookmark("ui000001", "nm99999999");
+            Assert.NotNull(newBookmark);
+            Assert.Equal(newBookmark, service.GetNameBookmark("ui000001", "nm99999999"));
+            service.DeleteNameBookmark("ui000001", "nm99999999");
+            Assert.Null(service.GetNameBookmark("ui000001", "nm99999999"));
         }
 
 
