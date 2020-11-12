@@ -273,9 +273,23 @@ namespace DataAccess
             return true;
         }
 
-        public IList<PrimaryProfession> GetProfessions()
+        public IList<PrimaryProfession> GetProfessions(string nconst)
         {
-            return ctx.Professions.ToList();
+            
+            /*var list = ctx.PrimaryProfessions.Find(nconst);
+            
+            var name = ctx.Names.Find(nconst);
+            
+            foreach (var p in list)
+            {
+                if (list[] == nconst)
+                {
+                    
+                }
+                
+            }
+            
+            */return ctx.PrimaryProfessions.ToList();
         }
 
        /* public IList<PrimaryProfession> GetPrimaryProfession(string nconst)

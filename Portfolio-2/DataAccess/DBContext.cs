@@ -9,7 +9,7 @@ namespace DataAccess
     {
         public DbSet<Title> Titles { get; set; }
 
-        public DbSet<PrimaryProfession> Professions { get; set; }
+        public DbSet<PrimaryProfession> PrimaryProfessions { get; set; }
 
         public DbSet<TitlePrincipals> TitlePrincipals { get; set; }
 
