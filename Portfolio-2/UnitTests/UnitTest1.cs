@@ -22,10 +22,9 @@ namespace UnitTests
         public UnitTest1(ITestOutputHelper testOutputHelper)
         {
             _testOutputHelper = testOutputHelper;
-          
         }
         
-
+        // ------------------------------ title tests ------------------------------
         [Fact]
         public void Title_Object_HasTconstAndPrimaryTitle()
         {
@@ -34,7 +33,7 @@ namespace UnitTests
             Assert.Null(title.PrimaryTitle);
         }
         
-        // Get ALL titles, names, and users
+        // ----------------- Get ALL titles, names, and users ----------------------
 
         [Fact]
         public void GetAllTitles_NoArgument_ReturnsAllTitles()
@@ -48,26 +47,22 @@ namespace UnitTests
         [Fact]
         public void GetAllUsers_NoArgument_ReturnsAllUsers()
         {
-            
             var service = new DataService();
             var users = service.GetUsers(0, 6);
             Assert.Equal(6, users.Count);
             Assert.Equal("Alex", users.First().FirstName);
-
         }
 
         [Fact]
         public void GetAllNames_NoArgument_ReturnsAllNames()
         {
-            
             var service = new DataService();
             var names = service.GetNames(0, 234484);
             Assert.Equal(234484, names.Count);
             Assert.Equal("Fred Astaire", names.First().PrimaryName);
-
         }
         
-        // Get a title, name or user BY t-, n-, u-const
+        // ----------- Get a title, name or user BY t-, n-, u-const -----------
 
         [Fact]
         public void GetTitleByTconst_InvalidTconst()
@@ -105,21 +100,17 @@ namespace UnitTests
             Assert.Equal("Fred Astaire", name.PrimaryName);
         }
 
-        // Title principals
+        // ---------------------------- Title principals ---------------------------
         [Fact]
-
         public void GetTitlePrincipalsByTconstAndNconst_ValidTconstNconst()
         {
-            
             var service = new DataService();
             var titlePrincipals = service.GetTitlePrincipals("tt0052520", "nm0580565");
             Assert.Equal(8, titlePrincipals.Ordering);
             Assert.Equal("actor", titlePrincipals.Category);
-            
         }
 
         [Fact]
-
         public void GetTitlePrincipalsByTitle_ValidTconst()
         {
             var service = new DataService();
@@ -129,9 +120,8 @@ namespace UnitTests
             Assert.Equal("nm0580565", titlePrincipalsList[1].Nconst.Trim());
             Assert.Equal("nm0001430", titlePrincipalsList[2].Nconst.Trim());
         }
-
+        // ----------------------- rating and rating history -------------------------
         [Fact]
-
         public void GetRatingsByUser_ValidUconst()
         {
             var service = new DataService();
@@ -141,7 +131,6 @@ namespace UnitTests
         }
 
         [Fact]
-
         public void GetRatingByUser_ValidUconstAndTconst()
         {
             var service = new DataService();
@@ -150,18 +139,8 @@ namespace UnitTests
             Assert.Equal(7, rating.Rating);
 
         }
-
+        
         [Fact]
-
-        public void GetTitleBookmarks_ValidUconst()
-        {
-            var service = new DataService();
-            var bookmarks = service.GetTitleBookmarks("ui000001");
-            Assert.Equal(5, bookmarks.Count);
-        }
-
-        [Fact]
-
         public void GetRatingHistory_ValidUconst()
         {
             var service = new DataService();
@@ -169,9 +148,18 @@ namespace UnitTests
             Assert.Equal(6, ratingHistory.Count);
 
         }
+        
+        // ------------------------------- title bookmarks ---------------------------
+        [Fact]
+        public void GetTitleBookmarks_ValidUconst()
+        {
+            var service = new DataService();
+            var bookmarks = service.GetTitleBookmarks("ui000001");
+            Assert.Equal(5, bookmarks.Count);
+        }
+
 
         [Fact]
-
         public void CreateTitleBookmark_ValidUconstAndTconst()
         {
             var service = new DataService();
@@ -180,55 +168,45 @@ namespace UnitTests
             Assert.Equal(newBookmark, service.GetTitleBookmark("ui000001", "tt6850980"));
             service.DeleteTitleBookmark("ui000001", "tt6850980");
             Assert.Null(service.GetTitleBookmark("ui000001", "tt6850980"));
-
         }
 
 
         [Fact]
-
         public void GetGenresByTconst_ValidTconst_GetTitleGenresList()
         {
             var service = new DataService();
             var titleGenres = service.GetGenres("tt9055052");
             Assert.True(titleGenres.Count == 3);
             Assert.Equal("Comedy", titleGenres[0]);
-
         }
 
         [Fact]
-
         public void GetTitleRating_ValidTconst_ReturnsSingleRating()
         {
             var service = new DataService();
             var titleRating = service.GetTitleRating("tt0247050");
             Assert.Equal(7.9, Math.Round(titleRating.AverageRating, 1));
             Assert.Equal(24, titleRating.NumVotes);
-
         }
 
         [Fact]
-
         public void GetTitleRatings_ReturnsAllRatings()
         {
             var service = new DataService();
             var titleRatings = service.GetTitleRatings();
             Assert.Equal(46703, titleRatings.Count);
-
         }
 
         [Fact]
-
         public void GetLocalTitles_ValidTconst_ReturnsLocalTitle()
         {
             var service = new DataService();
             var localTitle = service.GetLocalTitle("tt0052520");
             Assert.Equal("Зона на Самракот", localTitle[0]);
-
         }
 
-        // Title
+        // --------------------------------- Title -------------------------------------
         [Fact]
-
         public void CreateNewTitle()
         {
             var service = new DataService();
@@ -243,24 +221,18 @@ namespace UnitTests
             Assert.Equal("2020", title.StartYear);
             Assert.Equal("2020", title.EndYear);
             Assert.Equal(120, title.RunTimeMinutes);
-
             service.DeleteTitle(title.Tconst);
         }
-
-
-
+        
         [Fact]
-
         public void UpdateTitle_InvalidID_ReturnsFalse()
         {
             var service = new DataService();
             var result = service.UpdateTitle("tt001", "test", "Test", "Testy", true, "2015", "2015", 20, null, null, null);
             Assert.False(result);
-            
         }
 
         [Fact]
-
         public void UpdateTitle_ValidID_ReturnsTrue()
         {
             var service = new DataService();
@@ -270,18 +242,13 @@ namespace UnitTests
             Assert.Equal("tt10850402", title.Tconst);
             Assert.Equal("Testing", title.PrimaryTitle);
             Assert.True(result);
-            
             service.UpdateTitle(title.Tconst, title.Titletype, "Çocuk", title.OriginalTitle,
                 title.IsAdult, title.StartYear, title.EndYear, title.RunTimeMinutes, title.Poster, title.Awards, title.Plot);
-            
-            
         }
 
         [Fact]
-
         public void DeleteTitle()
         {
-            
             var service = new DataService();
             var title = service.CreateTitle("Movie", "Ultra Testing 3", "UT3", 
                 true, "2020", "2020", 120, null, null,
@@ -290,11 +257,9 @@ namespace UnitTests
             title = service.GetTitle(title.Tconst);
             Assert.True(result);
             Assert.Null(title);
-            
-
         }
 
-        //User tests
+        //------------------------------ User tests ------------------------------
         
         [Fact]
         public void CreateNewUser()
@@ -331,20 +296,17 @@ namespace UnitTests
             var result = service.UpdateUser(user.Uconst, "UpdatedFirstName", "UpdatedLastName", "UpdatedEmail",
                 "UpdatedPassword", "UpdatedUserName");
             Assert.True(result);
-
             user = service.GetUser(user.Uconst);
-            
             Assert.Equal("UpdatedFirstName", user.FirstName);
             Assert.Equal("UpdatedLastName", user.LastName);
             Assert.Equal("UpdatedEmail", user.Email);
             Assert.Equal("UpdatedPassword", user.Password);
             Assert.Equal("UpdatedUserName", user.UserName);
-            
             //cleanup
             service.DeleteUser(user.Uconst);
 
         }
-        //Name tests
+        // ---------------------------  Name tests ---------------------------------
         [Fact]
         public void CreateNewName()
         {
@@ -367,20 +329,16 @@ namespace UnitTests
         }
 
         [Fact]
-
         public void UpdateName()
         {
             var service = new DataService();
             var name = service.CreateName("Mickey Mouse", "1926", null);
             var result = service.UpdateName(name.Nconst, "UpdatedName", "UpdatedBirthyear", "UpdatedDeathyear");
             Assert.True(result);
-
             name = service.GetName(name.Nconst);
-            
             Assert.Equal("UpdatedName", name.PrimaryName);
             Assert.Equal("UpdatedBirthyear", name.BirthYear);
             Assert.Equal("UpdatedDeathyear", name.DeathYear);
-            
             //cleanup
             service.DeleteUser(name.Nconst);
         }
@@ -392,55 +350,6 @@ namespace UnitTests
             var profession = service.GetProfessions("nm0000001");
             Assert.Equal("actor",profession.First().Profession);
             Assert.Equal("soundtrack", profession.Last().Profession);
-        }
-        
-        // Helpers 
-        
-        (JArray, HttpStatusCode) GetArray(string url)
-        {
-            var client = new HttpClient();
-            var response = client.GetAsync(url).Result;
-            var data = response.Content.ReadAsStringAsync().Result;
-            return ((JArray)JsonConvert.DeserializeObject(data), response.StatusCode);
-        }
-
-        (JObject, HttpStatusCode) GetObject(string url)
-        {
-            var client = new HttpClient();
-            var response = client.GetAsync(url).Result;
-            var data = response.Content.ReadAsStringAsync().Result;
-            return ((JObject)JsonConvert.DeserializeObject(data), response.StatusCode);
-        }
-
-        (JObject, HttpStatusCode) PostData(string url, object content)
-        {
-            var client = new HttpClient();
-            var requestContent = new StringContent(
-                JsonConvert.SerializeObject(content),
-                Encoding.UTF8,
-                "application/json");
-            var response = client.PostAsync(url, requestContent).Result;
-            var data = response.Content.ReadAsStringAsync().Result;
-            return ((JObject)JsonConvert.DeserializeObject(data), response.StatusCode);
-        }
-
-        HttpStatusCode PutData(string url, object content)
-        {
-            var client = new HttpClient();
-            var response = client.PutAsync(
-                url,
-                new StringContent(
-                    JsonConvert.SerializeObject(content),
-                    Encoding.UTF8,
-                    "application/json")).Result;
-            return response.StatusCode;
-        }
-
-        HttpStatusCode DeleteData(string url)
-        {
-            var client = new HttpClient();
-            var response = client.DeleteAsync(url).Result;
-            return response.StatusCode;
         }
     }
 }
