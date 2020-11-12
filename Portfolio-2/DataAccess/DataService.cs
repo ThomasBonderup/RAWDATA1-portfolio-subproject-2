@@ -393,6 +393,16 @@ namespace DataAccess
                 .ToList();
             return result;
         }
+        
+        public IList<TitlePrincipals> SearchTitlePrincipals(string searchString, string uConst, int page, int pageSize)
+        {
+            var result = ctx.TitlePrincipals
+                .FromSqlInterpolated($"SELECT * FROM movie_data_model.actor_search({searchString}, {uConst})")
+                .Skip(page * pageSize)
+                .Take(pageSize)
+                .ToList();
+            return result;
+        }
 
         public IList<string> GetGenres(string tconst)
         {

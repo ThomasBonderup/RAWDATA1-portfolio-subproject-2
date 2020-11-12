@@ -202,7 +202,7 @@ namespace WebService.Controllers
         
         
         
-        [HttpGet("search/{searchString}")]
+        [HttpGet("search-title/{searchString}")]
         public IActionResult SearchTitle(string searchString, string uConst, int page = 0, int pageSize = 10)
         {
             CheckCurrentUser();
@@ -219,6 +219,8 @@ namespace WebService.Controllers
             
             return Ok(result);
         }
+        
+        
 
     }
 }
