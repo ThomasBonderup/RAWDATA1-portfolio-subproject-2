@@ -410,6 +410,44 @@ namespace DataAccess
             return result;
         }
 
+        public IList<RatingByUser> GetRatings(string uconst)
+        {
+            var result = new List<RatingByUser>();
+
+            foreach (var rating in ctx.RatingsByUser)
+            {
+                if (rating.Uconst.Trim() == uconst)
+                {
+                    result.Add(rating);
+                }
+            }
+            return result;
+        }
+
+        public RatingByUser GetRating(string uconst, string tconst)
+        {
+
+            var result = ctx.RatingsByUser.Find(uconst, tconst);
+            return result;
+
+        }
+
+        public IList<TitleBookmark> GetTitleBookmarks(string uconst)
+        {
+
+            IList<TitleBookmark> result = new List<TitleBookmark>();
+            foreach (var tb in ctx.TitleBookmarks)
+            {
+
+                if (tb.Uconst.Trim() == uconst)
+                {
+                    result.Add(tb);
+                }
+            }
+
+            return result;
+        }
+
         public TitleBookmark GetTitleBookmark(string uconst, string tconst)
         {
             return ctx.TitleBookmarks.Find(uconst, tconst);
@@ -417,6 +455,7 @@ namespace DataAccess
 
         public bool DeleteTitleBookmark(string uconst, string tconst)
         {
+            
             var titleBookmark = ctx.TitleBookmarks.Find(uconst, tconst);
             if (titleBookmark == null)
             {
@@ -425,6 +464,7 @@ namespace DataAccess
 
             ctx.TitleBookmarks.Remove(titleBookmark);
             return true;
+            
         }
         
         public TitleBookmark CreateTitleBookmark(string uconst, string tconst)

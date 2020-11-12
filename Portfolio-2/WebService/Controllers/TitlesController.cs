@@ -172,7 +172,7 @@ namespace WebService.Controllers
 
             if (genres == null)
             {
-                return NotFound();
+                return NoContent();
             }
             return Ok(genres);
         }
@@ -184,7 +184,7 @@ namespace WebService.Controllers
 
             if (titleRating == null)
             {
-                return NotFound();
+                return NoContent();
             }
 
             return Ok(titleRating);
@@ -198,7 +198,7 @@ namespace WebService.Controllers
             var titleBookmark = _dataService.GetTitleBookmark(uconst, tconst);
             if (titleBookmark == null)
             {
-                return NotFound();
+                return NoContent();
             }
             return Ok(titleBookmark);
         }
@@ -221,6 +221,41 @@ namespace WebService.Controllers
             var titleBookmark = _dataService.CreateTitleBookmark(uconst, tconst);
             return Ok(titleBookmark);
 
+        }
+
+
+        public IActionResult GetRatings(string uconst)
+        {
+            CheckCurrentUser();
+            var ratings = _dataService.GetRatings(uconst);
+            if (ratings == null)
+            {
+                return NoContent();
+            }
+            return Ok(ratings);
+        }
+
+        public IActionResult GetRating(string uconst, string tconst)
+        {
+            CheckCurrentUser();
+            var ratingByUser = _dataService.GetRating(uconst, tconst);
+            if (ratingByUser == null)
+            {
+                return NoContent();
+            }
+
+            return Ok(ratingByUser);
+        }
+
+        public IActionResult GetTitleBookmarks(string uconst)
+        {
+            CheckCurrentUser();
+            var titleBookmarks = _dataService.GetTitleBookmarks(uconst);
+            if (titleBookmarks == null)
+            {
+                return NotFound();
+            }
+            return Ok(titleBookmarks);
         }
 
         public IActionResult GetTitleRatings()

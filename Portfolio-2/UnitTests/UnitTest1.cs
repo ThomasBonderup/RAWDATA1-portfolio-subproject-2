@@ -132,11 +132,41 @@ namespace UnitTests
 
         [Fact]
 
+        public void GetRatingsByUser_ValidUconst()
+        {
+            var service = new DataService();
+            var ratings = service.GetRatings("ui000003");
+            Assert.Equal(3, ratings.Count);
+
+        }
+
+        [Fact]
+
+        public void GetRatingByUser_ValidUconstAndTconst()
+        {
+            var service = new DataService();
+            var rating = service.GetRating("ui000001", "tt0167260");
+            Assert.Equal(3, rating.Rating);
+
+        }
+
+        [Fact]
+
+        public void GetTitleBookmarks_ValidUconst()
+        {
+            var service = new DataService();
+            var bookmarks = service.GetTitleBookmarks("ui000001");
+            Assert.Equal(5, bookmarks.Count);
+        }
+
+        [Fact]
+
         public void CreateTitleBookmark_ValidUconstAndTconst()
         {
             var service = new DataService();
             var newBookmark = service.CreateTitleBookmark("ui000001", "tt6850980");
             Assert.NotNull(newBookmark);
+            Assert.Equal(newBookmark, service.GetTitleBookmark("ui000001", "tt6850980"));
             service.DeleteTitleBookmark("ui000001", "tt6850980");
             Assert.Null(service.GetTitleBookmark("ui000001", "tt6850980"));
 
