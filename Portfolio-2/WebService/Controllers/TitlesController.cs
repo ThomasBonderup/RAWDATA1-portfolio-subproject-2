@@ -177,6 +177,44 @@ namespace WebService.Controllers
             return Ok(genres);
         }
 
+        public IActionResult GetTitleRating(string tconst)
+        {
+            CheckCurrentUser();
+            var titleRating = _dataService.GetTitleRating(tconst);
+
+            if (titleRating == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(titleRating);
+
+        }
+
+        public IActionResult GetTitleRatings()
+        {
+            CheckCurrentUser();
+            var titleRatings = _dataService.GetTitleRatings();
+            if (titleRatings == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(titleRatings);
+
+        }
+
+        public IActionResult GetLocaltitle(string tconst)
+        {
+            CheckCurrentUser();
+            var localTitles = _dataService.GetLocalTitle(tconst);
+            if (localTitles == null)
+            {
+                return NotFound();
+            }
+            return Ok(localTitles);
+        }
+
         // POST
         
         [HttpPost("{tconst}")]

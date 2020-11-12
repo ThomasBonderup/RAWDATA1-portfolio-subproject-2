@@ -21,6 +21,10 @@ namespace DataAccess
 
         public DbSet<TitleGenres> TitleGenres { get; set; }
 
+        public DbSet<LocalTitles> LocalTitle { get; set; }
+
+        public DbSet<TitleRatings> TitleRatings { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
            // optionsBuilder.UseNpgsql();
@@ -85,7 +89,7 @@ namespace DataAccess
             modelBuilder.Entity<TitleEpisode>().Property(x => x.SeasonNumber).HasColumnName("seasonnumber");
             modelBuilder.Entity<TitleEpisode>().HasKey(x => new {x.Tconst, x.ParentTconst}); 
 
-            modelBuilder.Entity<LocalTitles>().ToTable("local_titles");
+            modelBuilder.Entity<LocalTitles>().ToTable("local_title");
             modelBuilder.Entity<LocalTitles>().Property(x => x.TitleId).HasColumnName("titleid");
             modelBuilder.Entity<LocalTitles>().Property(x => x.Ordering).HasColumnName("ordering");
             modelBuilder.Entity<LocalTitles>().Property(x => x.Title).HasColumnName("title");
@@ -94,7 +98,8 @@ namespace DataAccess
             modelBuilder.Entity<LocalTitles>().Property(x => x.Types).HasColumnName("types");
             modelBuilder.Entity<LocalTitles>().Property(x => x.Attributes).HasColumnName("attributes");
             modelBuilder.Entity<LocalTitles>().Property(x => x.IsOriginalTitle).HasColumnName("isoriginaltitle");
-            modelBuilder.Entity<LocalTitles>().HasKey(x => new {x.TitleId, x.Ordering, x.Region});
+            modelBuilder.Entity<LocalTitles>().HasKey(x => new {x.TitleId});
+            //modelBuilder.Entity<LocalTitles>().HasKey(x => new {x.TitleId, x.Ordering, x.Region});
 
             modelBuilder.Entity<User>().ToTable("user");
             modelBuilder.Entity<User>().Property(x => x.Uconst).HasColumnName("uconst");

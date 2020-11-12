@@ -142,6 +142,37 @@ namespace UnitTests
 
         }
 
+        [Fact]
+
+        public void GetTitleRating_ValidTconst_ReturnsSingleRating()
+        {
+            var service = new DataService();
+            var titleRating = service.GetTitleRating("tt0247050");
+            Assert.Equal(7.9, Math.Round(titleRating.AverageRating, 1));
+            Assert.Equal(24, titleRating.NumVotes);
+
+        }
+
+        [Fact]
+
+        public void GetTitleRatings_ReturnsAllRatings()
+        {
+            var service = new DataService();
+            var titleRatings = service.GetTitleRatings();
+            Assert.Equal(46703, titleRatings.Count);
+
+        }
+
+        [Fact]
+
+        public void GetLocalTitles_ValidTconst_ReturnsLocalTitle()
+        {
+            var service = new DataService();
+            var localTitle = service.GetLocalTitle("tt0052520");
+            Assert.Equal("Зона на Самракот", localTitle[0]);
+
+        }
+
         // Title
         [Fact]
 

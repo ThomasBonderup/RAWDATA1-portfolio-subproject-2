@@ -409,12 +409,39 @@ namespace DataAccess
             return result;
         }
 
-        public IList<string> GetGenres(string tconst)
+        public TitleRatings GetTitleRating(string tconst)
+        {
+            var result = ctx.TitleRatings.Find(tconst);
+            return result;
+        }
+
+        public IList<TitleRatings> GetTitleRatings()
         {
 
+            var result = ctx.TitleRatings;
+            return result.ToList();
+
+        }
+
+        public IList<string> GetLocalTitle(string tconst)
+        {
+            
             IList<string> result = new List<string>();
+            foreach (var lt in ctx.LocalTitle)
+            {
+                if (lt.TitleId.Trim() == tconst)
+                {
+                    result.Add(lt.Title);
+                }
+            }
 
+            return result;
+        }
 
+        public IList<string> GetGenres(string tconst)
+        {
+            IList<string> result = new List<string>();
+            
             foreach (var tg in ctx.TitleGenres)
             {
                 if (tg.Tconst.Trim() == tconst)
