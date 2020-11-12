@@ -280,7 +280,7 @@ namespace DataAccess
 
             foreach (var p in ctx.PrimaryProfessions)
             {
-                if (p.Nconst == nconst)
+                if (p.Nconst.Trim() == nconst)
                 {
                     result.Add(p);
                 }

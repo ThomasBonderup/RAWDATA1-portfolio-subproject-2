@@ -145,7 +145,7 @@ namespace DataAccess
             modelBuilder.Entity<PrimaryProfession>().ToTable("primaryprofession");
             modelBuilder.Entity<PrimaryProfession>().Property(x => x.Nconst).HasColumnName("nconst");
             modelBuilder.Entity<PrimaryProfession>().Property(x => x.Profession).HasColumnName("profession");
-            modelBuilder.Entity<PrimaryProfession>().HasKey(x => new{x.Nconst});
+            modelBuilder.Entity<PrimaryProfession>().HasKey(x => new{x.Nconst,x.Profession});
         }
         
         
