@@ -305,6 +305,18 @@ namespace WebService.Controllers
             return Ok(result);
         }
 
+        [HttpGet("{nconst}")]
+
+        public IActionResult GetNameRating(string nconst)
+        {
+            CheckCurrentUser();
+            var nameRating = _dataService.GetNameRating(nconst);
+            if (nameRating == null)
+            {
+                return NoContent();
+            }
+            return Ok(nameRating);
+        }
 
         [HttpGet("{tconst}")]
         public IActionResult GetLocaltitle(string tconst)

@@ -452,6 +452,12 @@ namespace DataAccess
             return result;
         }
 
+        public NameRating GetNameRating(string nconst)
+        {
+            var result = ctx.NameRatings.Find(nconst);
+            return result;
+        }
+
         public RatingByUser GetRating(string uconst, string tconst)
         {
 

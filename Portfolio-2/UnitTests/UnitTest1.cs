@@ -134,6 +134,16 @@ namespace UnitTests
 
         [Fact]
 
+        public void GetNameRating_ValidNconst()
+        {
+            var service = new DataService();
+            var nameRating = service.GetNameRating("nm8843384");
+            Assert.Equal("Haycar", nameRating.PrimaryName);
+            Assert.Equal(8.0, nameRating.Rating);
+        }
+
+        [Fact]
+
         public void GetAllRatingHistory_ValidUconstAndTconst()
         {
             var service = new DataService();
