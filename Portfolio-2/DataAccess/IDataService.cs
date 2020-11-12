@@ -34,6 +34,8 @@ namespace DataAccess
         int NumberOfUsers();
 
         int NumberOfTitles();
+        
+        int NumberOfTitlePrincipals();
 
         Title CreateTitle(string titleType, string primaryTitle, string originalTitle, bool isAdult, string startYear,
             string endYear, int? runtimeMinutes,

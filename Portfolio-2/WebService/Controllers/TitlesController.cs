@@ -67,6 +67,32 @@ namespace WebService.Controllers
             return result;
         }
         
+        private TitlePrincipalsDto CreateTitlePrincipalsListDto(TitlePrincipals titlePrincipals)
+        {
+            var dto = _mapper.Map<TitlePrincipalsDto>(titlePrincipals);
+            dto.Url = Url.Link(nameof(GetTitlePrincipals), new {titlePrincipals.Tconst});
+
+            return dto;
+        }
+        
+        private object CreateResultTitlePrincipals(int page, int pageSize, IList<TitlePrincipals> titlePrincipals)
+        {
+            var items = titlePrincipals.Select(CreateTitlePrincipalsListDto);
+            var count = _dataService.NumberOfTitlePrincipals();
+            var navigationUrls = CreatePagingNavigation(page, pageSize, count);
+  
+            var result = new
+            {
+                navigationUrls.prev,
+                navigationUrls.cur,
+                navigationUrls.next,
+                count,
+                items
+            };
+                  
+            return result;
+        }
+        
         public UnauthorizedResult CheckCurrentUser()
         {
             if (Program.CurrentUser == null)
@@ -220,7 +246,23 @@ namespace WebService.Controllers
             return Ok(result);
         }
         
-        
+        [HttpGet("search-titleprincipals/{searchString}")]
+        public IActionResult SearchTitlePrincipals(string searchString, string uConst, int page = 0, int pageSize = 10)
+        {
+            CheckCurrentUser();
+
+            pageSize = PaginationHelper.CheckPageSize(pageSize);
+            var titles = _dataService.SearchTitlePrincipals(searchString, Program.CurrentUser.Uconst, page, pageSize);
+
+            if (titles == null)
+            {
+                return NotFound();
+            }
+
+            var result = CreateResultTitles(page, pageSize, titles);
+            
+            return Ok(result);
+        }
 
     }
 }

@@ -296,6 +296,11 @@ namespace DataAccess
             return ctx.Titles.Count();
         }
         
+        public int NumberOfTitlePrincipals()
+        {
+            return ctx.TitlePrincipals.Count();
+        }
+        
         public int NumberOfUsers()
         {
             return ctx.Users.Count();
