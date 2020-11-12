@@ -384,14 +384,18 @@ namespace UnitTests
             service.DeleteUser(name.Nconst);
         }
 
-        /*[Fact]
+        [Fact]
         public void GetProfessions()
         {
             var service = new DataService();
-            var profession = service.GetPrimaryProfession("nm0000001");
-            //Assert.Equal("actor",profession.First().Profession);
-            //Assert.Equal("soundtrack", profession.Last().Profession);
-        }*/
+            var profession = service.GetProfessions("nm0000001");
+            /*_testOutputHelper.WriteLine(profession[0].Profession);
+            _testOutputHelper.WriteLine(profession[1].Profession);
+            _testOutputHelper.WriteLine(profession[2].Profession);*/
+            Assert.Equal("actor",profession.First().Profession);
+            Assert.Equal("soundtrack", profession.Last().Profession);
+        }
+        
         // Helpers 
         
         (JArray, HttpStatusCode) GetArray(string url)

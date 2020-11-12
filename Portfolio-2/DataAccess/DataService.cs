@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.SymbolStore;
+using System.IO.Enumeration;
 using System.Linq;
 using System.Security;
 using Microsoft.EntityFrameworkCore;
@@ -224,7 +225,6 @@ namespace DataAccess
         public IList<Name> GetNames(int page, int pageSize) //se om denne kan bruges til primary profession?
         {
             return ctx.Names
-                //.Include(x => x.PrimaryProfession)
                 .Skip(page * pageSize)
                 .Take(pageSize)
                 .ToList();
@@ -276,36 +276,23 @@ namespace DataAccess
         public IList<PrimaryProfession> GetProfessions(string nconst)
         {
             
-            /*var list = ctx.PrimaryProfessions.Find(nconst);
-            
-            var name = ctx.Names.Find(nconst);
-            
-            foreach (var p in list)
-            {
-                if (list[] == nconst)
-                {
-                    
-                }
-                
-            }
-            
-            */return ctx.PrimaryProfessions.ToList();
-        }
+            IList<PrimaryProfession> result = new List<PrimaryProfession>();
 
-       /* public IList<PrimaryProfession> GetPrimaryProfession(string nconst)
-        {
-            List<PrimaryProfession> professions = new List<PrimaryProfession>();
-            foreach (var p in GetProfessions())
+            foreach (var p in ctx.PrimaryProfessions)
             {
                 if (p.Nconst == nconst)
                 {
-                    professions.Add(p);
+                    result.Add(p);
                 }
+                
             }
-            return professions;
-        }*/
 
-//pagination use
+            return result;
+        }
+
+       
+
+        //pagination use
         public int NumberOfTitles()
         {
             return ctx.Titles.Count();
