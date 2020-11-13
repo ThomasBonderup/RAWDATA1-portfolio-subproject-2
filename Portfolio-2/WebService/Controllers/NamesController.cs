@@ -99,16 +99,17 @@ namespace WebService.Controllers
             return Ok(name);
         }
         
-        [HttpGet("/primaryprofession/{nconst}")]
+        [HttpGet("{nconst}/primaryprofession")]
         
         public IActionResult GetProfessions(string nconst){
         
             var professions = _dataService.GetProfessions(nconst);
+            Console.WriteLine(professions);
             if (professions == null)
             {
                 return NotFound();
             }
-            Console.WriteLine(professions);
+            
             return Ok(professions);
             
         }
