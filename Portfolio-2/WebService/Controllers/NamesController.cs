@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Storage;
+using Xunit.Abstractions;
 
 namespace WebService.Controllers
 {
@@ -15,6 +16,14 @@ namespace WebService.Controllers
     
     public class NamesController : ControllerBase
     {
+          
+        private readonly ITestOutputHelper _testOutputHelper;
+
+        public NamesController(ITestOutputHelper testOutputHelper)
+        {
+            _testOutputHelper = testOutputHelper;
+        }
+        
         private IDataService _dataService;
         private IMapper _mapper;
         private int MaxPageSize = 25;
@@ -129,7 +138,8 @@ namespace WebService.Controllers
             
             var professions = _dataService.GetProfessions(nconst);
             //Console.WriteLine(professions);
-            
+            //_testOutputHelper.WriteLine(professions.ToString());
+
             if (professions == null)
             {
                 return NotFound();
