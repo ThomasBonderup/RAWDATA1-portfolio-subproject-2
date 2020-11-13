@@ -388,6 +388,15 @@ namespace UnitTests
             Assert.Equal("actor",profession.First().Profession);
             Assert.Equal("soundtrack", profession.Last().Profession);
         }
+        
+        [Fact]
+        public void GetTitlePrincipalsByName()
+        {
+            var service = new DataService();
+            var profession = service.GetTitlePricipalsByName("nm0000002");
+            Assert.Equal("actress",profession.First().Category);
+            Assert.Equal("self", profession.Last().Category);
+        }
 
         
         //----------------------------  notes --------------------

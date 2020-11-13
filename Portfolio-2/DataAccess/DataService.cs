@@ -466,6 +466,22 @@ namespace DataAccess
             return result;
 
         }
+
+        public IList<TitlePrincipals> GetTitlePricipalsByName(string nconst)
+        {
+            List<TitlePrincipals> result = new List<TitlePrincipals>();
+
+            foreach (var tpbn in ctx.TitlePrincipals)
+            {
+                if (tpbn.Nconst.Trim() == nconst)
+                { 
+                    result.Add(tpbn); 
+                }
+            }
+
+            return result;
+        }
+
         // ------------------------------- title bookmark -----------------------------
         public IList<TitleBookmark> GetTitleBookmarks(string uconst)
         {

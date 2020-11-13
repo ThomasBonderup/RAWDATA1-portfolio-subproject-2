@@ -123,7 +123,7 @@ namespace DataAccess
             modelBuilder.Entity<TitlePrincipals>().Property(x => x.Category).HasColumnName("category");
             modelBuilder.Entity<TitlePrincipals>().Property(x => x.Job).HasColumnName("job");
             modelBuilder.Entity<TitlePrincipals>().Property(x => x.Characters).HasColumnName("characters");
-            modelBuilder.Entity<TitlePrincipals>().HasKey(x => new {x.Tconst, x.Nconst});
+            modelBuilder.Entity<TitlePrincipals>().HasKey(x => new {x.Tconst, x.Nconst,x.Ordering});
 
             modelBuilder.Entity<Name>().ToTable("name");
             modelBuilder.Entity<Name>().Property(x => x.Nconst).HasColumnName("nconst");
