@@ -109,7 +109,7 @@ namespace WebService.Controllers
             return Ok(name);
         }
         
-<<<<<<< Updated upstream
+
         [HttpGet("{nconst}")]
 
         public IActionResult GetNameRating(string nconst)
@@ -123,11 +123,8 @@ namespace WebService.Controllers
             return Ok(nameRating);
         }
         
-        [HttpGet("{nconst}/primaryprofession")]
-=======
         [HttpGet("{nconst}/primaryprofession")] //der kommer ingen data ud i postman?
->>>>>>> Stashed changes
-        
+
         public IActionResult GetProfessions(string nconst){
             
             var professions = _dataService.GetProfessions(nconst);
