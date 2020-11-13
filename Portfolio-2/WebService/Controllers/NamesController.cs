@@ -147,7 +147,6 @@ namespace WebService.Controllers
         }
 
         [HttpGet("{nconst}/knownfortitles")]
-
         public IActionResult GetKnownForTitles(string nconst)
         {
             var kft = _dataService.GetKnownForTitles(nconst);
@@ -158,5 +157,4 @@ namespace WebService.Controllers
             return Ok(kft);
         }
     }
-
 }
