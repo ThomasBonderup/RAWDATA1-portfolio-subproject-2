@@ -497,10 +497,11 @@ namespace DataAccess
 
             foreach (var sh in ctx.SearchHistories)
             {
-                
+                if (sh.Uconst.Trim() == uconst)
+                {
+                    result.Add(sh);
+                }
             }
-
-
             return result;
         }
 
