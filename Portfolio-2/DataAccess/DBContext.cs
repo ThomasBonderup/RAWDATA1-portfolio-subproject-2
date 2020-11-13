@@ -11,6 +11,8 @@ namespace DataAccess
 
         public DbSet<PrimaryProfession> PrimaryProfessions { get; set; }
 
+        public DbSet<KnownForTitle> KnownForTitles { get; set; }
+
         public DbSet<TitlePrincipals> TitlePrincipals { get; set; }
 
         public DbSet<User> Users { get; set; }
@@ -174,6 +176,11 @@ namespace DataAccess
             modelBuilder.Entity<PrimaryProfession>().Property(x => x.Nconst).HasColumnName("nconst");
             modelBuilder.Entity<PrimaryProfession>().Property(x => x.Profession).HasColumnName("profession");
             modelBuilder.Entity<PrimaryProfession>().HasKey(x => new{x.Nconst,x.Profession});
+
+            modelBuilder.Entity<KnownForTitle>().ToTable("knownfortitles");
+            modelBuilder.Entity<KnownForTitle>().Property(x => x.Nconst).HasColumnName("nconst");
+            modelBuilder.Entity<KnownForTitle>().Property(x => x.Tconst).HasColumnName("tconst");
+            modelBuilder.Entity<KnownForTitle>().HasKey(x => new {x.Nconst, x.Tconst});
         }
         
         

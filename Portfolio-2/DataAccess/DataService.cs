@@ -286,7 +286,21 @@ namespace DataAccess
             return result;
         }
 
-       
+        public IList<KnownForTitle> GetKnownForTitles(string nconst)
+        {
+            var result = new List<KnownForTitle>();
+
+            foreach (var kft in ctx.KnownForTitles)
+            {
+                if (kft.Nconst.Trim() == nconst)
+                {
+                    result.Add(kft);
+                }
+            }
+            return result;
+        }
+
+
 
         //pagination use
         public int NumberOfTitles()
