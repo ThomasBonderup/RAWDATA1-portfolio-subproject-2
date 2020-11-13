@@ -390,6 +390,15 @@ namespace UnitTests
         }
         
         [Fact]
+        public void GetKnownForTitles()
+        {
+            var service = new DataService();
+            var profession = service.GetKnownForTitles("nm0000083");
+            Assert.Equal("tt0969216 ",profession.First().Tconst);
+            Assert.Equal("tt0424773 ", profession.Last().Tconst);
+        }
+        
+        [Fact]
         public void GetTitlePrincipalsByName()
         {
             var service = new DataService();
