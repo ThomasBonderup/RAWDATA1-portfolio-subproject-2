@@ -98,6 +98,18 @@ namespace WebService.Controllers
             }
             return Ok(name);
         }
-}
+        
+        [HttpGet("{nconst}")]
+        
+        public IActionResult GetPrimaryProfession(string nconst){
+        
+            var professions = _dataService.GetProfessions(nconst);
+            if (professions == null)
+            {
+                return NotFound();
+            }
+            return Ok(professions);
+        }
+    }
 
 }
