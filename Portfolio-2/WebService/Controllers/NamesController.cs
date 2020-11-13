@@ -133,18 +133,17 @@ namespace WebService.Controllers
         }
         
         [HttpGet("{nconst}/primaryprofession")] //der kommer ingen data ud i postman?
-
         public IActionResult GetProfessions(string nconst){
             
             var professions = _dataService.GetProfessions(nconst);
-            //Console.WriteLine(professions);
-            //_testOutputHelper.WriteLine(professions.ToString());
 
             if (professions == null)
             {
                 return NotFound();
             }
+            _testOutputHelper.WriteLine(professions.ToString());
             return Ok(professions);
+            
         }
     }
 
