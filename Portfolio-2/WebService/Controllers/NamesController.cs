@@ -134,9 +134,7 @@ namespace WebService.Controllers
             {
                 return NotFound();
             }
-            
             return Ok(professions);
-            
         }
     }
 
