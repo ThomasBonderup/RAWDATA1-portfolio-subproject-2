@@ -4,7 +4,7 @@ namespace DataAccess
 {
     public class SearchHistory
     {
-        private string Uconst { get; set; }
+        public string Uconst { get; set; }
 
         public DateTime TimeStamp { get; set; }
 

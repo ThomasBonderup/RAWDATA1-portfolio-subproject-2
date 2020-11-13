@@ -11,6 +11,8 @@ namespace DataAccess
 
         public DbSet<PrimaryProfession> PrimaryProfessions { get; set; }
 
+        public DbSet<SearchHistory> SearchHistories { get; set; }
+
         public DbSet<KnownForTitle> KnownForTitles { get; set; }
 
         public DbSet<TitlePrincipals> TitlePrincipals { get; set; }
@@ -181,7 +183,14 @@ namespace DataAccess
             modelBuilder.Entity<KnownForTitle>().Property(x => x.Nconst).HasColumnName("nconst");
             modelBuilder.Entity<KnownForTitle>().Property(x => x.Tconst).HasColumnName("tconst");
             modelBuilder.Entity<KnownForTitle>().HasKey(x => new {x.Nconst, x.Tconst});
+
+            modelBuilder.Entity<SearchHistory>().ToTable("search_history");
+            modelBuilder.Entity<SearchHistory>().Property(x => x.Search).HasColumnName("search");
+            modelBuilder.Entity<SearchHistory>().Property(x => x.Uconst).HasColumnName("uconst");
+            modelBuilder.Entity<SearchHistory>().Property(x => x.TimeStamp).HasColumnName("tstamp");
+            modelBuilder.Entity<SearchHistory>().HasKey(x => new {x.Uconst, x.TimeStamp });
         }
+        
         
         
     }

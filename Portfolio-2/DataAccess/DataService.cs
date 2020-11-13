@@ -491,6 +491,19 @@ namespace DataAccess
             return result;
         }
 
+        public IList<SearchHistory> GetSearchHistory(string uconst)
+        {
+            List<SearchHistory> result = new List<SearchHistory>();
+
+            foreach (var sh in ctx.SearchHistories)
+            {
+                
+            }
+
+
+            return result;
+        }
+
         // ------------------------------- title bookmark -----------------------------
         public IList<TitleBookmark> GetTitleBookmarks(string uconst)
         {
