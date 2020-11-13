@@ -7,7 +7,7 @@ namespace DataAccess
     {
         IList<Title> GetTitles(int page, int pageSize);
 
-        public TitlePrincipals GetTitlePrincipals(string tconst, string nconst);
+        public TitlePrincipals GetTitlePrincipals(string tconst, string nconst, int ordering);
 
         public IList<PrimaryProfession> GetProfessions(string nconst);
 

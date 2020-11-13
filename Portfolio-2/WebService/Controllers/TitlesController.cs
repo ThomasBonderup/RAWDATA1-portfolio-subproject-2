@@ -134,12 +134,12 @@ namespace WebService.Controllers
 
         [HttpGet("{tconst}/titleprincipals/{nconst}")]
 
-        public IActionResult GetTitlePrincipals(string tconst, string nconst)
+        public IActionResult GetTitlePrincipals(string tconst, string nconst, int ordering)
         {
             CheckCurrentUser();
             
 
-            var titlePrincipals = _dataService.GetTitlePrincipals(tconst, nconst);
+            var titlePrincipals = _dataService.GetTitlePrincipals(tconst, nconst, ordering);
             if (titlePrincipals == null)
             {
                 return NotFound();

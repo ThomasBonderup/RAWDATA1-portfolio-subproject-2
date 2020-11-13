@@ -108,9 +108,9 @@ namespace DataAccess
             return null;
         }
 
-        public TitlePrincipals GetTitlePrincipals(string tconst, string nconst)
+        public TitlePrincipals GetTitlePrincipals(string tconst, string nconst, int ordering)
         {
-            var titleProncipals = ctx.TitlePrincipals.Find(tconst, nconst);
+            var titleProncipals = ctx.TitlePrincipals.Find(tconst, nconst, ordering);
 
             if (titleProncipals != null)
             {
