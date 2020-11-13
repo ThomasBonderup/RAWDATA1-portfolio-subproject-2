@@ -99,9 +99,9 @@ namespace WebService.Controllers
             return Ok(name);
         }
         
-        [HttpGet("{nconst}")]
+        [HttpGet("{nconst}/primaryprofession/{nconst}")]
         
-        public IActionResult GetPrimaryProfession(string nconst){
+        public IActionResult GetProfessions(string nconst){
         
             var professions = _dataService.GetProfessions(nconst);
             if (professions == null)
