@@ -505,6 +505,12 @@ namespace DataAccess
             return result;
         }
 
+        public SearchResult CreateSearch(string search)
+        {
+             
+            return new SearchResult();
+        }
+
         // ------------------------------- title bookmark -----------------------------
         public IList<TitleBookmark> GetTitleBookmarks(string uconst)
         {
