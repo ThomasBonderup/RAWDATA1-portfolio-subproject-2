@@ -76,6 +76,15 @@ namespace WebService.Controllers
                   
               return result;
           }
+        
+        public UnauthorizedResult CheckCurrentUser()
+        {
+            if (Program.CurrentUser == null)
+            {
+                return Unauthorized();
+            }
+            return null;
+        }
 
         [HttpGet(Name = nameof(GetUsers))]
         public IActionResult GetUsers(int page = 0, int pageSize = 10)
@@ -98,5 +107,18 @@ namespace WebService.Controllers
             }
             return Ok(user);
         }
+        
+        [HttpGet("{uconst}")]
+        public IActionResult GetRatingHistory(string uconst)
+        {
+            CheckCurrentUser();
+            var result = _dataService.GetRatingHistory(uconst);
+            if (result == null)
+            {
+                return NoContent();
+            }
+            return Ok(result);
+        }
+        
 }
 }

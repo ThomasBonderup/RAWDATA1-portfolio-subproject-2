@@ -240,7 +240,7 @@ namespace WebService.Controllers
             return Ok(ratings);
         }
 
-        [HttpGet("{uconst},{tconst}")]
+        [HttpGet("{uconst}/{tconst}")]
         public IActionResult GetRating(string uconst, string tconst)
         {
             CheckCurrentUser();
@@ -291,31 +291,6 @@ namespace WebService.Controllers
                 return NoContent();
             }
             return Ok(result);
-        }
-
-        [HttpGet("{uconst}")]
-        public IActionResult GetRatingHistory(string uconst)
-        {
-            CheckCurrentUser();
-            var result = _dataService.GetRatingHistory(uconst);
-            if (result == null)
-            {
-                return NoContent();
-            }
-            return Ok(result);
-        }
-
-        [HttpGet("{nconst}")]
-
-        public IActionResult GetNameRating(string nconst)
-        {
-            CheckCurrentUser();
-            var nameRating = _dataService.GetNameRating(nconst);
-            if (nameRating == null)
-            {
-                return NoContent();
-            }
-            return Ok(nameRating);
         }
 
         [HttpGet("{tconst}")]

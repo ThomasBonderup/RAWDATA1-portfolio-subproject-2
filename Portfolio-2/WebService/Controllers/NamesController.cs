@@ -76,6 +76,16 @@ namespace WebService.Controllers
                   
               return result;
           }
+        
+        public UnauthorizedResult CheckCurrentUser()
+        {
+            if (Program.CurrentUser == null)
+            {
+                return Unauthorized();
+            }
+            return null;
+        }
+        
 
         [HttpGet(Name = nameof(GetNames))]
         public IActionResult GetNames(int page = 0, int pageSize = 10)
@@ -97,6 +107,19 @@ namespace WebService.Controllers
                 return NotFound();
             }
             return Ok(name);
+        }
+        
+        [HttpGet("{nconst}")]
+
+        public IActionResult GetNameRating(string nconst)
+        {
+            CheckCurrentUser();
+            var nameRating = _dataService.GetNameRating(nconst);
+            if (nameRating == null)
+            {
+                return NoContent();
+            }
+            return Ok(nameRating);
         }
         
         [HttpGet("{nconst}/primaryprofession")]
