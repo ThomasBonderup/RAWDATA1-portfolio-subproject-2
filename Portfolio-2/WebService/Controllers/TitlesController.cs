@@ -162,7 +162,7 @@ namespace WebService.Controllers
             return Ok(titlePrincipalsList);
         }
 
-        [HttpGet("{tconst}")]
+        [HttpGet("{tconst}/titlegenres")]
 
         public IActionResult GetGenres(string tconst)
         {
@@ -177,7 +177,7 @@ namespace WebService.Controllers
             return Ok(genres);
         }
 
-        [HttpGet("{tconst}")]
+        [HttpGet("{tconst}/titlerating")]
         public IActionResult GetTitleRating(string tconst)
         {
             CheckCurrentUser();
@@ -229,10 +229,10 @@ namespace WebService.Controllers
 
         
         [HttpGet("{uconst}")]
-        public IActionResult GetRatings(string uconst)
+        public IActionResult GetRatings(int page = 0, int pageSize = 10)
         {
             CheckCurrentUser();
-            var ratings = _dataService.GetRatings(uconst);
+            var ratings = _dataService.GetRatings(page, pageSize);
             if (ratings == null)
             {
                 return NoContent();

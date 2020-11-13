@@ -436,18 +436,16 @@ namespace DataAccess
             return result;
         }
 
-        public IList<RatingByUser> GetRatings(string uconst)
+        public IList<TitleRatings> GetRatings(int page, int pageSize)
         {
-            var result = new List<RatingByUser>();
 
-            foreach (var rating in ctx.RatingsByUser)
-            {
-                if (rating.Uconst.Trim() == uconst)
-                {
-                    result.Add(rating);
-                }
-            }
+            var result = ctx.TitleRatings
+                .FromSqlInterpolated($"SELECT * FROM movie_data_model.title_ratings")
+                .Skip(page * pageSize)
+                .Take(pageSize)
+                .ToList();
             return result;
+            
         }
 
         public NameRating GetNameRating(string nconst)

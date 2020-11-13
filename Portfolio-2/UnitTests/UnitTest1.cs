@@ -114,11 +114,11 @@ namespace UnitTests
         }
         // ----------------------- rating and rating history -------------------------
         [Fact]
-        public void GetRatingsByUser_ValidUconst()
+        public void GetAllRatings()
         {
             var service = new DataService();
-            var ratings = service.GetRatings("ui000003");
-            Assert.Equal(3, ratings.Count);
+            var ratings = service.GetRatings(0, 46703);
+            Assert.Equal(46703, ratings.Count);
 
         }
 
