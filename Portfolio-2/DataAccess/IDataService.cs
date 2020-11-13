@@ -11,6 +11,8 @@ namespace DataAccess
 
         public IList<PrimaryProfession> GetProfessions(string nconst);
 
+        public IList<KnownForTitle> GetKnownForTitles(string nconst);
+
         public IList<TitlePrincipals> GetTitlePrincipalsByTitle(string tconst, int page, int pageSize);
 
         Title GetTitle(string tconst);

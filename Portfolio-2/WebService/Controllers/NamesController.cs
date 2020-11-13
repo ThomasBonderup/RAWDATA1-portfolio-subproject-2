@@ -145,6 +145,18 @@ namespace WebService.Controllers
             return Ok(professions);
             
         }
+
+        [HttpGet("{nconst}/knownfortitles")]
+
+        public IActionResult GetKnownForTitles(string nconst)
+        {
+            var kft = _dataService.GetKnownForTitles(nconst);
+            if (kft == null)
+            {
+                return NotFound();
+            }
+            return Ok(kft);
+        }
     }
 
 }
