@@ -274,7 +274,6 @@ namespace DataAccess
 
         public IList<PrimaryProfession> GetProfessions(string nconst)
         {
-            
             IList<PrimaryProfession> result = new List<PrimaryProfession>();
 
             foreach (var p in ctx.PrimaryProfessions)
@@ -283,9 +282,7 @@ namespace DataAccess
                 {
                     result.Add(p);
                 }
-                
             }
-
             return result;
         }
 

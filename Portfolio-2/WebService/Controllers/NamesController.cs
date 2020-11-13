@@ -99,7 +99,7 @@ namespace WebService.Controllers
             return Ok(name);
         }
         
-        [HttpGet("{nconst}/primaryprofession/{nconst}")]
+        [HttpGet("/primaryprofession/{nconst}")]
         
         public IActionResult GetProfessions(string nconst){
         
@@ -108,7 +108,9 @@ namespace WebService.Controllers
             {
                 return NotFound();
             }
+            Console.WriteLine(professions);
             return Ok(professions);
+            
         }
     }
 
