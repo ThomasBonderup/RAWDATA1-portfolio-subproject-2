@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Security;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 
 namespace DataAccess
 {
@@ -27,22 +28,9 @@ namespace DataAccess
             string startYear, string endYear,
             int? runtimeMinutes, string poster, string awards, string plot)
         {
-            var title = new Title
-            {
-                Tconst = AssignMaxTconst(),
-                Titletype = titleType,
-                PrimaryTitle = primaryTitle,
-                OriginalTitle = originalTitle,
-                IsAdult = isAdult,
-                StartYear = startYear,
-                EndYear = endYear,
-                RunTimeMinutes = runtimeMinutes,
-                Poster = poster,
-                Awards = awards,
-                Plot = plot
-            };
-            ctx.Titles.Add(title);
-            return title;
+            var newTconst = AssignMaxTconst();
+            ctx.Database.ExecuteSqlInterpolated($"INSERT INTO movie_data_model.title VALUES ({newTconst},{titleType},{primaryTitle},{originalTitle},{isAdult},{startYear},{endYear},{runtimeMinutes},{poster},{awards},{plot})");
+            return GetTitle(newTconst);
         }
 
         public bool UpdateTitle(string tconst, string titleType, string primaryTitle, string originalTitle,
@@ -56,17 +44,8 @@ namespace DataAccess
             {
                 return false;
             }
-
-            title.Titletype = titleType;
-            title.PrimaryTitle = primaryTitle;
-            title.OriginalTitle = originalTitle;
-            title.IsAdult = isAdult;
-            title.StartYear = startYear;
-            title.EndYear = endYear;
-            title.RunTimeMinutes = runtimeMinutes;
-            title.Poster = poster;
-            title.Awards = awards;
-            title.Plot = plot;
+            
+            ctx.Database.ExecuteSqlInterpolated($"UPDATE movie_data_model.title SET titletype = {titleType}, primarytitle = {primaryTitle}, originaltitle = {originalTitle}, isadult = {isAdult}, startyear = {startYear}, endyear = {endYear}, runtimeminutes = {runtimeMinutes}, poster = {poster}, awards = {awards}, plot = {plot} WHERE title.tconst = {tconst};");
 
             return true;
         }
@@ -75,14 +54,16 @@ namespace DataAccess
 
         public bool DeleteTitle(string tconst)
         {
-            var title = ctx.Titles.Find(tconst);
-
-            if (title != null)
-            {
-                ctx.Titles.Remove(title);
+            //var title = ctx.Titles.Find(tconst);
+            if (GetTitle(tconst) != null)
+            { 
+                ctx.Database.ExecuteSqlInterpolated($"DELETE FROM movie_data_model.title WHERE title.tconst = {tconst}");
+                if (GetTitle(tconst) == null)
+                {
+                    return false;
+                }
                 return true;
             }
-
             return false;
         }
 

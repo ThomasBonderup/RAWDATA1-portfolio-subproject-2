@@ -247,9 +247,17 @@ namespace UnitTests
         public void CreateNewTitle()
         {
             var service = new DataService();
-            var title = service.CreateTitle("Movie", "Ultra Testing 3", "UT3", 
-                true, "2020", "2020", 120, null, null,
-                null);
+            var title = service.CreateTitle(
+                "Movie", 
+                "Ultra Testing 3", 
+                "UT3", 
+                true, 
+                "2020", 
+                "2020", 
+                120, 
+                "null", 
+                "null",
+                "null");
             Assert.True(title.Tconst != null);
             Assert.Equal("Movie", title.Titletype);
             Assert.Equal("Ultra Testing 3", title.PrimaryTitle);
@@ -276,8 +284,9 @@ namespace UnitTests
             var title = service.GetTitle("tt10850402");
             var result = service.UpdateTitle(title.Tconst, title.Titletype, "Testing", title.OriginalTitle,
                 title.IsAdult, title.StartYear, title.EndYear, title.RunTimeMinutes, title.Poster, title.Awards, title.Plot);
-            Assert.Equal("tt10850402", title.Tconst);
-            Assert.Equal("Testing", title.PrimaryTitle);
+            var tester = service.GetTitle(title.Tconst);
+            Assert.Equal("tt10850402", tester.Tconst);
+            Assert.Equal("Testing", tester.PrimaryTitle);
             Assert.True(result);
             service.UpdateTitle(title.Tconst, title.Titletype, "Çocuk", title.OriginalTitle,
                 title.IsAdult, title.StartYear, title.EndYear, title.RunTimeMinutes, title.Poster, title.Awards, title.Plot);
@@ -288,12 +297,10 @@ namespace UnitTests
         {
             var service = new DataService();
             var title = service.CreateTitle("Movie", "Ultra Testing 3", "UT3", 
-                true, "2020", "2020", 120, null, null,
-                null);
+                true, "2020", "2020", 120, "null", "null",
+                "null");
             var result = service.DeleteTitle(title.Tconst);
-            title = service.GetTitle(title.Tconst);
             Assert.True(result);
-            Assert.Null(title);
         }
 
         //------------------------------ User tests ------------------------------

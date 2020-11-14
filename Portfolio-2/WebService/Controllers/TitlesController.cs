@@ -243,7 +243,7 @@ namespace WebService.Controllers
 
         // POST
         
-        [HttpPost("{tconst}")]
+        [HttpPost]
         public IActionResult CreateTitle(Title title)
         {
             CheckCurrentUser();
