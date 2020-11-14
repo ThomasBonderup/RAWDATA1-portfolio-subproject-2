@@ -170,6 +170,20 @@ namespace WebService.Controllers
             }
             return Ok(result);
         }
+
+        [HttpGet("{uconst}/searchhistory")]
+        public IActionResult GetSearchHistory(string uconst)
+        {
+            CheckCurrentUser();
+
+            var result = _dataService.GetSearchHistory(uconst);
+            if (result == null)
+            {
+                return NoContent();
+            }
+            return Ok(result);
+        }
+        
         
         // PUT
         

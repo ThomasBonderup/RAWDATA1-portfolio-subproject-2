@@ -7,16 +7,18 @@ namespace DataAccess
     {
         IList<Title> GetTitles(int page, int pageSize);
         
-        IList<TitlePrincipals> GetTitlePrincipalsList(int page, int pageSize);
+        //IList<TitlePrincipals> GetTitlePrincipalsList(int page, int pageSize);
 
-        public TitlePrincipals GetTitlePrincipals(string tconst, string nconst);
+        TitlePrincipals GetTitlePrincipal(string tconst, string nconst);
 
-        public IList<PrimaryProfession> GetProfessions(string nconst);
+        IList<PrimaryProfession> GetProfessions(string nconst);
 
-        public IList<KnownForTitle> GetKnownForTitles(string nconst);
+        IList<KnownForTitle> GetKnownForTitles(string nconst);
 
-        public IList<TitlePrincipals> GetTitlePrincipalsByTitle(string tconst, int page, int pageSize);
+        IList<TitlePrincipals> GetTitlePrincipalsByTitle(string tconst, int page, int pageSize);
 
+        IList<TitlePrincipals> GetTitlePrincipalsByName(string nconst, int page, int pageSize);
+        
         Title GetTitle(string tconst);
 
         bool DeleteTitle(string tconst);
@@ -57,27 +59,33 @@ namespace DataAccess
         IList<TitlePrincipals> SearchTitlePrincipals(string searchString, string uconst, int page, int pageSize);
 
         IList<SearchResult> SearchDynamicBestMatch(string searchString, int page, int pageSize);
-        public IList<string> GetGenres(string tconst);
+        
+        IList<string> GetGenres(string tconst);
 
-        public IList<string> GetLocalTitle(string tconst);
-        public IList<TitleRatings> GetTitleRatings();
+        IList<string> GetLocalTitle(string tconst);
+        
+        IList<TitleRatings> GetTitleRatings();
 
-        public TitleRatings GetTitleRating(string tconst);
-        public TitleBookmark CreateTitleBookmark(string uconst, string tconst);
+        TitleRatings GetTitleRating(string tconst);
+        
+        TitleBookmark CreateTitleBookmark(string uconst, string tconst);
 
-        public bool DeleteTitleBookmark(string uconst, string tconst);
+        bool DeleteTitleBookmark(string uconst, string tconst);
 
-        public TitleBookmark GetTitleBookmark(string uconst, string tconst);
+        TitleBookmark GetTitleBookmark(string uconst, string tconst);
 
-        public IList<TitleBookmark> GetTitleBookmarks(string uconst);
+        IList<TitleBookmark> GetTitleBookmarks(string uconst);
 
-        public RatingByUser GetRatingByUser(string uconst, string tconst);
+        RatingByUser GetRatingByUser(string uconst, string tconst);
 
-        public IList<RatingByUser> GetRatingsByUser(string uconst, int page, int pageSize);
-        public IList<RatingHistory> GetRatingHistory(string uconst);
+        IList<RatingByUser> GetRatingsByUser(string uconst, int page, int pageSize);
+        
+        IList<RatingHistory> GetRatingHistory(string uconst);
 
-        public IList<RatingHistory> GetAllRatingHistory(string uconst, string tconst);
+        IList<RatingHistory> GetAllRatingHistory(string uconst, string tconst);
 
-        public NameRating GetNameRating(string nconst);
+        NameRating GetNameRating(string nconst);
+
+        IList<SearchHistory> GetSearchHistory(string uconst);
     }
 }

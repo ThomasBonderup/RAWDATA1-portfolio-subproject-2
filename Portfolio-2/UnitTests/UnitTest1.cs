@@ -97,7 +97,7 @@ namespace UnitTests
         public void GetTitlePrincipalsByTconstAndNconst_ValidTconstNconst()
         {
             var service = new DataService();
-            var titlePrincipals = service.GetTitlePrincipals("tt0052520", "nm0580565");
+            var titlePrincipals = service.GetTitlePrincipal("tt0052520", "nm0580565");
            // Assert.Equal(null, titlePrincipals.Job);
             Assert.Equal("actor", titlePrincipals.Category);
         }
@@ -402,7 +402,7 @@ namespace UnitTests
         public void GetTitlePrincipalsByName()
         {
             var service = new DataService();
-            var profession = service.GetTitlePricipalsByName("nm0000002");
+            var profession = service.GetTitlePrincipalsByName("nm0000002", 1, 25);
             Assert.Equal("actress",profession.First().Category);
             Assert.Equal("self", profession.Last().Category);
         }

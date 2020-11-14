@@ -108,7 +108,7 @@ namespace DataAccess
             return null;
         }
 
-        public TitlePrincipals GetTitlePrincipals(string tconst, string nconst)
+        public TitlePrincipals GetTitlePrincipal(string tconst, string nconst)
         {
             var titleProncipals = ctx.TitlePrincipals.Find(tconst, nconst);
 
@@ -508,7 +508,7 @@ namespace DataAccess
 
         }
 
-        public IList<TitlePrincipals> GetTitlePricipalsByName(string nconst)
+        public IList<TitlePrincipals> GetTitlePrincipalsByName(string nconst, int page, int pageSize)
         {
             List<TitlePrincipals> result = new List<TitlePrincipals>();
 

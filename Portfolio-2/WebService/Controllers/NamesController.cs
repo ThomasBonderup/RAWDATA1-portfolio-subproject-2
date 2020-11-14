@@ -132,7 +132,40 @@ namespace WebService.Controllers
             {
                 return NotFound();
             }
+
+            if (kft.Count == 0)
+            {
+                return Ok("Missing information");
+            }
             return Ok(kft);
+        }
+        
+        [HttpGet("{nconst}/titleprincipals")]
+        public IActionResult GetTitlePrincipalsByName(string nconst, int page = 0, int pageSize = 10)
+        {
+            CheckCurrentUser();
+            
+            pageSize = PaginationHelper.CheckPageSize(pageSize);
+            
+            var titlePrincipalsList = _dataService.GetTitlePrincipalsByName(nconst, page, pageSize);
+            if (titlePrincipalsList == null)
+            {
+                return NotFound();
+            }
+            return Ok(titlePrincipalsList);
+        }
+        
+        [HttpGet("{nconst}/titleprincipals/{tconst}")]
+
+        public IActionResult GetTitlePrincipal(string tconst, string nconst)
+        {
+            CheckCurrentUser();
+            var titlePrincipals = _dataService.GetTitlePrincipal(tconst, nconst);
+            if (titlePrincipals == null)
+            {
+                return NotFound();
+            }
+            return Ok(titlePrincipals);
         }
     }
 }

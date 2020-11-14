@@ -160,7 +160,7 @@ namespace WebService.Controllers
         public IActionResult GetTitlePrincipals(string tconst, string nconst)
         {
             CheckCurrentUser();
-            var titlePrincipals = _dataService.GetTitlePrincipals(tconst, nconst);
+            var titlePrincipals = _dataService.GetTitlePrincipal(tconst, nconst);
             if (titlePrincipals == null)
             {
                 return NotFound();
