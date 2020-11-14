@@ -420,6 +420,17 @@ namespace DataAccess
                 .ToList();
             return result;
         }
+        
+        // TODO: Create insert userid and search string to search history for dynamic search with variadic array
+        public IList<SearchResult> SearchDynamicBestMatch(string searchString, int page, int pageSize)
+        {
+            var result = ctx.SearchResults
+                .FromSqlInterpolated($"SELECT * FROM movie_data_model.dynamic_bestmatch({searchString})")
+                .Skip(page * pageSize)
+                .Take(pageSize)
+                .ToList();
+            return result;
+        }
 
         public IList<RatingHistory> GetAllRatingHistory(string uconst, string tconst)
         {

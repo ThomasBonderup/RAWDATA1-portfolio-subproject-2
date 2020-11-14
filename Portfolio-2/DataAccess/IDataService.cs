@@ -51,6 +51,8 @@ namespace DataAccess
         IList<Title> SearchTitles(string searchString, string uconst, int page, int pageSize);
 
         IList<TitlePrincipals> SearchTitlePrincipals(string searchString, string uconst, int page, int pageSize);
+
+        IList<SearchResult> SearchDynamicBestMatch(string searchString, int page, int pageSize);
         public IList<string> GetGenres(string tconst);
 
         public IList<string> GetLocalTitle(string tconst);
