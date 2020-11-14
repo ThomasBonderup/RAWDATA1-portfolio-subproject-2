@@ -132,6 +132,31 @@ namespace WebService.Controllers
             return Ok(titleBookmarks);
         }
         
+        [HttpGet("{uconst}/titlenotes/{tconst}")]
+        public IActionResult GetTitleNote(string uconst, string tconst)
+        {
+            CheckCurrentUser();
+
+            var titleNote = _dataService.GetTitleNote(uconst, tconst);
+            if (titleNote == null)
+            {
+                return NoContent();
+            }
+            return Ok(titleNote);
+        }
+        
+        [HttpGet("{uconst}/titlenotes")]
+        public IActionResult GetTitleNotes(string uconst)
+        {
+            CheckCurrentUser();
+            var titleNotes = _dataService.GetTitleNotes(uconst);
+            if (titleNotes == null)
+            {
+                return NotFound();
+            }
+            return Ok(titleNotes);
+        }
+        
         [HttpGet("{uconst}/namebookmarks/{nconst}")]
         public IActionResult GetNameBookmark(string uconst, string nconst)
         {
@@ -155,6 +180,31 @@ namespace WebService.Controllers
                 return NotFound();
             }
             return Ok(nameBookmarks);
+        }
+        
+        [HttpGet("{uconst}/namenotes/{nconst}")]
+        public IActionResult GetNameNote(string uconst, string nconst)
+        {
+            CheckCurrentUser();
+
+            var nameNote = _dataService.GetNameNote(uconst, nconst);
+            if (nameNote == null)
+            {
+                return NoContent();
+            }
+            return Ok(nameNote);
+        }
+        
+        [HttpGet("{uconst}/namenotes")]
+        public IActionResult GetNameNotes(string uconst)
+        {
+            CheckCurrentUser();
+            var nameNotes = _dataService.GetNameNotes(uconst);
+            if (nameNotes == null)
+            {
+                return NotFound();
+            }
+            return Ok(nameNotes);
         }
 
         [HttpGet("{uconst}/rating")]
