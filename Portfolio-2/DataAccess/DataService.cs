@@ -398,6 +398,36 @@ namespace DataAccess
             return stringNconst;
         }
 
+        public bool IsValidTconst(string tconst)
+        {
+            var title = ctx.Titles.Find(tconst);
+            if (title != null)
+            {
+                return true;
+            }
+            return false;
+        }
+        
+        public bool IsValidUconst(string uconst)
+        {
+            var title = ctx.Users.Find(uconst);
+            if (title != null)
+            {
+                return true;
+            }
+            return false;
+        }
+        
+        public bool IsValidNconst(string nconst)
+        {
+            var title = ctx.Names.Find(nconst);
+            if (title != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public IList<Title> SearchTitles(string searchString, string uConst, int page, int pageSize)
         {
             var result = ctx.Titles
@@ -556,6 +586,8 @@ namespace DataAccess
         
         public TitleBookmark CreateTitleBookmark(string uconst, string tconst)
         {
+            if (!IsValidUconst(uconst) || !IsValidTconst(tconst)) return null;
+            
             var result = new TitleBookmark
             {
                 Uconst = uconst,
@@ -564,6 +596,7 @@ namespace DataAccess
             };
             ctx.TitleBookmarks.Add(result);
             return result;
+
         }
         
         // ------------------------------------- name bookmark -----------------------------------
@@ -598,6 +631,8 @@ namespace DataAccess
         
         public NameBookmark CreateNameBookmark(string uconst, string nconst)
         {
+            if (!IsValidUconst(uconst) || !IsValidNconst(nconst)) return null;
+
             var result = new NameBookmark
             {
                 Uconst = uconst,
@@ -683,6 +718,8 @@ namespace DataAccess
         
         public NameNotes CreateNameNote(string uconst, string nconst, string notes)
         {
+            if (!IsValidUconst(uconst) || !IsValidNconst(nconst)) return null;
+
             var response = new NameNotes()
             {
                 Uconst = uconst,
@@ -736,6 +773,7 @@ namespace DataAccess
         
         public TitleNotes CreateTitleNote(string uconst, string tconst, string notes)
         {
+            if (!IsValidUconst(uconst) || !IsValidTconst(tconst)) return null;
             var response = new TitleNotes()
             {
                 Uconst = uconst,

@@ -31,9 +31,9 @@ namespace UnitTests
         public void GetAllTitles_NoArgument_ReturnsAllTitles()
         {
             var service = new DataService();
-            var titles = service.GetTitles(55076, 55076);
-            Assert.Equal(55076, titles.Count);
-            Assert.Equal("Çocuk", titles.First().PrimaryTitle);
+            var titles = service.GetTitles(60000, 60000);
+            Assert.Equal(55087, titles.Count);
+            Assert.Equal("My Country: The New Age", titles.First().PrimaryTitle);
         }
 
         [Fact]
@@ -70,8 +70,8 @@ namespace UnitTests
         public void GetTitleByTconst_ValidTconst()
         {
             var service = new DataService();
-            var title = service.GetTitle("tt10850402");
-            Assert.Equal("Çocuk", title.PrimaryTitle);
+            var title = service.GetTitle("tt9999991");
+            Assert.Equal("Test 8 primarytitle", title.PrimaryTitle);
         }
 
         
@@ -284,11 +284,11 @@ namespace UnitTests
             var title = service.GetTitle("tt10850402");
             var result = service.UpdateTitle(title.Tconst, title.Titletype, "Testing", title.OriginalTitle,
                 title.IsAdult, title.StartYear, title.EndYear, title.RunTimeMinutes, title.Poster, title.Awards, title.Plot);
-            var tester = service.GetTitle(title.Tconst);
-            Assert.Equal("tt10850402", tester.Tconst);
-            Assert.Equal("Testing", tester.PrimaryTitle);
+            Assert.Equal("tt10850402", title.Tconst);
+            Assert.Equal("Testing", title.PrimaryTitle);
             Assert.True(result);
-            service.UpdateTitle(title.Tconst, title.Titletype, "Çocuk", title.OriginalTitle,
+
+            var cleanup = service.UpdateTitle(title.Tconst, title.Titletype, "Çocuk", title.OriginalTitle,
                 title.IsAdult, title.StartYear, title.EndYear, title.RunTimeMinutes, title.Poster, title.Awards, title.Plot);
         }
 
@@ -429,7 +429,7 @@ namespace UnitTests
         public void UpdateNameNote()
         {
             var service = new DataService();
-            var newNote = service.CreateNameNote("ui...", "nm...", "test");
+            var newNote = service.CreateNameNote("ui000001", "nm99999999", "test");
             var result = service.UpdateNameNote(newNote.Uconst, newNote.Nconst, "updated");
             Assert.True(result);
             newNote = service.GetNameNote(newNote.Uconst, newNote.Nconst);
@@ -451,7 +451,7 @@ namespace UnitTests
         public void UpdateTitleNote()
         {
             var service = new DataService();
-            var newNote = service.CreateTitleNote("ui...", "tt...", "test");
+            var newNote = service.CreateTitleNote("ui000001", "tt9999991", "test");
             var result = service.UpdateTitleNote(newNote.Uconst, newNote.Tconst, "updated");
             Assert.True(result);
             newNote = service.GetTitleNote(newNote.Uconst, newNote.Tconst);
