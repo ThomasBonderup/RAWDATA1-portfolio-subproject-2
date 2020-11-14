@@ -221,9 +221,9 @@ namespace DataAccess
             return null;
         }
 
-        public IList<Name> GetNames(int page, int pageSize) //se om denne kan bruges til primary profession?
+        public IList<Name> GetNames(int page, int pageSize)
         {
-            return ctx.Names
+            return ctx.Names.ToList()
                 .Skip(page * pageSize)
                 .Take(pageSize)
                 .ToList();

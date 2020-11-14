@@ -4,26 +4,14 @@ using System.Linq;
 using AutoMapper;
 using DataAccess;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.EntityFrameworkCore.Internal;
-using Microsoft.EntityFrameworkCore.Storage;
-using Xunit.Abstractions;
+using WebService.Common;
 
 namespace WebService.Controllers
 {
     [ApiController]
     [Route("api/names")]
-    
     public class NamesController : ControllerBase
     {
-          
-        private readonly ITestOutputHelper _testOutputHelper;
-
-        public NamesController(ITestOutputHelper testOutputHelper)
-        {
-            _testOutputHelper = testOutputHelper;
-        }
-        
         private IDataService _dataService;
         private IMapper _mapper;
         private int MaxPageSize = 25;
@@ -32,11 +20,6 @@ namespace WebService.Controllers
         {
             _dataService = dataService;
             _mapper = mapper;
-        }
-
-        private int CheckPageSize (int pageSize)
-        {
-            return pageSize > MaxPageSize ? MaxPageSize : pageSize;
         }
 
         private (string prev,string cur, string next) CreatePagingNavigation(int page, int pageSize, int count)
@@ -66,15 +49,12 @@ namespace WebService.Controllers
             return dto;
         }
 
-        private object CreateResult(int page, int pageSize, IList<Name> names)
+        private object CreateResultNames(int page, int pageSize, IList<Name> names)
          {
              var items = names.Select(CreateNameListDto);
-
              var count = _dataService.NumberOfNames();
-                      
-                      var navigationUrls = CreatePagingNavigation(page, pageSize, count);
-  
-                  var result = new
+             var navigationUrls = CreatePagingNavigation(page, pageSize, count);
+             var result = new
                   {
                       navigationUrls.prev,
                       navigationUrls.cur,
@@ -95,19 +75,19 @@ namespace WebService.Controllers
             return null;
         }
         
+        // GET
 
         [HttpGet(Name = nameof(GetNames))]
         public IActionResult GetNames(int page = 0, int pageSize = 10)
         {
-            pageSize = CheckPageSize(pageSize);
-            var names = _dataService.GetNames(page, pageSize);
-
-           var result = CreateResult(page, pageSize, names);
+            CheckCurrentUser();
+            pageSize = PaginationHelper.CheckPageSize(pageSize);
+            var names = _dataService.GetNames(page, pageSize); 
+            var result = CreateResultNames(page, pageSize, names);
             return Ok(result);
-
         }
+        
         [HttpGet("{nconst}")]
-
         public IActionResult GetName(string nconst)
         {
             var name = _dataService.GetName(nconst);
@@ -119,8 +99,7 @@ namespace WebService.Controllers
         }
         
 
-        [HttpGet("{nconst}")]
-
+        [HttpGet("{nconst}/namerating")]
         public IActionResult GetNameRating(string nconst)
         {
             CheckCurrentUser();
@@ -141,9 +120,8 @@ namespace WebService.Controllers
             {
                 return NotFound();
             }
-            _testOutputHelper.WriteLine(professions.ToString());
-            return Ok(professions);
             
+            return Ok(professions);
         }
 
         [HttpGet("{nconst}/knownfortitles")]

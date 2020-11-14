@@ -14,6 +14,7 @@ namespace WebService.Controllers
     {
         private readonly IDataService _dataService;
         private readonly IMapper _mapper;
+        
 
         public TitlesController(IDataService dataService, IMapper mapper)
         {
@@ -40,7 +41,6 @@ namespace WebService.Controllers
             return (prev, cur, next);
         }
         
-
         private TitleListDto CreateTitleListDto(Title title)
         {
             var dto = _mapper.Map<TitleListDto>(title);
@@ -133,14 +133,10 @@ namespace WebService.Controllers
         [HttpGet(Name = nameof(GetTitles))]
         public IActionResult GetTitles(int page = 0, int pageSize = 10)
         {
-
             CheckCurrentUser();
-            
             pageSize = PaginationHelper.CheckPageSize(pageSize);
             var titles = _dataService.GetTitles(page, pageSize);
-
             var result = CreateResultTitles(page, pageSize, titles);
-            
             return Ok(result);
         }
         
@@ -233,7 +229,7 @@ namespace WebService.Controllers
         
 
         [HttpGet("{tconst}/localtitle")]
-        public IActionResult GetLocaltitle(string tconst)
+        public IActionResult GetLocalTitle(string tconst)
         {
             CheckCurrentUser();
             var localTitles = _dataService.GetLocalTitle(tconst);
