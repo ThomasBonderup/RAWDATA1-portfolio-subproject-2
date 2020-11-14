@@ -11,8 +11,6 @@ namespace DataAccess
         public string BirthYear { get; set; }
 
         public string DeathYear { get; set; }
-        
-      //  public PrimaryProfession PrimaryProfession { get; set; }
-        
+
     }
 }

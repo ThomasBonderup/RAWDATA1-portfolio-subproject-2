@@ -53,28 +53,23 @@ namespace WebService.Controllers
         {
             var dto = _mapper.Map<UserListDto>(user);
             dto.Url = Url.Link(nameof(GetUsers), new {user.Uconst});
-            
             return dto;
         }
 
-        private object CreateResult(int page, int pageSize, IList<User> users)
-         {
-             var items = users.Select(CreateUserListDto);
-
-             var count = _dataService.NumberOfUsers();
-                      
-                      var navigationUrls = CreatePagingNavigation(page, pageSize, count);
-  
-                  var result = new
-                  {
-                      navigationUrls.prev,
-                      navigationUrls.cur,
-                      navigationUrls.next,
-                      count,
-                      items
-                  };
-                  
-              return result;
+        private object CreateResult(int page, int pageSize, IList<User> users) 
+        {
+            var items = users.Select(CreateUserListDto);
+            var count = _dataService.NumberOfUsers();
+            var navigationUrls = CreatePagingNavigation(page, pageSize, count);
+            var result = new 
+            {
+                navigationUrls.prev,
+                navigationUrls.cur,
+                navigationUrls.next,
+                count,
+                items
+            };
+            return result;
           }
         
         public UnauthorizedResult CheckCurrentUser()
@@ -85,19 +80,18 @@ namespace WebService.Controllers
             }
             return null;
         }
-
+        
+        // GET
         [HttpGet(Name = nameof(GetUsers))]
         public IActionResult GetUsers(int page = 0, int pageSize = 10)
         {
-            pageSize = CheckPageSize(pageSize);
-            var users = _dataService.GetUsers(page, pageSize);
-
+           pageSize = CheckPageSize(pageSize);
+           var users = _dataService.GetUsers(page, pageSize);
            var result = CreateResult(page, pageSize, users);
-            return Ok(result);
-
+           return Ok(result);
         }
+        
         [HttpGet("{uconst}")]
-
         public IActionResult GetUser(string uconst)
         {
             var user = _dataService.GetUser(uconst);
@@ -120,5 +114,95 @@ namespace WebService.Controllers
             return Ok(result);
         }
         
-}
+        [HttpGet("{uconst}/titlebookmarks/{tconst}")]
+        public IActionResult GetTitleBookmark(string uconst, string tconst)
+        {
+            CheckCurrentUser();
+
+            var titleBookmark = _dataService.GetTitleBookmark(uconst, tconst);
+            if (titleBookmark == null)
+            {
+                return NoContent();
+            }
+            return Ok(titleBookmark);
+        }
+
+
+        [HttpGet("{uconst}/rating")]
+        public IActionResult GetRatings(int page = 0, int pageSize = 10)
+        {
+            CheckCurrentUser();
+            var ratings = _dataService.GetRatings(page, pageSize);
+            if (ratings == null)
+            {
+                return NoContent();
+            }
+            return Ok(ratings);
+        }
+
+        [HttpGet("{uconst}/rating/{tconst}")]
+        public IActionResult GetRating(string uconst, string tconst)
+        {
+            CheckCurrentUser();
+            var ratingByUser = _dataService.GetRating(uconst, tconst);
+            if (ratingByUser == null)
+            {
+                return NoContent();
+            }
+
+            return Ok(ratingByUser);
+        }
+
+        [HttpGet("{uconst}/titlebookmarks")]
+        public IActionResult GetTitleBookmarks(string uconst)
+        {
+            CheckCurrentUser();
+            var titleBookmarks = _dataService.GetTitleBookmarks(uconst);
+            if (titleBookmarks == null)
+            {
+                return NotFound();
+            }
+            return Ok(titleBookmarks);
+        }
+        
+        [HttpGet("{uconst}/ratinghistory/{tconst}")]
+        public IActionResult GetAllRatingHistory(string uconst, string tconst)
+        {
+            CheckCurrentUser();
+
+            var result = _dataService.GetAllRatingHistory(uconst, tconst);
+            if (result == null)
+            {
+                return NoContent();
+            }
+            return Ok(result);
+        }
+        
+        // PUT
+        
+        
+        // POST
+        [HttpPost("{uconst}/titlebookmarks/{tconst}")]
+        public IActionResult CreateTitleBookmark(string uconst, string tconst)
+        {
+            CheckCurrentUser();
+            var titleBookmark = _dataService.CreateTitleBookmark(uconst, tconst);
+            return Ok(titleBookmark);
+
+        }
+        
+        // DELETE
+        [HttpDelete("{uconst}/titlebookmarks/{tconst}")]
+        public IActionResult DeleteTitleBookmark(string uconst, string tconst)
+        {
+            CheckCurrentUser();
+            var titleBookmark = _dataService.DeleteTitleBookmark(uconst, tconst);
+            if (titleBookmark)
+            {
+                return Ok();
+            }
+            return NotFound();
+        }
+        
+    }
 }

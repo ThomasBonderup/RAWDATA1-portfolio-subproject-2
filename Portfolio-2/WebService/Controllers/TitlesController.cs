@@ -163,8 +163,6 @@ namespace WebService.Controllers
         public IActionResult GetTitlePrincipals(string tconst, string nconst, int ordering)
         {
             CheckCurrentUser();
-            
-
             var titlePrincipals = _dataService.GetTitlePrincipals(tconst, nconst, ordering);
             if (titlePrincipals == null)
             {
@@ -217,81 +215,9 @@ namespace WebService.Controllers
             return Ok(titleRating);
 
         }
-
-        [HttpGet("{uconst},{tconst}")]
-        public IActionResult GetTitleBookmark(string uconst, string tconst)
-        {
-            CheckCurrentUser();
-
-            var titleBookmark = _dataService.GetTitleBookmark(uconst, tconst);
-            if (titleBookmark == null)
-            {
-                return NoContent();
-            }
-            return Ok(titleBookmark);
-        }
-
-        [HttpGet("{uconst},{tconst}")]
-        public IActionResult DeleteTitleBookmark(string uconst, string tconst)
-        {
-            CheckCurrentUser();
-            var titleBookmark = _dataService.DeleteTitleBookmark(uconst, tconst);
-            if (titleBookmark)
-            {
-                return Ok();
-            }
-
-            return NotFound();
-        }
-
-        [HttpGet("{uconst},{tconst}")]
-        public IActionResult CreateTitleBookmark(string uconst, string tconst)
-        {
-            CheckCurrentUser();
-            var titleBookmark = _dataService.CreateTitleBookmark(uconst, tconst);
-            return Ok(titleBookmark);
-
-        }
-
         
-        [HttpGet("{uconst}")]
-        public IActionResult GetRatings(int page = 0, int pageSize = 10)
-        {
-            CheckCurrentUser();
-            var ratings = _dataService.GetRatings(page, pageSize);
-            if (ratings == null)
-            {
-                return NoContent();
-            }
-            return Ok(ratings);
-        }
 
-        [HttpGet("{uconst}/{tconst}")]
-        public IActionResult GetRating(string uconst, string tconst)
-        {
-            CheckCurrentUser();
-            var ratingByUser = _dataService.GetRating(uconst, tconst);
-            if (ratingByUser == null)
-            {
-                return NoContent();
-            }
-
-            return Ok(ratingByUser);
-        }
-
-        [HttpGet("{uconst}")]
-        public IActionResult GetTitleBookmarks(string uconst)
-        {
-            CheckCurrentUser();
-            var titleBookmarks = _dataService.GetTitleBookmarks(uconst);
-            if (titleBookmarks == null)
-            {
-                return NotFound();
-            }
-            return Ok(titleBookmarks);
-        }
-
-        [HttpGet]
+        [HttpGet("titleratings")]
         public IActionResult GetTitleRatings()
         {
             CheckCurrentUser();
@@ -304,22 +230,9 @@ namespace WebService.Controllers
             return Ok(titleRatings);
 
         }
+        
 
-        [HttpGet("{uconst}/RatingHistory/{tconst}")]
-
-        public IActionResult GetAllRatingHistory(string uconst, string tconst)
-        {
-            CheckCurrentUser();
-
-            var result = _dataService.GetAllRatingHistory(uconst, tconst);
-            if (result == null)
-            {
-                return NoContent();
-            }
-            return Ok(result);
-        }
-
-        [HttpGet("{tconst}")]
+        [HttpGet("{tconst}/localtitle")]
         public IActionResult GetLocaltitle(string tconst)
         {
             CheckCurrentUser();
@@ -343,18 +256,16 @@ namespace WebService.Controllers
                title.RunTimeMinutes, title.Poster, title.Awards, title.Plot);
             return Ok(result);
         }
+        
+        
 
         // PUT
 
         [HttpPut("{tconst}")]
-
         public IActionResult UpdateTitle(Title title)
         {
-
             CheckCurrentUser();
-            
             var result = _dataService.GetTitle(title.Tconst);
-
             if (result != null)
             {
                 _dataService.UpdateTitle(title.Tconst, title.Titletype, title.PrimaryTitle, 
@@ -362,17 +273,16 @@ namespace WebService.Controllers
                     title.RunTimeMinutes, title.Poster, title.Awards, title.Plot);
                 return Ok(title);
             }
-
             return NotFound();
         }
 
 
         // DELETE
+        
         [HttpDelete("{tconst}")]
         public IActionResult DeleteTitle(string tconst)
         {
             CheckCurrentUser();
-
             if (!_dataService.DeleteTitle(tconst))
             {
                 return NotFound();
@@ -380,7 +290,7 @@ namespace WebService.Controllers
             return Ok();
         }
         
-        
+        // search
         
         [HttpGet("search-title/{searchString}")]
         public IActionResult SearchTitle(string searchString, string uConst, int page = 0, int pageSize = 10)
