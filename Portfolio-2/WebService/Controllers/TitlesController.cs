@@ -93,6 +93,32 @@ namespace WebService.Controllers
             return result;
         }
         
+        private object CreateSearchResults(int page, int pageSize, IList<SearchResult> searchResults)
+        {
+            var items = searchResults.Select(CreateSearchResultListDto);
+            var count = _dataService.NumberOfSearchResults();
+            var navigationUrls = CreatePagingNavigation(page, pageSize, count);
+  
+            var result = new
+            {
+                navigationUrls.prev,
+                navigationUrls.cur,
+                navigationUrls.next,
+                count,
+                items
+            };
+                  
+            return result;
+        }
+        
+        private SearchResultDto CreateSearchResultListDto(SearchResult searchResult)
+        {
+            var dto = _mapper.Map<SearchResultDto>(searchResult);
+            //dto.Url = Url.Link(nameof(GetSearchResults), new {searchResult.Tconst});
+
+            return dto;
+        }
+        
         public UnauthorizedResult CheckCurrentUser()
         {
             if (Program.CurrentUser == null)
@@ -392,5 +418,22 @@ namespace WebService.Controllers
             return Ok(result);
         }
 
+        [HttpGet("wi/{searchString}")]
+        public IActionResult SearchDynamicBestMatch(string searchString, int page = 0, int pageSize = 10)
+        {
+            CheckCurrentUser();
+
+            pageSize = PaginationHelper.CheckPageSize(pageSize);
+            var searchResult = _dataService.SearchDynamicBestMatch(searchString, page, pageSize);
+
+            if (searchResult == null)
+            {
+                return NotFound();
+            }
+
+            var result = CreateSearchResults(page, pageSize, searchResult);
+            
+            return Ok(result);
+        }
     }
 }

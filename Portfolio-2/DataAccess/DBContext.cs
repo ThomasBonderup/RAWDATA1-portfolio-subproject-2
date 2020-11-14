@@ -172,7 +172,8 @@ namespace DataAccess
 
             modelBuilder.Entity<SearchResult>().HasNoKey();
             modelBuilder.Entity<SearchResult>().Property(x => x.Tconst).HasColumnName("tconst");
-            modelBuilder.Entity<SearchResult>().Property(x => x.PrimaryTitle).HasColumnName("primarytitle");
+            modelBuilder.Entity<SearchResult>().Property(x => x.Rank).HasColumnName("rank");
+            modelBuilder.Entity<SearchResult>().Property(x => x.Title).HasColumnName("title");
 
             modelBuilder.Entity<PrimaryProfession>().ToTable("primaryprofession");
             modelBuilder.Entity<PrimaryProfession>().Property(x => x.Nconst).HasColumnName("nconst");

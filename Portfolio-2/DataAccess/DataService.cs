@@ -322,7 +322,12 @@ namespace DataAccess
         {
             return ctx.Names.Count();
         }
-        
+
+        public int NumberOfSearchResults()
+        {
+            return ctx.SearchResults.Count();
+        }
+
         public Title CreateTitle(string primaryTitle)
         {
             throw new System.NotImplementedException();

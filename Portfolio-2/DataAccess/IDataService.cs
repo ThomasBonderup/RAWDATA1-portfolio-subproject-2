@@ -41,6 +41,8 @@ namespace DataAccess
         
         int NumberOfTitlePrincipals();
 
+        int NumberOfSearchResults();
+
         Title CreateTitle(string titleType, string primaryTitle, string originalTitle, bool isAdult, string startYear,
             string endYear, int? runtimeMinutes,
             string poster, string awards, string plot);
