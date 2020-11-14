@@ -122,10 +122,10 @@ namespace WebService.Controllers
 
 
         [HttpGet("{uconst}/rating")]
-        public IActionResult GetRatings(int page = 0, int pageSize = 10)
+        public IActionResult GetRatingsByUser(string uconst, int page = 0, int pageSize = 10)
         {
             CheckCurrentUser();
-            var ratings = _dataService.GetRatings(page, pageSize);
+            var ratings = _dataService.GetRatingsByUser(uconst, page, pageSize);
             if (ratings == null)
             {
                 return NoContent();
@@ -134,10 +134,10 @@ namespace WebService.Controllers
         }
 
         [HttpGet("{uconst}/rating/{tconst}")]
-        public IActionResult GetRating(string uconst, string tconst)
+        public IActionResult GetRatingByUser(string uconst, string tconst)
         {
             CheckCurrentUser();
-            var ratingByUser = _dataService.GetRating(uconst, tconst);
+            var ratingByUser = _dataService.GetRatingByUser(uconst, tconst);
             if (ratingByUser == null)
             {
                 return NoContent();

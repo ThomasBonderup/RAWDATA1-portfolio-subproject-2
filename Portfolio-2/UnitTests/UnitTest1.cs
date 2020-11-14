@@ -114,11 +114,11 @@ namespace UnitTests
         }
         // ----------------------- rating and rating history -------------------------
         [Fact]
-        public void GetAllRatings()
+        public void GetAllRatings_ValidUconst()
         {
             var service = new DataService();
-            var ratings = service.GetRatings(0, 46703);
-            Assert.Equal(46703, ratings.Count);
+            var ratings = service.GetRatingsByUser("ui000001",0, 25);
+            Assert.Equal(5, ratings.Count);
 
         }
 
@@ -126,7 +126,7 @@ namespace UnitTests
         public void GetRatingByUser_ValidUconstAndTconst()
         {
             var service = new DataService();
-            var rating = service.GetRating("ui000001", "tt9999997");
+            var rating = service.GetRatingByUser("ui000001", "tt9999997");
             _testOutputHelper.WriteLine(rating.ToString());
             Assert.Equal(7, rating.Rating);
 

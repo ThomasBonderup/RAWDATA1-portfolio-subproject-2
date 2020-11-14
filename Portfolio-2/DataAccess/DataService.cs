@@ -477,25 +477,30 @@ namespace DataAccess
             return result;
         }
 
-        public IList<TitleRatings> GetRatings(int page, int pageSize)
-        {
-
-            var result = ctx.TitleRatings
-                .FromSqlInterpolated($"SELECT * FROM movie_data_model.title_ratings")
-                .Skip(page * pageSize)
-                .Take(pageSize)
-                .ToList();
-            return result;
-            
-        }
-
         public NameRating GetNameRating(string nconst)
         {
             var result = ctx.NameRatings.Find(nconst);
             return result;
         }
+        
+        // ratings by users
+        public IList<RatingByUser> GetRatingsByUser(string uconst, int page, int pageSize)
+        {
+            var result = new List<RatingByUser>();
 
-        public RatingByUser GetRating(string uconst, string tconst)
+            foreach (var r in ctx.RatingsByUser)
+            {
+                if (r.Uconst.Trim() == uconst)
+                { 
+                    result.Add(r); 
+                }
+            }
+            
+            return result.ToList();
+
+        }
+
+        public RatingByUser GetRatingByUser(string uconst, string tconst)
         {
 
             var result = ctx.RatingsByUser.Find(uconst, tconst);

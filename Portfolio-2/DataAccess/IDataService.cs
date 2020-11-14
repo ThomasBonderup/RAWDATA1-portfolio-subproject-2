@@ -71,9 +71,9 @@ namespace DataAccess
 
         public IList<TitleBookmark> GetTitleBookmarks(string uconst);
 
-        public RatingByUser GetRating(string uconst, string tconst);
+        public RatingByUser GetRatingByUser(string uconst, string tconst);
 
-        public IList<TitleRatings> GetRatings(int page, int pageSize);
+        public IList<RatingByUser> GetRatingsByUser(string uconst, int page, int pageSize);
         public IList<RatingHistory> GetRatingHistory(string uconst);
 
         public IList<RatingHistory> GetAllRatingHistory(string uconst, string tconst);
