@@ -87,5 +87,34 @@ namespace DataAccess
         NameRating GetNameRating(string nconst);
 
         IList<SearchHistory> GetSearchHistory(string uconst);
+        
+        NameBookmark CreateNameBookmark(string uconst, string nconst);
+
+        bool DeleteNameBookmark(string uconst, string nconst);
+
+        NameBookmark GetNameBookmark(string uconst, string nconst);
+
+        IList<NameBookmark> GetNameBookmarks(string uconst);
+        
+        NameNotes CreateNameNote(string uconst, string nconst, string notes);
+
+        bool DeleteNameNote(string uconst, string nconst);
+
+        bool UpdateNameNote(string uconst, string tconst, string notes);
+
+        NameNotes GetNameNote(string uconst, string nconst);
+
+        IList<NameNotes> GetNameNotes(string uconst);
+        
+        TitleNotes CreateTitleNote(string uconst, string tconst, string notes);
+
+        bool DeleteTitleNote(string uconst, string tconst);
+        
+        bool UpdateTitleNote(string uconst, string tconst, string notes);
+
+        TitleNotes GetTitleNote(string uconst, string tconst);
+
+        IList<TitleNotes> GetTitleNotes(string uconst);
+        
     }
 }

@@ -119,7 +119,43 @@ namespace WebService.Controllers
             }
             return Ok(titleBookmark);
         }
+        
+        [HttpGet("{uconst}/titlebookmarks")]
+        public IActionResult GetTitleBookmarks(string uconst)
+        {
+            CheckCurrentUser();
+            var titleBookmarks = _dataService.GetTitleBookmarks(uconst);
+            if (titleBookmarks == null)
+            {
+                return NotFound();
+            }
+            return Ok(titleBookmarks);
+        }
+        
+        [HttpGet("{uconst}/namebookmarks/{nconst}")]
+        public IActionResult GetNameBookmark(string uconst, string nconst)
+        {
+            CheckCurrentUser();
 
+            var nameBookmark = _dataService.GetNameBookmark(uconst, nconst);
+            if (nameBookmark == null)
+            {
+                return NoContent();
+            }
+            return Ok(nameBookmark);
+        }
+        
+        [HttpGet("{uconst}/namebookmarks")]
+        public IActionResult GetNameBookmarks(string uconst)
+        {
+            CheckCurrentUser();
+            var nameBookmarks = _dataService.GetNameBookmarks(uconst);
+            if (nameBookmarks == null)
+            {
+                return NotFound();
+            }
+            return Ok(nameBookmarks);
+        }
 
         [HttpGet("{uconst}/rating")]
         public IActionResult GetRatingsByUser(string uconst, int page = 0, int pageSize = 10)
@@ -145,18 +181,7 @@ namespace WebService.Controllers
 
             return Ok(ratingByUser);
         }
-
-        [HttpGet("{uconst}/titlebookmarks")]
-        public IActionResult GetTitleBookmarks(string uconst)
-        {
-            CheckCurrentUser();
-            var titleBookmarks = _dataService.GetTitleBookmarks(uconst);
-            if (titleBookmarks == null)
-            {
-                return NotFound();
-            }
-            return Ok(titleBookmarks);
-        }
+        
         
         [HttpGet("{uconst}/ratinghistory/{tconst}")]
         public IActionResult GetAllRatingHistory(string uconst, string tconst)
