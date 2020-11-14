@@ -14,6 +14,7 @@ namespace WebService.Controllers
     {
         private readonly IDataService _dataService;
         private readonly IMapper _mapper;
+        private int MaxPageSize = 25;
         
 
         public TitlesController(IDataService dataService, IMapper mapper)

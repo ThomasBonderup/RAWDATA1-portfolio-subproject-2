@@ -4,9 +4,7 @@ using System.Linq;
 using AutoMapper;
 using DataAccess;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.EntityFrameworkCore.Internal;
-using Microsoft.EntityFrameworkCore.Storage;
+using WebService.Common;
 
 namespace WebService.Controllers
 {
@@ -23,11 +21,6 @@ namespace WebService.Controllers
         {
             _dataService = dataService;
             _mapper = mapper;
-        }
-
-        private int CheckPageSize (int pageSize)
-        {
-            return pageSize > MaxPageSize ? MaxPageSize : pageSize;
         }
 
         private (string prev,string cur, string next) CreatePagingNavigation(int page, int pageSize, int count)
@@ -56,7 +49,7 @@ namespace WebService.Controllers
             return dto;
         }
 
-        private object CreateResult(int page, int pageSize, IList<User> users) 
+        private object CreateResultUsers(int page, int pageSize, IList<User> users) 
         {
             var items = users.Select(CreateUserListDto);
             var count = _dataService.NumberOfUsers();
@@ -85,9 +78,9 @@ namespace WebService.Controllers
         [HttpGet(Name = nameof(GetUsers))]
         public IActionResult GetUsers(int page = 0, int pageSize = 10)
         {
-           pageSize = CheckPageSize(pageSize);
+           pageSize = PaginationHelper.CheckPageSize(pageSize);
            var users = _dataService.GetUsers(page, pageSize);
-           var result = CreateResult(page, pageSize, users);
+           var result = CreateResultUsers(page, pageSize, users);
            return Ok(result);
         }
         
@@ -102,7 +95,7 @@ namespace WebService.Controllers
             return Ok(user);
         }
         
-        [HttpGet("{uconst}")]
+        [HttpGet("{uconst}/ratinghistory")]
         public IActionResult GetRatingHistory(string uconst)
         {
             CheckCurrentUser();
