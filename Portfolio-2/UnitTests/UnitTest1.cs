@@ -97,7 +97,7 @@ namespace UnitTests
         public void GetTitlePrincipalsByTconstAndNconst_ValidTconstNconst()
         {
             var service = new DataService();
-            var titlePrincipals = service.GetTitlePrincipals("tt0052520", "nm0580565", 8);
+            var titlePrincipals = service.GetTitlePrincipals("tt0052520", "nm0580565");
            // Assert.Equal(null, titlePrincipals.Job);
             Assert.Equal("actor", titlePrincipals.Category);
         }

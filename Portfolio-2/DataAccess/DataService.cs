@@ -108,9 +108,9 @@ namespace DataAccess
             return null;
         }
 
-        public TitlePrincipals GetTitlePrincipals(string tconst, string nconst, int ordering)
+        public TitlePrincipals GetTitlePrincipals(string tconst, string nconst)
         {
-            var titleProncipals = ctx.TitlePrincipals.Find(tconst, nconst, ordering);
+            var titleProncipals = ctx.TitlePrincipals.Find(tconst, nconst);
 
             if (titleProncipals != null)
             {
@@ -298,6 +298,17 @@ namespace DataAccess
                 }
             }
             return result;
+        }
+        
+        /*
+         * title principals
+         */
+        public IList<TitlePrincipals> GetTitlePrincipalsList(int page, int pageSize)
+        {
+            return ctx.TitlePrincipals.ToList()
+                .Skip(page * pageSize)
+                .Take(pageSize)
+                .ToList();
         }
 
 

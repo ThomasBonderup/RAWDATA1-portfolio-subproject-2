@@ -94,7 +94,7 @@ namespace DataAccess
             modelBuilder.Entity<TitleGenres>().ToTable("title_genres");
             modelBuilder.Entity<TitleGenres>().Property(x => x.Tconst).HasColumnName("tconst");
             modelBuilder.Entity<TitleGenres>().Property(x => x.Genre).HasColumnName("genre");
-            modelBuilder.Entity<TitleGenres>().HasKey(x => new {x.Tconst});
+            modelBuilder.Entity<TitleGenres>().HasKey(x => new {x.Tconst, x.Genre});
 
             modelBuilder.Entity<TitleBookmark>().ToTable("title_bookmark");
             modelBuilder.Entity<TitleBookmark>().Property(x => x.Uconst).HasColumnName("uconst");
@@ -127,7 +127,8 @@ namespace DataAccess
             modelBuilder.Entity<TitlePrincipals>().Property(x => x.Category).HasColumnName("category");
             modelBuilder.Entity<TitlePrincipals>().Property(x => x.Job).HasColumnName("job");
             modelBuilder.Entity<TitlePrincipals>().Property(x => x.Characters).HasColumnName("characters");
-            modelBuilder.Entity<TitlePrincipals>().HasKey(x => new {x.Tconst, x.Nconst,x.Ordering});
+            //modelBuilder.Entity<TitlePrincipals>().HasKey(x => new {x.Tconst, x.Nconst,x.Ordering});
+            modelBuilder.Entity<TitlePrincipals>().HasKey(x => new {x.Tconst, x.Nconst});
 
             modelBuilder.Entity<Name>().ToTable("name");
             modelBuilder.Entity<Name>().Property(x => x.Nconst).HasColumnName("nconst");
@@ -158,7 +159,7 @@ namespace DataAccess
             modelBuilder.Entity<LocalTitles>().Property(x => x.Types).HasColumnName("types");
             modelBuilder.Entity<LocalTitles>().Property(x => x.Attributes).HasColumnName("attributes");
             modelBuilder.Entity<LocalTitles>().Property(x => x.IsOriginalTitle).HasColumnName("isoriginaltitle");
-            modelBuilder.Entity<LocalTitles>().HasKey(x => new {x.TitleId});
+            modelBuilder.Entity<LocalTitles>().HasKey(x => new {x.TitleId, x.Ordering});
             //modelBuilder.Entity<LocalTitles>().HasKey(x => new {x.TitleId, x.Ordering, x.Region});
 
             modelBuilder.Entity<User>().ToTable("user");

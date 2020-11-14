@@ -157,10 +157,10 @@ namespace WebService.Controllers
 
         [HttpGet("{tconst}/titleprincipals/{nconst}")]
 
-        public IActionResult GetTitlePrincipals(string tconst, string nconst, int ordering)
+        public IActionResult GetTitlePrincipals(string tconst, string nconst)
         {
             CheckCurrentUser();
-            var titlePrincipals = _dataService.GetTitlePrincipals(tconst, nconst, ordering);
+            var titlePrincipals = _dataService.GetTitlePrincipals(tconst, nconst);
             if (titlePrincipals == null)
             {
                 return NotFound();

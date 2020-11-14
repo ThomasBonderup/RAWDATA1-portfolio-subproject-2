@@ -6,8 +6,10 @@ namespace DataAccess
     public interface IDataService
     {
         IList<Title> GetTitles(int page, int pageSize);
+        
+        IList<TitlePrincipals> GetTitlePrincipalsList(int page, int pageSize);
 
-        public TitlePrincipals GetTitlePrincipals(string tconst, string nconst, int ordering);
+        public TitlePrincipals GetTitlePrincipals(string tconst, string nconst);
 
         public IList<PrimaryProfession> GetProfessions(string nconst);
 
