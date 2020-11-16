@@ -300,12 +300,21 @@ namespace WebService.Controllers
 
         [HttpPost("{uconst}/namenotes/{nconst}")]
 
-        public IActionResult CreateNameNote(string uconst, string nconst, string notes)
+        public IActionResult CreateNameNote(NameNotes nameNote)
         {
-            var nameNote = _dataService.CreateNameNote(uconst, nconst,notes);
+            var result = _dataService.CreateNameNote(nameNote.Uconst, nameNote.Nconst, nameNote.Notes);
 
-            return Ok(nameNote);
+            return Ok(result);
         }
+
+        [HttpPost("{uconst}/namebookmarks/{nconst}")]
+
+        public IActionResult CreateNameBookmark(NameBookmark nameBookmark)
+        {
+            var result = _dataService.CreateNameBookmark(nameBookmark.Uconst, nameBookmark.Nconst);
+            return Ok(result);
+        }
+
 
         // DELETE
         [HttpDelete("{uconst}/titlebookmarks/{tconst}")]
@@ -340,6 +349,19 @@ namespace WebService.Controllers
             {
                 return Ok();
             }
+            return NotFound();
+        }
+
+        [HttpDelete("{uconst}/namebookmarks/{nconst}")]
+
+        public IActionResult DeleteNameBookmark(string uconst, string nconst)
+        {
+            var nameBookMark = _dataService.DeleteNameBookmark(uconst, nconst);
+            if (nameBookMark)
+            {
+                return Ok();
+            }
+
             return NotFound();
         }
         }
