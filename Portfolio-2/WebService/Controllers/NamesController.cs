@@ -195,7 +195,6 @@ namespace WebService.Controllers
                 _dataService.UpdateName(name.Nconst, name.PrimaryName, name.BirthYear, name.DeathYear);
                 return Ok(result);
             }
-
             return NotFound();
         }
 
