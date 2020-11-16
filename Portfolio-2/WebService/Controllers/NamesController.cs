@@ -4,6 +4,7 @@ using System.Linq;
 using AutoMapper;
 using DataAccess;
 using Microsoft.AspNetCore.Mvc;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure.Internal;
 using WebService.Common;
 
 namespace WebService.Controllers
@@ -168,6 +169,8 @@ namespace WebService.Controllers
             return Ok(titlePrincipals);
         }
 
+        
+        //DELETE
         [HttpDelete("{nconst}")]
 
         public IActionResult DeleteName(string nconst)
@@ -182,6 +185,22 @@ namespace WebService.Controllers
             return Ok(name);
         }
 
+        //PUT
+        [HttpPut("{nconst}")]
+        public IActionResult UpdateName(Name name)
+        {
+            var result = _dataService.GetName(name.Nconst);
+            if (result != null)
+            {
+                _dataService.UpdateName(name.Nconst, name.PrimaryName, name.BirthYear, name.DeathYear);
+                return Ok(result);
+            }
+
+            return NotFound();
+        }
+
+
+        //POST
         [HttpPost]
         
            public IActionResult CreateName(Name name)

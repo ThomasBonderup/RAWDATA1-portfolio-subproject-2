@@ -40,6 +40,8 @@ namespace DataAccess
         bool UpdateUser(string uconst, string FirstName, string LastName, string Email, string Password, string UserName);
 
         bool DeleteUser(string uconst);
+
+        bool UpdateName(string Nconst, string PrimaryName, string BirthYear, string DeathYear);
         
         int NumberOfNames();
         
