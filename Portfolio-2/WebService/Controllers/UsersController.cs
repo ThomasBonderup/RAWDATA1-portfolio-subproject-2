@@ -320,7 +320,7 @@ namespace WebService.Controllers
             return NotFound();
         }
 
-        [HttpDelete]
+        [HttpDelete("{uconst}")]
         public IActionResult DeleteUser(string uconst)
         {
             var user = _dataService.DeleteUser(uconst);
@@ -332,5 +332,15 @@ namespace WebService.Controllers
             return Ok();
         }
 
+        [HttpDelete("{uconst}/namenotes/{nconst}")]
+        public IActionResult DeleteNameNote(string uconst, string nconst)
+        {
+            var nameNote = _dataService.DeleteNameNote(uconst, nconst);
+            if (nameNote)
+            {
+                return Ok();
+            }
+            return NotFound();
+        }
         }
 }
