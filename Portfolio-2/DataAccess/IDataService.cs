@@ -21,6 +21,10 @@ namespace DataAccess
         
         Title GetTitle(string tconst);
 
+        bool DeleteName(string nconst);
+
+        Name CreateName(string PrimaryName, string BirthYear, string DeathYear);
+
         bool DeleteTitle(string tconst);
 
         User GetUser(string uconst);

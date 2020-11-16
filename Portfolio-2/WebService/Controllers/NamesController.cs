@@ -167,5 +167,30 @@ namespace WebService.Controllers
             }
             return Ok(titlePrincipals);
         }
+
+        [HttpDelete("{nconst}")]
+
+        public IActionResult DeleteName(string nconst)
+        {
+            CheckCurrentUser();
+            var name = _dataService.DeleteName(nconst);
+
+            if (!name)
+            {
+                return NotFound();
+            }
+            return Ok(name);
+        }
+
+        [HttpPost]
+        
+            IActionResult CreateName(Name name)
+            {
+                var result = _dataService.CreateName(name.PrimaryName, name.BirthYear, name.DeathYear);
+                
+                
+                
+                return Ok(result);
+            }
     }
 }
