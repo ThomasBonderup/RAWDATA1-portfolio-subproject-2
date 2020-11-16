@@ -184,12 +184,10 @@ namespace WebService.Controllers
 
         [HttpPost]
         
-            IActionResult CreateName(Name name)
+           public IActionResult CreateName(Name name)
             {
                 var result = _dataService.CreateName(name.PrimaryName, name.BirthYear, name.DeathYear);
-                
-                
-                
+
                 return Ok(result);
             }
     }

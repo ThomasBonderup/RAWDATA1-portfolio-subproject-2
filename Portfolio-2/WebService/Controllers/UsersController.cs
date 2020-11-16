@@ -4,6 +4,7 @@ using System.Linq;
 using AutoMapper;
 using DataAccess;
 using Microsoft.AspNetCore.Mvc;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure.Internal;
 using WebService.Common;
 
 namespace WebService.Controllers
@@ -261,8 +262,23 @@ namespace WebService.Controllers
         
         
         // PUT
-        
-        
+
+        [HttpPut("{uconst}")]
+        public IActionResult UpdateUser(User user)
+        {
+            var result = _dataService.GetUser(user.Uconst);
+            if (result != null)
+            {
+                _dataService.UpdateUser(user.Uconst, user.FirstName, user.LastName, user.Email, user.Password,
+                    user.UserName);
+                
+                return Ok(user);
+            }
+
+            return NotFound();
+        }
+
+
         // POST
         [HttpPost("{uconst}/titlebookmarks/{tconst}")]
         public IActionResult CreateTitleBookmark(string uconst, string tconst)
@@ -272,7 +288,16 @@ namespace WebService.Controllers
             return Ok(titleBookmark);
 
         }
-        
+
+        [HttpPost]
+
+        public IActionResult CreateUser(User user)
+        {
+            var result =
+                _dataService.CreateUser(user.FirstName, user.LastName, user.Email, user.Password, user.UserName);
+            return Ok(result);
+        }
+
         // DELETE
         [HttpDelete("{uconst}/titlebookmarks/{tconst}")]
         public IActionResult DeleteTitleBookmark(string uconst, string tconst)
@@ -285,6 +310,18 @@ namespace WebService.Controllers
             }
             return NotFound();
         }
-        
-    }
+
+        [HttpDelete]
+        public IActionResult DeleteUser(string uconst)
+        {
+            var user = _dataService.DeleteUser(uconst);
+            if (!user)
+            {
+                return NotFound();
+            }
+
+            return Ok();
+        }
+
+        }
 }
