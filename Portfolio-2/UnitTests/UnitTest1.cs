@@ -32,7 +32,7 @@ namespace UnitTests
         {
             var service = new DataService();
             var titles = service.GetTitles(60000, 60000);
-            Assert.Equal(55087, titles.Count);
+            Assert.Equal(55085, titles.Count);
             Assert.Equal("My Country: The New Age", titles.First().PrimaryTitle);
         }
 
@@ -118,7 +118,7 @@ namespace UnitTests
         {
             var service = new DataService();
             var ratings = service.GetRatingsByUser("ui000001",0, 25);
-            Assert.Equal(5, ratings.Count);
+            Assert.Equal(3, ratings.Count);
 
         }
 
@@ -200,11 +200,11 @@ namespace UnitTests
         public void CreateNameBookmark_ValidUconstAndNconst()
         {
             var service = new DataService();
-            var newBookmark = service.CreateNameBookmark("ui000001", "nm99999999");
+            var newBookmark = service.CreateNameBookmark("ui000001", "nm9999999");
             Assert.NotNull(newBookmark);
-            Assert.Equal(newBookmark, service.GetNameBookmark("ui000001", "nm99999999"));
-            service.DeleteNameBookmark("ui000001", "nm99999999");
-            Assert.Null(service.GetNameBookmark("ui000001", "nm99999999"));
+            Assert.Equal(newBookmark, service.GetNameBookmark("ui000001", "nm9999999"));
+            service.DeleteNameBookmark("ui000001", "nm9999999");
+            Assert.Null(service.GetNameBookmark("ui000001", "nm9999999"));
         }
 
 
@@ -429,7 +429,7 @@ namespace UnitTests
         public void UpdateNameNote()
         {
             var service = new DataService();
-            var newNote = service.CreateNameNote("ui000001", "nm99999999", "test");
+            var newNote = service.CreateNameNote("ui000001", "nm9999999", "test");
             var result = service.UpdateNameNote(newNote.Uconst, newNote.Nconst, "updated");
             Assert.True(result);
             newNote = service.GetNameNote(newNote.Uconst, newNote.Nconst);

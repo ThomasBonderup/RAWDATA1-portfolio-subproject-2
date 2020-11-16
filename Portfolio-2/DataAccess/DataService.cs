@@ -25,11 +25,26 @@ namespace DataAccess
          */
 
         public Title CreateTitle(string titleType, string primaryTitle, string originalTitle, bool isAdult,
-            string startYear, string endYear,
-            int? runtimeMinutes, string poster, string awards, string plot)
+            string startYear, string endYear, int? runtimeMinutes, string poster, string awards, string plot)
         {
             var newTconst = AssignMaxTconst();
-            ctx.Database.ExecuteSqlInterpolated($"INSERT INTO movie_data_model.title VALUES ({newTconst},{titleType},{primaryTitle},{originalTitle},{isAdult},{startYear},{endYear},{runtimeMinutes},{poster},{awards},{plot})");
+            var newTitle = new Title
+            {
+                Tconst = newTconst,
+                Titletype = titleType,
+                PrimaryTitle = primaryTitle,
+                OriginalTitle = originalTitle,
+                IsAdult = isAdult,
+                StartYear = startYear,
+                EndYear = endYear,
+                RunTimeMinutes = runtimeMinutes,
+                Poster = poster,
+                Awards = awards,
+                Plot = plot
+            };
+            ctx.Titles.Add(newTitle);
+            //ctx.Database.ExecuteSqlInterpolated($"INSERT INTO movie_data_model.title VALUES ({newTconst},{titleType},{primaryTitle},{originalTitle},{isAdult},{startYear},{endYear},{runtimeMinutes},{poster},{awards},{plot})");
+            ctx.SaveChanges();
             return GetTitle(newTconst);
         }
 
@@ -45,7 +60,18 @@ namespace DataAccess
                 return false;
             }
             
-            ctx.Database.ExecuteSqlInterpolated($"UPDATE movie_data_model.title SET titletype = {titleType}, primarytitle = {primaryTitle}, originaltitle = {originalTitle}, isadult = {isAdult}, startyear = {startYear}, endyear = {endYear}, runtimeminutes = {runtimeMinutes}, poster = {poster}, awards = {awards}, plot = {plot} WHERE title.tconst = {tconst};");
+            title.Titletype = titleType;
+            title.PrimaryTitle = primaryTitle;
+            title.OriginalTitle = originalTitle;
+            title.IsAdult = isAdult;
+            title.StartYear = startYear;
+            title.EndYear = endYear;
+            title.RunTimeMinutes = runtimeMinutes;
+            title.Poster = poster;
+            title.Awards = awards;
+            title.Plot = plot;
+            ctx.SaveChanges();
+            //ctx.Database.ExecuteSqlInterpolated($"UPDATE movie_data_model.title SET titletype = {titleType}, primarytitle = {primaryTitle}, originaltitle = {originalTitle}, isadult = {isAdult}, startyear = {startYear}, endyear = {endYear}, runtimeminutes = {runtimeMinutes}, poster = {poster}, awards = {awards}, plot = {plot} WHERE movie_data_model.title.tconst = {tconst};");
 
             return true;
         }
@@ -54,17 +80,15 @@ namespace DataAccess
 
         public bool DeleteTitle(string tconst)
         {
-            //var title = ctx.Titles.Find(tconst);
-            if (GetTitle(tconst) != null)
-            { 
-                ctx.Database.ExecuteSqlInterpolated($"DELETE FROM movie_data_model.title WHERE title.tconst = {tconst}");
-                if (GetTitle(tconst) == null)
-                {
-                    return false;
-                }
-                return true;
+            var title = ctx.Titles.Find(tconst);
+            if (title == null)
+            {
+                return false;
             }
-            return false;
+            //ctx.Database.ExecuteSqlInterpolated($"DELETE FROM movie_data_model.title WHERE title.tconst = {tconst}");
+            ctx.Titles.Remove(title);
+            ctx.SaveChanges();
+            return true;
         }
 
 
@@ -131,6 +155,7 @@ namespace DataAccess
             };
 
             ctx.Users.Add(user);
+            ctx.SaveChanges();
             return user;
         }
 
@@ -142,6 +167,7 @@ namespace DataAccess
             if (user != null)
             {
                 ctx.Users.Remove(user);
+                ctx.SaveChanges();
                 return true;
             }
 
@@ -182,7 +208,7 @@ namespace DataAccess
             user.Email = Email;
             user.Password = Password;
             user.UserName = UserName;
-
+            ctx.SaveChanges();
             return true;
         }
 
@@ -221,7 +247,7 @@ namespace DataAccess
             };
 
             ctx.Names.Add(name);
-
+            ctx.SaveChanges();
             return name;
         }
 
@@ -232,6 +258,7 @@ namespace DataAccess
             if (name != null)
             {
                 ctx.Names.Remove(name);
+                ctx.SaveChanges();
                 return true;
             }
 
@@ -249,7 +276,8 @@ namespace DataAccess
             name.PrimaryName = primaryName;
             name.BirthYear = birthYear;
             name.DeathYear = deathYear;
-
+            ctx.SaveChanges();
+            
             return true;
         }
 
@@ -470,7 +498,6 @@ namespace DataAccess
                  result.Add(rh);   
                 }
             }
-
             return result;
         }
 
@@ -581,6 +608,7 @@ namespace DataAccess
                 return false;
             }
             ctx.TitleBookmarks.Remove(titleBookmark);
+            ctx.SaveChanges();
             return true;
         }
         
@@ -595,6 +623,7 @@ namespace DataAccess
                 Timestamp = DateTime.Now
             };
             ctx.TitleBookmarks.Add(result);
+            ctx.SaveChanges();
             return result;
 
         }
@@ -626,6 +655,7 @@ namespace DataAccess
                 return false;
             }
             ctx.NameBookmarks.Remove(nameBookmark);
+            ctx.SaveChanges();
             return true;
         }
         
@@ -640,6 +670,7 @@ namespace DataAccess
                 Timestamp = DateTime.Now
             };
             ctx.NameBookmarks.Add(result);
+            ctx.SaveChanges();
             return result;
         }
 
@@ -713,6 +744,7 @@ namespace DataAccess
                 return false;
             }
             ctx.NameNotes.Remove(note);
+            ctx.SaveChanges();
             return true;
         }
         
@@ -727,6 +759,7 @@ namespace DataAccess
                 Notes = notes
             };
             ctx.NameNotes.Add(response);
+            ctx.SaveChanges();
             return response;
         }
 
@@ -738,6 +771,7 @@ namespace DataAccess
                 return false;
             }
             note.Notes = notes;
+            ctx.SaveChanges();
             return true;
         }
         
@@ -768,6 +802,7 @@ namespace DataAccess
                 return false;
             }
             ctx.TitleNotes.Remove(note);
+            ctx.SaveChanges();
             return true;
         }
         
@@ -781,6 +816,7 @@ namespace DataAccess
                 Notes = notes
             };
             ctx.TitleNotes.Add(response);
+            ctx.SaveChanges();
             return response;
         }
 
@@ -792,6 +828,7 @@ namespace DataAccess
                 return false;
             }
             note.Notes = notes;
+            ctx.SaveChanges();
             return true;
         }
         
