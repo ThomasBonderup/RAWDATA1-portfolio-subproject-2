@@ -266,6 +266,7 @@ namespace WebService.Controllers
         [HttpPut("{uconst}")]
         public IActionResult UpdateUser(User user)
         {
+            CheckCurrentUser();
             var result = _dataService.GetUser(user.Uconst);
             if (result != null)
             {
@@ -273,6 +274,36 @@ namespace WebService.Controllers
                     user.UserName);
                 
                 return Ok(user);
+            }
+
+            return NotFound();
+        }
+        
+        [HttpPut("{uconst}/namenotes/{nconst}")]
+        public IActionResult UpdateNameNote(NameNotes nameNotes)
+        {
+            CheckCurrentUser();
+            var result = _dataService.GetNameNote(nameNotes.Uconst, nameNotes.Nconst);
+            if (result != null)
+            {
+                _dataService.UpdateNameNote(nameNotes.Uconst, nameNotes.Nconst, nameNotes.Notes);
+                
+                return Ok(nameNotes);
+            }
+
+            return NotFound();
+        }
+        
+        [HttpPut("{uconst}/titlenotes/{tconst}")]
+        public IActionResult UpdateTitleNote(TitleNotes titleNotes)
+        {
+            CheckCurrentUser();
+            var result = _dataService.GetTitleNote(titleNotes.Uconst, titleNotes.Tconst);
+            if (result != null)
+            {
+                _dataService.UpdateTitleNote(titleNotes.Uconst, titleNotes.Tconst, titleNotes.Notes);
+                
+                return Ok(titleNotes);
             }
 
             return NotFound();
@@ -286,22 +317,29 @@ namespace WebService.Controllers
             CheckCurrentUser();
             var titleBookmark = _dataService.CreateTitleBookmark(uconst, tconst);
             return Ok(titleBookmark);
-
+        }
+        
+        [HttpPost("{uconst}/titlenotes/{tconst}")]
+        public IActionResult CreateTitleNote(TitleNotes titleNote)
+        {
+            CheckCurrentUser();
+            var result = _dataService.CreateTitleNote(titleNote.Uconst, titleNote.Tconst, titleNote.Notes);
+            return Ok(result);
         }
 
         [HttpPost]
-
         public IActionResult CreateUser(User user)
         {
+            CheckCurrentUser();
             var result =
                 _dataService.CreateUser(user.FirstName, user.LastName, user.Email, user.Password, user.UserName);
             return Ok(result);
         }
 
         [HttpPost("{uconst}/namenotes/{nconst}")]
-
         public IActionResult CreateNameNote(NameNotes nameNote)
         {
+            CheckCurrentUser();
             var result = _dataService.CreateNameNote(nameNote.Uconst, nameNote.Nconst, nameNote.Notes);
 
             return Ok(result);
@@ -311,6 +349,7 @@ namespace WebService.Controllers
 
         public IActionResult CreateNameBookmark(NameBookmark nameBookmark)
         {
+            CheckCurrentUser();
             var result = _dataService.CreateNameBookmark(nameBookmark.Uconst, nameBookmark.Nconst);
             return Ok(result);
         }
@@ -332,6 +371,7 @@ namespace WebService.Controllers
         [HttpDelete("{uconst}")]
         public IActionResult DeleteUser(string uconst)
         {
+            CheckCurrentUser();
             var user = _dataService.DeleteUser(uconst);
             if (!user)
             {
@@ -344,8 +384,21 @@ namespace WebService.Controllers
         [HttpDelete("{uconst}/namenotes/{nconst}")]
         public IActionResult DeleteNameNote(string uconst, string nconst)
         {
+            CheckCurrentUser();
             var nameNote = _dataService.DeleteNameNote(uconst, nconst);
             if (nameNote)
+            {
+                return Ok();
+            }
+            return NotFound();
+        }
+        
+        [HttpDelete("{uconst}/titlenotes/{tconst}")]
+        public IActionResult DeleteTitleNote(string uconst, string tconst)
+        {
+            CheckCurrentUser();
+            var titleNote = _dataService.DeleteTitleNote(uconst, tconst);
+            if (titleNote)
             {
                 return Ok();
             }
@@ -356,6 +409,7 @@ namespace WebService.Controllers
 
         public IActionResult DeleteNameBookmark(string uconst, string nconst)
         {
+            CheckCurrentUser();
             var nameBookMark = _dataService.DeleteNameBookmark(uconst, nconst);
             if (nameBookMark)
             {

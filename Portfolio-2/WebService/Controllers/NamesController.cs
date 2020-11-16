@@ -189,6 +189,7 @@ namespace WebService.Controllers
         [HttpPut("{nconst}")]
         public IActionResult UpdateName(Name name)
         {
+            CheckCurrentUser();
             var result = _dataService.GetName(name.Nconst);
             if (result != null)
             {
@@ -204,7 +205,9 @@ namespace WebService.Controllers
         
            public IActionResult CreateName(Name name)
             {
-                var result = _dataService.CreateName(name.PrimaryName, name.BirthYear, name.DeathYear);
+                CheckCurrentUser();
+                var result = _dataService.CreateName(name.PrimaryName, name.BirthYear, 
+                    name.DeathYear);
 
                 return Ok(result);
             }

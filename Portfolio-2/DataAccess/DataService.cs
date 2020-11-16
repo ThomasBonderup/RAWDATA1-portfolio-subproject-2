@@ -71,8 +71,6 @@ namespace DataAccess
             title.Awards = awards;
             title.Plot = plot;
             ctx.SaveChanges();
-            //ctx.Database.ExecuteSqlInterpolated($"UPDATE movie_data_model.title SET titletype = {titleType}, primarytitle = {primaryTitle}, originaltitle = {originalTitle}, isadult = {isAdult}, startyear = {startYear}, endyear = {endYear}, runtimeminutes = {runtimeMinutes}, poster = {poster}, awards = {awards}, plot = {plot} WHERE movie_data_model.title.tconst = {tconst};");
-
             return true;
         }
 
@@ -194,20 +192,20 @@ namespace DataAccess
                 .ToList();
         }
 
-        public bool UpdateUser(string uconst, string FirstName, string LastName, string Email, string Password,
-            string UserName)
+        public bool UpdateUser(string uconst, string firstName, string lastName, string email, 
+            string password, string userName)
         {
-            var user = GetUser(uconst);
+            var user = ctx.Users.Find(uconst);
             if (user == null)
             {
                 return false;
             }
 
-            user.FirstName = FirstName;
-            user.LastName = LastName;
-            user.Email = Email;
-            user.Password = Password;
-            user.UserName = UserName;
+            user.FirstName = firstName;
+            user.LastName = lastName;
+            user.Email = email;
+            user.Password = password;
+            user.UserName = userName;
             ctx.SaveChanges();
             return true;
         }
@@ -236,14 +234,14 @@ namespace DataAccess
                 .ToList();
         }
 
-        public Name CreateName(string PrimaryName, string Birthyear, string DeathYear)
+        public Name CreateName(string primaryName, string birthYear, string deathYear)
         {
             var name = new Name()
             {
                 Nconst = AssignMaxNconst(),
-                PrimaryName = PrimaryName,
-                BirthYear = Birthyear,
-                DeathYear = DeathYear
+                PrimaryName = primaryName,
+                BirthYear = birthYear,
+                DeathYear = deathYear
             };
 
             ctx.Names.Add(name);
@@ -267,7 +265,7 @@ namespace DataAccess
 
         public bool UpdateName(string nconst, string primaryName, string birthYear, string deathYear)
         {
-            var name = GetName(nconst);
+            var name = ctx.Names.Find(nconst);
             if (name == null)
             {
                 return false;
@@ -375,7 +373,7 @@ namespace DataAccess
                 }
             }
             maxUconstInt++;
-            var stringUconst = "tt" + maxUconstInt.ToString();
+            var stringUconst = "ui" + maxUconstInt.ToString();
 
             return stringUconst;
         }
@@ -421,7 +419,7 @@ namespace DataAccess
                 }
             }
             maxNconstInt++;
-            var stringNconst = "tt" + maxNconstInt.ToString();
+            var stringNconst = "nm" + maxNconstInt.ToString();
 
             return stringNconst;
         }
@@ -765,7 +763,7 @@ namespace DataAccess
 
         public bool UpdateNameNote(string uconst, string nconst, string notes)
         {
-            var note = GetNameNote(uconst, nconst);
+            var note = ctx.NameNotes.Find(uconst, nconst);
             if (note == null)
             {
                 return false;
@@ -822,7 +820,7 @@ namespace DataAccess
 
         public bool UpdateTitleNote(string uconst, string tconst, string notes)
         {
-            var note = GetTitleNote(uconst, tconst);
+            var note = ctx.TitleNotes.Find(uconst, tconst);
             if (note == null)
             {
                 return false;
