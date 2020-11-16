@@ -298,6 +298,15 @@ namespace WebService.Controllers
             return Ok(result);
         }
 
+        [HttpPost("{uconst}/namenotes/{nconst}")]
+
+        public IActionResult CreateNameNote(string uconst, string nconst, string notes)
+        {
+            var nameNote = _dataService.CreateNameNote(uconst, nconst,notes);
+
+            return Ok(nameNote);
+        }
+
         // DELETE
         [HttpDelete("{uconst}/titlebookmarks/{tconst}")]
         public IActionResult DeleteTitleBookmark(string uconst, string tconst)
