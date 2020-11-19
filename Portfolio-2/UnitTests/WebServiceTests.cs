@@ -42,8 +42,8 @@ namespace UnitTests
            var (data, statusCode) = GetResponseWithPaging(TitlesApi);
            Assert.Equal(HttpStatusCode.OK, statusCode);
            Assert.Equal(10, data.Count());
-           Assert.Equal("tt10850402", data.First()["tconst"]);
-           Assert.Equal("tt2583620 ", data.Last()["tconst"]);
+           Assert.Equal("tt10850888", data.First()["tconst"]);
+           Assert.Equal("tt7006666 ", data.Last()["tconst"]);
        }
 
        [Fact]
@@ -71,12 +71,12 @@ namespace UnitTests
                 PrimaryTitle = "primaryTitle Test",
                 OriginalTitle = "originalTitle Test",
                 IsAdult = false,
-                StartYear = 2020,
-                EndYear = 2020,
+                StartYear = "2020",
+                EndYear = "2020",
                 RunTimeMinutes = 160,
                 Poster = "poster N/A",
                 Awards = "null",
-                Plot = ""
+                Plot = "te"
             };
             _testOutputHelper.WriteLine(newTitle.ToString());
 
@@ -98,8 +98,8 @@ namespace UnitTests
                 PrimaryTitle = "primaryTitle Test 2",
                 OriginalTitle = "originalTitle Test 2",
                 IsAdult = false,
-                StartYear = 2021,
-                EndYear = 2023,
+                StartYear = "2021",
+                EndYear = "2023",
                 RunTimeMinutes = 161,
                 Poster = "poster N/A",
                 Awards = "null",
@@ -110,14 +110,14 @@ namespace UnitTests
 
             var update = new
             {
-                Tconst = title["tconst"],
+                Tconst = title["tconst"].ToString(),
                 Titletype = title["titleType"] + "Updated",
                 PrimaryTitle = title["primaryTitle"] + "Updated",
                 OriginalTitle = title["originalTitle"] + "Updated",
-                IsAdult = title["isAdult"],
-                StartYear = title["startYear"] + "2020",
-                EndYear = title["endYear"] + "2020",
-                RunTimeMinutes = title["runTimeMinutes"] + "1",
+                IsAdult = title["isAdult"].Value<bool>(),
+                StartYear = "2020",
+                EndYear = "2020",
+                RunTimeMinutes = title["runTimeMinutes"].Value<int?>(),
                 Poster = title["poster"] + "Updated",
                 Awards = title["awards"] + "Updated",
                 Plot = title["plot"] + "Updated",
@@ -140,20 +140,20 @@ namespace UnitTests
         {
             var update = new
             {
-                Tconst = -1,
+                Tconst = "1",
                 Titletype = "Updated",
                 PrimaryTitle = "Updated",
                 OriginalTitle = "Updated",
                 IsAdult = true,
-                StartYear = 2020,
-                EndYear = 2021,
+                StartYear = "2020",
+                EndYear = "2021",
                 RunTimeMinutes = 10,
                 Poster = "Updated",
                 Awards = "Updated",
                 Plot = "Updated",
             };
 
-            var statusCode = PutData($"{TitlesApi}", update);
+            var statusCode = PutData($"{TitlesApi}/{update.Tconst}", update);
 
             Assert.Equal(HttpStatusCode.NotFound, statusCode);
         }
@@ -170,7 +170,7 @@ namespace UnitTests
                 IsAdult = false,
                 StartYear = "2021",
                 EndYear = "2023",
-                RunTimeMinutes = "161",
+                RunTimeMinutes = 161,
                 Poster = "poster N/A",
                 Awards = "null",
                 Plot = "gg"
@@ -199,9 +199,9 @@ namespace UnitTests
        {
            var (data, statusCode) = GetResponseWithPaging(UsersApi);
            Assert.Equal(HttpStatusCode.OK, statusCode);
-           Assert.Equal(6, data.Count());
+           Assert.Equal(7, data.Count());
            Assert.Equal("ui000001  ", data.First()["uconst"]);
-           Assert.Equal("ui000006  ", data.Last()["uconst"]);
+           Assert.Equal("ui000006  ", data[5]["uconst"]);
        }
        
        [Fact]
@@ -336,7 +336,7 @@ namespace UnitTests
        (JObject, HttpStatusCode) PostData(string url, object content)
        {
            var client = new HttpClient();
-           //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", "ui000001");
+           client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue( "ui000001");
            var requestContent = new StringContent(
                JsonConvert.SerializeObject(content),
                Encoding.UTF8,
@@ -349,6 +349,7 @@ namespace UnitTests
        HttpStatusCode PutData(string url, object content)
        {
            var client = new HttpClient();
+           client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue( "ui000001");
            var response = client.PutAsync(
                url,
                new StringContent(
@@ -361,6 +362,7 @@ namespace UnitTests
        HttpStatusCode DeleteData(string url)
        {
            var client = new HttpClient();
+           client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue( "ui000001");
            var response = client.DeleteAsync(url).Result;
            return response.StatusCode;
        }
