@@ -215,14 +215,42 @@ namespace UnitTests
        [Fact]
        public void ApiUsers_GetWithInvalidUserId_NotFound()
        {
-           var (_, statusCode) = GetObject($"{UsersApi}/ui000000");
+           var (_,statusCode) = GetObject($"{UsersApi}/ui000000");
            
            Assert.Equal(HttpStatusCode.NotFound, statusCode);
        }
-       
-       
-       
-       
+
+       [Fact]
+       public void ApiUsers_DeleteUserWithValidUserId_Ok()
+       {
+           var data = new
+           {
+               Uconst = "ui0000000",
+               FirstName = "John",
+               LastName = "Doe",
+               Email ="johndoe@mail.com",
+               Password = "JohnDoe01",
+               UserName = "JD01"
+           };
+           
+           var (user, _) = PostData($"{UsersApi}",data);
+
+           var statusCode = DeleteData($"{UsersApi}/{user["uconst"]}");
+
+           Assert.Equal(HttpStatusCode.OK,statusCode);
+           
+           
+       }
+
+       [Fact]
+       public void ApiUsers_DeleteUserWithInvalidId_NotFound()
+       {
+           var statusCode = DeleteData($"{UsersApi}/-1");
+           Assert.Equal(HttpStatusCode.NotFound, statusCode);
+       }
+
+
+
        // -------------------------------- api/names -------------------------------- 
        [Fact]
        public void ApiNames_GetWithNoArguments_OkAndAllNames()
