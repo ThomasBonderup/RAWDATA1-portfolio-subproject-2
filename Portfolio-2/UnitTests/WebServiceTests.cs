@@ -264,7 +264,7 @@ namespace UnitTests
        }
        
        [Fact]
-       public void ApiUsers_GetWithValidNameId_OkAndName()
+       public void ApiNames_GetWithValidNameId_OkAndName()
        {
            var (user, statusCode) = GetObject($"{NamesApi}/nm0000001");
            
@@ -273,11 +273,28 @@ namespace UnitTests
        }
        
        [Fact]
-       public void ApiUsers_GetWithInvalidNameId_NotFound()
+       public void ApiNames_GetWithInvalidNameId_NotFound()
        {
            var (_, statusCode) = GetObject($"{NamesApi}/nm0000000");
            
            Assert.Equal(HttpStatusCode.NotFound, statusCode);
+       }
+
+       [Fact]
+
+       public void ApiNames_GetKnownForTitlesWithValidNameId_OkAndTitles()
+       {
+           var (data, statusCode) = GetResponseWithPaging("{NamesApi}/nconst/knownfortitles");
+
+           Assert.Equal(HttpStatusCode.OK, statusCode);
+           Assert.Equal(2, data.Count());
+           Assert.Equal("tt0372784  ", data.First()["nconst"]);
+           Assert.Equal("tt0468569 ", data.Last()["nconst"]);
+       }
+       
+       [Fact]
+       public void ApiNames_GetKnownForTitlesWithInvalidId_NotFound()
+       {
        }
 
        [Fact]
