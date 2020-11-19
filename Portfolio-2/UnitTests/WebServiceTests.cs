@@ -275,11 +275,37 @@ namespace UnitTests
        [Fact]
        public void ApiUsers_GetWithInvalidNameId_NotFound()
        {
-           var (_, statusCode) = GetObject($"{NamesApi}/nm000000");
+           var (_, statusCode) = GetObject($"{NamesApi}/nm0000000");
            
            Assert.Equal(HttpStatusCode.NotFound, statusCode);
        }
 
+       [Fact]
+       public void ApiNames_DeleteNameWithValidNameId_Ok()
+       {
+           var data = new
+           {
+               Nconst = "nm0000000",
+               PrimaryName = "John Doe",
+               BirthYear = "0000",
+               DeathYear = "0000"
+           };
+           
+           var (name, _) = PostData($"{NamesApi}",data);
+
+           var statusCode = DeleteData($"{NamesApi}/{name["nconst"]}");
+
+           Assert.Equal(HttpStatusCode.OK,statusCode);
+       }
+
+       [Fact]
+       public void ApiNames_DeleteNameWithInvalidId_NotFound()
+       {
+           var statusCode = DeleteData($"{NamesApi}/-1");
+           Assert.Equal(HttpStatusCode.NotFound, statusCode);
+       }
+
+       
 
        // --------------------------------  Helper methods for tests
        (JArray, HttpStatusCode) GetArray(string url)
