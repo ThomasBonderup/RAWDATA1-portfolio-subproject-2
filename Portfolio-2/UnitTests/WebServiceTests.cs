@@ -284,7 +284,7 @@ namespace UnitTests
 
        public void ApiNames_GetKnownForTitlesWithValidNameId_OkAndTitles()
        {
-           var (data, statusCode) = GetResponseWithPaging("{NamesApi}/nconst/knownfortitles");
+           var (data, statusCode) = GetResponseWithPaging($"{NamesApi}/nconst/knownfortitles");
 
            Assert.Equal(HttpStatusCode.OK, statusCode);
            Assert.Equal(2, data.Count());
@@ -295,6 +295,8 @@ namespace UnitTests
        [Fact]
        public void ApiNames_GetKnownForTitlesWithInvalidId_NotFound()
        {
+           var (_, statusCode) = GetResponseWithPaging($"{NamesApi}/nconst/knownfortitles");
+           Assert.Equal(HttpStatusCode.NotFound,statusCode);
        }
 
        [Fact]
