@@ -303,6 +303,18 @@ namespace UnitTests
             Assert.True(result);
         }
 
+        [Fact]
+        public void SearchTitle()
+        {
+            var service = new DataService();
+            var title = service.CreateTitle("Movie", "Ultra Testing 3", "UT3", 
+                true, "2020", "2020", 120, "null", "null",
+                "null");
+            var result = service.SearchTitles("Ultra Testing 3", "ui000001", 0, 10);
+            service.DeleteTitle(title.Tconst);
+            Assert.Equal(1, result.Count);
+        }
+
         //------------------------------ User tests ------------------------------
         
         [Fact]
