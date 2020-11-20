@@ -165,6 +165,16 @@ namespace UnitTests
 
         }
         
+        // ----------------------- search history -------------------------
+
+        [Fact]
+        public void GetSearchHistory()
+        {
+            var service = new DataService();
+            var searchHistory = service.GetSearchHistory("ui000002");
+            Assert.Equal(3, searchHistory.Count);
+        }
+        
         // ------------------------------- title bookmarks ---------------------------
         [Fact]
         public void GetTitleBookmarks_ValidUconst()
