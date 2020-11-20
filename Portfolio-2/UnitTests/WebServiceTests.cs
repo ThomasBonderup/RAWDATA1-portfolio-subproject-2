@@ -283,22 +283,39 @@ namespace UnitTests
        [Fact]
 
        public void ApiNames_GetKnownForTitlesWithValidNameId_OkAndTitles()
-       {
-           var (data, statusCode) = GetResponseWithPaging($"{NamesApi}/nconst/knownfortitles");
+       { 
+           var (data, statusCode) = GetResponseWithPaging($"{NamesApi}/nm0000288 /knownfortitles");
 
            Assert.Equal(HttpStatusCode.OK, statusCode);
            Assert.Equal(2, data.Count());
-           Assert.Equal("tt0372784  ", data.First()["nconst"]);
-           Assert.Equal("tt0468569 ", data.Last()["nconst"]);
+           Assert.Equal("tt0372784  ", data.First()["tconst"]);
+           Assert.Equal("tt0468569 ", data.Last()["tconst"]);
        }
        
        [Fact]
        public void ApiNames_GetKnownForTitlesWithInvalidId_NotFound()
        {
-           var (_, statusCode) = GetResponseWithPaging($"{NamesApi}/nconst/knownfortitles");
+           var (_, statusCode) = GetResponseWithPaging($"{NamesApi}/nm0000288 /knownfortitles");
            Assert.Equal(HttpStatusCode.NotFound,statusCode);
        }
 
+      /* [Fact]
+       public void ApiNames_GetPrimaryProfessionsWithValidId_OkAndProfessions()
+       {
+           var (name, statusCode) = GetObject($"{NamesApi}/nm0000001/primaryprofession");
+           Assert.Equal(HttpStatusCode.OK, statusCode);
+          // Assert.Equal(3, name.Count());
+           Assert.Equal("actor", name.First["profession"]);
+           Assert.Equal("soundtrack", name.Last["profession"]);
+       }
+       
+       [Fact]
+       public void ApiNames_GetPrimaryProfessionsWithInvalidId_NotFound()
+       {
+           var (_, statusCode) = GetResponseWithPaging($"{NamesApi}/nm0000001/primaryprofession");
+           Assert.Equal(HttpStatusCode.NotFound,statusCode);
+       }
+*/
        [Fact]
        public void ApiNames_DeleteNameWithValidNameId_Ok()
        {
