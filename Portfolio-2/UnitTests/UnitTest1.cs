@@ -426,7 +426,16 @@ namespace UnitTests
             Assert.Equal("self", profession.Last().Category);
         }
 
-        
+        [Fact]
+        public void SearchTitlePrincipals()
+        {
+            var service = new DataService();
+            var name = service.CreateName("Mickey Mouse", "1926", null);
+            var result = service.SearchTitlePrincipals("Mickey Mouse", "ui000001", 0, 10);
+            service.DeleteName(name.Nconst);
+            Assert.Equal(2, result.Count);
+        }
+
         //----------------------------  notes --------------------
         [Fact]
         public void GetNameNotes_ValidUconst()
