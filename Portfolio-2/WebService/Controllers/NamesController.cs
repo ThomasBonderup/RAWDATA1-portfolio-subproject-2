@@ -129,15 +129,11 @@ namespace WebService.Controllers
         public IActionResult GetKnownForTitles(string nconst)
         {
             var kft = _dataService.GetKnownForTitles(nconst);
-            if (kft == null)
+            if (kft == null || kft.Count == 0)
             {
                 return NotFound();
             }
-
-            if (kft.Count == 0)
-            {
-                return Ok("Missing information");
-            }
+            
             return Ok(kft);
         }
         

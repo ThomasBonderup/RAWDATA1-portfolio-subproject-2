@@ -284,18 +284,18 @@ namespace UnitTests
 
        public void ApiNames_GetKnownForTitlesWithValidNameId_OkAndTitles()
        { 
-           var (data, statusCode) = GetResponseWithPaging($"{NamesApi}/nm0000288 /knownfortitles");
+           var (data, statusCode) = GetArray($"{NamesApi}/nm0000288/knownfortitles");
 
            Assert.Equal(HttpStatusCode.OK, statusCode);
            Assert.Equal(2, data.Count());
-           Assert.Equal("tt0372784  ", data.First()["tconst"]);
-           Assert.Equal("tt0468569 ", data.Last()["tconst"]);
+           Assert.Equal("tt0468569 ", data.First()["tconst"]);
+           Assert.Equal("tt0372784 ", data.Last()["tconst"]);
        }
        
        [Fact]
        public void ApiNames_GetKnownForTitlesWithInvalidId_NotFound()
        {
-           var (_, statusCode) = GetResponseWithPaging($"{NamesApi}/nm0000288 /knownfortitles");
+           var (_, statusCode) = GetObject($"{NamesApi}/nm00000000/knownfortitles");
            Assert.Equal(HttpStatusCode.NotFound,statusCode);
        }
 
