@@ -199,7 +199,7 @@ namespace UnitTests
        {
            var (data, statusCode) = GetResponseWithPaging(UsersApi);
            Assert.Equal(HttpStatusCode.OK, statusCode);
-           Assert.Equal(7, data.Count());
+           Assert.Equal(6, data.Count());
            Assert.Equal("ui000001  ", data.First()["uconst"]);
            Assert.Equal("ui000006  ", data[5]["uconst"]);
        }
