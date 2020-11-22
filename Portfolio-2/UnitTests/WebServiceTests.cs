@@ -42,8 +42,8 @@ namespace UnitTests
            var (data, statusCode) = GetResponseWithPaging(TitlesApi);
            Assert.Equal(HttpStatusCode.OK, statusCode);
            Assert.Equal(10, data.Count());
-           Assert.Equal("tt10850888", data.First()["tconst"]);
-           Assert.Equal("tt7006666 ", data.Last()["tconst"]);
+           Assert.Equal("tt0052520 ", data.First()["tconst"]);
+           Assert.Equal("tt0108778 ", data.Last()["tconst"]);
        }
 
        [Fact]
