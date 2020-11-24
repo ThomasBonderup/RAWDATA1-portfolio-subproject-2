@@ -243,7 +243,7 @@ namespace WebService.Controllers
 
         // POST
         
-        [HttpPost("{tconst}")]
+        [HttpPost]
         public IActionResult CreateTitle(Title title)
         {
             CheckCurrentUser();
@@ -251,7 +251,7 @@ namespace WebService.Controllers
            var result = _dataService.CreateTitle(title.Titletype, title.PrimaryTitle, 
                title.OriginalTitle, title.IsAdult, title.StartYear, title.EndYear,
                title.RunTimeMinutes, title.Poster, title.Awards, title.Plot);
-            return Ok(result);
+            return Created("",result);
         }
         
         

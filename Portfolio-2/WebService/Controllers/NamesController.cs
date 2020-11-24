@@ -4,6 +4,7 @@ using System.Linq;
 using AutoMapper;
 using DataAccess;
 using Microsoft.AspNetCore.Mvc;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure.Internal;
 using WebService.Common;
 
 namespace WebService.Controllers
@@ -128,15 +129,11 @@ namespace WebService.Controllers
         public IActionResult GetKnownForTitles(string nconst)
         {
             var kft = _dataService.GetKnownForTitles(nconst);
-            if (kft == null)
+            if (kft == null || kft.Count == 0)
             {
                 return NotFound();
             }
-
-            if (kft.Count == 0)
-            {
-                return Ok("Missing information");
-            }
+            
             return Ok(kft);
         }
         
@@ -167,5 +164,48 @@ namespace WebService.Controllers
             }
             return Ok(titlePrincipals);
         }
+
+        
+        //DELETE
+        [HttpDelete("{nconst}")]
+
+        public IActionResult DeleteName(string nconst)
+        {
+            CheckCurrentUser();
+            var name = _dataService.DeleteName(nconst);
+
+            if (!name)
+            {
+                return NotFound();
+            }
+            return Ok(name);
+        }
+
+        //PUT
+        [HttpPut("{nconst}")]
+        public IActionResult UpdateName(Name name)
+        {
+            CheckCurrentUser();
+            var result = _dataService.GetName(name.Nconst);
+            if (result != null)
+            {
+                _dataService.UpdateName(name.Nconst, name.PrimaryName, name.BirthYear, name.DeathYear);
+                return Ok(result);
+            }
+            return NotFound();
+        }
+
+
+        //POST
+        [HttpPost]
+        
+           public IActionResult CreateName(Name name)
+            {
+                CheckCurrentUser();
+                var result = _dataService.CreateName(name.PrimaryName, name.BirthYear, 
+                    name.DeathYear);
+
+                return Ok(result);
+            }
     }
 }

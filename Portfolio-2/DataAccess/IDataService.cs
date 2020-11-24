@@ -21,6 +21,10 @@ namespace DataAccess
         
         Title GetTitle(string tconst);
 
+        bool DeleteName(string nconst);
+
+        Name CreateName(string PrimaryName, string BirthYear, string DeathYear);
+
         bool DeleteTitle(string tconst);
 
         User GetUser(string uconst);
@@ -36,6 +40,8 @@ namespace DataAccess
         bool UpdateUser(string uconst, string FirstName, string LastName, string Email, string Password, string UserName);
 
         bool DeleteUser(string uconst);
+
+        bool UpdateName(string Nconst, string PrimaryName, string BirthYear, string DeathYear);
         
         int NumberOfNames();
         

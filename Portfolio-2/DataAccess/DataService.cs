@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Security;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 
 namespace DataAccess
 {
@@ -24,12 +25,12 @@ namespace DataAccess
          */
 
         public Title CreateTitle(string titleType, string primaryTitle, string originalTitle, bool isAdult,
-            string startYear, string endYear,
-            int? runtimeMinutes, string poster, string awards, string plot)
+            string startYear, string endYear, int? runtimeMinutes, string poster, string awards, string plot)
         {
-            var title = new Title
+            var newTconst = AssignMaxTconst();
+            var newTitle = new Title
             {
-                Tconst = AssignMaxTconst(),
+                Tconst = newTconst,
                 Titletype = titleType,
                 PrimaryTitle = primaryTitle,
                 OriginalTitle = originalTitle,
@@ -41,8 +42,10 @@ namespace DataAccess
                 Awards = awards,
                 Plot = plot
             };
-            ctx.Titles.Add(title);
-            return title;
+            ctx.Titles.Add(newTitle);
+            //ctx.Database.ExecuteSqlInterpolated($"INSERT INTO movie_data_model.title VALUES ({newTconst},{titleType},{primaryTitle},{originalTitle},{isAdult},{startYear},{endYear},{runtimeMinutes},{poster},{awards},{plot})");
+            ctx.SaveChanges();
+            return GetTitle(newTconst);
         }
 
         public bool UpdateTitle(string tconst, string titleType, string primaryTitle, string originalTitle,
@@ -56,7 +59,7 @@ namespace DataAccess
             {
                 return false;
             }
-
+            
             title.Titletype = titleType;
             title.PrimaryTitle = primaryTitle;
             title.OriginalTitle = originalTitle;
@@ -67,7 +70,7 @@ namespace DataAccess
             title.Poster = poster;
             title.Awards = awards;
             title.Plot = plot;
-
+            ctx.SaveChanges();
             return true;
         }
 
@@ -76,14 +79,14 @@ namespace DataAccess
         public bool DeleteTitle(string tconst)
         {
             var title = ctx.Titles.Find(tconst);
-
-            if (title != null)
+            if (title == null)
             {
-                ctx.Titles.Remove(title);
-                return true;
+                return false;
             }
-
-            return false;
+            //ctx.Database.ExecuteSqlInterpolated($"DELETE FROM movie_data_model.title WHERE title.tconst = {tconst}");
+            ctx.Titles.Remove(title);
+            ctx.SaveChanges();
+            return true;
         }
 
 
@@ -150,6 +153,7 @@ namespace DataAccess
             };
 
             ctx.Users.Add(user);
+            ctx.SaveChanges();
             return user;
         }
 
@@ -161,6 +165,7 @@ namespace DataAccess
             if (user != null)
             {
                 ctx.Users.Remove(user);
+                ctx.SaveChanges();
                 return true;
             }
 
@@ -187,21 +192,21 @@ namespace DataAccess
                 .ToList();
         }
 
-        public bool UpdateUser(string uconst, string FirstName, string LastName, string Email, string Password,
-            string UserName)
+        public bool UpdateUser(string uconst, string firstName, string lastName, string email, 
+            string password, string userName)
         {
-            var user = GetUser(uconst);
+            var user = ctx.Users.Find(uconst);
             if (user == null)
             {
                 return false;
             }
 
-            user.FirstName = FirstName;
-            user.LastName = LastName;
-            user.Email = Email;
-            user.Password = Password;
-            user.UserName = UserName;
-
+            user.FirstName = firstName;
+            user.LastName = lastName;
+            user.Email = email;
+            user.Password = password;
+            user.UserName = userName;
+            ctx.SaveChanges();
             return true;
         }
 
@@ -229,18 +234,18 @@ namespace DataAccess
                 .ToList();
         }
 
-        public Name CreateName(string PrimaryName, string Birthyear, string DeathYear)
+        public Name CreateName(string primaryName, string birthYear, string deathYear)
         {
             var name = new Name()
             {
                 Nconst = AssignMaxNconst(),
-                PrimaryName = PrimaryName,
-                BirthYear = Birthyear,
-                DeathYear = DeathYear
+                PrimaryName = primaryName,
+                BirthYear = birthYear,
+                DeathYear = deathYear
             };
 
             ctx.Names.Add(name);
-
+            ctx.SaveChanges();
             return name;
         }
 
@@ -251,6 +256,7 @@ namespace DataAccess
             if (name != null)
             {
                 ctx.Names.Remove(name);
+                ctx.SaveChanges();
                 return true;
             }
 
@@ -259,7 +265,7 @@ namespace DataAccess
 
         public bool UpdateName(string nconst, string primaryName, string birthYear, string deathYear)
         {
-            var name = GetName(nconst);
+            var name = ctx.Names.Find(nconst);
             if (name == null)
             {
                 return false;
@@ -268,7 +274,8 @@ namespace DataAccess
             name.PrimaryName = primaryName;
             name.BirthYear = birthYear;
             name.DeathYear = deathYear;
-
+            ctx.SaveChanges();
+            
             return true;
         }
 
@@ -366,7 +373,7 @@ namespace DataAccess
                 }
             }
             maxUconstInt++;
-            var stringUconst = "tt" + maxUconstInt.ToString();
+            var stringUconst = "ui" + maxUconstInt.ToString();
 
             return stringUconst;
         }
@@ -412,9 +419,39 @@ namespace DataAccess
                 }
             }
             maxNconstInt++;
-            var stringNconst = "tt" + maxNconstInt.ToString();
+            var stringNconst = "nm" + maxNconstInt.ToString();
 
             return stringNconst;
+        }
+
+        public bool IsValidTconst(string tconst)
+        {
+            var title = ctx.Titles.Find(tconst);
+            if (title != null)
+            {
+                return true;
+            }
+            return false;
+        }
+        
+        public bool IsValidUconst(string uconst)
+        {
+            var title = ctx.Users.Find(uconst);
+            if (title != null)
+            {
+                return true;
+            }
+            return false;
+        }
+        
+        public bool IsValidNconst(string nconst)
+        {
+            var title = ctx.Names.Find(nconst);
+            if (title != null)
+            {
+                return true;
+            }
+            return false;
         }
 
         public IList<Title> SearchTitles(string searchString, string uConst, int page, int pageSize)
@@ -459,7 +496,6 @@ namespace DataAccess
                  result.Add(rh);   
                 }
             }
-
             return result;
         }
 
@@ -570,11 +606,14 @@ namespace DataAccess
                 return false;
             }
             ctx.TitleBookmarks.Remove(titleBookmark);
+            ctx.SaveChanges();
             return true;
         }
         
         public TitleBookmark CreateTitleBookmark(string uconst, string tconst)
         {
+            if (!IsValidUconst(uconst) || !IsValidTconst(tconst)) return null;
+            
             var result = new TitleBookmark
             {
                 Uconst = uconst,
@@ -582,7 +621,9 @@ namespace DataAccess
                 Timestamp = DateTime.Now
             };
             ctx.TitleBookmarks.Add(result);
+            ctx.SaveChanges();
             return result;
+
         }
         
         // ------------------------------------- name bookmark -----------------------------------
@@ -612,11 +653,14 @@ namespace DataAccess
                 return false;
             }
             ctx.NameBookmarks.Remove(nameBookmark);
+            ctx.SaveChanges();
             return true;
         }
         
         public NameBookmark CreateNameBookmark(string uconst, string nconst)
         {
+            if (!IsValidUconst(uconst) || !IsValidNconst(nconst)) return null;
+
             var result = new NameBookmark
             {
                 Uconst = uconst,
@@ -624,6 +668,7 @@ namespace DataAccess
                 Timestamp = DateTime.Now
             };
             ctx.NameBookmarks.Add(result);
+            ctx.SaveChanges();
             return result;
         }
 
@@ -697,11 +742,14 @@ namespace DataAccess
                 return false;
             }
             ctx.NameNotes.Remove(note);
+            ctx.SaveChanges();
             return true;
         }
         
         public NameNotes CreateNameNote(string uconst, string nconst, string notes)
         {
+            if (!IsValidUconst(uconst) || !IsValidNconst(nconst)) return null;
+
             var response = new NameNotes()
             {
                 Uconst = uconst,
@@ -709,17 +757,19 @@ namespace DataAccess
                 Notes = notes
             };
             ctx.NameNotes.Add(response);
+            ctx.SaveChanges();
             return response;
         }
 
         public bool UpdateNameNote(string uconst, string nconst, string notes)
         {
-            var note = GetNameNote(uconst, nconst);
+            var note = ctx.NameNotes.Find(uconst, nconst);
             if (note == null)
             {
                 return false;
             }
             note.Notes = notes;
+            ctx.SaveChanges();
             return true;
         }
         
@@ -750,11 +800,13 @@ namespace DataAccess
                 return false;
             }
             ctx.TitleNotes.Remove(note);
+            ctx.SaveChanges();
             return true;
         }
         
         public TitleNotes CreateTitleNote(string uconst, string tconst, string notes)
         {
+            if (!IsValidUconst(uconst) || !IsValidTconst(tconst)) return null;
             var response = new TitleNotes()
             {
                 Uconst = uconst,
@@ -762,17 +814,19 @@ namespace DataAccess
                 Notes = notes
             };
             ctx.TitleNotes.Add(response);
+            ctx.SaveChanges();
             return response;
         }
 
         public bool UpdateTitleNote(string uconst, string tconst, string notes)
         {
-            var note = GetTitleNote(uconst, tconst);
+            var note = ctx.TitleNotes.Find(uconst, tconst);
             if (note == null)
             {
                 return false;
             }
             note.Notes = notes;
+            ctx.SaveChanges();
             return true;
         }
         

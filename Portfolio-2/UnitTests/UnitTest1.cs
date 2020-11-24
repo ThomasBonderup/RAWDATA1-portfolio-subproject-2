@@ -31,9 +31,9 @@ namespace UnitTests
         public void GetAllTitles_NoArgument_ReturnsAllTitles()
         {
             var service = new DataService();
-            var titles = service.GetTitles(55076, 55076);
-            Assert.Equal(55076, titles.Count);
-            Assert.Equal("Çocuk", titles.First().PrimaryTitle);
+            var titles = service.GetTitles(60000, 60000);
+            Assert.Equal(55085, titles.Count);
+            Assert.Equal("My Country: The New Age", titles.First().PrimaryTitle);
         }
 
         [Fact]
@@ -70,8 +70,8 @@ namespace UnitTests
         public void GetTitleByTconst_ValidTconst()
         {
             var service = new DataService();
-            var title = service.GetTitle("tt10850402");
-            Assert.Equal("Çocuk", title.PrimaryTitle);
+            var title = service.GetTitle("tt9999991");
+            Assert.Equal("Test 8 primarytitle", title.PrimaryTitle);
         }
 
         
@@ -118,7 +118,7 @@ namespace UnitTests
         {
             var service = new DataService();
             var ratings = service.GetRatingsByUser("ui000001",0, 25);
-            Assert.Equal(5, ratings.Count);
+            Assert.Equal(3, ratings.Count);
 
         }
 
@@ -165,6 +165,16 @@ namespace UnitTests
 
         }
         
+        // ----------------------- search history -------------------------
+
+        [Fact]
+        public void GetSearchHistory()
+        {
+            var service = new DataService();
+            var searchHistory = service.GetSearchHistory("ui000002");
+            Assert.Equal(3, searchHistory.Count);
+        }
+        
         // ------------------------------- title bookmarks ---------------------------
         [Fact]
         public void GetTitleBookmarks_ValidUconst()
@@ -200,11 +210,11 @@ namespace UnitTests
         public void CreateNameBookmark_ValidUconstAndNconst()
         {
             var service = new DataService();
-            var newBookmark = service.CreateNameBookmark("ui000001", "nm99999999");
+            var newBookmark = service.CreateNameBookmark("ui000001", "nm9999999");
             Assert.NotNull(newBookmark);
-            Assert.Equal(newBookmark, service.GetNameBookmark("ui000001", "nm99999999"));
-            service.DeleteNameBookmark("ui000001", "nm99999999");
-            Assert.Null(service.GetNameBookmark("ui000001", "nm99999999"));
+            Assert.Equal(newBookmark, service.GetNameBookmark("ui000001", "nm9999999"));
+            service.DeleteNameBookmark("ui000001", "nm9999999");
+            Assert.Null(service.GetNameBookmark("ui000001", "nm9999999"));
         }
 
 
@@ -247,9 +257,17 @@ namespace UnitTests
         public void CreateNewTitle()
         {
             var service = new DataService();
-            var title = service.CreateTitle("Movie", "Ultra Testing 3", "UT3", 
-                true, "2020", "2020", 120, null, null,
-                null);
+            var title = service.CreateTitle(
+                "Movie", 
+                "Ultra Testing 3", 
+                "UT3", 
+                true, 
+                "2020", 
+                "2020", 
+                120, 
+                "null", 
+                "null",
+                "null");
             Assert.True(title.Tconst != null);
             Assert.Equal("Movie", title.Titletype);
             Assert.Equal("Ultra Testing 3", title.PrimaryTitle);
@@ -279,7 +297,8 @@ namespace UnitTests
             Assert.Equal("tt10850402", title.Tconst);
             Assert.Equal("Testing", title.PrimaryTitle);
             Assert.True(result);
-            service.UpdateTitle(title.Tconst, title.Titletype, "Çocuk", title.OriginalTitle,
+
+            var cleanup = service.UpdateTitle(title.Tconst, title.Titletype, "Çocuk", title.OriginalTitle,
                 title.IsAdult, title.StartYear, title.EndYear, title.RunTimeMinutes, title.Poster, title.Awards, title.Plot);
         }
 
@@ -288,12 +307,22 @@ namespace UnitTests
         {
             var service = new DataService();
             var title = service.CreateTitle("Movie", "Ultra Testing 3", "UT3", 
-                true, "2020", "2020", 120, null, null,
-                null);
+                true, "2020", "2020", 120, "null", "null",
+                "null");
             var result = service.DeleteTitle(title.Tconst);
-            title = service.GetTitle(title.Tconst);
             Assert.True(result);
-            Assert.Null(title);
+        }
+
+        [Fact]
+        public void SearchTitle()
+        {
+            var service = new DataService();
+            var title = service.CreateTitle("Movie", "Ultra Testing 3", "UT3", 
+                true, "2020", "2020", 120, "null", "null",
+                "null");
+            var result = service.SearchTitles("Ultra Testing 3", "ui000001", 0, 10);
+            service.DeleteTitle(title.Tconst);
+            Assert.Equal(1, result.Count);
         }
 
         //------------------------------ User tests ------------------------------
@@ -407,7 +436,16 @@ namespace UnitTests
             Assert.Equal("self", profession.Last().Category);
         }
 
-        
+        [Fact]
+        public void SearchTitlePrincipals()
+        {
+            var service = new DataService();
+            var name = service.CreateName("Mickey Mouse", "1926", null);
+            var result = service.SearchTitlePrincipals("Mickey Mouse", "ui000001", 0, 10);
+            service.DeleteName(name.Nconst);
+            Assert.Equal(2, result.Count);
+        }
+
         //----------------------------  notes --------------------
         [Fact]
         public void GetNameNotes_ValidUconst()
@@ -422,7 +460,7 @@ namespace UnitTests
         public void UpdateNameNote()
         {
             var service = new DataService();
-            var newNote = service.CreateNameNote("ui...", "nm...", "test");
+            var newNote = service.CreateNameNote("ui000001", "nm9999999", "test");
             var result = service.UpdateNameNote(newNote.Uconst, newNote.Nconst, "updated");
             Assert.True(result);
             newNote = service.GetNameNote(newNote.Uconst, newNote.Nconst);
@@ -444,7 +482,7 @@ namespace UnitTests
         public void UpdateTitleNote()
         {
             var service = new DataService();
-            var newNote = service.CreateTitleNote("ui...", "tt...", "test");
+            var newNote = service.CreateTitleNote("ui000001", "tt9999991", "test");
             var result = service.UpdateTitleNote(newNote.Uconst, newNote.Tconst, "updated");
             Assert.True(result);
             newNote = service.GetTitleNote(newNote.Uconst, newNote.Tconst);

@@ -42,8 +42,8 @@ namespace UnitTests
            var (data, statusCode) = GetResponseWithPaging(TitlesApi);
            Assert.Equal(HttpStatusCode.OK, statusCode);
            Assert.Equal(10, data.Count());
-           Assert.Equal("tt10850402", data.First()["tconst"]);
-           Assert.Equal("tt2583620 ", data.Last()["tconst"]);
+           Assert.Equal("tt0052520 ", data.First()["tconst"]);
+           Assert.Equal("tt0108778 ", data.Last()["tconst"]);
        }
 
        [Fact]
@@ -71,12 +71,12 @@ namespace UnitTests
                 PrimaryTitle = "primaryTitle Test",
                 OriginalTitle = "originalTitle Test",
                 IsAdult = false,
-                StartYear = 2020,
-                EndYear = 2020,
+                StartYear = "2020",
+                EndYear = "2020",
                 RunTimeMinutes = 160,
                 Poster = "poster N/A",
                 Awards = "null",
-                Plot = ""
+                Plot = "te"
             };
             _testOutputHelper.WriteLine(newTitle.ToString());
 
@@ -98,8 +98,8 @@ namespace UnitTests
                 PrimaryTitle = "primaryTitle Test 2",
                 OriginalTitle = "originalTitle Test 2",
                 IsAdult = false,
-                StartYear = 2021,
-                EndYear = 2023,
+                StartYear = "2021",
+                EndYear = "2023",
                 RunTimeMinutes = 161,
                 Poster = "poster N/A",
                 Awards = "null",
@@ -110,14 +110,14 @@ namespace UnitTests
 
             var update = new
             {
-                Tconst = title["tconst"],
+                Tconst = title["tconst"].ToString(),
                 Titletype = title["titleType"] + "Updated",
                 PrimaryTitle = title["primaryTitle"] + "Updated",
                 OriginalTitle = title["originalTitle"] + "Updated",
-                IsAdult = title["isAdult"],
-                StartYear = title["startYear"] + "2020",
-                EndYear = title["endYear"] + "2020",
-                RunTimeMinutes = title["runTimeMinutes"] + "1",
+                IsAdult = title["isAdult"].Value<bool>(),
+                StartYear = "2020",
+                EndYear = "2020",
+                RunTimeMinutes = title["runTimeMinutes"].Value<int?>(),
                 Poster = title["poster"] + "Updated",
                 Awards = title["awards"] + "Updated",
                 Plot = title["plot"] + "Updated",
@@ -140,20 +140,20 @@ namespace UnitTests
         {
             var update = new
             {
-                Tconst = -1,
+                Tconst = "1",
                 Titletype = "Updated",
                 PrimaryTitle = "Updated",
                 OriginalTitle = "Updated",
                 IsAdult = true,
-                StartYear = 2020,
-                EndYear = 2021,
+                StartYear = "2020",
+                EndYear = "2021",
                 RunTimeMinutes = 10,
                 Poster = "Updated",
                 Awards = "Updated",
                 Plot = "Updated",
             };
 
-            var statusCode = PutData($"{TitlesApi}", update);
+            var statusCode = PutData($"{TitlesApi}/{update.Tconst}", update);
 
             Assert.Equal(HttpStatusCode.NotFound, statusCode);
         }
@@ -170,7 +170,7 @@ namespace UnitTests
                 IsAdult = false,
                 StartYear = "2021",
                 EndYear = "2023",
-                RunTimeMinutes = "161",
+                RunTimeMinutes = 161,
                 Poster = "poster N/A",
                 Awards = "null",
                 Plot = "gg"
@@ -201,7 +201,7 @@ namespace UnitTests
            Assert.Equal(HttpStatusCode.OK, statusCode);
            Assert.Equal(6, data.Count());
            Assert.Equal("ui000001  ", data.First()["uconst"]);
-           Assert.Equal("ui000006  ", data.Last()["uconst"]);
+           Assert.Equal("ui000006  ", data[5]["uconst"]);
        }
        
        [Fact]
@@ -215,14 +215,42 @@ namespace UnitTests
        [Fact]
        public void ApiUsers_GetWithInvalidUserId_NotFound()
        {
-           var (_, statusCode) = GetObject($"{UsersApi}/ui000000");
+           var (_,statusCode) = GetObject($"{UsersApi}/ui000000");
            
            Assert.Equal(HttpStatusCode.NotFound, statusCode);
        }
-       
-       
-       
-       
+
+       [Fact]
+       public void ApiUsers_DeleteUserWithValidUserId_Ok()
+       {
+           var data = new
+           {
+               Uconst = "ui0000000",
+               FirstName = "John",
+               LastName = "Doe",
+               Email ="johndoe@mail.com",
+               Password = "JohnDoe01",
+               UserName = "JD01"
+           };
+           
+           var (user, _) = PostData($"{UsersApi}",data);
+
+           var statusCode = DeleteData($"{UsersApi}/{user["uconst"]}");
+
+           Assert.Equal(HttpStatusCode.OK,statusCode);
+           
+           
+       }
+
+       [Fact]
+       public void ApiUsers_DeleteUserWithInvalidId_NotFound()
+       {
+           var statusCode = DeleteData($"{UsersApi}/-1");
+           Assert.Equal(HttpStatusCode.NotFound, statusCode);
+       }
+
+
+
        // -------------------------------- api/names -------------------------------- 
        [Fact]
        public void ApiNames_GetWithNoArguments_OkAndAllNames()
@@ -236,7 +264,7 @@ namespace UnitTests
        }
        
        [Fact]
-       public void ApiUsers_GetWithValidNameId_OkAndName()
+       public void ApiNames_GetWithValidNameId_OkAndName()
        {
            var (user, statusCode) = GetObject($"{NamesApi}/nm0000001");
            
@@ -245,13 +273,75 @@ namespace UnitTests
        }
        
        [Fact]
-       public void ApiUsers_GetWithInvalidNameId_NotFound()
+       public void ApiNames_GetWithInvalidNameId_NotFound()
        {
-           var (_, statusCode) = GetObject($"{NamesApi}/nm000000");
+           var (_, statusCode) = GetObject($"{NamesApi}/nm0000000");
            
            Assert.Equal(HttpStatusCode.NotFound, statusCode);
        }
 
+       [Fact]
+
+       public void ApiNames_GetKnownForTitlesWithValidNameId_OkAndTitles()
+       { 
+           var (data, statusCode) = GetArray($"{NamesApi}/nm0000288/knownfortitles");
+
+           Assert.Equal(HttpStatusCode.OK, statusCode);
+           Assert.Equal(2, data.Count());
+           Assert.Equal("tt0468569 ", data.First()["tconst"]);
+           Assert.Equal("tt0372784 ", data.Last()["tconst"]);
+       }
+       
+       [Fact]
+       public void ApiNames_GetKnownForTitlesWithInvalidId_NotFound()
+       {
+           var (_, statusCode) = GetObject($"{NamesApi}/nm00000000/knownfortitles");
+           Assert.Equal(HttpStatusCode.NotFound,statusCode);
+       }
+
+      /* [Fact]
+       public void ApiNames_GetPrimaryProfessionsWithValidId_OkAndProfessions()
+       {
+           var (name, statusCode) = GetObject($"{NamesApi}/nm0000001/primaryprofession");
+           Assert.Equal(HttpStatusCode.OK, statusCode);
+          // Assert.Equal(3, name.Count());
+           Assert.Equal("actor", name.First["profession"]);
+           Assert.Equal("soundtrack", name.Last["profession"]);
+       }
+       
+       [Fact]
+       public void ApiNames_GetPrimaryProfessionsWithInvalidId_NotFound()
+       {
+           var (_, statusCode) = GetResponseWithPaging($"{NamesApi}/nm0000001/primaryprofession");
+           Assert.Equal(HttpStatusCode.NotFound,statusCode);
+       }
+*/
+       [Fact]
+       public void ApiNames_DeleteNameWithValidNameId_Ok()
+       {
+           var data = new
+           {
+               Nconst = "nm0000000",
+               PrimaryName = "John Doe",
+               BirthYear = "0000",
+               DeathYear = "0000"
+           };
+           
+           var (name, _) = PostData($"{NamesApi}",data);
+
+           var statusCode = DeleteData($"{NamesApi}/{name["nconst"]}");
+
+           Assert.Equal(HttpStatusCode.OK,statusCode);
+       }
+
+       [Fact]
+       public void ApiNames_DeleteNameWithInvalidId_NotFound()
+       {
+           var statusCode = DeleteData($"{NamesApi}/-1");
+           Assert.Equal(HttpStatusCode.NotFound, statusCode);
+       }
+
+       
 
        // --------------------------------  Helper methods for tests
        (JArray, HttpStatusCode) GetArray(string url)
@@ -282,7 +372,7 @@ namespace UnitTests
        (JObject, HttpStatusCode) PostData(string url, object content)
        {
            var client = new HttpClient();
-           //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", "ui000001");
+           client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue( "ui000001");
            var requestContent = new StringContent(
                JsonConvert.SerializeObject(content),
                Encoding.UTF8,
@@ -295,6 +385,7 @@ namespace UnitTests
        HttpStatusCode PutData(string url, object content)
        {
            var client = new HttpClient();
+           client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue( "ui000001");
            var response = client.PutAsync(
                url,
                new StringContent(
@@ -307,6 +398,7 @@ namespace UnitTests
        HttpStatusCode DeleteData(string url)
        {
            var client = new HttpClient();
+           client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue( "ui000001");
            var response = client.DeleteAsync(url).Result;
            return response.StatusCode;
        }
