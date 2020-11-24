@@ -293,7 +293,7 @@ namespace UnitTests
        }
        
        [Fact]
-       public void ApiNames_GetKnownForTitlesWithInvalidId_NotFound()
+       public void ApiNames_GetKnownForTitlesWithInvalidNameId_NotFound()
        {
            var (_, statusCode) = GetObject($"{NamesApi}/nm00000000/knownfortitles");
            Assert.Equal(HttpStatusCode.NotFound,statusCode);
@@ -316,7 +316,29 @@ namespace UnitTests
            Assert.Equal(HttpStatusCode.NotFound,statusCode);
        }
 */
-       [Fact]
+      [Fact]
+
+      public void ApiNames_GetTitlePrincipalsWithValidNameId_Ok()
+      {
+          var (data, statusCode) = GetArray($"{NamesApi}/nm0000001/titleprincipals");
+          Assert.Equal(HttpStatusCode.OK,statusCode);
+          Assert.Equal(1,data.Count());
+          Assert.Equal("tt0360833 ", data.First()["tconst"]);
+      }
+
+      [Fact]
+      public void ApiNames_GetTitlePrincipalsWithInvalidId_NotFound()
+      {
+          var (_, statusCode) = GetArray($"{NamesApi}/nm0000000/titleprincipals");
+          Assert.Equal(HttpStatusCode.NotFound,statusCode);
+      }
+
+      [Fact]
+      public void ApiNames_GetTitleAndNameWithValidId_Ok()
+      {
+      }
+
+      [Fact]
        public void ApiNames_DeleteNameWithValidNameId_Ok()
        {
            var data = new
