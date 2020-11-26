@@ -51,5 +51,6 @@ define(['knockout'], function(ko) {
         searchInput,
         searchBtn,
         advSearchBtn,
+        loginBtn
     };
 });
