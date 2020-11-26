@@ -1,9 +1,35 @@
 
+body{
 
+    font-family:  Helvetica, Arial, sans-serif, 'Segoe UI', Tahoma, Verdana, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    margin: 1%;
+    border: black 1px solid;
+    
+}
+
+header{
+    background-color: cornflowerblue;
+    border: black 2px solid;
+}
 
 img{
     
-    width: 5%;
-    height: 5%;
+    width: 3%;
+    height: 3%;
+    
+}
+
+nav{
+    display: inline;
+}
+
+nav ul{
+    display: inline;
+}
+
+ul li{
+    
+    display: inline;
     
 }
