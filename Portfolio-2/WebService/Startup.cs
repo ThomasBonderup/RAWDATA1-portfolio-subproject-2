@@ -34,6 +34,8 @@ namespace WebService
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseFileServer();
+
             app.UseRouting();
 
             app.UseAuth();

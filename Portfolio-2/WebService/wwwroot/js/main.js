@@ -13,9 +13,14 @@ require(['knockout', 'text'], (ko) => {
             viewModel: { require: "components/titleList/titleList" },
             template: { require: "text!components/titleList/titleList.html"}
         });
+
+    ko.components.register("title-details",
+        {
+            viewModel: { require: "components/titleDetails/titleDetails" },
+            template: { require: "text!components/titleDetails/titleDetails.html" }
+        });
 });
 
 require(['knockout', 'viewModel'], function (ko, vm) {
-    console.log(vm.name);
     ko.applyBindings(vm);
 });

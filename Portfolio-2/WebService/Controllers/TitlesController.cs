@@ -134,7 +134,7 @@ namespace WebService.Controllers
         [HttpGet(Name = nameof(GetTitles))]
         public IActionResult GetTitles(int page = 0, int pageSize = 10)
         {
-            CheckCurrentUser();
+            //CheckCurrentUser();
             pageSize = PaginationHelper.CheckPageSize(pageSize);
             var titles = _dataService.GetTitles(page, pageSize);
             var result = CreateResultTitles(page, pageSize, titles);
