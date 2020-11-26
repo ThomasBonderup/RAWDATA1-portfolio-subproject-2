@@ -19,6 +19,12 @@ require(['knockout', 'text'], (ko) => {
             viewModel: { require: "components/titleDetails/titleDetails" },
             template: { require: "text!components/titleDetails/titleDetails.html" }
         });
+    
+    ko.components.register("userlist",
+        {
+        viewModel: {require: "component/login/login"},
+        template:{require: "text!components/login/login.html"}
+    })
 });
 
 require(['knockout', 'viewModel'], function (ko, vm) {
