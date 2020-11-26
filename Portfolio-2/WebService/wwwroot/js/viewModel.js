@@ -5,6 +5,8 @@ define(['knockout'], function(ko) {
    // var genres = ko.observableArray();
     var selectedGenre = ko.observable();
     
+    
+    
     function Genre(genre){
         this.genre = ko.observable(genre);
     }
@@ -40,11 +42,13 @@ define(['knockout'], function(ko) {
     let searchInput = ko.observable("search...");
     
     let searchBtn = () => console.log("Search button clicked");
+    let advSearchBtn = () => console.log("Filtered search");
     
     return {
         genres,
         selectedGenre,
         searchInput,
         searchBtn,
+        advSearchBtn,
     };
 });
