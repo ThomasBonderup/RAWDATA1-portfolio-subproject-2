@@ -1,7 +1,8 @@
 require.config({
     baseUrl: "js",
     paths : {
-        knockout: "lib/knockout/knockout-latest"
+        knockout: "lib/knockout/knockout-latest",
+        dataservice: "services/dataService"
     }
 });
 
