@@ -5,6 +5,7 @@
     <link href="css/style.css" rel="stylesheet" />
 
 </head>
+
 <body>
  <header>
     <span>   <img src="resources/logo_black.svg"> </span>
@@ -13,6 +14,9 @@
 <select data-bind="options: genres, optionsText: 'genre', value: selectedGenre, optionsCaption: 'Genre'" ></select>
     <button data-bind="click: advSearchBtn">Advanced search</button>
 <div data-bind="visible: selectedGenre"></div>
+     <button data-bind="click: loginBtn">Login</button>
+     <div data-bind="component:{name:login}"></div>
+     
     
     <nav>
         <ul>

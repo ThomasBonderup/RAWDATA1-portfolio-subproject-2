@@ -43,6 +43,7 @@ define(['knockout'], function(ko) {
     
     let searchBtn = () => console.log("Search button clicked");
     let advSearchBtn = () => console.log("Filtered search");
+    let loginBtn = () => console.log("Login button clicked");
     
     return {
         genres,
