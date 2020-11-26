@@ -23,7 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="wwwroot\js\components" />
+      <Folder Include="wwwroot\js\components\login" />
       <Folder Include="wwwroot\resources" />
     </ItemGroup>
 
