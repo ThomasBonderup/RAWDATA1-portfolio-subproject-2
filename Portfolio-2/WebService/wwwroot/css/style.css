@@ -20,16 +20,15 @@ img{
     
 }
 
-nav{
+nav, nav ul, ul li{
     display: inline;
 }
 
-nav ul{
-    display: inline;
+.bi{
+    width: 30%;
+    height: 30%;
 }
 
-ul li{
-    
-    display: inline;
-    
+.content-container{
+    border: black 1px solid;
 }
