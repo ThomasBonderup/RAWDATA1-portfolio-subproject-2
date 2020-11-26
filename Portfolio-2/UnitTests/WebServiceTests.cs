@@ -31,9 +31,6 @@ namespace UnitTests
         private const string NamesApi = "http://localhost:5001/api/names";
         
         // ------ authentication...
-        // TODO fix authentication error
-        // ui000001  
-        
 
         // -------------------------------- api/titles -------------------------------- 
        [Fact]
