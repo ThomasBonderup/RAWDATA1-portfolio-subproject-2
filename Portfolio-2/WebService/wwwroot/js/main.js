@@ -14,6 +14,13 @@ require(['knockout', 'text'], (ko) => {
             template: { require: "text!components/titleList/titleList.html"}
         });
 
+    ko.components.register("user",
+        {
+            viewModel: {require: "component/user/user"},
+            template:{require: "text!components/login/login.html"}
+
+        });
+
     ko.components.register("title-details",
         {
             viewModel: { require: "components/titleDetails/titleDetails" },
@@ -26,6 +33,8 @@ require(['knockout', 'text'], (ko) => {
         template:{require: "text!components/login/login.html"}
     })
 });
+
+
 
 require(['knockout', 'viewModel'], function (ko, vm) {
     ko.applyBindings(vm);

@@ -8,16 +8,13 @@ define(['knockout'], ['dataservice'], (ko, ds, user) =>{
     let bookmarks = ko.observableArray();
     
     
-    
-    
-    
     return {
         
         userImg,
         firstName,
         lastName,
         ratingHistory,
-        bookmarks
-    }
+        bookmarks,
+    };
     
 });
