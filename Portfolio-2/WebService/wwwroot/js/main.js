@@ -17,7 +17,7 @@ require(['knockout', 'text'], (ko) => {
     ko.components.register("user",
         {
             viewModel: {require: "component/user/user"},
-            template:{require: "text!components/login/login.html"}
+            template:{require: "text!components/login/login.html"} <!-- skal denne ikke være user.html?-->
 
         });
 
