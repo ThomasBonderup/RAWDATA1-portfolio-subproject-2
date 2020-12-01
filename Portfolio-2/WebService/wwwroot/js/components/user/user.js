@@ -1,20 +1,23 @@
-define(['knockout'], ['dataservice'], (ko, ds, user) =>{
+define(['knockout'], ['dataservice'], (ko, ds) =>{
+    
+    let user = ko.observable();
+    
    
-    let userImg = ko.observable();
-    let firstName = ko.observable("Django");
-    let lastName = ko.observable("Bang-Bang");
-    
-    let ratingHistory = ko.observableArray();
-    let bookmarks = ko.observableArray();
-    
-    
-    return {
+    return function(params){
         
-        userImg,
-        firstName,
-        lastName,
-        ratingHistory,
-        bookmarks,
+        
+        let firstName = ko.observable("Test");
+        let lastName = ko.observable("Testesen");
+        let role = ko.observable("Admin");
+
+
+        return {
+            user,
+            firstName,
+            lastName,
+            role,
+        };
+        
     };
     
 });

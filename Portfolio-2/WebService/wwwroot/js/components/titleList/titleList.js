@@ -3,6 +3,7 @@ define(['knockout', 'dataservice'], (ko, ds) =>  {
        let titles = ko.observableArray([]);
        
        
+       
        ds.getTitles(function (data) { titles(data)});
        //debugger;
        console.log(ko.toJSON(titles));

@@ -1,11 +1,10 @@
 define(['knockout'], function(ko) {
     
-  //  var self = this;
-    
-   // var genres = ko.observableArray();
-    var selectedGenre = ko.observable();
+    let selectedComponent = ko.observable('user');
     
     
+    var user = ko.observable({firstName: "Test", lastName: "Testesen", userRole: "pub_user"});
+
     
     function Genre(genre){
         this.genre = ko.observable(genre);
@@ -41,16 +40,28 @@ define(['knockout'], function(ko) {
     
     let searchInput = ko.observable("search...");
     
+    let chgComponent = () => {
+        
+        if(selectedComponent() === 'user'){
+            selectedComponent('title-list');
+        }else{
+            selectedComponent('user');
+        }
+    };
+
+    var selectedGenre = ko.observable();
+    
     let searchBtn = () => console.log("Search button clicked");
-    let advSearchBtn = () => console.log("Filtered search");
     let loginBtn = () => console.log("Login button clicked");
     
     return {
+        user,
+        chgComponent,
+        selectedComponent,
         genres,
         selectedGenre,
         searchInput,
         searchBtn,
-        advSearchBtn,
         loginBtn
     };
 });

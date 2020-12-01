@@ -35,6 +35,7 @@ namespace WebService
             }
 
             app.UseFileServer();
+            
 
             app.UseRouting();
 
