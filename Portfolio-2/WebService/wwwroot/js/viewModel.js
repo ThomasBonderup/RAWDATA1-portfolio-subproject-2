@@ -1,7 +1,22 @@
-define(['knockout'], function(ko) {
+define(['knockout', 'postman'], function(ko, postman) {
     
     let selectedComponent = ko.observable('user');
+    let selectedCategory = ko.observable();
+    let currentParams = ko.observable({selectedCategory});
+    let menuElements = ["About us", "Register", "Login" ];
     
+    let changeContent = element => {
+        selectedComponent(element.toLowerCase());
+    }
+    
+    let isActive = element => {
+        return element.toLowerCase() === selectedComponent() ? "active" : "";
+    }
+    
+    postman.subscribe("changeContent", component => {
+       changeContent(component);
+        
+    });
     
     var user = ko.observable({firstName: "Test", lastName: "Testesen", userRole: "pub_user"});
 
@@ -43,8 +58,10 @@ define(['knockout'], function(ko) {
     let chgComponent = () => {
         console.log("Change component");
         if(selectedComponent() === 'user'){
-            selectedComponent('title-list');
+            currentParams({genre: selectedGenre});
+            selectedComponent('login');
         }else{
+            currentParams({selectedGenre});
             selectedComponent('user');
         }
     };
@@ -70,5 +87,8 @@ define(['knockout'], function(ko) {
         searchBtn,
         loginBtn,
         advSearchBtn,
+        isActive,
+        menuElements,
+        changeContent,
     };
 });
