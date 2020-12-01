@@ -32,3 +32,7 @@ nav, nav ul, ul li{
 .content-container{
     border: black 1px solid;
 }
+
+.componentBtn{
+    display: block;
+}

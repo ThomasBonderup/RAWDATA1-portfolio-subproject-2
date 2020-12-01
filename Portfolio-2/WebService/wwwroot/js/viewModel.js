@@ -49,7 +49,13 @@ define(['knockout'], function(ko) {
         }
     };
 
+    let advSearchButton = () => console.log("Advanced presssed");
+    
+    
+
     var selectedGenre = ko.observable();
+
+    
     
     let searchBtn = () => console.log("Search button clicked");
     let loginBtn = () => console.log("Login button clicked");
@@ -62,6 +68,7 @@ define(['knockout'], function(ko) {
         selectedGenre,
         searchInput,
         searchBtn,
-        loginBtn
+        loginBtn,
+        advSearchButton,
     };
 });

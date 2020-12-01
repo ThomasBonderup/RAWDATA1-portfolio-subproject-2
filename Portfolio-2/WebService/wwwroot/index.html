@@ -11,9 +11,10 @@
     <span>   <img src="resources/logo_black.svg"> </span>
     <input data-bind="textInput: searchInput"/>
     <button data-bind="click: searchBtn">Search</button>
-<select data-bind="options: genres, optionsText: 'genre', value: selectedGenre, optionsCaption: 'Genre'" ></select>
+<select class="extras" data-bind="options: genres, optionsText: 'genre', value: selectedGenre, optionsCaption: 'Genre'" ></select>
     <button data-bind="click: advSearchBtn">Advanced search</button>
-<div data-bind="visible: selectedGenre"></div>
+
+
 
      
     
@@ -29,12 +30,19 @@
                 <a>Login</a>
             </li>
             
-            
         </ul>
     </nav>
+
+     <button class="componentBtn" data-bind="click: chgComponent">Change component</button>
+     
 </header>
 
+
+
 <h1>Example</h1>
+
+ <div data-bind="visible: selectedGenre"></div>
+ 
  
  <title-list></title-list>
  <title-details params="tconst: 'tt0052520'"></title-details>
