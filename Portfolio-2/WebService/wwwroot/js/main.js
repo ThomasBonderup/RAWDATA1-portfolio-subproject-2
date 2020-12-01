@@ -3,7 +3,7 @@ require.config({
     paths : {
         knockout: "lib/knockout/knockout-latest.debug",
         text: "lib/require-text/text.min",
-        dataservice: "services/dataService"
+        dataservice: "services/dataService",
         jquery: "lib/jquery/jquery.min",
         bootstrap: "../css/lib/twitter-bootstrap/js/bootstrap.bundle.min",
         postman: "services/postman"
