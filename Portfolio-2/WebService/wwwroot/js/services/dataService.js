@@ -13,8 +13,16 @@ define([], () => {
           .then(callback);
    }
    
+   let getNames = (callback) =>
+   {
+      fetch('api/names')
+          .then(response => response.json())
+          .then(callback);
+   }
+   
    return {
       getTitles,
-      getTitle
+      getTitle,
+      getNames
    }
 });
