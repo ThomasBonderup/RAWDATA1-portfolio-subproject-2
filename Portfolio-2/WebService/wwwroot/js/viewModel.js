@@ -41,7 +41,7 @@ define(['knockout'], function(ko) {
     let searchInput = ko.observable("search...");
     
     let chgComponent = () => {
-        
+        console.log("Change component");
         if(selectedComponent() === 'user'){
             selectedComponent('title-list');
         }else{
@@ -49,7 +49,7 @@ define(['knockout'], function(ko) {
         }
     };
 
-    let advSearchBtn = () => console.log("Advanced presssed");
+    let advSearchBtn = () => console.log("Advanced clicked");
     
     
 
