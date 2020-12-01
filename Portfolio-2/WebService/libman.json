@@ -17,6 +17,10 @@
     {
       "library": "knockout@3.5.1",
       "destination": "wwwroot/js/lib/knockout/"
+    },
+    {
+      "library": "jquery@3.5.1",
+      "destination": "wwwroot/js/lib/jquery/"
     }
   ]
 }
