@@ -1,7 +1,8 @@
 <div>
-    <span data-bind="foreach: titles">
-            <ul data-bind="foreach: items">
-                <li data-bind="text: primaryTitle"></li>
-            </ul>
-    </span>
+    <div class="container" data-bind="foreach: titles">
+            <div class="row" data-bind="foreach: items">
+                <div class="col-4" data-bind="text: primaryTitle"></div>
+                <img data-bind="attr:{src: poster}" />
+            </div>
+    </div>
 </div>    
