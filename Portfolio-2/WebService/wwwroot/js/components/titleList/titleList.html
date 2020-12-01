@@ -1,5 +1,7 @@
 <div>
-    <ul data-bind="foreach: titles">
-        <li data-bind="text: items[0].primaryTitle"></li>
-    </ul>
+    <span data-bind="foreach: titles">
+            <ul data-bind="foreach: items">
+                <li data-bind="text: primaryTitle"></li>
+            </ul>
+    </span>
 </div>    
