@@ -49,7 +49,7 @@ define(['knockout'], function(ko) {
         }
     };
 
-    let advSearchButton = () => console.log("Advanced presssed");
+    let advSearchBtn = () => console.log("Advanced presssed");
     
     
 
@@ -69,6 +69,6 @@ define(['knockout'], function(ko) {
         searchInput,
         searchBtn,
         loginBtn,
-        advSearchButton,
+        advSearchBtn,
     };
 });
