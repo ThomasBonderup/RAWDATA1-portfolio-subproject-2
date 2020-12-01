@@ -1,33 +1,25 @@
 define(['knockout'], function(login){
-    var newUser = login.observable();
+    var newUser = [
+        {firstName: login.observable(), lastName:login.observable(), email:login.observable(),username:login.observable(), password:login.observable()}
+    ];
+    let selectedUser = login.observable();
     
+    let createNewUser = () =>{
+        newUser.push(selectedUser());
+    }
+    let registerBtn = function(){
+        console.log("registerbtn clicked");
+    };
     //supposed to  - when the user clicks on the button, toggle between hiding and showing the dropdown content(?)
-    function loginFunction(){
-        document.getElementById("dropdownLogin").classList.toggle("show");
-    }
+  //  let registerBtn = () => console.log("Login button clicked");
     
-    window.onclick = function(event){
-        if(!event.target.matches('.dropBtn')){
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            var i;
-            for (i=0; i<dropdowns.length; i++){
-                var openDropdown = dropdowns[i];
-                if(openDropdown.classList.contains('show')){
-                    openDropdown.classList.remove('show');
-                }
-            }
-        }
-    }
-    
-   /* let loginBtn = () => console.log("Login button clicked");
-    
-    let signInBtn = () => console.log("Sign in button clicked");*/
+    let signInBtn = () => console.log("Sign in button clicked");
     
     return{
         newUser,
-        loginFunction
-        //loginBtn,
-        //signInBtn
+        selectedUser,
+      createNewUser,
+       registerBtn
     }
     
 });

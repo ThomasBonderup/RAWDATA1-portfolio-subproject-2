@@ -1,20 +1,21 @@
 <div class="border" data-bind="with: category">
-    <div >
-        <div data-bind="text: login"></div>
-    </div>
-    
-    <div class ="dropdownlogin">
-        <button onclick = "loginFunction()" class="dropBtn">Login</button>
-        <div id = "dropdownLogin" class = "dropdown-content">
-        <button data-bind="click:loginBtn">Register</button>
-            <button href="#">Sign In</button>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">User details:</span>
+          </div>  
+            <input type="text" class="form-control" placeholder="First Name" aria-label="Last Name" aria-describedby="basic-addon1">
+            <input type="text" class="form-control" placeholder="Last Name" aria-label="Last Name" aria-describedby="basic-addon1">
+            <input type="text" class="form-control" placeholder="E-mail" aria-label="E-mail" aria-describedby="basic-addon1">
+            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+            <input type="text" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
         </div>
     </div>
-   <!--- <div>
-        <button data-bind="click:loginBtn" >Login</button>
+    <div>
+        <button data-bind="click: registerBtn" >Register</button>
+        
     </div>
 <div>
     <button data-bind="click:signInBtn">Sign In</button>
-</div>-->
 </div>
+
 
