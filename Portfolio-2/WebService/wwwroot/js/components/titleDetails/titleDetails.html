@@ -1,3 +1,8 @@
-<div class="border">
-    <div data-bind="text: title().name"></div>
-</div>
+<div>
+    <div class="container" data-bind="foreach: title">
+        <div class="row" data-bind="foreach: items">
+            <div class="col-4" data-bind="text: primaryTitle"></div>
+            <img class="img-fluid" data-bind="attr:{src: poster}" />
+        </div>
+    </div>
+</div>    
