@@ -93,7 +93,11 @@ namespace DataAccess
 
         public IList<Title> GetTitles(int page, int pageSize)
         {
-            return ctx.Titles.ToList()
+            // Reflection: Async and await if we have time after the frontend is created
+            // TODO Create new db context for each method call
+            // if not working send email to Henrik include db script so he can recreate db
+            using var ctx1 = new DBContext();
+            return ctx1.Titles.ToList()
                 .Skip(page * pageSize)
                 .Take(pageSize)
                 .ToList();

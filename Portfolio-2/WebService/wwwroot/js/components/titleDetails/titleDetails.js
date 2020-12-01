@@ -4,7 +4,6 @@ define(['knockout', 'dataservice'], (ko, ds) => {
         let tconst = params.tconst;
 
         ds.getTitle(tconst, function (data) { title(data) });
-        console.log(ko.toJSON(title));
         return {
             title
         }

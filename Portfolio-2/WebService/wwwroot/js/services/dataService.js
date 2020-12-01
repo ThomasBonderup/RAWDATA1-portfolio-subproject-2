@@ -8,7 +8,12 @@ define([], () => {
    }
    
    let getTitle = (tconst, callback) => {
-      fetch('api/titles/' + tconst)
+      fetch('api/titles/' + tconst, {
+         headers : {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+         }
+      })
           .then(response => response.json())
           .then(callback);
    }
