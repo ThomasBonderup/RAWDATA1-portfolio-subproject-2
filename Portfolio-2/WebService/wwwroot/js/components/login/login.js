@@ -1,21 +1,25 @@
 define(['knockout','dataservice'], (ko, ds)=> {
+    let currentTemplate = ko.observable('user-list');
     return function (params) {
-        var newUser =
+        let user = ()=>
+            selectedUser(
             {
                 firstName: ko.observable(),
                 lastName: ko.observable(),
                 email: ko.observable(),
                 username: ko.observable(),
                 password: ko.observable()
-            }
+            });
+        currentTemplate("new-User");
 
         let selectedUser = ko.observable();
 
-        let createNewUser = () => {
-            newUser.push(selectedUser());
-        }
-        let registerBtn = () =>
+        let createUser = () => {
             console.log("registerbtn clicked");
+            user.push(selectedUser());
+            currentTemplate("user-list");
+        }
+         
 
         //supposed to  - when the user clicks on the button, toggle between hiding and showing the dropdown content(?)
         //      let registerBtn = () => console.log("Login button clicked");
@@ -23,10 +27,10 @@ define(['knockout','dataservice'], (ko, ds)=> {
         let signInBtn = () => console.log("Sign in button clicked");
 
         return {
-            newUser,
+            user,
             selectedUser,
-            createNewUser,
-            registerBtn
+            createUser,
+            currentTemplate
         }
     }
 });

@@ -1,21 +1,32 @@
-<div class="border" data-bind="with: category">
-    <button data-bind="click: registerBtn" >Register</button>
-    
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1">User details:</span>
-            <div>
-            
-            <input type="text" class="form-control" placeholder="First Name" aria-label="Last Name" aria-describedby="basic-addon1">
-            <input type="text" class="form-control" placeholder="Last Name" aria-label="Last Name" aria-describedby="basic-addon1">
-            <input type="text" class="form-control" placeholder="E-mail" aria-label="E-mail" aria-describedby="basic-addon1">
-            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-            <input type="text" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
-        </div>
+<!DOCTYPE html>
+<html>
+
+<body>
+<div data-bind="currentTemplate"></div>
+<!--<div class="border" data-bind="with: category">-->
+<!--<script type="text/html" id="new-user">-->
+    <div type="text/html id = "new-user>        
+        <div data-bind="with:selectedUser">
+          <button data-bind="click: createUser">Register</button>
+        <span class="input-group-text">User details:</span>
+            <input type="text" class="form-control" placeholder="First Name" aria-label="Last Name" aria-describedby="register"/>
+            <input type="text" class="form-control" placeholder="Last Name" aria-label="Last Name" aria-describedby="register"/>
+            <input type="text" class="form-control" placeholder="E-mail" aria-label="E-mail" aria-describedby="register"/>
+            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="register"/>
+            <input type="text" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="register"/>
     </div>
-        </div>
+    </div>
+    
+<!--</script>-->
+
+<script type="text/html" id="user-list">
+<button data-bind="click: createUser">Register1</button>
+    
+</script>
 <div>
+    <button data-bind="click:hello">hello</button>
     <button data-bind="click:signInBtn">Sign In</button>
 </div>
-</div>
-
+<!--</div>-->
+</body>
+</html>
