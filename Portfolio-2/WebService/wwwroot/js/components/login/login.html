@@ -9,11 +9,11 @@
         <div data-bind="with:selectedUser">
           <button data-bind="click: createUser">Register</button>
         <span class="input-group-text">User details:</span>
-            <input type="text" class="form-control" placeholder="First Name" aria-label="Last Name" aria-describedby="register"/>
-            <input type="text" class="form-control" placeholder="Last Name" aria-label="Last Name" aria-describedby="register"/>
-            <input type="text" class="form-control" placeholder="E-mail" aria-label="E-mail" aria-describedby="register"/>
-            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="register"/>
-            <input type="text" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="register"/>
+            <input data-bind="text:firstName" class="form-control" placeholder="First Name" aria-label="Last Name" aria-describedby="register"/>
+            <input data-bind="text:lastName" class="form-control" placeholder="Last Name" aria-label="Last Name" aria-describedby="register"/>
+            <input data-bind="text:email" class="form-control" placeholder="E-mail" aria-label="E-mail" aria-describedby="register"/>
+            <input data-bind="text:username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="register"/>
+            <input data-bind="text:password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="register"/>
     </div>
     </div>
     
@@ -25,7 +25,7 @@
 </script>
 <div>
     <button data-bind="click:hello">hello</button>
-    <button data-bind="click:signInBtn">Sign In</button>
+    <button data-bind="click:signInBtn ">Sign In</button>
 </div>
 <!--</div>-->
 </body>

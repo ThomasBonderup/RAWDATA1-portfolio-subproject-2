@@ -4,18 +4,18 @@ define(['knockout','dataservice'], (ko, ds)=> {
         let user = ()=>
             selectedUser(
             {
-                firstName: ko.observable(),
-                lastName: ko.observable(),
-                email: ko.observable(),
-                username: ko.observable(),
-                password: ko.observable()
+                firstName: ko.observable("Joe"),
+                lastName: ko.observable("John"),
+                email: ko.observable("john@john.com"),
+                username: ko.observable("joejohn"),
+                password: ko.observable("1234")
             });
         currentTemplate("new-User");
 
         let selectedUser = ko.observable();
 
         let createUser = () => {
-            console.log("registerbtn clicked");
+            console.log(selectedUser);
             user.push(selectedUser());
             currentTemplate("user-list");
         }
@@ -30,7 +30,8 @@ define(['knockout','dataservice'], (ko, ds)=> {
             user,
             selectedUser,
             createUser,
-            currentTemplate
+            currentTemplate,
+            signInBtn
         }
     }
 });
