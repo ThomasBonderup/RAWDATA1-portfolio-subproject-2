@@ -1,15 +1,15 @@
-define(['knockout','dataservice'], (login)=> {
+define(['knockout','dataservice'], (ko, ds)=> {
     return function (params) {
         var newUser =
             {
-                firstName: login.observable(),
-                lastName: login.observable(),
-                email: login.observable(),
-                username: login.observable(),
-                password: login.observable()
+                firstName: ko.observable(),
+                lastName: ko.observable(),
+                email: ko.observable(),
+                username: ko.observable(),
+                password: ko.observable()
             }
 
-        let selectedUser = login.observable();
+        let selectedUser = ko.observable();
 
         let createNewUser = () => {
             newUser.push(selectedUser());

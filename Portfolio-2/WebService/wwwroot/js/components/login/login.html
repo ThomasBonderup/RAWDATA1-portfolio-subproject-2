@@ -1,8 +1,11 @@
 <div class="border" data-bind="with: category">
+    <button data-bind="click: registerBtn" >Register</button>
+    
         <div class="input-group mb-3">
           <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">User details:</span>
-          </div>  
+            <div>
+            
             <input type="text" class="form-control" placeholder="First Name" aria-label="Last Name" aria-describedby="basic-addon1">
             <input type="text" class="form-control" placeholder="Last Name" aria-label="Last Name" aria-describedby="basic-addon1">
             <input type="text" class="form-control" placeholder="E-mail" aria-label="E-mail" aria-describedby="basic-addon1">
@@ -10,12 +13,9 @@
             <input type="text" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
         </div>
     </div>
-    <div>
-        <button data-bind="click: registerBtn" >Register</button>
-        
-    </div>
+        </div>
 <div>
     <button data-bind="click:signInBtn">Sign In</button>
 </div>
-
+</div>
 
