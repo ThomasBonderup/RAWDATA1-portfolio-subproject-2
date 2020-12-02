@@ -1,23 +1,25 @@
-define(['knockout'], ['dataservice'], (ko, ds) =>{
+define(['knockout'], ['dataservice', 'postman'], (ko, ds, postman) =>{
     
-    let user = ko.observable();
+    let _user = ko.observable();
     
    
     return function(params){
         
+        let selectedUser = params.selectedUser;
         
-        let firstName = ko.observable("Test");
-        let lastName = ko.observable("Testesen");
-        let role = ko.observable("Admin");
-
-
+        let selectUser = user => {
+            selectedUser(user);
+            postman.publish('changeUser', user);
+            
+        }
+        
+      ds.getUser(function (data){_user(data)});
+        
+        
         return {
-            user,
-            firstName,
-            lastName,
-            role,
-        };
-        
-    };
-    
+            _user,
+          selectedUser,
+            selectUser,
+        }
+    }
 });

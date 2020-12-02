@@ -1,5 +1,18 @@
 define([], () => {
    
+   
+   let getUser = (uconst, callback) =>
+   {
+      fetch('api/users/' + uconst,{
+         header : {
+            'content-type': 'application/json',
+            'Accept': 'application/json'
+         }
+      })
+          .then(response => response.json())
+          .then(callback);
+   }
+   
    let getTitles = (callback) =>
    {
       fetch('api/titles')
@@ -28,6 +41,7 @@ define([], () => {
    return {
       getTitles,
       getTitle,
-      getNames
+      getNames,
+      getUser,
    }
 });

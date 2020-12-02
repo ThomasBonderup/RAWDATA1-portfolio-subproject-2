@@ -1,13 +1,9 @@
 define(['knockout', 'postman'], function(ko, postman) {
     
     let selectedComponent = ko.observable('user');
-    let selectedCategory = ko.observable();
-    let currentParams = ko.observable({selectedCategory});
-    let menuElements = ["About us", "Register", "Login" ];
-    
-    let changeContent = element => {
-        selectedComponent(element.toLowerCase());
-    }
+    let selectedUser = ko.observable();
+    let currentParams = ko.observable({selectedUser});
+    let menuElements = ["About us", "Register", "Login", "User"];
     
     let isActive = element => {
         return element.toLowerCase() === selectedComponent() ? "active" : "";
@@ -55,13 +51,13 @@ define(['knockout', 'postman'], function(ko, postman) {
     
     let searchInput = ko.observable();
     
-    let chgComponent = () => {
+    let changeContent = () => {
         console.log("Change component");
         if(selectedComponent() === 'user'){
-            currentParams({genre: selectedGenre});
+            currentParams({_user: selectedUser});
             selectedComponent('login');
         }else{
-            currentParams({selectedGenre});
+            currentParams({selectedUser});
             selectedComponent('user');
         }
     };
@@ -71,7 +67,6 @@ define(['knockout', 'postman'], function(ko, postman) {
     
 
     var selectedGenre = ko.observable();
-
     
     
     let searchBtn = () => console.log("Search button clicked");
@@ -79,7 +74,6 @@ define(['knockout', 'postman'], function(ko, postman) {
     
     return {
         user,
-        chgComponent,
         selectedComponent,
         genres,
         selectedGenre,
