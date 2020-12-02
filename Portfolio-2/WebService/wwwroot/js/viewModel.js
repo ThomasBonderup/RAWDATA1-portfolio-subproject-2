@@ -4,25 +4,12 @@ define(['knockout', 'postman'], function(ko, postman) {
     let selectedUser = ko.observable();
     let currentParams = ko.observable({selectedUser});
     let menuElements = ["About us", "Register", "Login", "User"];
-    
-    let isActive = element => {
-        return element.toLowerCase() === selectedComponent() ? "active" : "";
-    }
-    
-    postman.subscribe("changeContent", component => {
-       changeContent(component);
-        
-    });
-    
-    var user = ko.observable({firstName: "Test", lastName: "Testesen", userRole: "pub_user"});
+    let advSearchBtn = () => console.log("Advanced clicked");
+    var selectedGenre = ko.observable();
+    let searchInput = ko.observable();
 
-    
-    function Genre(genre){
-        this.genre = ko.observable(genre);
-    }
-    
     var genres = ([
-        
+
         new Genre("Comedy"),
         new Genre("Horror"),
         new Genre("Reality-TV"),
@@ -46,10 +33,27 @@ define(['knockout', 'postman'], function(ko, postman) {
         new Genre("Biography"),
         new Genre("Musical"),
         new Genre("Music"),
-        
-        ]);
+
+    ]);
     
-    let searchInput = ko.observable();
+    
+    let isActive = element => {
+        return element.toLowerCase() === selectedComponent() ? "active" : "";
+    }
+    
+    postman.subscribe("changeContent", component => {
+       changeContent(component);
+        
+    });
+    
+    
+    function Genre(genre){
+        this.genre = ko.observable(genre);
+    }
+    
+
+    let searchBtn = () => console.log("Search button clicked");
+    let loginBtn = () => console.log("Login button clicked");
     
     let changeContent = () => {
         console.log("Change component");
@@ -62,18 +66,9 @@ define(['knockout', 'postman'], function(ko, postman) {
         }
     };
 
-    let advSearchBtn = () => console.log("Advanced clicked");
-    
-    
-
-    var selectedGenre = ko.observable();
-    
-    
-    let searchBtn = () => console.log("Search button clicked");
-    let loginBtn = () => console.log("Login button clicked");
     
     return {
-        user,
+
         selectedComponent,
         genres,
         selectedGenre,
