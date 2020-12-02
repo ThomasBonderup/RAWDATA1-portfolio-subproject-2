@@ -1,4 +1,4 @@
-define(['knockout'], (login)=> {
+define(['knockout','dataservice'], (login)=> {
     return function (params) {
         var newUser =
             {

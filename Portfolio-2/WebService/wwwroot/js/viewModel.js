@@ -53,7 +53,7 @@ define(['knockout', 'postman'], function(ko, postman) {
         
         ]);
     
-    let searchInput = ko.observable("search...");
+    let searchInput = ko.observable();
     
     let chgComponent = () => {
         console.log("Change component");
