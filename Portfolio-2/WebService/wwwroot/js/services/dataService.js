@@ -13,9 +13,15 @@ define([], () => {
           .then(callback);
    }
    
-   let getTitles = (callback) =>
+   let getTitles = (searchString, callback) =>
    {
-      fetch('api/titles')
+      fetch('api/titles/search-title/' + searchString, {
+         headers : {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'ui000001'
+         }
+      })
           .then(response => response.json())
           .then(callback);
    }

@@ -9,7 +9,7 @@
 <body>
  <header>
     <span>   <img class="logo" src="resources/logo_black.svg"> </span>
-    <input data-bind="textInput: searchInput" placeholder="Search..." aria-label="Search..."/>
+    <input data-bind="value: searchInput" placeholder="Search..." aria-label="Search..."/>
     <button data-bind="click: searchBtn">Search</button>
 <select class="extras" data-bind="options: genres, optionsText: 'genre', value: selectedGenre, optionsCaption: 'Genre'" ></select>
     <button data-bind="click: advSearchBtn">Advanced search</button>
@@ -42,13 +42,9 @@
 <!-- <div data-bind="{name: selectedComponent, params: currentParams}">-->
 <!--     <span data-bind="text: selectedComponent"></span>-->
 <!-- </div>-->
- <div data-bind="component: {name: selectedComponent}"></div>
- 
- <title-list></title-list>
- <title-details params="tconst: 'tt0052520'"></title-details>
- 
- 
- 
+<!-- <title-list></title-list>-->
+<!-- <title-details params="tconst: 'tt0052520'"></title-details>-->
+ <div data-bind="component: {name: selectedComponent, params: currentParams}"></div>
 
 <script data-main="js/main.js" src="js/lib/require.js/require.js"></script>
 </body>
