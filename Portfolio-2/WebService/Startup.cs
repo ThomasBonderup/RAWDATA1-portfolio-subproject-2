@@ -39,7 +39,7 @@ namespace WebService
 
             app.UseRouting();
 
-            //app.UseAuth();
+            app.UseAuth();
 
             app.UseEndpoints(endpoints =>
             {

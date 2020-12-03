@@ -292,7 +292,7 @@ namespace WebService.Controllers
         [HttpGet("search-title/{searchString}")]
         public IActionResult SearchTitle(string searchString, string uConst, int page = 0, int pageSize = 10)
         {
-            CheckCurrentUser();
+            //CheckCurrentUser();
 
             pageSize = PaginationHelper.CheckPageSize(pageSize);
             var titles = _dataService.SearchTitles(searchString, Program.CurrentUser.Uconst, page, pageSize);

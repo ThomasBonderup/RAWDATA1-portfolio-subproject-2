@@ -2,11 +2,11 @@ define(['knockout', 'postman'], function(ko, postman) {
     
     let selectedComponent = ko.observable('user');
     let selectedUser = ko.observable();
-    let currentParams = ko.observable({selectedUser});
+    let searchInput = ko.observable();
+    let currentParams = ko.observable({searchInput});
     let menuElements = ["About us", "Register", "Login", "User"];
     let advSearchBtn = () => console.log("Advanced clicked");
     var selectedGenre = ko.observable();
-    let searchInput = ko.observable();
 
     var genres = ([
 
@@ -52,7 +52,11 @@ define(['knockout', 'postman'], function(ko, postman) {
     }
     
 
-    let searchBtn = () => console.log("Search button clicked");
+    let searchBtn = () => {
+        console.log("Search button clicked");
+        currentParams({searchInput})
+        selectedComponent('title-list')
+    }
     let loginBtn = () => console.log("Login button clicked");
     
     
@@ -69,7 +73,6 @@ define(['knockout', 'postman'], function(ko, postman) {
 
     
     return {
-
         selectedComponent,
         genres,
         selectedGenre,
