@@ -1,4 +1,4 @@
-define(['knockout'], ['dataservice', 'postman'], (ko, ds, postman) =>{
+define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) =>{
     
     let _user = ko.observable();
     

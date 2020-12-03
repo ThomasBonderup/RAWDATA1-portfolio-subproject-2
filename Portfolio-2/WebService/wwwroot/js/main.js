@@ -23,8 +23,8 @@ require(['knockout', 'text'], (ko) => {
 
     ko.components.register("user",
         {
-            viewModel: {require: "component/user/user"},
-            template: {require: "text!components/login/user.html"} 
+            viewModel: {require: "components/user/user"},
+            template: {require: "text!components/user/user.html"} 
 
         });
 
@@ -36,7 +36,7 @@ require(['knockout', 'text'], (ko) => {
     
     ko.components.register("login",
         {
-        viewModel: {require: "component/login/login"},
+        viewModel: {require: "components/login/login"},
         template:{require: "text!components/login/login.html"}
     })
 });
