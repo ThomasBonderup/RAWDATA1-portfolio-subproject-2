@@ -12,6 +12,13 @@ define([], () => {
    }
    
    let postUser = (callback) =>{
+      fetch(user,{
+         header:{
+            
+         }
+      })
+          .then(response => response.json())
+          .then(callback);
       
    }
    
