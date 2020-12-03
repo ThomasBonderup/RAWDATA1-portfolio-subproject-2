@@ -1,5 +1,4 @@
-<div data-bind="currentTemplate"></div>
-
+<div data-bind="template: currentTemplate"></div>
     <script type="text/html" id = "create-account">        
         <div data-bind="createUser">
         <span class="input-group-text">User details:</span>
@@ -11,20 +10,7 @@
         </div>
     </script>
 
-<div type ="text/html" id = "login-page">
+<script type ="text/html" id = "login-page">
     <button data-bind="click:createUser" type ="button" class ="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Create New User</button>
-    <div>
-        <!-- foreach:user
-        <ul data-bind="click: selectUser"> $parent.
-           <span data-bind="text:firstName"></span>
-        </ul>
-    </div> -->
-</div>
-
-<div type="text/html" id="signIn-page">
     <button type ="button" class ="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Sign In</button>
-    <div>
-    </div>
-    
-</div>
-</div>
+</script>
