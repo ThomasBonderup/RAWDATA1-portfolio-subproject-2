@@ -1,8 +1,11 @@
 <div>
-    <div class="container" data-bind="foreach: title">
-        <div class="row" data-bind="foreach: items">
-            <div class="col-4" data-bind="text: primaryTitle"></div>
-            <img class="img-fluid" data-bind="attr:{src: poster}" />
+    <div class="container">
+        <h2>Title details</h2>
+        <div class="row">
+            <div class="container">
+                <div class="col-4" data-bind="text: title().primaryTitle"></div>
+                <img class="img-fluid" data-bind="attr:{src: title().poster}" />
+            </div>
         </div>
     </div>
 </div>    
