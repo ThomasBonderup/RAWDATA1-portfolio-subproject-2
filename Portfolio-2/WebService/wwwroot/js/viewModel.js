@@ -55,6 +55,7 @@ define(['knockout', 'postman'], function(ko, postman) {
     let searchBtn = () => console.log("Search button clicked");
     let loginBtn = () => console.log("Login button clicked");
     
+    
     let changeContent = () => {
         console.log("Change component");
         if(selectedComponent() === 'user'){
@@ -79,5 +80,6 @@ define(['knockout', 'postman'], function(ko, postman) {
         isActive,
         menuElements,
         changeContent,
+        currentParams,
     };
 });

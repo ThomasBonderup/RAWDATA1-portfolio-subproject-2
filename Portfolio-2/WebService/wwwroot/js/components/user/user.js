@@ -5,6 +5,12 @@ define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) =>{
    
     return function(params){
         
+        let user = ko.observableArray();
+        let uconst = params.uconst;
+        
+        ds.getUser(uconst, function(data) {user(data)});
+        
+        /*
         let selectedUser = params.selectedUser;
         
         let selectUser = user => {
@@ -14,12 +20,21 @@ define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) =>{
         }
         
       ds.getUser(function (data){_user(data)});
+        */
+        
+        let firstName = ko.observable('Test');
+        let lastName = ko.observable('Testesen');
+        let userRole = ko.observable('Admin');
         
         
         return {
             _user,
-          selectedUser,
+            selectedUser,
             selectUser,
+            firstName,
+            lastName,
+            userRole,
+            user
         }
     }
 });
