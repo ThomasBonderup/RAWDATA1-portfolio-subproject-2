@@ -8,9 +8,16 @@
   <path d="M8 12c4 0 5 1.755 5 1.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-.245S4 12 8 12z"/>
 </svg> </span>
     
+    
+    
+    <button data-bind="editBtn", click="isEditMode">Edit</button>
+    
     <ul class="userInfo" data-bind="forach: user">
         
-        <li data-bind="text: firstName, click: $parent.selectUser"></li>
+        <li data-bind="text: firstName"></li>
+        <li data-bind="text: lastName"></li>
+        <li data-bind="text: userRole"></li>
+        
     </ul>
         <div>
             <user params="user: selectedUser"></user>

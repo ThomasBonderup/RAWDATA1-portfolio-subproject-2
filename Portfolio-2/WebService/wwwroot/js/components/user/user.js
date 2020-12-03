@@ -1,13 +1,19 @@
 define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) =>{
     
-    let _user = ko.observable();
+  //  let _user = ko.observable();
     
+    let editBtn = ko.observable();
+    let editMode = false;
+    
+    
+    let isEditMode = function () {console.log('Running method'); return editMode === false ? true : false}
    
     return function(params){
         
         let user = ko.observableArray();
         //let uconst = params.uconst;
         let uconst = 'ui000001';
+        
         ds.getUser(uconst, function(data) {user(data)});
         
         /*
@@ -28,13 +34,15 @@ define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) =>{
         
         
         return {
-            _user,
+            isEditMode,
+            editBtn,
+          //  _user,
             //selectedUser,
             //selectUser,
             firstName,
             lastName,
             userRole,
-            user
+            user,
         }
     }
 });
