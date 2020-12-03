@@ -61,6 +61,7 @@ define(['knockout', 'postman'], function(ko, postman) {
         if(selectedComponent() === 'user'){
             currentParams({_user: selectedUser});
             selectedComponent('login');
+            selectedComponent('login');
         }else{
             currentParams({selectedUser});
             selectedComponent('user');

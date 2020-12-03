@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html>
-
-<body>
 <div data-bind="currentTemplate"></div>
-<!--<div class="border" data-bind="with: category">-->
-<!--<script type="text/html" id="new-user">-->
 
-    <div type="text/html" id = "add-user">        
-        <div data-bind="with:selectedUser">
+    <div type="text/html" id = "create-account">        
+        <div > <!--data-bind="with:selectedUser"-->
         <span class="input-group-text">User details:</span>
             <input data-bind="text:firstName" class="form-control" placeholder="First Name" aria-label="First Name" aria-describedby="register"/>
             <input data-bind="text:lastName" class="form-control" placeholder="Last Name" aria-label="Last Name" aria-describedby="register"/>
@@ -17,20 +11,20 @@
         </div>
     </div>
 
-<div type ="text/html" id = "user-list">
-    <button data-bind="click: createUser">Register</button>
+<div type ="text/html" id = "login-page">
+    <button data-bind="click: createUser">Create New User</button>
     <div>
-        <!-- foreach:user-->
-        <ul data-bind="click: selectUser"> <!--$parent.-->
+        <!-- foreach:user
+        <ul data-bind="click: selectUser"> $parent.
            <span data-bind="text:firstName"></span>
         </ul>
-    </div>
+    </div> -->
 </div>
 
-<div>
-    <button data-bind="click:signInBtn ">Sign In</button>
-</div>
+<div type="text/html" id="signIn-page">
+    <button data-bind="click:signInUser ">Sign In</button>
+    <div>
+    </div>
     
-<!--</div>-->
-</body>
-</html>
+</div>
+</div>
