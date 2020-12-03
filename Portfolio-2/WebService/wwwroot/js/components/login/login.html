@@ -1,7 +1,7 @@
 <div data-bind="currentTemplate"></div>
 
-    <div type="text/html" id = "create-account">        
-        <div > <!--data-bind="with:selectedUser"-->
+    <script type="text/html" id = "create-account">        
+        <div data-bind="createUser">
         <span class="input-group-text">User details:</span>
             <input data-bind="text:firstName" class="form-control" placeholder="First Name" aria-label="First Name" aria-describedby="register"/>
             <input data-bind="text:lastName" class="form-control" placeholder="Last Name" aria-label="Last Name" aria-describedby="register"/>
@@ -9,10 +9,10 @@
             <input data-bind="text:username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="register"/>
             <input data-bind="text:password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="register"/>
         </div>
-    </div>
+    </script>
 
 <div type ="text/html" id = "login-page">
-    <button type ="button" class ="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Create New User</button>
+    <button data-bind="click:createUser" type ="button" class ="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Create New User</button>
     <div>
         <!-- foreach:user
         <ul data-bind="click: selectUser"> $parent.
