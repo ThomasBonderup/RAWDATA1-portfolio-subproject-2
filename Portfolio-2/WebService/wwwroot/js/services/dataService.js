@@ -1,6 +1,4 @@
 define([], () => {
-   
-   
    let getUser = (uconst, callback) =>
    {
       fetch('api/users/' + uconst,{
@@ -11,6 +9,10 @@ define([], () => {
       })
           .then(response => response.json())
           .then(callback);
+   }
+   
+   let postUser = (callback) =>{
+      
    }
    
    let getTitles = (searchString, callback) =>
@@ -49,5 +51,6 @@ define([], () => {
       getTitle,
       getNames,
       getUser,
+      postUser
    }
 });
