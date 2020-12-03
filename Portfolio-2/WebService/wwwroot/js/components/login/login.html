@@ -1,7 +1,7 @@
-<div data-bind="template: currentTemplate"></div>
-<script type="text/html" id = "createaccount-page">        
-        <div data-bind="createUserBtn">
-            <form>
+<div class="container buff30" data-bind="template: currentTemplate"></div>
+<script  type="text/html" id = "createaccount-page">        
+        <div class="card border-primary mb-3" data-bind="createUserBtn">
+            <form class="card-body" >
                 <fieldset>
                     <legend>Create Account</legend>
                     <div class="form-group" data-children-count="1">
@@ -28,13 +28,15 @@
                 </fieldset>
             </form>
         </div>
-        <button data-bind="click:createAccount" type ="button" class ="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Submit</button>
-        <button data-bind="click:cancelUserBtn" type ="button" class ="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Cancel</button>
+        <div class="modal-footer">
+            <button data-bind="click:createAccount" type ="button" class ="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Submit</button>
+            <button data-bind="click:cancelUserBtn" type ="button" class ="btn btn-secondary" data-toggle="button" aria-pressed="false" autocomplete="off">Cancel</button>
+        </div>
     </script>
 
 
 <script type="text/html" id="signIn-page">
-    <div data-bind="signInUserBtn">
+    <div class="card border-primary mb-3" data-bind="signInUserBtn">
         <label for="signIn-page">Login information:</label>
         <input data-bind="text:E-mail" class="form-control" placeholder="E-mail" aria-label="E-mail" aria-describedby="register"/>
         <input data-bind="text:Password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="register"/>
@@ -43,6 +45,10 @@
 </script>
 
 <script type ="text/html" id = "login-page">
-    <button data-bind="click:createUserBtn" type ="button" class ="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Create New User</button>
-    <button data-bind="click:signInUserBtn" type ="button" class ="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Sign In</button>
+    <div class="card border-primary mb-3">
+        <div class="card-body" data-bind="login-page">
+            <button data-bind="click:createUserBtn" type ="button" class ="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Create New User</button>
+            <button data-bind="click:signInUserBtn" type ="button" class ="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Sign In</button>
+        </div> 
+    </div>    
 </script>

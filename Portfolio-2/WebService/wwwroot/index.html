@@ -3,7 +3,7 @@
 <head>
     <title>Movie Finder</title>
     <!--<link rel="stylesheet" href="js/lib/twitter-bootstrap/css/bootstrap.min.css">-->
-    <!--<link href="css/style.css" rel="stylesheet" />-->
+    <link href="css/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="js/lib/twitter-bootstrap/css/bootstrap-lux.min.css">
     <link rel="icon" href="resources/logo_whiteonblack.svg">
 </head>
@@ -12,36 +12,45 @@
 <header>
     <EnableDefaultContentItems></EnableDefaultContentItems>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand"> <img class="logo" src="resources/logo_white.svg" height="50" width="50"/></a>
+        <a class="navbar-brand" href="/"><img src="resources/logo_white.svg" width="50"/></a>
         
         <form class="form-inline my-2 my-lg-0" data-children-count="1">
-            <input data-bind="value: searchInput" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search...">
-            <button data-bind="click:searchBtn" class="btn btn-secondary my-2 my-sm-0" type="submit" data-toggle="button" aria-pressed="false" autocomplete="off">Search</button>
+            <input data-bind="value: searchInput" class="form-control mr-sm-2 nav-item" type="text" placeholder="Search" aria-label="Search...">
+            <button data-bind="click:searchBtn" class="btn btn-secondary my-2 my-sm-0 nav-item" type="submit" data-toggle="button" aria-pressed="false" autocomplete="off">Search</button>
+            <button data-bind="click:advSearchBtn" type ="button" class ="btn btn-secondary my-2 my-sm-0 nav-item" data-toggle="button" aria-pressed="false" autocomplete="off">Advanced search</button>
         </form>
         
         
-        <select class="nav-link dropdown-toggle" data-bind="options: genres, optionsText: 'genre', value: selectedGenre, optionsCaption: 'Genre'" ></select>
-        
-        <button data-bind="click:advSearchBtn" type ="button" class ="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Advanced search</button>
-
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-             <span class="navbar-toggler-icon"></span>
-         </button>
-        
+            <span class="navbar-toggler-icon"></span>
+        </button>
+            
          <div class="collapse navbar-collapse" id="navbarNav">
+             
+             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+             <div class="dropdown-menu">
+                 <a class="dropdown-item" href="#">Action</a>
+                 <a class="dropdown-item" href="#">Another action</a>
+                 <a class="dropdown-item" href="#">Something else here</a>
+             </div>
+             
+             <select class="nav-link dropdown-toggle" data-bind="options: genres, optionsText: 'genre', value: selectedGenre, optionsCaption: 'Genre'" ></select>
+             
              <ul class="navbar-nav" data-bind="foreach: menuElements">
                  <li class="nav-item" data-bind="css: $parent.isActive($data)">
-                     <a class="nav-link" href="#" data-bind="click: $parent.changeContent">
+                     <a class="nav-link" data-bind="click: $parent.changeContent">
                          <span data-bind="text: $data"></span>
                      </a>
                  </li>
              </ul>
+             
          </div>
      </nav>
 </header>
- 
 
-<h1>Example</h1>
+<span class="container buff30">
+<div class="container" data-bind="component: {name: selectedComponent, params: currentParams}"></div>
+</span>
 <!-- <div data-bind="visible: selectedGenre"></div>-->
 <!-- -->
 <!-- -->
@@ -50,8 +59,6 @@
 <!-- </div>-->
 <!-- <title-list></title-list>-->
 <!-- <title-details params="tconst: 'tt0052520'"></title-details>-->
-
-<div data-bind="component: {name: selectedComponent, params: currentParams}"></div>
 
 <script data-main="js/main.js" src="js/lib/require.js/require.js"></script>
 </body>

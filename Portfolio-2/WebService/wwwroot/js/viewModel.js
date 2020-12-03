@@ -1,15 +1,14 @@
 define(['knockout', 'postman'], function(ko, postman) {
     
-    let selectedComponent = ko.observable('user');
+    let selectedComponent = ko.observable('home');
     let selectedUser = ko.observable();
     let searchInput = ko.observable();
     let currentParams = ko.observable({searchInput});
-    let menuElements = ["About us", "Register", "Login", "User"];
+    let menuElements = ["About", "Login", "User"];
     let advSearchBtn = () => console.log("Advanced clicked");
     var selectedGenre = ko.observable();
 
     var genres = ([
-
         new Genre("Comedy"),
         new Genre("Horror"),
         new Genre("Reality-TV"),
@@ -33,7 +32,6 @@ define(['knockout', 'postman'], function(ko, postman) {
         new Genre("Biography"),
         new Genre("Musical"),
         new Genre("Music"),
-
     ]);
     
     
@@ -43,9 +41,7 @@ define(['knockout', 'postman'], function(ko, postman) {
     
     postman.subscribe("changeContent", component => {
        changeContent(component);
-        
     });
-    
     
     function Genre(genre){
         this.genre = ko.observable(genre);
@@ -54,24 +50,28 @@ define(['knockout', 'postman'], function(ko, postman) {
 
     let searchBtn = () => {
         console.log("Search button clicked");
-        currentParams({searchInput})
-        selectedComponent('title-list')
+        currentParams({searchInput});
+        selectedComponent('title-list');
     }
-    let loginBtn = () => console.log("Login button clicked");
     
+    let loginBtn = () => {
+        console.log("Login button clicked");
+    }
+
+    let changeContent = element => {
+        selectedComponent(element.toLowerCase());
+    }
     
-    let changeContent = () => {
+    /*let changeContent = () => {
         console.log("Change component");
         if(selectedComponent() === 'user'){
             currentParams({_user: selectedUser});
-            selectedComponent('login');
             selectedComponent('login');
         }else{
             currentParams({selectedUser});
             selectedComponent('user');
         }
-    };
-
+    };*/
     
     return {
         selectedComponent,

@@ -1,5 +1,6 @@
 define(["knockout","dataservice"], (ko, ds)=> {
     return function (params) {
+        // todo make a return error statement if username allready exists in the system 
         let currentTemplate = ko.observable("login-page");
         let createAccount = () =>
         {

@@ -10148,3 +10148,10 @@ th {
 .card-title, .card-header {
   color: inherit;
 }
+
+.buff5 { margin-inside:5px; }
+.buff7 { margin-inside:7px; }
+.buff10 { margin-inside:10px; }
+.buff15 { margin-inside:15px; }
+.buff17 { margin-inside:17px; }
+.buff30 { margin-inside:30px; }
