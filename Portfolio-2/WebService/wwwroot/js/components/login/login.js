@@ -10,7 +10,7 @@ define(['knockout','dataservice'], (ko, ds)=> {
                 username: ko.observable("joejohn"),
                 password: ko.observable("1234")
             });
-        //currentTemplate("new-User");
+        currentTemplate("new-User");
 
         let selectedUser = ko.observable();
         
