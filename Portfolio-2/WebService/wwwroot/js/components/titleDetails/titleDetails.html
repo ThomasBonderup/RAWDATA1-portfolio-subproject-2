@@ -1,10 +1,27 @@
 <div>
     <div class="container">
-        <h2>Title details</h2>
+        <h2 data-bind="text: title().primaryTitle">Title details</h2>
         <div class="row">
-            <div class="container">
-                <div class="col-4" data-bind="text: title().primaryTitle"></div>
+            <div class="col-6">
                 <img class="img-fluid" data-bind="attr:{src: title().poster}" />
+            </div>
+            <div class="col-6">
+                <p>Runtime: <span data-bind="text: title().runTimeMinutes"></span> minutes</p>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-6">
+                            <p>Rating:</p>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" class="btn btn-primary">Rate this</button>
+                        </div>
+                    </div>
+                </div>
+                <p>Cast and Crew</p>
+                <p>Director:</p>
+                <p>Writers:</p>
+                <p>Actors:</p>
+                <p data-bind="text: title().plot"></p>
             </div>
         </div>
     </div>
