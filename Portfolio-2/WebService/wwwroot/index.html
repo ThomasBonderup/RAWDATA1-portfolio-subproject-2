@@ -1,22 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>index</title>
-    <link rel="stylesheet" href="js/lib/twitter-bootstrap/css/bootstrap.min.css">
+    <title>Movie Finder</title>
+    <!--<link rel="stylesheet" href="js/lib/twitter-bootstrap/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="js/lib/twitter-bootstrap/css/bootstrap-lux.min.css">
     <link href="css/style.css" rel="stylesheet" />
+    <link rel="icon" href="resources/logo_white.svg">
+    
 </head>
 
 <body>
- <header>
-    <span>   <img class="logo" src="resources/logo_black.svg"> </span>
+<header>
+    
+    
+    
+    <span>  <img class="logo" src="resources/logo_black.svg"> </span>
     <input data-bind="value: searchInput" placeholder="Search..." aria-label="Search..."/>
-    <button data-bind="click: searchBtn">Search</button>
-<select class="extras" data-bind="options: genres, optionsText: 'genre', value: selectedGenre, optionsCaption: 'Genre'" ></select>
-    <button data-bind="click: advSearchBtn">Advanced search</button>
+    <button data-bind="click:searchBtn" type ="button" class ="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Search</button>
+    <select class="extras" data-bind="options: genres, optionsText: 'genre', value: selectedGenre, optionsCaption: 'Genre'" ></select>
+    <button data-bind="click:advSearchBtn" type ="button" class ="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Advanced search</button>
 
      <EnableDefaultContentItems>false</EnableDefaultContentItems>
-     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-         <a class="navbar-brand" href="#"></a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">Navbar</a>
          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
              <span class="navbar-toggler-icon"></span>
          </button>
@@ -30,8 +36,6 @@
              </ul>
          </div>
      </nav>
-     
-     
 </header>
  
 
