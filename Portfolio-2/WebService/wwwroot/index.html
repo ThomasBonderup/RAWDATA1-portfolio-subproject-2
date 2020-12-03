@@ -36,18 +36,14 @@
  
 
 <h1>Example</h1>
-
- <div data-bind="visible: selectedGenre"></div>
+<!-- <div data-bind="visible: selectedGenre"></div>-->
+<!-- -->
+<!-- -->
+<!-- <div data-bind="{name: selectedComponent, params: currentParams}">-->
+<!--     <span data-bind="text: selectedComponent"></span>-->
+<!-- </div>-->
+ <div data-bind="component: {name: selectedComponent}"></div>
  
- 
- <div data-bind="{name: selectedComponent, params: currentParams}">
-     <span data-bind="text: selectedComponent"></span>
-     
- </div>
- 
- 
- <user></user>
- <login></login>
  <title-list></title-list>
  <title-details params="tconst: 'tt0052520'"></title-details>
  

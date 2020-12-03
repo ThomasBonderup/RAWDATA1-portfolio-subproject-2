@@ -6,8 +6,8 @@ define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) =>{
     return function(params){
         
         let user = ko.observableArray();
-        let uconst = params.uconst;
-        
+        //let uconst = params.uconst;
+        let uconst = 'ui000001';
         ds.getUser(uconst, function(data) {user(data)});
         
         /*
@@ -29,8 +29,8 @@ define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) =>{
         
         return {
             _user,
-            selectedUser,
-            selectUser,
+            //selectedUser,
+            //selectUser,
             firstName,
             lastName,
             userRole,
