@@ -1,16 +1,28 @@
 <div data-bind="template: currentTemplate"></div>
-    <script type="text/html" id = "create-account">        
-        <div data-bind="createUser">
-        <span class="input-group-text">User details:</span>
+<script type="text/html" id = "createaccount-page">        
+        <div data-bind="createUserBtn">
+        <label for="createaccount-page">User Information:</label> 
             <input data-bind="text:firstName" class="form-control" placeholder="First Name" aria-label="First Name" aria-describedby="register"/>
             <input data-bind="text:lastName" class="form-control" placeholder="Last Name" aria-label="Last Name" aria-describedby="register"/>
             <input data-bind="text:email" class="form-control" placeholder="E-mail" aria-label="E-mail" aria-describedby="register"/>
             <input data-bind="text:username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="register"/>
             <input data-bind="text:password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="register"/>
         </div>
+        <button data-bind="click:createAccount" type ="button" class ="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Submit</button>
+        <button data-bind="click:cancelUserBtn" type ="button" class ="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Cancel</button>
     </script>
 
+
+<script type="text/html" id="signIn-page">
+    <div data-bind="signInUserBtn">
+        <label for="signIn-page">Login information:</label>
+        <input data-bind="text:E-mail" class="form-control" placeholder="E-mail" aria-label="E-mail" aria-describedby="register"/>
+        <input data-bind="text:Password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="register"/>
+    </div>
+    <button data-bind="click:signInUser" type ="button" class ="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Login</button>
+</script>
+
 <script type ="text/html" id = "login-page">
-    <button data-bind="click:createUser" type ="button" class ="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Create New User</button>
-    <button type ="button" class ="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Sign In</button>
+    <button data-bind="click:createUserBtn" type ="button" class ="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Create New User</button>
+    <button data-bind="click:signInUserBtn" type ="button" class ="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Sign In</button>
 </script>

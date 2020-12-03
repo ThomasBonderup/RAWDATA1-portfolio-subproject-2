@@ -7,17 +7,27 @@ define(['knockout','dataservice'], (ko, ds)=> {
         }
         let selectedUser = ko.observable();
         
-        let createUser = () => {
+        let createUserBtn = () => {
             console.log("create user button clicked")
             //console.log(selectedUser);
             //user.push(selectedUser());
-            currentTemplate("create-account");
+            currentTemplate("createaccount-page");
+        }
+        
+        let cancelUserBtn = () =>{
+            console.log("cancel pushed")
+            currentTemplate("login-page");
         }
 
-        let signInUser = () =>{
+        let signInUserBtn = () =>{
             console.log("sign in button clicked");
             currentTemplate("signIn-page")
         }
+        
+        let signInUser =()=>{
+            
+        }
+        
 
         let existingAccount= (info) =>
         {
@@ -59,10 +69,13 @@ define(['knockout','dataservice'], (ko, ds)=> {
         let signInBtn = () => console.log("Sign in button clicked");*/
 
         return {
-            createUser,
+            createUserBtn,
             currentTemplate,
-            signInUser,
-            selectedUser
+            signInUserBtn,
+            selectedUser,
+            cancelUserBtn,
+            createAccount,
+            signInUser
             /*user,
             selectedUser,
             createUser,
