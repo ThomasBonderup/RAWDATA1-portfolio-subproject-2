@@ -21,7 +21,7 @@ header{
     
 }
 
-nav, nav ul, ul li{
+nav, nav ul, ul li, .user_info_fields{
     display: inline;
 }
 
@@ -37,3 +37,5 @@ nav, nav ul, ul li{
 .componentBtn{
     display: block;
 }
+
+

@@ -1,30 +1,57 @@
 <div class="container, user-container">
     
-    
-    <span> <svg width="15%" height="15%" viewBox="0 0 16 16" class="bi bi-file-earmark-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <div class="row">
+ 
+    <span class="col-sm"> <svg width="85%" height="85%" viewBox="0 0 16 16" class="bi bi-file-earmark-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
   <path d="M4 0h5.5v1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h1V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"/>
   <path d="M9.5 3V0L14 4.5h-3A1.5 1.5 0 0 1 9.5 3z"/>
   <path fill-rule="evenodd" d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
   <path d="M8 12c4 0 5 1.755 5 1.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-.245S4 12 8 12z"/>
 </svg> </span>
+   
     
     
     
-    <button data-bind="editBtn", click="isEditMode">Edit</button>
+    <form class="AVAST_PAM_signupform AVAST_PAM_loginform user_form col-sm">
     
-    <ul class="userInfo" data-bind="forach: user">
+        <button data-bind="click: isEditMode" type="button" class="btn btn-secondary border">Edit</button>
+       
+        <button data-bind="click: saveSettings" type="button" class="btn btn-secondary border">Save</button>
+    
+        <legend class="border-bottom">User info</legend>
+            <div class="form-group row">
+            <label  class="col-sm-2 col-form-label" for="first_name">First name:</label>
+                <div class="col-sm-10">
+            <input data-bind="textInput: fName, enable: 'editMode'" readonly="" class="form-control-plaintext user_info_fields border-bottom" value="" id="first_name">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-sm-2 col-form-label" for="last_name">Last name:</label>
+                <div class="col-lg-10">
+                    <input data-bind="textInput: lastName, enable: 'editMode'" readonly="" class="form-control-plaintext user_info_fields border-bottom" value="" id="last_name">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-sm-2 col-form-label" for="e_mail">E-mail:</label>
+                <div class="col-sm-10">
+                    <input data-bind="textInput: email" readonly="" class="form-control-plaintext user_info_fields border-bottom" value="" id="e_mail">
+                </div>
+            </div>
         
-        <li data-bind="text: firstName"></li>
-        <li data-bind="text: lastName"></li>
-        <li data-bind="text: userRole"></li>
-        
-    </ul>
-        <div>
-            <user params="user: selectedUser"></user>
+ 
+    </form>
+
+    </div>
+    
+
+    <div class="card text-white bg-info mb-3 row" style="max-width: 20rem;">
+        <div class="card-header">- Michael Corleone </div>
+        <div class="card-body">
+            <h4 class="card-title">Godfather 2</h4>
+            <p class="card-text font-italic">"Only Don't Tell Me That You're Innocent. Because It Insults My Intelligence And It Makes Me Very Angry."</p>
         </div>
-        <text data-bind="textInput: firstName"></text>
-        <text data-bind="textInput: lastName"></text>
-        <text data-bind="textInput: userRole"></text>
     </div>
     
     <div class="histories bookmark-history"></div>
