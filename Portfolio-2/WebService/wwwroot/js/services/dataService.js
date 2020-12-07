@@ -57,15 +57,12 @@ define([], () => {
    //        .then(callback);
    // }
    
-   let getTitle = (tconst, callback) => {
-      fetch('api/titles/' + tconst, {
-         headers : {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-         }
-      })
-          .then(response => response.json())
-          .then(callback);
+   let getTitle = (url, tconst, callback) => {
+      if (url === undefined) {
+         url = titleApiUrl + "/" + tconst;
+         
+         getJSON(url, callback);
+      }
    }
    
    let getNames = (callback) =>

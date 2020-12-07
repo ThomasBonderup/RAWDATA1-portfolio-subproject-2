@@ -1,4 +1,4 @@
-define(['knockout', 'dataservice'], (ko, ds) =>  {
+define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) =>  {
    return function (params) {
        let titles = ko.observableArray([]);
        let pageSizes = [5, 10, 15, 20, 25];
@@ -6,12 +6,21 @@ define(['knockout', 'dataservice'], (ko, ds) =>  {
        let searchString = params.searchInput;
        let prev = ko.observable();
        let next = ko.observable();
+       let selectedTitle = ko.observable();
+       
+       let selectTitle = title => {
+           selectedTitle(title);
+           //console.log(selectedTitle());
+           postman.publish('changeTitle', selectedTitle());
+       }
        
        let getData = url => {
            ds.getTitles(url, searchString(), function (data) {
                prev(data.prev || undefined);
                next(data.next || undefined);
-               titles(data);
+               titles(data.items);
+               console.log(titles());
+               //console.log(selectedTitle());
            });
        }
 
@@ -31,7 +40,7 @@ define(['knockout', 'dataservice'], (ko, ds) =>  {
        
        selectedPageSize.subscribe(() => {
            let size = selectedPageSize()[0];
-          getData(ds.getTitlesUrlWithPageSize(size)); 
+           getData(ds.getTitlesUrlWithPageSize(size)); 
        });
        
        getData();
@@ -46,6 +55,8 @@ define(['knockout', 'dataservice'], (ko, ds) =>  {
            titles,
            enablePrev,
            enableNext,
+           selectTitle,
+           selectedTitle
        }
    } 
 });

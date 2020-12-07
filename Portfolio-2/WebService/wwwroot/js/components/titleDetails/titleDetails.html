@@ -1,19 +1,22 @@
 <div>
     <div class="container">
         <div class="row">
-            <div class="col-6">
-                <h2 data-bind="text: title().primaryTitle">Title details (<span data-bind="text: title().startYear"></span>)</h2>
+            <div class="border" data-bind="with: title">
+            <div >
+                <div data-bind="text: primaryTitle"></div>
             </div>
+        </div>
+            
             <div class="col-6">
                 <button type="button" class="btn btn-primary">Add to bookmarks +</button>
             </div>
         </div>
         <div class="row">
             <div class="col-6">
-                <img class="img-fluid" data-bind="attr:{src: title().poster}" />
+                <img class="img-fluid" data-bind="attr:{src: title.poster}" />
             </div>
             <div class="col-6">
-                <p>Runtime: <span data-bind="text: title().runTimeMinutes"></span> minutes</p>
+                <p>Runtime: <span data-bind="text: title.runTimeMinutes"></span> minutes</p>
                 <div class="container">
                     <div class="row">
                         <div class="col-6">
@@ -28,8 +31,8 @@
                 <p>Director:</p>
                 <p>Writers:</p>
                 <p>Actors:</p>
-                <p data-bind="text: title().plot"></p>
-                <p>Awards: <span data-bind="text: title().awards"></span></p>
+                <p data-bind="text: title.plot"></p>
+                <p>Awards: <span data-bind="text: title.awards"></span></p>
             </div>
         </div>
     </div>
