@@ -5,14 +5,15 @@ define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
 
         //ds.getTitle(tconst, function (data) { title(data) });
         
-        let title = ko.observable();
+        let titles = ko.observable();
         //
         postman.subscribe('changeTitle', title => {
-            console.log(title);
+            titles(title);
+            console.log(titles())
         });
         
         return {
-            title
+            titles
         }
     }
 });
