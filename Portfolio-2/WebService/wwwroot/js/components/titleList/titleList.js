@@ -1,6 +1,8 @@
 define(['knockout', 'dataservice'], (ko, ds) =>  {
    return function (params) {
        let titles = ko.observableArray([]);
+       let pageSizes = [5, 10, 15, 20, 25];
+       let selectedPageSize = ko.observableArray([10]);
        let searchString = params.searchInput;
        let prev = ko.observable();
        let next = ko.observable();
@@ -27,13 +29,18 @@ define(['knockout', 'dataservice'], (ko, ds) =>  {
        
        let enableNext = ko.computed(() => next() !== undefined);
        
+       selectedPageSize.subscribe(() => {
+           let size = selectedPageSize()[0];
+          getData(ds.getTitlesUrlWithPageSize(size)); 
+       });
+       
        getData();
        
        
        
-       //debugger;
-       //console.log(ko.toJSON(titles));
        return {
+           pageSizes,
+           selectedPageSize,
            showPrev,
            showNext,
            titles,

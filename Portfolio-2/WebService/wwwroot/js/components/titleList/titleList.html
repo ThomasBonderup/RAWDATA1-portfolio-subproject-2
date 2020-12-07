@@ -1,5 +1,8 @@
 <div class="container">
     <h2>Title search results</h2>
+    <div>
+        Page size: <select data-bind="options: pageSizes, selectedOptions: selectedPageSize"></select>
+    </div>
     <div data-bind="foreach: titles">
             <div class="row" data-bind="foreach: items">
                 <div class="col-4">

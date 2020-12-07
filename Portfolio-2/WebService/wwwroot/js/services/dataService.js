@@ -41,6 +41,8 @@ define([], () => {
       getJSON(url, callback);
    };
    
+   let getTitlesUrlWithPageSize = size => titleApiUrl + "?pageSize=" + size;
+   
    // let getTitles = (searchString, callback) =>
    // {
    //    fetch('api/titles/search-title/' + searchString, {
@@ -75,6 +77,7 @@ define([], () => {
    return {
       getTitles,
       getTitle,
+      getTitlesUrlWithPageSize,
       getNames,
       getUser,
       postUser
