@@ -41,6 +41,7 @@ define([], () => {
       getJSON(url, callback);
    };
    
+   // TODO pageSize feature do not work with searchString
    let getTitlesUrlWithPageSize = size => titleApiUrl + "?pageSize=" + size;
    
    // let getTitles = (searchString, callback) =>
