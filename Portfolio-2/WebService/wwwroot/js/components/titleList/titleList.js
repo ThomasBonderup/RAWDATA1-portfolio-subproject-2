@@ -7,8 +7,8 @@ define(['knockout', 'dataservice'], (ko, ds) =>  {
        
        let getData = url => {
            ds.getTitles(url, searchString(), function (data) {
-               prev(data.prev);
-               next(data.next);
+               prev(data.prev || undefined);
+               next(data.next || undefined);
                titles(data);
            });
        }
@@ -17,11 +17,15 @@ define(['knockout', 'dataservice'], (ko, ds) =>  {
            console.log(prev());
            getData(prev());
        }
+       
+       let enablePrev = ko.computed(() => prev() !== undefined);
 
        let showNext = title => {
            console.log(next());
            getData(next());
        }
+       
+       let enableNext = ko.computed(() => next() !== undefined);
        
        getData();
        
@@ -32,7 +36,9 @@ define(['knockout', 'dataservice'], (ko, ds) =>  {
        return {
            showPrev,
            showNext,
-           titles
+           titles,
+           enablePrev,
+           enableNext,
        }
    } 
 });
