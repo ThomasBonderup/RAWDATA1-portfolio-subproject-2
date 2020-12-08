@@ -6,7 +6,7 @@
     <div class="row" data-bind="foreach: titles">
         <div class="col-4" data-bind="click: $parent.selectTitle">
             <div class="primary_title" data-bind="text: primaryTitle"></div>
-            <img class="img-fluid" data-bind="attr:{src: poster}" />
+            <img class="img-fluid" data-bind="attr:{src: poster}" onerror=src="resources/image-placeholder.png" />
         </div>
     </div>
     <div>
