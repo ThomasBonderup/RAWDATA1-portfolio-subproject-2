@@ -178,7 +178,8 @@ namespace DataAccess
 
         public User GetUser(string uconst)
         {
-            var user = ctx.Users.Find(uconst);
+            using var ctx1 = new DBContext();
+            var user = ctx1.Users.Find(uconst);
 
             if (user != null)
             {
