@@ -26,7 +26,12 @@
                     </div>
                 </div>
                 <p>Cast and Crew</p>
-                <p>Director:</p>
+                <p>TitlePrincipalsList: 
+                    <span data-bind="foreach: $parent.titlePrincipals">
+                        <span data-bind="text: nconst"></span>
+                    </span>
+                </p>
+                <p>Directors:</p>
                 <p>Writers:</p>
                 <p>Actors:</p>
                 <p>Genres: <span data-bind="text: $parent.genres"></span></p>
