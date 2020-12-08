@@ -41,6 +41,11 @@ define([], () => {
       getJSON(url, callback);
    };
    
+   let getRating = (tconst, callback) => {
+      let url = titleApiUrl + "/" + tconst + "/titlerating";
+      getJSON(url, callback);
+   }
+   
    // TODO pageSize feature do not work with searchString
    let getTitlesUrlWithPageSize = size => titleApiUrl + "?pageSize=" + size;
    
@@ -78,6 +83,7 @@ define([], () => {
       getTitlesUrlWithPageSize,
       getNames,
       getUser,
-      postUser
+      postUser,
+      getRating,
    }
 });
