@@ -1,5 +1,5 @@
-define(['knockout', 'postman'], function(ko, postman) {
-    
+define(['knockout', 'postman'], function (ko, postman) {
+
     let selectedComponent = ko.observable('home');
     let selectedUser = ko.observable();
     let searchInput = ko.observable();
@@ -8,55 +8,36 @@ define(['knockout', 'postman'], function(ko, postman) {
     let advSearchBtn = () => console.log("Advanced clicked");
     var selectedGenre = ko.observable();
 
-    var genres = ([
-        new Genre("Comedy"),
-        new Genre("Horror"),
-        new Genre("Reality-TV"),
-        new Genre("Sport"),
-        new Genre("Talk-Show"),
-        new Genre("Crime"),
-        new Genre("Mystery"),
-        new Genre("News"),
-        new Genre("Action"),
-        new Genre("History"),
-        new Genre("Animation"),
-        new Genre("Thriller"),
-        new Genre("Short"),
-        new Genre("War"),
-        new Genre("Game-Show"),
-        new Genre("Sci-Fi"),
-        new Genre("Family"),
-        new Genre("Documentary"),
-        new Genre("Adventure"),
-        new Genre("Adult"),
-        new Genre("Biography"),
-        new Genre("Musical"),
-        new Genre("Music"),
-    ]);
-    
-    
+    var genresList = [
+        "Comedy", "Horror", "Reality-TV", "Sport", "Talk-Show", "Crime",
+        "Mystery", "News", "Action", "History", "Animation", "Thriller",
+        "Short", "War", "Game-Show", "Sci-Fi", "Family", "Documentary",
+        "Adventure", "Adult", "Biography", "Musical", "Music",
+    ];
+
+
     let isActive = element => {
         return element.toLowerCase() === selectedComponent() ? "active" : "";
     }
-    
-    postman.subscribe("changeContent", component => {
-       changeContent(component);
-    });
-    
-    postman.subscribe("changeTitle", component => {
-       changeContent('title-details'); 
-    });
-    
-    function Genre(genre){
-        this.genre = ko.observable(genre);
+
+    let isActiveDrop = genre => {
+        return genre.toLowerCase() === selectedGenre() ? "active" : "";
     }
-    
+
+    postman.subscribe("changeContent", component => {
+        changeContent(component);
+    });
+
+    postman.subscribe("changeTitle", component => {
+        changeContent('title-details');
+    });
+
     let searchBtn = () => {
         console.log("Search button clicked");
         currentParams({searchInput});
         selectedComponent('title-list');
     }
-    
+
     let loginBtn = () => {
         console.log("Login button clicked");
     }
@@ -64,7 +45,7 @@ define(['knockout', 'postman'], function(ko, postman) {
     let changeContent = element => {
         selectedComponent(element.toLowerCase());
     }
-    
+
     /*let changeContent = () => {
         console.log("Change component");
         if(selectedComponent() === 'user'){
@@ -75,10 +56,9 @@ define(['knockout', 'postman'], function(ko, postman) {
             selectedComponent('user');
         }
     };*/
-    
+
     return {
         selectedComponent,
-        genres,
         selectedGenre,
         searchInput,
         searchBtn,
@@ -88,5 +68,7 @@ define(['knockout', 'postman'], function(ko, postman) {
         menuElements,
         changeContent,
         currentParams,
+        genresList,
+        isActiveDrop,
     };
 });
