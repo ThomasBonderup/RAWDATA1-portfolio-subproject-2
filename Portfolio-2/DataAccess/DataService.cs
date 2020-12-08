@@ -27,6 +27,7 @@ namespace DataAccess
         public Title CreateTitle(string titleType, string primaryTitle, string originalTitle, bool isAdult,
             string startYear, string endYear, int? runtimeMinutes, string poster, string awards, string plot)
         {
+            using var ctx1 = new DBContext();
             var newTconst = AssignMaxTconst();
             var newTitle = new Title
             {
@@ -42,9 +43,9 @@ namespace DataAccess
                 Awards = awards,
                 Plot = plot
             };
-            ctx.Titles.Add(newTitle);
+            ctx1.Titles.Add(newTitle);
             //ctx.Database.ExecuteSqlInterpolated($"INSERT INTO movie_data_model.title VALUES ({newTconst},{titleType},{primaryTitle},{originalTitle},{isAdult},{startYear},{endYear},{runtimeMinutes},{poster},{awards},{plot})");
-            ctx.SaveChanges();
+            ctx1.SaveChanges();
             return GetTitle(newTconst);
         }
 
@@ -53,7 +54,8 @@ namespace DataAccess
             int? runtimeMinutes, string poster, string awards, string plot)
         {
 
-            var title = ctx.Titles.Find(tconst);
+            using var ctx1 = new DBContext();
+            var title = ctx1.Titles.Find(tconst);
 
             if (title == null || tconst.Length != 10 || !tconst.StartsWith("t"))
             {
@@ -225,7 +227,8 @@ namespace DataAccess
 
         public Name GetName(string nconst)
         {
-            var name = ctx.Names.Find(nconst);
+            using var ctx1 = new DBContext();
+            var name = ctx1.Names.Find(nconst);
 
             if (name != null)
             {
@@ -260,12 +263,13 @@ namespace DataAccess
 
         public bool DeleteName(string nconst)
         {
-            var name = ctx.Names.Find(nconst);
+            using var ctx1 = new DBContext();
+            var name = ctx1.Names.Find(nconst);
 
             if (name != null)
             {
-                ctx.Names.Remove(name);
-                ctx.SaveChanges();
+                ctx1.Names.Remove(name);
+                ctx1.SaveChanges();
                 return true;
             }
 
@@ -274,7 +278,8 @@ namespace DataAccess
 
         public bool UpdateName(string nconst, string primaryName, string birthYear, string deathYear)
         {
-            var name = ctx.Names.Find(nconst);
+            using var ctx1 = new DBContext();
+            var name = ctx1.Names.Find(nconst);
             if (name == null)
             {
                 return false;
@@ -283,7 +288,7 @@ namespace DataAccess
             name.PrimaryName = primaryName;
             name.BirthYear = birthYear;
             name.DeathYear = deathYear;
-            ctx.SaveChanges();
+            ctx1.SaveChanges();
             
             return true;
         }
@@ -321,6 +326,7 @@ namespace DataAccess
          */
         public IList<TitlePrincipals> GetTitlePrincipalsList(int page, int pageSize)
         {
+          
             return ctx.TitlePrincipals.ToList()
                 .Skip(page * pageSize)
                 .Take(pageSize)

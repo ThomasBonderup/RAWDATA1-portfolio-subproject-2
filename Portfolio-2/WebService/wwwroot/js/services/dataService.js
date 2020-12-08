@@ -1,5 +1,6 @@
 define([], () => {
    const titleApiUrl = "api/titles";
+   const userApiUrl = "api/users"
    
    let getJSON = (url, callback) => {
       fetch(url, {
@@ -10,7 +11,14 @@ define([], () => {
          }
       }).then(response => response.json().then(callback));
    }
+
+   let getUser = (uconst, callback) => {
+      let url = userApiUrl + "/" + uconst().trim();
+      console.log("getUser api url: " + url);
+      getJSON(url, callback);
+   }
    
+   /*
    let getUser = (uconst, callback) =>
    {
       fetch('api/users/' + uconst,{
@@ -22,7 +30,7 @@ define([], () => {
           .then(response => response.json())
           .then(callback);
    }
-   
+   */
    let postUser = (callback) =>{
       fetch(user,{
          header:{
