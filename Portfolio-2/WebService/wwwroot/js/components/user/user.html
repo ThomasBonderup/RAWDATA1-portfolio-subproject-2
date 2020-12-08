@@ -22,8 +22,7 @@
             <div class="form-group row">
             <label  class="col-sm-2 col-form-label" for="first_name">First name:</label>
                 <div class="col-sm-10">
-                    <input data-bind="text: firstName" readonly="" id="first_name">
-           <!-- <input data-bind="textInput: fName" readonly="" class="form-control-plaintext user_info_fields border-bottom" value="" id="first_name"> -->
+            <input  readonly="" class="form-control-plaintext user_info_fields border-bottom" value="" id="first_name" data-bind="textInput: fName"> 
                
                 </div>
             </div>
@@ -31,7 +30,7 @@
             <div class="form-group row">
                 <label  class="col-sm-2 col-form-label" for="last_name">Last name:</label>
                 <div class="col-lg-10">
-                    <input data-bind="value: lastName"  class="form-control-plaintext user_info_fields border-bottom" id="last_name">
+                    <input  class="form-control-plaintext user_info_fields border-bottom" id="last_name" data-bind="value: lastName" >
                 </div>
             </div>
 
