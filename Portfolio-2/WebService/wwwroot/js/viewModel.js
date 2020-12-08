@@ -43,6 +43,10 @@ define(['knockout', 'postman'], function(ko, postman) {
        changeContent(component);
     });
     
+    postman.subscribe("changeTitle", component => {
+       changeContent('title-details'); 
+    });
+    
     function Genre(genre){
         this.genre = ko.observable(genre);
     }
