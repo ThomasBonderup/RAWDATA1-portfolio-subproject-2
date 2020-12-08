@@ -51,7 +51,6 @@ define(['knockout', 'postman'], function(ko, postman) {
         this.genre = ko.observable(genre);
     }
     
-
     let searchBtn = () => {
         console.log("Search button clicked");
         currentParams({searchInput});

@@ -146,6 +146,8 @@ namespace DataAccess
 
         public User CreateUser(string firstName, string lastName, string email, string password, string userName)
         {
+            
+            using var ctx1 = new DBContext();
             var user = new User
             {
                 FirstName = firstName,
@@ -156,20 +158,22 @@ namespace DataAccess
                 UserName = userName
             };
 
-            ctx.Users.Add(user);
-            ctx.SaveChanges();
+            ctx1.Users.Add(user);
+            ctx1.SaveChanges();
             return user;
         }
 
         public bool DeleteUser(string uconst)
         {
 
-            var user = ctx.Users.Find(uconst);
+            using var ctx1 = new DBContext();
+            
+            var user = ctx1.Users.Find(uconst);
 
             if (user != null)
             {
-                ctx.Users.Remove(user);
-                ctx.SaveChanges();
+                ctx1.Users.Remove(user);
+                ctx1.SaveChanges();
                 return true;
             }
 
