@@ -23,7 +23,8 @@ define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
         });
         
         return {
-            titles
+            titles,
+            rating
         }
     }
 });

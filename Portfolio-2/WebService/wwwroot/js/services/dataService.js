@@ -42,7 +42,8 @@ define([], () => {
    };
    
    let getRating = (tconst, callback) => {
-      let url = titleApiUrl + "/" + tconst + "/titlerating";
+      let url = titleApiUrl + "/" + tconst().trim() + "/titlerating";
+      console.log("getRating api url:" + url);
       getJSON(url, callback);
    }
    
