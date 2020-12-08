@@ -678,14 +678,15 @@ namespace DataAccess
 
         public TitleRatings GetTitleRating(string tconst)
         {
-            var result = ctx.TitleRatings.Find(tconst);
+            using var ctx1 = new DBContext();
+            var result = ctx1.TitleRatings.Find(tconst);
             return result;
         }
 
         public IList<TitleRatings> GetTitleRatings()
         {
-
-            var result = ctx.TitleRatings;
+            using var ctx1 = new DBContext();
+            var result = ctx1.TitleRatings;
             return result.ToList();
 
         }
@@ -709,7 +710,9 @@ namespace DataAccess
         {
             IList<string> result = new List<string>();
             
-            foreach (var tg in ctx.TitleGenres)
+            using var ctx1 = new DBContext();
+            
+            foreach (var tg in ctx1.TitleGenres)
             {
                 if (tg.Tconst.Trim() == tconst)
                 {
