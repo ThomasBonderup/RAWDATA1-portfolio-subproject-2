@@ -8,8 +8,17 @@ define(["knockout","dataservice"], (ko, ds)=> {
             console.log(user);
             selectedUser(user);
             ds.getUser()
+            console.log(selectedUser());
         }
+       //let uconst = ko.observable('ui000001');
+        
         let selectedUser = ko.observable();
+        
+        /*ds.getUser(uconst, function (data) {
+            selectedUser(data);
+        });
+        
+        console.log(selectedUser());*/
         
         let createUserBtn = () => {
             console.log("create user button clicked");
