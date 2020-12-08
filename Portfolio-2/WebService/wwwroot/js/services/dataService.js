@@ -43,7 +43,13 @@ define([], () => {
    
    let getRating = (tconst, callback) => {
       let url = titleApiUrl + "/" + tconst().trim() + "/titlerating";
-      console.log("getRating api url:" + url);
+      console.log("getRating api url: " + url);
+      getJSON(url, callback);
+   }
+   
+   let getGenres = (tconst, callback) => {
+      let url = titleApiUrl + "/" + tconst().trim() + "/titlegenres";
+      console.log("getRating api url: " + url);
       getJSON(url, callback);
    }
    
@@ -86,5 +92,6 @@ define([], () => {
       getUser,
       postUser,
       getRating,
+      getGenres,
    }
 });
