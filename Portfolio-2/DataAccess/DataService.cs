@@ -145,8 +145,23 @@ namespace DataAccess
         /**
          *  USER
          */
+        //extra create user possibly should be deleted?
+        public User CreateUser(string firstName, string lastName, string email, string userName, string password = null,
+            string salt = null)
+        {
+            var user = new User
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                Uconst = AssignMaxUconst(),
+                Email = email,
+                Password = password,
+                UserName = userName
+            };
+            return user;
+        }
 
-        public User CreateUser(string firstName, string lastName, string email, string userName, string password, string salt)
+        public User CreateUser(string firstName, string lastName, string email, string userName, string password)
             //ændret rækkefølge password til sidst i rækken herover + indsatte salt???? - kan det påvirke resten?
         {
             
