@@ -17,12 +17,22 @@
                 <p>Runtime: <span data-bind="text: runTimeMinutes"></span> minutes</p>
                 <div class="container">
                     <div class="row">
-                        <div class="col-6" data-bind="with: $parent.rating">
-                            <p>Rating: <span data-bind="text: averageRating"></span></p>
+                        <div class="col-12" data-bind="with: $parent.rating">
+                            <p>Average Title Rating: <span data-bind="text: averageRating"></span></p>
+                        </div>
+                        <div class="col-6">
+                            <form>
+                                <div class="form-group">
+                                    <label for="formControlRange">Give title rating: </label>
+                                    <span data-bind="text: $parent.titleRating"></span>
+                                    <input type="range" class="form-control-range" id="formControlRange" data-bind="attr: {min: 1, max: 10}, value: $parent.titleRating">
+                                </div>
+                            </form>
                         </div>
                         <div class="col-6">
                             <button type="button" class="btn btn-primary">Rate this</button>
                         </div>
+                        
                     </div>
                 </div>
                 <p>Cast and Crew</p>
