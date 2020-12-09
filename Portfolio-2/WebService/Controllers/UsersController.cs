@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Xml;
 using AutoMapper;
 //using AutoMapper.Configuration;
@@ -12,6 +15,7 @@ using WebService.Common;
 using WebService.Models;
 using WebService.Services;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 
 namespace WebService.Controllers
 {
@@ -33,7 +37,7 @@ namespace WebService.Controllers
         }
 
         [HttpPost("register")]
-        public IActionResult Register(User dto)
+        public IActionResult Register(RegisterDto dto)
         {
             if (_dataService.GetUser(dto.UserName) != null)
             {
@@ -51,6 +55,53 @@ namespace WebService.Controllers
             _dataService.CreateUser(dto.FirstName, dto.LastName, dto.Email, dto.UserName, pwd, salt);
 
             return CreatedAtRoute(null, new {dto.UserName});
+        }
+
+        [HttpPost("login")]
+        public IActionResult Login(LoginDto dto)
+        {
+            var user = _dataService.GetUser(dto.Username);
+            if (user == null)
+            {
+                return BadRequest();
+            }
+
+            int.TryParse(_configuration.GetSection("Auth:PasswordSize").Value, out int pwdSize);
+
+            if (pwdSize == 0)
+            {
+                throw new ArgumentException("No password size");
+            }
+
+            string secret = _configuration.GetSection("Auth:secret").Value;
+            if (string.IsNullOrEmpty(secret))
+            {
+                throw new Exception("No secret");
+            }
+
+            var password = PasswordService.HashPassword(dto.Password, user.Salt, pwdSize);
+
+            if (password != user.Password)
+            {
+                return BadRequest();
+            }
+            
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            var key = Encoding.UTF8.GetBytes(secret);
+            
+            var tokenDescription = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[]{new Claim("id",user.Uconst) }),
+                Expires = DateTime.Now.AddSeconds(45), //skal nok sættes højere
+                SigningCredentials = new SigningCredentials(
+                    new SymmetricSecurityKey(key),SecurityAlgorithms.HmacSha256Signature )
+            };
+
+            var securityToken = tokenHandler.CreateToken(tokenDescription);
+            var token = tokenHandler.WriteToken(securityToken);
+
+            return Ok(new {dto.Username, token});
         }
 
         private (string prev, string cur, string next) CreatePagingNavigation(int page, int pageSize, int count)
