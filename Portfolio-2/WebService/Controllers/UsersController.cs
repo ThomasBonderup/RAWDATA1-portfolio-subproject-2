@@ -46,8 +46,9 @@ namespace WebService.Controllers
                 throw new ArgumentException("No Password Size");
             }
 
-            var salt = PasswordService.GenerateSalt(pwdSize);
-            var pwd = PasswordService.HashPassword(dto.Password, salt, pwdSize);
+            //var salt = PasswordService.GenerateSalt(pwdSize);
+            //var pwd = PasswordService.HashPassword(dto.Password, salt, pwdSize);
+            var pwd = dto.Password; //needs to be replaced
 
             _dataService.CreateUser(dto.FirstName, dto.LastName,dto.Email,dto.UserName,pwd,salt);
 
