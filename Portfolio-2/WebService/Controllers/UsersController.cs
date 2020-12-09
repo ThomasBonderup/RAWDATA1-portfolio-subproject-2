@@ -9,20 +9,21 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.JSInterop.Infrastructure;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure.Internal;
 using WebService.Common;
+using WebService.Models;
+using WebService.Services;
 
 namespace WebService.Controllers
 {
     [ApiController]
     [Route("api/users")]
-
     public class UsersController : ControllerBase
-        {
+    {
         private IDataService _dataService;
         private IMapper _mapper;
         private int MaxPageSize = 25;
         private IConfiguration _configuration;
-        
-        
+
+
         public UsersController(IDataService dataService, IMapper mapper, IConfiguration configuration)
         {
             _dataService = dataService;
@@ -31,7 +32,6 @@ namespace WebService.Controllers
         }
 
         [HttpPost("register")]
-
         public IActionResult Register(User dto)
         {
             if (_dataService.GetUser(dto.UserName) != null)
@@ -39,24 +39,24 @@ namespace WebService.Controllers
                 return BadRequest();
             }
 
-            /*int.TryParse(_configuration.GetSection("Auth:PassewordSize").Value, out int pwdSize);
-
-            if (pwdSize == 0)
+           // int.TryParse(_configuration.GetSection("Auth:PasswordSize").Value, out int pwdSize);
+           var pwdSize = 3;
+           if (pwdSize == 0)
             {
                 throw new ArgumentException("No Password Size");
             }
 
-            //var salt = PasswordService.GenerateSalt(pwdSize);
-            //var pwd = PasswordService.HashPassword(dto.Password, salt, pwdSize);
-            var pwd = dto.Password; //needs to be replaced
-            var salt = dto.Email; //need to be replaced
+            var salt = PasswordService.GenerateSalt(pwdSize);
+            var pwd = PasswordService.HashPassword(dto.Password, salt, pwdSize);
+            //var pwd = dto.Password; //needs to be replaced
+            //var salt = dto.Email; //need to be replaced
 
-            _dataService.CreateUser(dto.FirstName, dto.LastName,dto.Email,dto.UserName,pwd,salt);*/
+            _dataService.CreateUser(dto.FirstName, dto.LastName, dto.Email, dto.UserName, pwd, salt);
 
             return CreatedAtRoute(null, new {dto.UserName});
         }
 
-        private (string prev,string cur, string next) CreatePagingNavigation(int page, int pageSize, int count)
+        private (string prev, string cur, string next) CreatePagingNavigation(int page, int pageSize, int count)
         {
             string prev = null;
 
@@ -66,12 +66,12 @@ namespace WebService.Controllers
             }
 
             string next = null;
-            
-            if (page < (int) Math.Ceiling((double)count / pageSize) - 1)
+
+            if (page < (int) Math.Ceiling((double) count / pageSize) - 1)
                 next = Url.Link(nameof(GetUsers), new {page = page + 1, pageSize});
 
             var cur = Url.Link(nameof(GetUsers), new {page, pageSize});
-            
+
             return (prev, cur, next);
         }
 
@@ -82,12 +82,12 @@ namespace WebService.Controllers
             return dto;
         }
 
-        private object CreateResultUsers(int page, int pageSize, IList<User> users) 
+        private object CreateResultUsers(int page, int pageSize, IList<User> users)
         {
             var items = users.Select(CreateUserListDto);
             var count = _dataService.NumberOfUsers();
             var navigationUrls = CreatePagingNavigation(page, pageSize, count);
-            var result = new 
+            var result = new
             {
                 navigationUrls.prev,
                 navigationUrls.cur,
@@ -96,27 +96,28 @@ namespace WebService.Controllers
                 items
             };
             return result;
-          }
-        
+        }
+
         public UnauthorizedResult CheckCurrentUser()
         {
             if (Program.CurrentUser == null)
             {
                 return Unauthorized();
             }
+
             return null;
         }
-        
+
         // GET
         [HttpGet(Name = nameof(GetUsers))]
         public IActionResult GetUsers(int page = 0, int pageSize = 10)
         {
-           pageSize = PaginationHelper.CheckPageSize(pageSize);
-           var users = _dataService.GetUsers(page, pageSize);
-           var result = CreateResultUsers(page, pageSize, users);
-           return Ok(result);
+            pageSize = PaginationHelper.CheckPageSize(pageSize);
+            var users = _dataService.GetUsers(page, pageSize);
+            var result = CreateResultUsers(page, pageSize, users);
+            return Ok(result);
         }
-        
+
         [HttpGet("{uconst}")]
         public IActionResult GetUser(string uconst)
         {
@@ -125,9 +126,10 @@ namespace WebService.Controllers
             {
                 return NotFound();
             }
+
             return Ok(user);
         }
-        
+
         [HttpGet("{uconst}/ratinghistory")]
         public IActionResult GetRatingHistory(string uconst)
         {
@@ -137,9 +139,10 @@ namespace WebService.Controllers
             {
                 return NoContent();
             }
+
             return Ok(result);
         }
-        
+
         [HttpGet("{uconst}/titlebookmarks/{tconst}")]
         public IActionResult GetTitleBookmark(string uconst, string tconst)
         {
@@ -150,9 +153,10 @@ namespace WebService.Controllers
             {
                 return NoContent();
             }
+
             return Ok(titleBookmark);
         }
-        
+
         [HttpGet("{uconst}/titlebookmarks")]
         public IActionResult GetTitleBookmarks(string uconst)
         {
@@ -162,9 +166,10 @@ namespace WebService.Controllers
             {
                 return NotFound();
             }
+
             return Ok(titleBookmarks);
         }
-        
+
         [HttpGet("{uconst}/titlenotes/{tconst}")]
         public IActionResult GetTitleNote(string uconst, string tconst)
         {
@@ -175,9 +180,10 @@ namespace WebService.Controllers
             {
                 return NoContent();
             }
+
             return Ok(titleNote);
         }
-        
+
         [HttpGet("{uconst}/titlenotes")]
         public IActionResult GetTitleNotes(string uconst)
         {
@@ -187,9 +193,10 @@ namespace WebService.Controllers
             {
                 return NotFound();
             }
+
             return Ok(titleNotes);
         }
-        
+
         [HttpGet("{uconst}/namebookmarks/{nconst}")]
         public IActionResult GetNameBookmark(string uconst, string nconst)
         {
@@ -200,9 +207,10 @@ namespace WebService.Controllers
             {
                 return NoContent();
             }
+
             return Ok(nameBookmark);
         }
-        
+
         [HttpGet("{uconst}/namebookmarks")]
         public IActionResult GetNameBookmarks(string uconst)
         {
@@ -212,9 +220,10 @@ namespace WebService.Controllers
             {
                 return NotFound();
             }
+
             return Ok(nameBookmarks);
         }
-        
+
         [HttpGet("{uconst}/namenotes/{nconst}")]
         public IActionResult GetNameNote(string uconst, string nconst)
         {
@@ -225,9 +234,10 @@ namespace WebService.Controllers
             {
                 return NoContent();
             }
+
             return Ok(nameNote);
         }
-        
+
         [HttpGet("{uconst}/namenotes")]
         public IActionResult GetNameNotes(string uconst)
         {
@@ -237,6 +247,7 @@ namespace WebService.Controllers
             {
                 return NotFound();
             }
+
             return Ok(nameNotes);
         }
 
@@ -249,6 +260,7 @@ namespace WebService.Controllers
             {
                 return NoContent();
             }
+
             return Ok(ratings);
         }
 
@@ -264,8 +276,8 @@ namespace WebService.Controllers
 
             return Ok(ratingByUser);
         }
-        
-        
+
+
         [HttpGet("{uconst}/ratinghistory/{tconst}")]
         public IActionResult GetAllRatingHistory(string uconst, string tconst)
         {
@@ -276,6 +288,7 @@ namespace WebService.Controllers
             {
                 return NoContent();
             }
+
             return Ok(result);
         }
 
@@ -289,10 +302,11 @@ namespace WebService.Controllers
             {
                 return NoContent();
             }
+
             return Ok(result);
         }
-        
-        
+
+
         // PUT
 
         [HttpPut("{uconst}")]
@@ -304,13 +318,13 @@ namespace WebService.Controllers
             {
                 _dataService.UpdateUser(user.Uconst, user.FirstName, user.LastName, user.Email, user.Password,
                     user.UserName);
-                
+
                 return Ok(user);
             }
 
             return NotFound();
         }
-        
+
         [HttpPut("{uconst}/namenotes/{nconst}")]
         public IActionResult UpdateNameNote(NameNotes nameNotes)
         {
@@ -319,13 +333,13 @@ namespace WebService.Controllers
             if (result != null)
             {
                 _dataService.UpdateNameNote(nameNotes.Uconst, nameNotes.Nconst, nameNotes.Notes);
-                
+
                 return Ok(nameNotes);
             }
 
             return NotFound();
         }
-        
+
         [HttpPut("{uconst}/titlenotes/{tconst}")]
         public IActionResult UpdateTitleNote(TitleNotes titleNotes)
         {
@@ -334,7 +348,7 @@ namespace WebService.Controllers
             if (result != null)
             {
                 _dataService.UpdateTitleNote(titleNotes.Uconst, titleNotes.Tconst, titleNotes.Notes);
-                
+
                 return Ok(titleNotes);
             }
 
@@ -350,7 +364,7 @@ namespace WebService.Controllers
             var titleBookmark = _dataService.CreateTitleBookmark(uconst, tconst);
             return Ok(titleBookmark);
         }
-        
+
         [HttpPost("{uconst}/titlenotes/{tconst}")]
         public IActionResult CreateTitleNote(TitleNotes titleNote)
         {
@@ -378,7 +392,6 @@ namespace WebService.Controllers
         }
 
         [HttpPost("{uconst}/namebookmarks/{nconst}")]
-
         public IActionResult CreateNameBookmark(NameBookmark nameBookmark)
         {
             CheckCurrentUser();
@@ -397,6 +410,7 @@ namespace WebService.Controllers
             {
                 return Ok();
             }
+
             return NotFound();
         }
 
@@ -422,9 +436,10 @@ namespace WebService.Controllers
             {
                 return Ok();
             }
+
             return NotFound();
         }
-        
+
         [HttpDelete("{uconst}/titlenotes/{tconst}")]
         public IActionResult DeleteTitleNote(string uconst, string tconst)
         {
@@ -434,11 +449,11 @@ namespace WebService.Controllers
             {
                 return Ok();
             }
+
             return NotFound();
         }
 
         [HttpDelete("{uconst}/namebookmarks/{nconst}")]
-
         public IActionResult DeleteNameBookmark(string uconst, string nconst)
         {
             CheckCurrentUser();
@@ -450,5 +465,5 @@ namespace WebService.Controllers
 
             return NotFound();
         }
-        }
+    }
 }
