@@ -101,9 +101,9 @@ define([], () => {
       postJSON(url, JSON.stringify(data), callback);
    }
 
-   let getActors = (url, nconst, callback) => {
+   let getActors = (url, searchString, callback) => {
       if (url === undefined) {
-         url = namesApiUrl + "/" + nconst;
+         url = titleApiUrl + "/titleprincipals/" + searchString;
       }
       getJSON(url, callback);
    };
