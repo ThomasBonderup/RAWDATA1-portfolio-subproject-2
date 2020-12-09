@@ -46,9 +46,7 @@ define(['knockout', 'postman'], function (ko, postman) {
         selectedComponent(element.toLowerCase());
     }
     
-    if (selectedComponent() === 'movies') {
-        selectedComponent('title-list');
-    }
+    
 
     /*let changeContent = () => {
         console.log("Change component");
