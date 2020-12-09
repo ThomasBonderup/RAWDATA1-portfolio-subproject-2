@@ -39,7 +39,7 @@ namespace WebService.Controllers
                 return BadRequest();
             }
 
-            int.TryParse(_configuration.GetSection("Auth:PassewordSize").Value, out int pwdSize);
+            /*int.TryParse(_configuration.GetSection("Auth:PassewordSize").Value, out int pwdSize);
 
             if (pwdSize == 0)
             {
@@ -49,8 +49,9 @@ namespace WebService.Controllers
             //var salt = PasswordService.GenerateSalt(pwdSize);
             //var pwd = PasswordService.HashPassword(dto.Password, salt, pwdSize);
             var pwd = dto.Password; //needs to be replaced
+            var salt = dto.Email; //need to be replaced
 
-            _dataService.CreateUser(dto.FirstName, dto.LastName,dto.Email,dto.UserName,pwd,salt);
+            _dataService.CreateUser(dto.FirstName, dto.LastName,dto.Email,dto.UserName,pwd,salt);*/
 
             return CreatedAtRoute(null, new {dto.UserName});
         }
