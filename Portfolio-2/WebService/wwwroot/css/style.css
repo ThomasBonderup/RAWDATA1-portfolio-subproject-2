@@ -1,5 +1,5 @@
 
-body{
+/*body{
 
     font-family:  Helvetica, Arial, sans-serif, 'Segoe UI', Tahoma, Verdana, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -36,6 +36,10 @@ nav, nav ul, ul li, .user_info_fields{
 
 .componentBtn{
     display: block;
+}*/
+
+.container {
+    margin-top:10px;
 }
 
 

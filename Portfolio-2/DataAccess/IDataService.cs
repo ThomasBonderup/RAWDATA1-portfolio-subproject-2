@@ -73,7 +73,7 @@ namespace DataAccess
         IList<TitleRatings> GetTitleRatings();
 
         TitleRatings GetTitleRating(string tconst);
-        
+
         TitleBookmark CreateTitleBookmark(string uconst, string tconst);
 
         bool DeleteTitleBookmark(string uconst, string tconst);
@@ -85,6 +85,8 @@ namespace DataAccess
         RatingByUser GetRatingByUser(string uconst, string tconst);
 
         IList<RatingByUser> GetRatingsByUser(string uconst, int page, int pageSize);
+
+        bool CreateRatingByUser(string uconst, string tconst, float rating, string review);
         
         IList<RatingHistory> GetRatingHistory(string uconst);
 

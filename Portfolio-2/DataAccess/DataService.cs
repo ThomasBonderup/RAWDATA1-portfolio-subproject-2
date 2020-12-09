@@ -559,6 +559,22 @@ namespace DataAccess
 
         }
 
+        public bool CreateRatingByUser(string uconst, string tconst, float rating, string review)
+        {
+            using var ctx1 = new DBContext();
+            var newRating = new RatingByUser
+            {
+                Uconst = uconst,
+                Tconst = tconst,
+                Rating = rating,
+                Review = review
+            };
+
+            ctx1.RatingsByUser.Add(newRating);
+            ctx1.SaveChanges();
+            return true;
+        }
+
         public IList<TitlePrincipals> GetTitlePrincipalsByName(string nconst, int page, int pageSize)
         {
             List<TitlePrincipals> result = new List<TitlePrincipals>();

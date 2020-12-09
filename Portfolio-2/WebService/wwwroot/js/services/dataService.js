@@ -12,6 +12,18 @@ define([], () => {
       }).then(response => response.json().then(callback));
    }
 
+   let postJSON = (url, data, callback) => {
+      fetch(url, {
+         headers : {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'ui000001'
+         },
+         body: data,
+         method: "POST"
+      }).then(response => response.json().then(callback));
+   }
+
    let getUser = (uconst, callback) => {
       let url = userApiUrl + "/" + uconst().trim();
       console.log("getUser api url: " + url);
@@ -67,6 +79,18 @@ define([], () => {
       getJSON(url, callback);
    }
    
+   let giveTitleReview = (uconst, tconst, titleRating, titleReview, callback) => {
+      let url = titleApiUrl + "/titlerating";
+      let data = new Object;
+      data.uconst = uconst;
+      data.tconst = tconst;
+      data.titleRating = titleRating;
+      data.titleReview = titleReview;
+      let data1 = JSON.stringify(data);
+      console.log(data1);
+      postJSON(url, JSON.stringify(data), callback);
+   }
+   
    // TODO pageSize feature do not work with searchString
    let getTitlesUrlWithPageSize = size => titleApiUrl + "?pageSize=" + size;
    
@@ -108,5 +132,6 @@ define([], () => {
       getRating,
       getGenres,
       getTitlePrincipals,
+      giveTitleReview
    }
 });

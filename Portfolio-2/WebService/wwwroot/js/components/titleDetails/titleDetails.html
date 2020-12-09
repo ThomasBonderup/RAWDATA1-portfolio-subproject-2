@@ -1,39 +1,22 @@
 <div>
     <div class="container" data-bind="with: titles">
         <div class="row">
-            <div class="col-6">
+            <div class="col-sm-12 col-lg-6">
                 <h2 data-bind="text: primaryTitle">Title details </h2> 
                 <p>(<span data-bind="text: startYear"></span>) (<span data-bind="text: titletype"></span>)</p>
             </div>
-            <div class="col-6">
+            <div class="col-sm-12 col-lg-6">
                 <button type="button" class="btn btn-primary">Add to bookmarks +</button>
             </div>
         </div>
         <div class="row">
-            <div class="col-6">
+            <div class="col-sm-12 col-lg-6">
                 <img class="img-fluid" data-bind="attr:{src: poster}" onerror=src="resources/image-placeholder.png" />
             </div>
-            <div class="col-6">
+            <div class="col-sm-12 col-lg-6">
                 <p>Runtime: <span data-bind="text: runTimeMinutes"></span> minutes</p>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12" data-bind="with: $parent.rating">
-                            <p>Average Title Rating: <span data-bind="text: averageRating"></span></p>
-                        </div>
-                        <div class="col-6">
-                            <form>
-                                <div class="form-group">
-                                    <label for="formControlRange">Give title rating: </label>
-                                    <span data-bind="text: $parent.titleRating"></span>
-                                    <input type="range" class="form-control-range" id="formControlRange" data-bind="attr: {min: 1, max: 10}, value: $parent.titleRating">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-6">
-                            <button type="button" class="btn btn-primary">Rate this</button>
-                        </div>
-                        
-                    </div>
+                <div data-bind="with: $parent.rating">
+                    <p>Average Title Rating: <span data-bind="text: averageRating"></span></p>
                 </div>
                 <p>Cast and Crew</p>
                 <p>TitlePrincipalsList: 
@@ -41,13 +24,30 @@
                         <span data-bind="text: nconst"></span>
                     </span>
                 </p>
-                <p>Directors:</p>
-                <p>Writers:</p>
-                <p>Actors:</p>
                 <p>Genres: <span data-bind="text: $parent.genres"></span></p>
-                <p data-bind="text: plot"></p>
+                <p>Plot: <span data-bind="text: plot"></span></p>
                 <p>Awards: <span data-bind="text: awards"></span></p>
+                <br>
+                <div class="row">
+                    <div class="col-12">
+                        <form>
+                            <div class="form-group">
+                                <h3>Rate a title and give a review:</h3>
+                                <label for="formControlRange">Title rating:</label>
+                                <span data-bind="text: $parent.titleRating"></span>
+                                <input type="range" class="form-control-range" id="formControlRange" data-bind="attr: {min: 1, max: 10}, value: $parent.titleRating">
+                                <label for="exampleFormControlTextarea1">Title review:</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" data-bind="text: $parent.titleReview"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <br>
+                    <div class="col-12">
+                        <button type="button" class="btn btn-primary" data-bind="click: $parent.giveTitleRating">Rate this</button>
+                    </div>
+                </div>
             </div>
         </div>
+        
     </div>
 </div>    

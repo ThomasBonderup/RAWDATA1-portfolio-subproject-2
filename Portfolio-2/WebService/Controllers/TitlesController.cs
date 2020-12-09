@@ -227,6 +227,14 @@ namespace WebService.Controllers
             return Ok(titleRatings);
 
         }
+
+        [HttpPost("titlerating")]
+        public IActionResult CreateTitleRatingByUser(RatingByUser ratingByUser)
+        {
+            CheckCurrentUser();
+            var result = _dataService.CreateRatingByUser(ratingByUser.Uconst, ratingByUser.Tconst, ratingByUser.Rating, ratingByUser.Review);
+            return Created("", result);
+        }
         
 
         [HttpGet("{tconst}/localtitle")]

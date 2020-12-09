@@ -9,6 +9,8 @@ define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
         
         let tconst = ko.observable();
         
+        let uconst = ko.observable('ui000001');
+        
         let rating = ko.observable();
         
         let genres = ko.observable();
@@ -18,6 +20,8 @@ define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
         let actors = ko.observableArray();
         
         let titleRating = ko.observable(5);
+        
+        let titleReview = ko.observable();
         
         postman.subscribe('changeTitle', title => {
             titles(title);
@@ -41,12 +45,18 @@ define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
             console.log(titlePrincipals());
         });
         
+        let giveTitleRating = (uconst, tconst, titleRating, titleReview) => {
+            ds.giveTitleReview(uconst, tconst, titleRating, titleReview);
+        }
+        
         return {
             titles,
             rating,
             genres,
             titlePrincipals,
-            titleRating
+            titleRating,
+            giveTitleRating,
+            titleReview
         }
     }
 });
