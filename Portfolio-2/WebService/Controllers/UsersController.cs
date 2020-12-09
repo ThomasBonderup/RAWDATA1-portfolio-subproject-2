@@ -40,16 +40,13 @@ namespace WebService.Controllers
                 return BadRequest();
             } 
             int.TryParse(_configuration.GetSection("Auth:PasswordSize").Value, out int pwdSize);
-           //var pwdSize = 3;
-           if (pwdSize == 0)
+            if (pwdSize == 0)
             {
                 throw new ArgumentException("No Password Size");
             }
 
             var salt = PasswordService.GenerateSalt(pwdSize);
             var pwd = PasswordService.HashPassword(dto.Password, salt, pwdSize);
-            //var pwd = dto.Password; //needs to be replaced
-            //var salt = dto.Email; //need to be replaced
 
             _dataService.CreateUser(dto.FirstName, dto.LastName, dto.Email, dto.UserName, pwd, salt);
 
