@@ -102,9 +102,7 @@ define([], () => {
    }
 
    let getActors = (url, searchString, callback) => {
-      if (url === undefined) {
-         url = titleApiUrl + "/titleprincipals/" + searchString;
-      }
+      url = titleApiUrl + "/titleprincipals/" + searchString;
       getJSON(url, callback);
    };
    

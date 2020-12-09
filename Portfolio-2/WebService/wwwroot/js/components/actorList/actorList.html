@@ -3,6 +3,10 @@
         <div class="row">
             <div class="col-12">
                 <h1>Actor List</h1>
+                <input data-bind="value: searchString" class="form-control mr-sm-2" type="text" placeholder="Search"
+                           aria-label="Search...">
+                <button data-bind="click: getActorData" class="btn btn-primary my-2 my-sm-0"
+                            data-toggle="button" aria-pressed="false" autocomplete="off">Search</button>
                 <p>Actor name: <span data-bind="text: actors().primaryName"></span></p>
             </div>
         </div>
