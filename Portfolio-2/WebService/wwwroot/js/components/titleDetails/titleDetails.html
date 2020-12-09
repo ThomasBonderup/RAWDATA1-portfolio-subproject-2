@@ -15,7 +15,7 @@
             </div>
             <div class="col-sm-12 col-lg-6">
                 <p>Runtime: <span data-bind="text: runTimeMinutes"></span> minutes</p>
-                <div data-bind="with: $parent.rating">
+                <div data-bind="with: $parent.averageRating">
                     <p>Average Title Rating: <span data-bind="text: averageRating"></span></p>
                 </div>
                 <p>Cast and Crew</p>
@@ -34,10 +34,10 @@
                             <div class="form-group">
                                 <h3>Rate a title and give a review:</h3>
                                 <label for="formControlRange">Title rating:</label>
-                                <span data-bind="text: $parent.titleRating"></span>
-                                <input type="range" class="form-control-range" id="formControlRange" data-bind="attr: {min: 1, max: 10}, value: $parent.titleRating">
+                                <span data-bind="text: $parent.rating"></span>
+                                <input type="range" class="form-control-range" id="formControlRange" data-bind="attr: {min: 1, max: 10}, value: $parent.rating">
                                 <label for="exampleFormControlTextarea1">Title review:</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" data-bind="text: $parent.titleReview"></textarea>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" data-bind="value: $parent.review"></textarea>
                             </div>
                         </form>
                     </div>

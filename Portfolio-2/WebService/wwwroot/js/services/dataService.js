@@ -79,13 +79,13 @@ define([], () => {
       getJSON(url, callback);
    }
    
-   let giveTitleReview = (uconst, tconst, titleRating, titleReview, callback) => {
+   let giveTitleReview = (uconst, tconst, rating, review, callback) => {
       let url = titleApiUrl + "/titlerating";
       let data = new Object;
       data.uconst = uconst;
       data.tconst = tconst;
-      data.titleRating = titleRating;
-      data.titleReview = titleReview;
+      data.rating = parseFloat(rating);
+      data.review = review;
       let data1 = JSON.stringify(data);
       console.log(data1);
       postJSON(url, JSON.stringify(data), callback);
