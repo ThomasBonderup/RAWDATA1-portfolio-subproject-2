@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 using AutoMapper;
-using AutoMapper.Configuration;
+//using AutoMapper.Configuration;
 using DataAccess;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.JSInterop.Infrastructure;
@@ -11,6 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure.Internal;
 using WebService.Common;
 using WebService.Models;
 using WebService.Services;
+using Microsoft.Extensions.Configuration;
 
 namespace WebService.Controllers
 {
@@ -37,10 +38,9 @@ namespace WebService.Controllers
             if (_dataService.GetUser(dto.UserName) != null)
             {
                 return BadRequest();
-            }
-
-           // int.TryParse(_configuration.GetSection("Auth:PasswordSize").Value, out int pwdSize);
-           var pwdSize = 3;
+            } 
+            int.TryParse(_configuration.GetSection("Auth:PasswordSize").Value, out int pwdSize);
+           //var pwdSize = 3;
            if (pwdSize == 0)
             {
                 throw new ArgumentException("No Password Size");
