@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml;
 using AutoMapper;
+using AutoMapper.Configuration;
 using DataAccess;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.JSInterop.Infrastructure;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure.Internal;
 using WebService.Common;
 
@@ -17,11 +20,38 @@ namespace WebService.Controllers
         private IDataService _dataService;
         private IMapper _mapper;
         private int MaxPageSize = 25;
+        private IConfiguration _configuration;
         
-        public UsersController(IDataService dataService, IMapper mapper)
+        
+        public UsersController(IDataService dataService, IMapper mapper, IConfiguration configuration)
         {
             _dataService = dataService;
             _mapper = mapper;
+            _configuration = configuration;
+        }
+
+        [HttpPost("register")]
+
+        public IActionResult Register(User dto)
+        {
+            if (_dataService.GetUser(dto.UserName) != null)
+            {
+                return BadRequest();
+            }
+
+            int.TryParse(_configuration.GetSection("Auth:PassewordSize").Value, out int pwdSize);
+
+            if (pwdSize == 0)
+            {
+                throw new ArgumentException("No Password Size");
+            }
+
+            var salt = PasswordService.GenerateSalt(pwdSize);
+            var pwd = PasswordService.HashPassword(dto.Password, salt, pwdSize);
+
+            _dataService.CreateUser(dto.FirstName, dto.LastName,dto.Email,dto.UserName,pwd,salt);
+
+            return CreatedAtRoute(null, new {dto.UserName});
         }
 
         private (string prev,string cur, string next) CreatePagingNavigation(int page, int pageSize, int count)

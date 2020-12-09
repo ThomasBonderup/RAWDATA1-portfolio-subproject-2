@@ -13,6 +13,8 @@ namespace DataAccess
 
         public string UserName { get; set; }
 
+        public string Salt { get; set; }
+
         public override string ToString()
         {
             return $"Uconst = {Uconst}, FirstName = {FirstName}, LastName = {LastName}, Email = {Email}," +

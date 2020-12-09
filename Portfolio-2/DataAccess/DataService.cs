@@ -146,7 +146,8 @@ namespace DataAccess
          *  USER
          */
 
-        public User CreateUser(string firstName, string lastName, string email, string password, string userName)
+        public User CreateUser(string firstName, string lastName, string email, string userName, string password, string salt)
+            //ændret rækkefølge password til sidst i rækken herover + indsatte salt???? - kan det påvirke resten?
         {
             
             using var ctx1 = new DBContext();

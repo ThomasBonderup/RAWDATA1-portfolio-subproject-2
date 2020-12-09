@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using AutoMapper.Configuration;
 using DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -17,11 +18,13 @@ namespace WebService.Middleware
     {
         private readonly RequestDelegate _next;
         private readonly IDataService _dataService;
+        private readonly IConfiguration _configuration;
 
-        public AuthMiddleware(RequestDelegate next, IDataService dataService)
+        public AuthMiddleware(RequestDelegate next, IDataService dataService, IConfiguration configuration)
         {
             _next = next;
             _dataService = dataService;
+            _configuration = configuration;
         }
 
         public async Task InvokeAsync(HttpContext context)

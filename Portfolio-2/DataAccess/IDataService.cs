@@ -35,7 +35,7 @@ namespace DataAccess
 
         IList<User> GetUsers(int page, int pageSize);
 
-        User CreateUser(string firstName, string lastName, string Email, string password, string userName);
+        User CreateUser(string firstName, string lastName, string Email, string userName, string password = null, string salt =null);
 
         bool UpdateUser(string uconst, string FirstName, string LastName, string Email, string Password, string UserName);
 
