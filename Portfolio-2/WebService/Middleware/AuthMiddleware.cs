@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
-using DataAccess;
 
 namespace WebService.Middleware
 {
@@ -53,11 +52,11 @@ namespace WebService.Middleware
                 }, out var validatedToken);
 
                 var jwtToken = validatedToken as JwtSecurityToken;
-                var claim = jwtToken.Claims.FirstOrDefault(x => x.Type == "id");
+                var claim = jwtToken.Claims.FirstOrDefault(x => x.Type == "uconst");
                 if (claim != null)
                 {
-                    int.TryParse(claim.Value.ToString(), out var id);
-                   // context.Items["User"] = _dataService.GetUser(id);
+                    int.TryParse(claim.Value.ToString(), out var uconst);
+                    //context.Items["User"] = _dataService.GetUser(uconst);
                 }
 
             }

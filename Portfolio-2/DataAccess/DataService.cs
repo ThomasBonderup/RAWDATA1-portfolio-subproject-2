@@ -155,9 +155,11 @@ namespace DataAccess
                 LastName = lastName,
                 Uconst = AssignMaxUconst(),
                 Email = email,
+                UserName = userName,
                 Password = password,
-                UserName = userName
+                Salt = salt
             };
+            ctx.Add(user); //add the user to a list??
             return user;
         }
 
