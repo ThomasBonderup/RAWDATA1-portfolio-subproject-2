@@ -21,6 +21,12 @@ require(['knockout', 'text'], (ko) => {
             template: { require: "text!components/titleList/titleList.html"}
         });
 
+    ko.components.register("movies",
+        {
+            viewModel: { require: "components/titleList/titleList" },
+            template: { require: "text!components/titleList/titleList.html"}
+        });
+
     ko.components.register("user",
         {
             viewModel: {require: "components/user/user"},
