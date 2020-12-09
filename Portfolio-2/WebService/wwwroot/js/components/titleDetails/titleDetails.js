@@ -45,8 +45,12 @@ define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
             console.log(titlePrincipals());
         });
         
-        let giveTitleRating = (function(data) {
+        let giveTitleReview = (function(data) {
             ds.giveTitleReview(uconst(), tconst(), rating(), review());
+        });
+        
+        let addToBookmarks = (function(data) {
+           ds.addToBookmarks(uconst(), tconst()); 
         });
         
         return {
@@ -54,9 +58,10 @@ define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
             rating,
             genres,
             titlePrincipals,
-            giveTitleRating,
+            giveTitleReview,
             review,
-            averageRating
+            averageRating,
+            addToBookmarks
         }
     }
 });

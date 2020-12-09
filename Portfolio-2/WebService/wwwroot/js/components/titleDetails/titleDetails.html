@@ -6,7 +6,7 @@
                 <p>(<span data-bind="text: startYear"></span>) (<span data-bind="text: titletype"></span>)</p>
             </div>
             <div class="col-sm-12 col-lg-6">
-                <button type="button" class="btn btn-primary">Add to bookmarks +</button>
+                <button type="button" class="btn btn-primary" data-bind="click: $parent.addToBookmarks">Add to bookmarks +</button>
             </div>
         </div>
         <div class="row">
@@ -43,7 +43,7 @@
                     </div>
                     <br>
                     <div class="col-12">
-                        <button type="button" class="btn btn-primary" data-bind="click: $parent.giveTitleRating">Rate this</button>
+                        <button type="button" class="btn btn-primary" data-bind="click: $parent.giveTitleReview">Rate this</button>
                     </div>
                 </div>
             </div>

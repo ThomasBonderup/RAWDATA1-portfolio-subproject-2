@@ -4,7 +4,7 @@ define(['knockout', 'postman'], function (ko, postman) {
     let selectedUser = ko.observable();
     let searchInput = ko.observable();
     let currentParams = ko.observable({searchInput});
-    let menuElements = ["About", "Login", "User"];
+    let menuElements = ["Movies", "Actors", "About", "Login", "User"];
     let advSearchBtn = () => console.log("Advanced clicked");
     var selectedGenre = ko.observable();
 
@@ -45,6 +45,8 @@ define(['knockout', 'postman'], function (ko, postman) {
     let changeContent = element => {
         selectedComponent(element.toLowerCase());
     }
+    
+    
 
     /*let changeContent = () => {
         console.log("Change component");

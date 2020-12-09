@@ -1,0 +1,22 @@
+<div>
+    <div class="container" data-bind="">
+        <div class="row">
+            <div class="col-12">
+                <h1>Actor List</h1>
+                <input data-bind="value: searchString" class="form-control mr-sm-2" type="text" placeholder="Search"
+                           aria-label="Search...">
+                <button data-bind="click: getActorData" class="btn btn-primary my-2 my-sm-0"
+                            data-toggle="button" aria-pressed="false" autocomplete="off">Search</button>
+            </div>
+            <div class="row" data-bind="foreach: actors">
+                <div class="col-lg-4">
+                    <p>Tconst: <span data-bind="text: tconst"></span></p>
+                    <p>Nconst: <span data-bind="text: nconst"></span></p>
+                    <p>Ordering: <span data-bind="text: ordering"></span></p>
+                    <p>Category: <span data-bind="text: category"></span></p>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,7 @@
 define([], () => {
    const titleApiUrl = "api/titles";
-   const userApiUrl = "api/users"
+   const userApiUrl = "api/users";
+   const namesApiUrl = "api/names";
    
    let getJSON = (url, callback) => {
       fetch(url, {
@@ -91,6 +92,20 @@ define([], () => {
       postJSON(url, JSON.stringify(data), callback);
    }
    
+   let addToBookmarks = (uconst, tconst, callback) => {
+      let url = userApiUrl + "/" + uconst + "/titlebookmarks/" + tconst;
+      let data = new Object;
+      data.uconst = uconst;
+      data.tconst = tconst;
+      
+      postJSON(url, JSON.stringify(data), callback);
+   }
+
+   let getActors = (url, searchString, callback) => {
+      url = titleApiUrl + "/titleprincipals/" + searchString;
+      getJSON(url, callback);
+   };
+   
    // TODO pageSize feature do not work with searchString
    let getTitlesUrlWithPageSize = size => titleApiUrl + "?pageSize=" + size;
    
@@ -132,6 +147,8 @@ define([], () => {
       getRating,
       getGenres,
       getTitlePrincipals,
-      giveTitleReview
+      giveTitleReview,
+      addToBookmarks,
+      getActors
    }
 });
