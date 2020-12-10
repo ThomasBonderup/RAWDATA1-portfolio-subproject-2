@@ -4,7 +4,7 @@ define(['knockout', 'postman'], function (ko, postman) {
     let selectedUser = ko.observable();
     let searchInput = ko.observable();
     let currentParams = ko.observable({searchInput});
-    let menuElements = ["Movies", "Actors", "About", "Login", "User"];
+    let menuElements = ["Home", "Movies", "Actors", "About", "Login", "User"];
     let advSearchBtn = () => console.log("Advanced clicked");
     var selectedGenre = ko.observable();
 

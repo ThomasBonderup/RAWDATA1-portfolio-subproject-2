@@ -27,7 +27,9 @@ namespace DataAccess
 
         bool DeleteTitle(string tconst);
 
-        User GetUser(string uconst);
+        //User GetUser(string uconst);
+        
+        User GetUser(string username);
 
         Name GetName(string nconst);
 

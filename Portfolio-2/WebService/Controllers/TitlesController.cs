@@ -303,7 +303,8 @@ namespace WebService.Controllers
             //CheckCurrentUser();
 
             pageSize = PaginationHelper.CheckPageSize(pageSize);
-            var titles = _dataService.SearchTitles(searchString, Program.CurrentUser.Uconst, page, pageSize);
+            //var titles = _dataService.SearchTitles(searchString, Program.CurrentUser.Uconst, page, pageSize);
+            var titles = _dataService.SearchTitles(searchString, "ui000001", page, pageSize);
 
             if (titles == null)
             {
@@ -318,10 +319,11 @@ namespace WebService.Controllers
         [HttpGet("titleprincipals/{searchString}")]
         public IActionResult SearchTitlePrincipals(string searchString, string uConst, int page = 0, int pageSize = 10)
         {
-            CheckCurrentUser();
+            //CheckCurrentUser();
 
             pageSize = PaginationHelper.CheckPageSize(pageSize);
-            var titles = _dataService.SearchTitlePrincipals(searchString, Program.CurrentUser.Uconst, page, pageSize);
+            //var titles = _dataService.SearchTitlePrincipals(searchString, Program.CurrentUser.Uconst, page, pageSize);
+            var titles = _dataService.SearchTitlePrincipals(searchString, "ui000001", page, pageSize);
 
             if (titles == null)
             {
