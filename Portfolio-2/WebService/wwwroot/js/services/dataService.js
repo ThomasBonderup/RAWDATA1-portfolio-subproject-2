@@ -202,6 +202,6 @@ define([], () => {
       addToBookmarks,
       getActors,
       updateUser,
-      
+      userLogin
    }
 });
