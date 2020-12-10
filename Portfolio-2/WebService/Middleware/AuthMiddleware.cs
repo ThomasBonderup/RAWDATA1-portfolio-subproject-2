@@ -65,19 +65,5 @@ namespace WebService.Middleware
             }
             await _next(context);
         }
-
-        /* public async Task InvokeAsync(HttpContext context)
-         {
-             Program.CurrentUser = null;
- 
-             var auth = context.Request.Headers["Authorization"].ToString();
-             if (!string.IsNullOrEmpty(auth))
-             {
-                 Program.CurrentUser = _dataService.GetUser((auth.ToString())); //det her er et problem fordi vi finder vores
-                 //getUser ved uconst og ikke username ligesom Henriks
-             }
- 
-             await _next(context);
-         }*/
     }
 }
