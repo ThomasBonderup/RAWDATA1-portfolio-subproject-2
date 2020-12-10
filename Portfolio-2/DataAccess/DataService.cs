@@ -149,6 +149,7 @@ namespace DataAccess
         public User CreateUser(string firstName, string lastName, string email, string userName, string password = null,
             string salt = null)
         {
+            using var ctx1 = new DBContext();
             var user = new User
             {
                 FirstName = firstName,
@@ -159,7 +160,8 @@ namespace DataAccess
                 Password = password,
                 Salt = salt
             };
-            ctx.Add(user); //add the user to a list??
+            ctx1.Add(user); //add the user to a list??
+            ctx1.SaveChanges();
             return user;
         }
 
@@ -200,10 +202,23 @@ namespace DataAccess
             return false;
         }
 
-        public User GetUser(string uconst)
+        /*public User GetUser(string uconst)
         {
             using var ctx1 = new DBContext();
             var user = ctx1.Users.Find(uconst);
+
+            if (user != null)
+            {
+                return user;
+            }
+
+            return null;
+        }*/
+        
+        public User GetUser(string username)
+        {
+            using var ctx1 = new DBContext();
+            var user = ctx1.Users.FirstOrDefault(x => x.UserName == username);
 
             if (user != null)
             {

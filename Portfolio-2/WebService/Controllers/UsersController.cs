@@ -39,10 +39,10 @@ namespace WebService.Controllers
         [HttpPost("register")]
         public IActionResult Register(RegisterDto dto)
         {
-            if (_dataService.GetUser(dto.UserName) != null)
-            {
-                return BadRequest();
-            } 
+            //if (_dataService.GetUser(dto.UserName) != null)
+            //{
+            //    return BadRequest();
+            //} 
             int.TryParse(_configuration.GetSection("Auth:PasswordSize").Value, out int pwdSize);
             if (pwdSize == 0)
             {
