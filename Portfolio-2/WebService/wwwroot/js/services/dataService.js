@@ -77,8 +77,23 @@ define([], () => {
           .then(callback);
    }
    */
-   
-  
+
+   let userLogin = (username, password, callback) => {
+      let url = userApiUrl + "/login";
+      let data = new Object;
+      data.username = username;
+      data.password = password;
+      console.log(JSON.stringify(data));
+      fetch(url, {
+         headers : {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+         },
+         body: JSON.stringify(data),
+         method: "POST"
+      }).then(response => response.json().then(response => localStorage.setItem("jwtToken", response.token)))
+   };
+
    let postUser = (callback) =>{
       fetch(user,{
          header:{
