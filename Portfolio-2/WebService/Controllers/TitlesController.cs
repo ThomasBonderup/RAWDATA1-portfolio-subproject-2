@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using DataAccess;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebService.Attributes;
 using WebService.Common;
 
 namespace WebService.Controllers
@@ -296,6 +298,7 @@ namespace WebService.Controllers
         }
         
         // search
+        
         
         [HttpGet("search-title/{searchString}")]
         public IActionResult SearchTitle(string searchString, string uConst, int page = 0, int pageSize = 10)
