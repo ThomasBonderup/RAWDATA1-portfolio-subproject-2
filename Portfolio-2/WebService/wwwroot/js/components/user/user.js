@@ -3,7 +3,7 @@ define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) =>{
     return function(params){
         
         let editMode = ko.observable(false);
-        let uconst = ko.observable('ui000001');
+        let uconst = ko.observable('alta01');
         let user = ko.observable();
         
         let firstName = ko.observable();
@@ -44,12 +44,7 @@ define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) =>{
                 editMode(false);
                 showUserInfo(true);
                 showEditUser(false);
-            } else{
-          //   editMode(true);
-          //   showUserInfo(false);
-          //   showEditUser(true);
-                
-            }
+            } 
         }
         
         let isEditMode = function () {
@@ -58,10 +53,6 @@ define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) =>{
                 editMode(true);
                 showUserInfo(false);
                 showEditUser(true);
-            }else{
-            //    editMode(false);
-             //   showUserInfo(true);
-             //   showEditUser(false);
             }
         }
         
