@@ -1,12 +1,15 @@
-<div class="container">
+<div class="flex-column justify-content-around">
     <h2>Title search results</h2>
     <div>
         Page size: <select data-bind="options: pageSizes, selectedOptions: selectedPageSize"></select>
     </div>
     <div class="row" data-bind="foreach: titles">
-        <div class="col-lg-4" data-bind="click: $parent.selectTitle">
+        <div  class="col-sm-10 col-md-5 col-lg-4" data-bind="click: $parent.selectTitle">
             <div class="primary_title" data-bind="text: primaryTitle"></div>
-            <img class="img-fluid" data-bind="attr:{src: poster}" onerror=src="resources/image-placeholder.png" />
+            <div  class="poster-container">
+                <img class="poster-object-fit-cover"
+                     data-bind="attr:{src: poster}" onerror=src="resources/image-placeholder.svg">
+            </div>
         </div>
     </div>
     <div>
@@ -14,4 +17,4 @@
         <button class="btn btn-primary" data-bind="click: showPrev, enable: enablePrev">Prev</button>
         <button class="btn btn-primary" data-bind="click: showNext, enable: enableNext">Next</button>
     </div>
-</div>    
+</div>

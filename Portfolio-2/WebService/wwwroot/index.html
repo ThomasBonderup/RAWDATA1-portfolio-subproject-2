@@ -2,8 +2,7 @@
 <html>
 <head>
     <title>Movie Finder</title>
-    <!--<link rel="stylesheet" href="js/lib/twitter-bootstrap/css/bootstrap.min.css">-->
-    <!--<link href="css/style.css" rel="stylesheet" />-->
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="js/lib/twitter-bootstrap/css/bootstrap-lux.min.css">
     <link href="css/style.css" rel="stylesheet" />
     <link rel="icon" href="resources/logo_whiteonblack.svg">
@@ -11,7 +10,6 @@
 </head>
 
 <body class style>
-<EnableDefaultContentItems></EnableDefaultContentItems> <!-- hvad er det her? og skal den være her?-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary ">
     <a class="navbar-brand" href="/"><img src="resources/logo_white.svg" width="50"/></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
@@ -54,9 +52,7 @@
     </div>
 </nav>
 <div class="container">
-  <span class="row">
     <div data-bind="component: {name: selectedComponent, params: currentParams}"></div>
-  </span>
     <!-- <div data-bind="visible: selectedGenre"></div>-->
     <!-- -->
     <!-- -->

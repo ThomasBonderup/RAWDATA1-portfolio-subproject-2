@@ -1,45 +1,44 @@
-
-/*body{
-
-    font-family:  Helvetica, Arial, sans-serif, 'Segoe UI', Tahoma, Verdana, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    margin: 1%;
-    border: black 1px solid;
-    background-color: dimgrey;
-    
-}
-
-header{
-    background-color: cornflowerblue;
-    border: black 2px solid;
-}
-
-.logo{
-    
-    width: 3%;
-    height: 3%;
-    
-}
-
-nav, nav ul, ul li, .user_info_fields{
-    display: inline;
-}
-
-.bi{
-    width: 30%;
-    height: 30%;
-}
-
-.content-container{
-    border: black 1px solid;
-}
-
-.componentBtn{
-    display: block;
-}*/
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
 
 .container {
-    margin-top:10px;
+    margin-top:4%;
 }
 
+.poster-object-fit-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.poster-container {
+    width: 250px;
+    height: 333px;
+    margin: 10px;
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .poster-container {
+        width: 250px;
+        height: 333px;
+    }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .poster-container {
+        width: 250px;
+        height: 333px;
+    }
+}
+
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .poster-container {
+        width: 300px;
+        height: 400px;
+    }
+}
 

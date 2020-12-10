@@ -1,0 +1,16 @@
+<svg width="300" height="400" xmlns="http://www.w3.org/2000/svg" class="bi bi-file-earmark-image">
+ <g>
+  <title>background</title>
+  <rect x="-1" y="-1" width="302" height="402" id="canvas_background" fill="none"/>
+ </g>
+
+ <g>
+  <title>Layer 1</title>
+  <rect id="svg_4" height="400" width="300" y="-0.23777" x="-0.21739" opacity="0.5" stroke-opacity="null" stroke-width="null" stroke="null" fill="#e5e5e5"/>
+  <g stroke="null" id="svg_3">
+   <path stroke="null" fill-rule="evenodd" d="m193.13043,286.26087a21.56522,21.56522 0 0 0 21.56522,-21.56522l0,-102.43478l-48.52174,-48.52174l-59.30435,0a21.56522,21.56522 0 0 0 -21.56522,21.56522l0,129.3913a21.56522,21.56522 0 0 0 21.56522,21.56522l86.26087,0zm-97.04347,-150.95651a10.78261,10.78261 0 0 1 10.78261,-10.78261l59.30435,0l0,21.56522a16.17391,16.17391 0 0 0 16.17391,16.17391l21.56522,0l0,59.30435l-22.46017,-22.46017a5.3913,5.3913 0 0 0 -8.19478,0.6793l-23.25809,32.56348l-23.34435,-14.01739a5.3913,5.3913 0 0 0 -6.58817,0.81948l-23.98052,23.98052l0,-107.82608z" id="svg_1"/>
+   <path stroke="null" fill-rule="evenodd" d="m133.84765,189.21739a16.17391,16.17391 0 1 0 0,-32.34782a16.17391,16.17391 0 0 0 0,32.34782z" id="svg_2"/>
+  </g>
+  <text transform="matrix(1,0,0,1,0,0) " xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_5" y="65.65421" x="77.07643" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="null" fill="#000000">POSTER N/A</text>
+ </g>
+</svg>
