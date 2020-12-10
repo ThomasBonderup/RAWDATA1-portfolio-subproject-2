@@ -66,19 +66,19 @@ define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) =>{
         
         let isSearchHistoryMode = function () {
             
-            if(showSearchHistory === false){
+            if(showSearchHistory() === false){
                 showSearchHistory(true);
             }else{
                 showSearchHistory(false);
             }
+            
+            console.log(showSearchHistory());
         }
         
         let isBookmarksMode = function () {
             // get bookmarkslist
             
-            
             // ON / OFF SWITCH
-      
             if(showBookmarks() === false){
                 showBookmarks(true);
                 
