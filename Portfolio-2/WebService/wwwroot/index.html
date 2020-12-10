@@ -11,7 +11,9 @@
 
 <body class style>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary ">
-    <a class="navbar-brand" href="/"><img src="resources/logo_white.svg" width="50"/></a>
+    <div data-bind="click: changeContent('home')">
+        <a class="navbar-brand"><img src="resources/logo_white.svg" width="50"/></a>
+    </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
             aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

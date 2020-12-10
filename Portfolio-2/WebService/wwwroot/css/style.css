@@ -11,6 +11,11 @@
     object-fit: cover;
 }
 
+.poster{
+    margin: 1%;
+    width: 80%;
+}
+
 .poster-container {
     width: 250px;
     height: 333px;

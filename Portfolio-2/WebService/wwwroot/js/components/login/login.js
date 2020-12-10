@@ -92,11 +92,6 @@ define(["knockout","dataservice"], (ko, ds)=> {
             createAccount,
             signInUser,
             user
-            /*selectedUser,
-            createUser,
-            currentTemplate,
-            signInBtn,
-            selectUser*/            
         }
     }
 });
