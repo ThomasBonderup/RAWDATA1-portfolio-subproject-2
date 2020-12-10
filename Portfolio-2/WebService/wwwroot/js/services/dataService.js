@@ -25,8 +25,41 @@ define([], () => {
       }).then(response => response.json().then(callback));
    }
 
-   let getUser = (uconst, callback) => {
-      let url = userApiUrl + "/" + uconst().trim();
+   
+   let updateUser = (uconst, firstName, lastName, email, password, username, callback) => {
+      
+      
+      let url = userApiUrl + "/" + username;
+      let data = new Object;
+      data.uconst = uconst;
+      data.firstName = firstName;
+      data.lastName = lastName;
+      data.email = email;
+      data.password = password;
+      data.lastName = lastName;
+      data.username = username;
+      
+      console.log(data.uconst);
+      console.log(data.firstName);
+      console.log(data.lastName);
+      console.log(data.email);
+      console.log(data.password);
+      console.log(data.lastName);
+      console.log(data.username);
+      
+      
+      
+      
+      
+      
+      
+      postJSON(url, JSON.stringify(data), callback);
+      
+      
+   }
+   
+   let getUser = (username, callback) => {
+      let url = userApiUrl + "/" + username();
       console.log("getUser api url: " + url);
       getJSON(url, callback);
    }
@@ -152,6 +185,8 @@ define([], () => {
       getTitlePrincipals,
       giveTitleReview,
       addToBookmarks,
-      getActors
+      getActors,
+      updateUser,
+      
    }
 });

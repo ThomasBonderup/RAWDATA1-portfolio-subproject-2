@@ -166,10 +166,11 @@ namespace WebService.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{uconst}")]
-        public IActionResult GetUser(string uconst)
+        // FROM UCONST TO USERNAME
+        [HttpGet("{username}")]
+        public IActionResult GetUser(string username)
         {
-            var user = _dataService.GetUser(uconst);
+            var user = _dataService.GetUser(username);
             if (user == null)
             {
                 return NotFound();

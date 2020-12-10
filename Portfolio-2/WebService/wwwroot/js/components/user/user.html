@@ -1,4 +1,11 @@
 <div class="container, user-container">
+
+
+
+    <div class="alert alert-dismissible alert-success" data-bind="visible: settingsSaved">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong></strong> <a href="#" class="alert-link">Settings has been saved</a>.
+    </div>
     
  <div class="row">
  
@@ -18,15 +25,19 @@
                 <h5 class="mx-4 my-5">First name: <span class="mx-1 my-5" data-bind="text: firstName"></span></h5>
                 <h5 class="mx-4 my-5 flex-column">Last name: <span class="mx-1 my-5" data-bind="text: lastName"></span></h5>
                 <h5 class="mx-4 my-5">E-mail: <span class="mx-1 my-5" data-bind="text: email"></span></h5>
-                <h5 class="mx-4 my-5">Username: <span class="mx-1 my-5" data-bind="text: userName"></span></h5>
+                <h5 class="mx-4 my-5">Username: <span class="mx-1 my-5" data-bind="text: username"></span></h5>
+            <h5 class="mx-4 my-5">Password: <span class="mx-1 my-5" data-bind="text: "></span></h5>
 
-            <div class="buttons">
+            <div class="buttons border-bottom">
                 <button data-bind="click: isEditMode, disable: editMode" type="button" class="btn btn-primary border mx-2 my-3">Edit</button>
                 <button data-bind="click: saveSettings, enable: editMode" type="button" class="btn btn-primary border mx-2 my-3">Save</button>
+                <button data-bind="click: isBookmarksMode" type="button" class="btn btn-primary border mx-2 my-3">Bookmarks</button>
+                <button data-bind="click: isSearchHistoryMode" type="button" class="btn btn-primary border mx-2 my-3">Search History</button>
             </div>
+
                   
             </div>
-    
+
      
 
 
@@ -41,8 +52,9 @@
         <h5 class="mx-4 my-5">First name: <input class="mx-1 border-left-0 border-right-0 border-top-0" data-bind="value: firstName"></h5>
         <h5 class="mx-4 my-5 flex-column">Last name: <input class="mx-1 border-left-0 border-right-0 border-top-0" data-bind="value: lastName"></h5>
         <h5 class="mx-4 my-5">E-mail: <input class="mx-1 border-left-0 border-right-0 border-top-0" data-bind="value: email"></h5>
-        <h5 class="mx-4 my-5">Username: <input class="mx-1 border-left-0 border-right-0 border-top-0" data-bind="value: userName"></h5>
-        
+        <h5 class="mx-4 my-5">Username: <input class="mx-1 border-left-0 border-right-0 border-top-0" data-bind="value: username"></h5>
+        <h5 class="mx-4 my-5">Password: <input class="mx-1 border-left-0 border-right-0 border-top-0" data-bind="value: password"></h5>
+        <h5 class="mx-4 my-5">Password: <input class="mx-1 border-left-0 border-right-0 border-top-0" data-bind="value: password2"></h5>
         
         
         <!--
@@ -55,32 +67,83 @@
         <label for="e_mail">Username:</label>
         <input class="mx-1 my-5" data-bind="text: userName" id="user_name">
         -->
-        <div class="buttons">
+        <div class="buttons edit_save border-bottom">
             <button data-bind="click: isEditMode, disable: editMode" type="button" class="btn btn-primary border mx-2 my-3">Edit</button>
             <button data-bind="click: saveSettings, enable: editMode" type="button" class="btn btn-primary border mx-2 my-3">Save</button>
+            <button data-bind="click: isBookmarksMode, enable: showBookmarks" type="button" class="btn btn-primary border mx-2 my-3">Bookmarks</button>
+            <button data-bind="click: isSearchHistoryMode, enable: showSearchHistory" type="button" class="btn btn-primary border mx-2 my-3">Search History</button>
+        
         </div>
+
+     
         
         
     </div>
 
- </div>
-    
-    
   
-        
-        
-    <div class="card text-white bg-info mb-3 row my-3" style="max-width: 20rem;">
+
+ </div>
+
+<!--
+    <div class="buttons bookmarks_searchHistory">
+        <button data-bind="click: isBookmarksMode, enable: showBookmarks" type="button" class="btn btn-primary border mx-2 my-3">Bookmarks</button>
+        <button data-bind="click: isSearchHistoryMode, enable: showSearchHistory" type="button" class="btn btn-primary border mx-2 my-3">Search History</button>
+    </div>
+        -->
+        <div class="row">
+    <div class="card text-white bg-info mb-3 row my-3 mx-4" style="max-width: 15rem; max-height: 13rem;">
         <div class="card-header">- Michael Corleone </div>
         <div class="card-body">
             <h4 class="card-title">Godfather 2</h4>
             <p class="card-text font-italic">"Only Don't Tell Me That You're Innocent. Because It Insults My Intelligence And It Makes Me Very Angry."</p>
         </div>
     </div>
-    
-    <div class="histories bookmark-history"></div>
-    
-    <div class="histories bookmark-history"></div>
-    
 
+
+    <div class="bookmark-history" data-bind="visible: showBookmarks">
+
+        <table class="table table-hover table-borderless table-dark mx-4">
+            <thead>
+            <tr>
+                <th scope="col">Bookmarks</th>
+                <th scope="col">Title</th>
+                <th scope="col">Rating</th>
+                <th scope="col">Comment</th>
+            </tr>
+            </thead>
+            <tbody>
+
+
+            <tr class="table-primary">
+                <th scope="row">Primary</th>
+                <td>Column content</td>
+                <td>Column content</td>
+                <td>Column content</td>
+            </tr>
+            <tr class="table-dark">
+                <th scope="row">Secondary</th>
+                <td>Column content</td>
+                <td>Column content</td>
+                <td>Column content</td>
+            </tr>
+            <tr class="table-primary">
+                <th scope="row">Primary</th>
+                <td>Column content</td>
+                <td>Column content</td>
+                <td>Column content</td>
+            </tr>
+            <tr class="table-dark">
+                <th scope="row">Secondary</th>
+                <td>Column content</td>
+                <td>Column content</td>
+                <td>Column content</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="search_history"></div>
+
+</div>
 </div>
 
