@@ -99,9 +99,9 @@
         </div>
     </div>
 
-
+            <div class="col">
     <div class="bookmark-history" data-bind="visible: showBookmarks">
-
+        <h2 class="px-2">Booksmarks</h2>
         <table class="table table-hover table-borderless table-dark mx-4">
             <thead>
             <tr>
@@ -142,7 +142,47 @@
         </table>
     </div>
     
-    <div class="search_history"></div>
+    <div class="search_history my-5" data-bind="visible: showSearchHistory">
+<h2 class="px-2">Search history</h2>
+        <table class="table table-hover table-borderless table-dark mx-4">
+            <thead>
+            <tr>
+                <th scope="col">Search</th>
+                <th scope="col">Timestamp</th>
+            </tr>
+            </thead>
+            <tbody>
+
+
+            <tr class="table-primary">
+                <th scope="row">Primary</th>
+                <td>Column content</td>
+                <td>Column content</td>
+            </tr>
+            <tr class="table-dark">
+                <th scope="row">Secondary</th>
+                <td>Column content</td>
+                <td>Column content</td>
+            </tr>
+            <tr class="table-primary">
+                <th scope="row">Primary</th>
+                <td>Column content</td>
+                <td>Column content</td>
+            </tr>
+            <tr class="table-dark">
+                <th scope="row">Secondary</th>
+                <td>Column content</td>
+                <td>Column content</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+           </div>
+        
+        
+        
+    </div>
 
 </div>
 </div>
