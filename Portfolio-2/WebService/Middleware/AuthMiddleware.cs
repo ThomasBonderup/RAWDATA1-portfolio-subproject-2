@@ -55,8 +55,8 @@ namespace WebService.Middleware
                 var claim = jwtToken.Claims.FirstOrDefault(x => x.Type == "uconst");
                 if (claim != null)
                 {
-                    int.TryParse(claim.Value.ToString(), out var uconst);
-                    //context.Items["User"] = _dataService.GetUser(uconst);
+                    var uconst = claim.Value;
+                    context.Items["User"] = _dataService.GetUser(uconst);
                 }
 
             }
