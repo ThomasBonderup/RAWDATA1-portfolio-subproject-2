@@ -205,7 +205,7 @@ namespace DataAccess
             return false;
         }
 
-        /*public User GetUser(string uconst)
+        public User GetUserByUconst(string uconst)
         {
             using var ctx1 = new DBContext();
             var user = ctx1.Users.Find(uconst);
@@ -216,7 +216,7 @@ namespace DataAccess
             }
 
             return null;
-        }*/
+        }
         
         public User GetUser(string username)
         {
