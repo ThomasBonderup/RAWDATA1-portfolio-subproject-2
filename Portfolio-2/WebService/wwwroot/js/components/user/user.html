@@ -1,50 +1,75 @@
 <div class="container, user-container">
     
-    <div class="row">
+ <div class="row">
  
-    <span class="col-sm"> <svg width="85%" height="85%" viewBox="0 0 16 16" class="bi bi-file-earmark-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <span class="col-sm mx-5 py-5 border-bottom"> <svg width="85%" height="85%" viewBox="0 0 16 16" class="bi bi-file-earmark-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
   <path d="M4 0h5.5v1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h1V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"/>
   <path d="M9.5 3V0L14 4.5h-3A1.5 1.5 0 0 1 9.5 3z"/>
   <path fill-rule="evenodd" d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
   <path d="M8 12c4 0 5 1.755 5 1.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-.245S4 12 8 12z"/>
 </svg> </span>
    
-    
- 
-    
-    <form class="AVAST_PAM_signupform AVAST_PAM_loginform user_form col-sm">
         
-        <button data-bind="click: isEditMode" type="button" class="btn btn-secondary border">Edit</button>
-       
-        <button data-bind="click: saveSettings" type="button" class="btn btn-secondary border">Save</button>
+        <div class="user_details" data-bind="visible: showUserInfo">
+            
+            <legend class="border-bottom py-3">User info</legend>
+            
+           
+                <h5 class="mx-4 my-5">First name: <span class="mx-1 my-5" data-bind="text: firstName"></span></h5>
+                <h5 class="mx-4 my-5 flex-column">Last name: <span class="mx-1 my-5" data-bind="text: lastName"></span></h5>
+                <h5 class="mx-4 my-5">E-mail: <span class="mx-1 my-5" data-bind="text: email"></span></h5>
+                <h5 class="mx-4 my-5">Username: <span class="mx-1 my-5" data-bind="text: userName"></span></h5>
+
+            <div class="buttons">
+                <button data-bind="click: isEditMode, disable: editMode" type="button" class="btn btn-primary border mx-2 my-3">Edit</button>
+                <button data-bind="click: saveSettings, enable: editMode" type="button" class="btn btn-primary border mx-2 my-3">Save</button>
+            </div>
+                  
+            </div>
+    
+     
+
+
+    
+    
+    
+    <div class="edit_user" data-bind="visible: showEditUser">
+
+        <legend class="border-bottom py-3">User info</legend>
+
+
+        <h5 class="mx-4 my-5">First name: <input class="mx-1 border-left-0 border-right-0 border-top-0" data-bind="value: firstName"></h5>
+        <h5 class="mx-4 my-5 flex-column">Last name: <input class="mx-1 border-left-0 border-right-0 border-top-0" data-bind="value: lastName"></h5>
+        <h5 class="mx-4 my-5">E-mail: <input class="mx-1 border-left-0 border-right-0 border-top-0" data-bind="value: email"></h5>
+        <h5 class="mx-4 my-5">Username: <input class="mx-1 border-left-0 border-right-0 border-top-0" data-bind="value: userName"></h5>
         
-        <legend class="border-bottom">User info</legend>
-            <div class="form-group row">
-            <label  class="col-sm-2 col-form-label" for="first_name">First name:</label>
-                <div class="col-sm-10">
-            <input  readonly="" class="form-control-plaintext user_info_fields border-bottom" value="" id="first_name" data-bind="textInput: fName"> 
-               
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label  class="col-sm-2 col-form-label" for="last_name">Last name:</label>
-                <div class="col-lg-10">
-                    <input  class="form-control-plaintext user_info_fields border-bottom" id="last_name" data-bind="value: lastName" >
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label  class="col-sm-2 col-form-label" for="e_mail">E-mail:</label>
-                <div class="col-sm-10">
-                    <input data-bind="textInput: email" readonly="" class="form-control-plaintext user_info_fields border-bottom" value="" id="e_mail">
-                </div>
-            </div>
-    </form>
+        
+        
+        <!--
+        <label for="first_name">First Name:</label>
+       <input class="mx-1 my-5" data-bind="text: firstName" id="first_name">
+        <label for="last_name">Last Name:</label>
+        <input class="mx-1 my-5" data-bind="text: lastName" id="last_name">
+        <label for="e_mail">E-mail:</label>
+        <input class="mx-1 my-5" data-bind="text: email" id="e_mail">
+        <label for="e_mail">Username:</label>
+        <input class="mx-1 my-5" data-bind="text: userName" id="user_name">
+        -->
+        <div class="buttons">
+            <button data-bind="click: isEditMode, disable: editMode" type="button" class="btn btn-primary border mx-2 my-3">Edit</button>
+            <button data-bind="click: saveSettings, enable: editMode" type="button" class="btn btn-primary border mx-2 my-3">Save</button>
+        </div>
+        
+        
     </div>
-    
 
-    <div class="card text-white bg-info mb-3 row" style="max-width: 20rem;">
+ </div>
+    
+    
+  
+        
+        
+    <div class="card text-white bg-info mb-3 row my-3" style="max-width: 20rem;">
         <div class="card-header">- Michael Corleone </div>
         <div class="card-body">
             <h4 class="card-title">Godfather 2</h4>

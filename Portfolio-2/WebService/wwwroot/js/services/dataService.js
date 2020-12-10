@@ -44,6 +44,8 @@ define([], () => {
           .then(callback);
    }
    */
+   
+  
    let postUser = (callback) =>{
       fetch(user,{
          header:{
@@ -54,6 +56,7 @@ define([], () => {
           .then(callback);
       
    }
+   
    
    let getTitles = (url, searchString, callback) => {
       if (url === undefined) {

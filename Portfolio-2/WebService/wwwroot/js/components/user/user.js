@@ -2,59 +2,82 @@ define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) =>{
 
     return function(params){
         
+        let editMode = ko.observable(false);
+        let uconst = ko.observable('ui000001');
+        let user = ko.observable();
         
-        let uconst = ko.observable('ui000001');    
-    let firstName = ko.observable();
-    let lastName = ko.observable("Jacko");
-    let email = ko.observable();
-    let userRole = ko.observable();
-    let password = ko.observable();
-    let userName = ko.observable();
-    
-    let user = ko.observable();
-    
+        let firstName = ko.observable();
+        let lastName = ko.observable();
+        let email = ko.observable();
+        let password = ko.observable();
+        let userName = ko.observable();
+        
+        let showUserInfo = ko.observable(true);
+        let showEditUser = ko.observable(false);
+        
+      
+   
+
     ds.getUser(uconst, function (data){
         user(data);
+        firstName(user().firstName);
+        lastName(user().lastName);
+        email(user().email);
+        password(user().password);
+        userName(user().username);
+        
     });
     
-    
-    
-  
-    
-    
-    let editBtn = ko.observable();
-    let editMode = ko.observable(false);
-    
-      
-      
-        
-        ds.getUser(uconst, function(data) {user(data)});
-        let userDetails = ko.observableArray(user.getData(user).splitText(":", ","));
-        firstName(userDetails[1]);
+    /*
+    postman.subscribe('getUser', user => {
        
+        user(user);
+        console.log(user());
+        
+    });
+    */
+        
+        let saveSettings = function() {
+            
+            if(editMode() === true){
+                //SAVE SETTINGS
+                editMode(false);
+                showUserInfo(true);
+                showEditUser(false);
+            } else{
+          //   editMode(true);
+          //   showUserInfo(false);
+          //   showEditUser(true);
+                
+            }
+        }
         
         let isEditMode = function () {
-
-            console.log(firstName);
             
             if(editMode() === false){
                 editMode(true);
+                showUserInfo(false);
+                showEditUser(true);
             }else{
-                editMode(false);
+            //    editMode(false);
+             //   showUserInfo(true);
+             //   showEditUser(false);
             }
-            console.log(editMode());
         }
         
         return {
-         
-            editBtn,
-            editMode,
+            
+            user,
             firstName,
             lastName,
             email,
-            userRole,
-            user,
+            password,
+            userName,
+            editMode,
+            showUserInfo,
+            showEditUser,
             isEditMode,
+            saveSettings,
      
         }
     }

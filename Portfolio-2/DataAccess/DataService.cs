@@ -80,14 +80,15 @@ namespace DataAccess
 
         public bool DeleteTitle(string tconst)
         {
-            var title = ctx.Titles.Find(tconst);
+            using var ctx1 = new DBContext();
+            var title = ctx1.Titles.Find(tconst);
             if (title == null)
             {
                 return false;
             }
             //ctx.Database.ExecuteSqlInterpolated($"DELETE FROM movie_data_model.title WHERE title.tconst = {tconst}");
-            ctx.Titles.Remove(title);
-            ctx.SaveChanges();
+            ctx1.Titles.Remove(title);
+            ctx1.SaveChanges();
             return true;
         }
 
@@ -107,19 +108,20 @@ namespace DataAccess
 
         public Title GetTitle(string tconst)
         {
-            var title = ctx.Titles.Find(tconst);
+            using var ctx1 = new DBContext();
+            var title = ctx1.Titles.Find(tconst);
 
             if (title != null)
             {
                 return title;
             }
-
             return null;
         }
 
         public TitlePrincipals GetTitlePrincipal(string tconst, string nconst)
         {
-            var titleProncipals = ctx.TitlePrincipals.Find(tconst, nconst);
+            using var ctx1 = new DBContext();
+            var titleProncipals = ctx1.TitlePrincipals.Find(tconst, nconst);
 
             if (titleProncipals != null)
             {
@@ -131,8 +133,9 @@ namespace DataAccess
 
         public IList<TitlePrincipals> GetTitlePrincipalsByTitle(string tconst, int page, int pageSize)
         {
-
-            var result = ctx.TitlePrincipals
+            
+            using var ctx1 = new DBContext();
+            var result = ctx1.TitlePrincipals
                 .FromSqlInterpolated($"SELECT * FROM movie_data_model.title_principals WHERE tconst = {tconst}")
                 .Skip(page * pageSize)
                 .Take(pageSize)
@@ -230,16 +233,19 @@ namespace DataAccess
 
         public IList<User> GetUsers(int page, int pageSize)
         {
-            return ctx.Users.ToList()
+            using var ctx1 = new DBContext();
+            return ctx1.Users.ToList()
                 .Skip(page * pageSize)
                 .Take(pageSize)
                 .ToList();
         }
 
-        public bool UpdateUser(string uconst, string firstName, string lastName, string email, 
+        public bool UpdateUser(string uconst, string firstName, string lastName, string email,
             string password, string userName)
         {
-            var user = ctx.Users.Find(uconst);
+            
+            using var ctx1 = new DBContext();
+            var user = ctx1.Users.Find(uconst);
             if (user == null)
             {
                 return false;
@@ -250,7 +256,7 @@ namespace DataAccess
             user.Email = email;
             user.Password = password;
             user.UserName = userName;
-            ctx.SaveChanges();
+            ctx1.SaveChanges();
             return true;
         }
 
@@ -273,7 +279,8 @@ namespace DataAccess
 
         public IList<Name> GetNames(int page, int pageSize)
         {
-            return ctx.Names.ToList()
+            using var ctx1 = new DBContext();
+            return ctx1.Names.ToList()
                 .Skip(page * pageSize)
                 .Take(pageSize)
                 .ToList();
@@ -281,6 +288,7 @@ namespace DataAccess
 
         public Name CreateName(string primaryName, string birthYear, string deathYear)
         {
+            using var ctx1 = new DBContext();
             var name = new Name()
             {
                 Nconst = AssignMaxNconst(),
@@ -289,8 +297,8 @@ namespace DataAccess
                 DeathYear = deathYear
             };
 
-            ctx.Names.Add(name);
-            ctx.SaveChanges();
+            ctx1.Names.Add(name);
+            ctx1.SaveChanges();
             return name;
         }
 
@@ -330,7 +338,9 @@ namespace DataAccess
         {
             IList<PrimaryProfession> result = new List<PrimaryProfession>();
 
-            foreach (var p in ctx.PrimaryProfessions)
+            using var ctx1 = new DBContext();
+            
+            foreach (var p in ctx1.PrimaryProfessions)
             {
                 if (p.Nconst.Trim() == nconst)
                 {
@@ -343,8 +353,9 @@ namespace DataAccess
         public IList<KnownForTitle> GetKnownForTitles(string nconst)
         {
             var result = new List<KnownForTitle>();
+            using var ctx1 = new DBContext();
 
-            foreach (var kft in ctx.KnownForTitles)
+            foreach (var kft in ctx1.KnownForTitles)
             {
                 if (kft.Nconst.Trim() == nconst)
                 {
@@ -359,8 +370,8 @@ namespace DataAccess
          */
         public IList<TitlePrincipals> GetTitlePrincipalsList(int page, int pageSize)
         {
-          
-            return ctx.TitlePrincipals.ToList()
+          using var ctx1 = new DBContext();
+            return ctx1.TitlePrincipals.ToList()
                 .Skip(page * pageSize)
                 .Take(pageSize)
                 .ToList();
@@ -504,7 +515,8 @@ namespace DataAccess
 
         public IList<Title> SearchTitles(string searchString, string uConst, int page, int pageSize)
         {
-            var result = ctx.Titles
+            using var ctx1 = new DBContext();
+            var result = ctx1.Titles
                 .FromSqlInterpolated($"SELECT * FROM movie_data_model.string_search({searchString}, {uConst})")
                 .Skip(page * pageSize)
                 .Take(pageSize)

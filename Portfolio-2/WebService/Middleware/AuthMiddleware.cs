@@ -63,7 +63,6 @@ namespace WebService.Middleware
             catch
             {
             }
-
             await _next(context);
         }
 
