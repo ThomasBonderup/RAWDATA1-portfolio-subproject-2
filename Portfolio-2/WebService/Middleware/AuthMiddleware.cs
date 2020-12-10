@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.VisualBasic;
 
 namespace WebService.Middleware
 {
@@ -56,7 +57,7 @@ namespace WebService.Middleware
                 if (claim != null)
                 {
                     var uconst = claim.Value;
-                    context.Items["User"] = _dataService.GetUser(uconst);
+                    context.Items["User"] = _dataService.GetUserByUconst(uconst.Trim());
                 }
 
             }
