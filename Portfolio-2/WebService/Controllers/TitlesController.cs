@@ -299,6 +299,7 @@ namespace WebService.Controllers
         
         // search
         
+        [Authorization]
         [HttpGet("search-title/{searchString}")]
         public IActionResult SearchTitle(string searchString, string uConst, int page = 0, int pageSize = 10)
         {

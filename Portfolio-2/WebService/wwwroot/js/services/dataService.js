@@ -3,22 +3,24 @@ define([], () => {
    const userApiUrl = "api/users";
    const namesApiUrl = "api/names";
    
+   // Private function
    let getJSON = (url, callback) => {
       fetch(url, {
          headers : {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
-            'Authorization': 'ui000001'
+            'Authorization': 'Bearer ' + localStorage.getItem('jwtToken')
          }
       }).then(response => response.json().then(callback));
    }
 
+   // Private function
    let postJSON = (url, data, callback) => {
       fetch(url, {
          headers : {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
-            'Authorization': 'ui000001'
+            'Authorization': 'Bearer ' + localStorage.getItem('jwtToken')
          },
          body: data,
          method: "POST"
@@ -27,8 +29,6 @@ define([], () => {
 
    
    let updateUser = (uconst, firstName, lastName, email, password, username, callback) => {
-      
-      
       let url = userApiUrl + "/" + username;
       let data = new Object;
       data.uconst = uconst;
@@ -47,15 +47,7 @@ define([], () => {
       console.log(data.lastName);
       console.log(data.username);
       
-      
-      
-      
-      
-      
-      
       postJSON(url, JSON.stringify(data), callback);
-      
-      
    }
    
    let getUser = (username, callback) => {
