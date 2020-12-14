@@ -38,10 +38,10 @@
 <script type="text/html" id="signIn-page">
     <div class="card border-primary mb-3" data-bind="signInUserBtn">
         <label for="signIn-page">Login information:</label>
-        <input data-bind="text:E-mail" class="form-control" placeholder="E-mail" aria-label="E-mail" aria-describedby="register"/>
-        <input data-bind="text:Password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="register"/>
+        <input data-bind="value: username" class="form-control" placeholder="E-mail" aria-label="E-mail" aria-describedby="register"/>
+        <input data-bind="value: password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="register"/>
     </div>
-    <button data-bind="click:signInUser" type ="button" class ="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Login</button>
+    <button data-bind="click:loginUser" type ="button" class ="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Login</button>
 </script>
 
 <script type ="text/html" id = "login-page">
