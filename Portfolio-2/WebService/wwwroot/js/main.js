@@ -6,7 +6,8 @@ require.config({
         dataservice: "services/dataService",
         jquery: "lib/jquery/jquery.min",
         bootstrap: "../css/lib/twitter-bootstrap/js/bootstrap.bundle.min",
-        postman: "services/postman"
+        postman: "services/postman",
+        knockoutValidator: "lib/knockout/knockout-validator"
     },
     shim: {
         bootstrap: ['jquery']
@@ -14,7 +15,7 @@ require.config({
     
 });
 
-require(['knockout', 'text'], (ko) => {
+require(['knockout', 'text', 'knockoutValidator'], (ko) => {
     ko.components.register("title-list",
         {
             viewModel: { require: "components/titleList/titleList" },

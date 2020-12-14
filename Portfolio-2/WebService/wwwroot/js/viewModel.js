@@ -2,7 +2,14 @@ define(['knockout', 'postman'], function (ko, postman) {
 
     let selectedComponent = ko.observable('home');
     let selectedUser = ko.observable();
-    let searchInput = ko.observable();
+    let searchInput = ko.observable().extend({
+        validation: {
+            message: "Please add a longer search string",
+            validator: function(value) {
+                return value > 2
+            }
+        }
+    });
     let currentParams = ko.observable({searchInput});
     let menuElements = ["Home", "Movies", "Actors", "About", "Login", "User"];
     let advSearchBtn = () => console.log("Advanced clicked");
