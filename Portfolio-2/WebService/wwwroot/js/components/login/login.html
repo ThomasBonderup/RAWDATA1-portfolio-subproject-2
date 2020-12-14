@@ -6,30 +6,30 @@
                     <legend>Create Account</legend>
                     <div class="form-group" data-children-count="1">
                         <label class="col-form-label" for="firstName">First name</label>
-                        <input data-bind="text:firstName" type="text" class="form-control" placeholder="John" id="firstName">
+                        <input data-bind="value: firstname" type="text" class="form-control" placeholder="John" id="firstName">
                     </div>
                     <div class="form-group" data-children-count="1">
                         <label class="col-form-label" for="lastName">Last name</label>
-                        <input data-bind="text:lastName" type="text" class="form-control" placeholder="Doe" id="lastName">
+                        <input data-bind="value: lastname" type="text" class="form-control" placeholder="Doe" id="lastName">
                     </div>
                     <div class="form-group" data-children-count="1">
                         <label for="exampleInputEmail1">Email address</label>
-                        <input data-bind="text:email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="johndoe@example.com" data-kwimpalastatus="alive" data-kwimpalaid="1607009151902-2">
+                        <input data-bind="value: email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="johndoe@example.com" data-kwimpalastatus="alive" data-kwimpalaid="1607009151902-2">
                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                     </div>
                     <div class="form-group" data-children-count="1">
                         <label class="col-form-label" for="username">Username</label>
-                        <input data-bind="text:username" type="text" class="form-control" placeholder="JohnDoe01" id="username">
+                        <input data-bind="value: username" type="text" class="form-control" placeholder="JohnDoe01" id="username">
                     </div>
                     <div class="form-group" data-children-count="1">
                         <label for="exampleInputPassword1">Password</label>
-                        <input data-bind="text:password" type="password" class="form-control" id="exampleInputPassword1" placeholder="superSecretPassword123" data-kwimpalastatus="alive" data-kwimpalaid="1607009151902-0">
+                        <input data-bind="value: password" type="password" class="form-control" id="exampleInputPassword1" placeholder="superSecretPassword123" data-kwimpalastatus="alive" data-kwimpalaid="1607009151902-0">
                     </div>
                 </fieldset>
             </form>
         </div>
         <div class="modal-footer">
-            <button data-bind="click:createAccount" type ="button" class ="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Submit</button>
+            <button data-bind="click:registerUser" type ="button" class ="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Submit</button>
             <button data-bind="click:cancelUserBtn" type ="button" class ="btn btn-secondary" data-toggle="button" aria-pressed="false" autocomplete="off">Cancel</button>
         </div>
     </script>

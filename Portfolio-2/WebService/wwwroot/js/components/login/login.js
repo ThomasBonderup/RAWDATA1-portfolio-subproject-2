@@ -3,6 +3,9 @@ define(["knockout","dataservice"], (ko, ds)=> {
         // todo make a return error statement if username allready exists in the system 
         let currentTemplate = ko.observable("login-page");
         
+        let firstname = ko.observable();
+        let lastname = ko.observable();
+        let email = ko.observable();
         let username = ko.observable();
         let password = ko.observable();
 
@@ -10,6 +13,10 @@ define(["knockout","dataservice"], (ko, ds)=> {
             console.log(username());
             console.log(password());
             ds.userLogin(username(), password());
+        });
+        
+        let registerUser = (function(data) {
+           ds.registerUser(firstname(), lastname(), email(), username(), password()); 
         });
         
         let createAccount = () =>
@@ -102,8 +109,12 @@ define(["knockout","dataservice"], (ko, ds)=> {
             createAccount,
             signInUser,
             user,
+            firstname,
+            lastname,
+            email,
             username,
             password,
+            registerUser,
             loginUser
         }
     }

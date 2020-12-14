@@ -85,6 +85,19 @@ define([], () => {
          method: "POST"
       }).then(response => response.json().then(response => localStorage.setItem("jwtToken", response.token)))
    };
+   
+   let registerUser = (firstname, lastname, email, username, password, callback) => {
+     let url = userApiUrl + "/register";
+     let data = new Object;
+     data.firstname = firstname;
+     data.lastname = lastname;
+     data.email = email;
+     data.username = username;
+     data.password = password;
+     console.log(JSON.stringify(data));
+     
+     postJSON(url, JSON.stringify(data), callback);
+   };
 
    let postUser = (callback) =>{
       fetch(user,{
@@ -194,6 +207,7 @@ define([], () => {
       addToBookmarks,
       getActors,
       updateUser,
-      userLogin
+      userLogin,
+      registerUser
    }
 });
