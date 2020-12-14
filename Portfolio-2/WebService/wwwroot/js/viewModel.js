@@ -4,7 +4,7 @@ define(['knockout', 'postman'], function (ko, postman) {
     let selectedUser = ko.observable();
     let searchInput = ko.observable().extend({
         validation: {
-            message: "Please add a longer search string",
+            message: "Please add a longer search string for better search results",
             validator: function(value) {
                 return value > 2
             }
