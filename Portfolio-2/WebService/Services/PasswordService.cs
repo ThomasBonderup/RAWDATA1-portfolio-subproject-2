@@ -2,7 +2,6 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-using Npgsql.TypeHandlers;
 
 namespace WebService.Services
 {

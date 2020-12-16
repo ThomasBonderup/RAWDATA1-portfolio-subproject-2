@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using DataAccess;
-
 namespace WebService.Common
 {
     public static class PaginationHelper

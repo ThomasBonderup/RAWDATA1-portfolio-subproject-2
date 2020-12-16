@@ -1,12 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.SymbolStore;
-using System.IO.Enumeration;
 using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Security;
 using Microsoft.EntityFrameworkCore;
-using Npgsql;
 
 namespace DataAccess
 {
@@ -18,8 +13,7 @@ namespace DataAccess
         {
             ctx = new DBContext();
         }
-
-
+        
         /**
          *  TITLES
          */
