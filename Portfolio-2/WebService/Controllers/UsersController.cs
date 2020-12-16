@@ -3,14 +3,10 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
-using System.Text;    
-using System.Xml;
+using System.Text;
 using AutoMapper;
-//using AutoMapper.Configuration;
 using DataAccess;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.JSInterop.Infrastructure;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure.Internal;
 using WebService.Common;
 using WebService.Models;
 using WebService.Services;
@@ -39,10 +35,6 @@ namespace WebService.Controllers
         [HttpPost("register")]
         public IActionResult Register(RegisterDto dto)
         {
-            //if (_dataService.GetUser(dto.UserName) != null)
-            //{
-            //    return BadRequest();
-            //} 
             int.TryParse(_configuration.GetSection("Auth:PasswordSize").Value, out int pwdSize);
             if (pwdSize == 0)
             {
