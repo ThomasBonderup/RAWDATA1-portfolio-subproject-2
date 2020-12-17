@@ -8,7 +8,7 @@ namespace DataAccess
         public string Uconst { get; set; }
         public string Tconst { get; set; }
         public DateTime Timestamp { get; set; }
-        
+         
 
     }
 }

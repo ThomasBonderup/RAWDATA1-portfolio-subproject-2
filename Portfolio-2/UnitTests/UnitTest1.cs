@@ -354,7 +354,19 @@ namespace UnitTests
             Assert.Null(user);
 
         }
-        
+
+        [Fact]
+        public void GetUserWithUsername()
+        {
+            var service = new DataService();
+            var user = service.GetUser("alta01");
+            Console.WriteLine(user);
+            Assert.Equal(user.FirstName, "Alex");
+            
+
+
+        }
+
         [Fact]
         public void UpdateUser()
         { var service = new DataService();

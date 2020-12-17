@@ -170,7 +170,7 @@ namespace DataAccess
             modelBuilder.Entity<User>().Property(x => x.Password).HasColumnName("password");
             modelBuilder.Entity<User>().Property(x => x.UserName).HasColumnName("username");
             modelBuilder.Entity<User>().Property(x => x.Salt).HasColumnName("salt");
-            modelBuilder.Entity<User>().HasKey(x => new {x.Uconst});
+            modelBuilder.Entity<User>().HasKey(x => new {x.UserName});
 
             modelBuilder.Entity<SearchResult>().HasNoKey();
             modelBuilder.Entity<SearchResult>().Property(x => x.Tconst).HasColumnName("tconst");

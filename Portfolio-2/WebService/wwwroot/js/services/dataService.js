@@ -13,7 +13,7 @@ define([], () => {
          }
       }).then(response => response.json().then(callback));
    }
-
+  
    // Private function
    let postJSON = (url, data, callback) => {
       fetch(url, {
@@ -37,7 +37,7 @@ define([], () => {
       data.email = email;
       data.password = password;
       data.lastName = lastName;
-      data.username = username;
+      data.userName = username;
       
       console.log(data.uconst);
       console.log(data.firstName);
@@ -193,6 +193,27 @@ define([], () => {
           .then(callback);
    }
    
+   let getRatingHistory = (uconst, callback) =>
+   {
+      var url = userApiUrl + "/" + uconst + "/" + "ratinghistory";
+      getJSON(url, callback);
+      
+   }
+   
+   let getSearchHistory = (uconst, callback) => 
+   {
+      var url = userApiUrl + "/" + uconst + "/" + "searchhistory";
+      getJSON(url, callback);
+   }
+   
+   
+   let getTitleBookmarks = (uconst, callback) =>
+   {
+      var url = userApiUrl + "/" + uconst + "/" + "titlebookmarks";
+      getJSON(url, callback);
+   }
+   
+   
    return {
       getTitles,
       getTitle,
@@ -208,6 +229,10 @@ define([], () => {
       getActors,
       updateUser,
       userLogin,
-      registerUser
+      registerUser,
+      getRatingHistory,
+      getSearchHistory,
+      getTitleBookmarks,
+      
    }
 });

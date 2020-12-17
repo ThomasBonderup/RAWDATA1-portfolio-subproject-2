@@ -632,8 +632,8 @@ namespace DataAccess
         public IList<SearchHistory> GetSearchHistory(string uconst)
         {
             List<SearchHistory> result = new List<SearchHistory>();
-
-            foreach (var sh in ctx.SearchHistories)
+            using var ctx1 = new DBContext();
+            foreach (var sh in ctx1.SearchHistories)
             {
                 if (sh.Uconst.Trim() == uconst)
                 {
@@ -653,7 +653,8 @@ namespace DataAccess
         public IList<TitleBookmark> GetTitleBookmarks(string uconst)
         {
             IList<TitleBookmark> result = new List<TitleBookmark>();
-            foreach (var tb in ctx.TitleBookmarks)
+            using var ctx1 = new DBContext();
+            foreach (var tb in ctx1.TitleBookmarks)
             {
                 if (tb.Uconst.Trim() == uconst)
                 {

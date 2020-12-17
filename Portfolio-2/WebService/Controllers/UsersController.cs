@@ -12,6 +12,7 @@ using WebService.Models;
 using WebService.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using WebService.Attributes;
 
 namespace WebService.Controllers
 {
@@ -149,6 +150,7 @@ namespace WebService.Controllers
         }
 
         // GET
+      //  [Authorization]
         [HttpGet(Name = nameof(GetUsers))]
         public IActionResult GetUsers(int page = 0, int pageSize = 10)
         {
@@ -159,15 +161,17 @@ namespace WebService.Controllers
         }
 
         // FROM UCONST TO USERNAME
-        [HttpGet("{username}")]
+        //[Authorization]
+        [HttpGet("{userName}")]
         public IActionResult GetUser(string username)
         {
+           
             var user = _dataService.GetUser(username);
-            if (user == null)
+           // Console.WriteLine(user.UserName + " in controller ");
+           if (user == null)
             {
                 return NotFound();
             }
-
             return Ok(user);
         }
 
@@ -419,7 +423,7 @@ namespace WebService.Controllers
         {
             CheckCurrentUser();
             var result =
-                _dataService.CreateUser(user.FirstName, user.LastName, user.Email, user.Password, user.UserName);
+                _dataService.CreateUser(user.FirstName, user.LastName, user.Email, user.UserName, user.Password);
             return Ok(result);
         }
 

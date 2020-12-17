@@ -18,7 +18,7 @@ namespace DataAccess
         public override string ToString()
         {
             return $"Uconst = {Uconst}, FirstName = {FirstName}, LastName = {LastName}, Email = {Email}," +
-                   $"Password = {Password}, UserName ={UserName}";
+                   $"Password = {Password}, UserName ={UserName}, Salt = {Salt}";
         }
         
     }
